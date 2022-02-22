@@ -1,0 +1,28 @@
+name: ronin-db-activerecord
+version: 0.1.0
+summary: ActiveRecord backend for the Ronin Database
+description:
+  ronin-db-activerecord contains ActiveRecord models and migrations for the
+  Ronin Database.
+
+license: LGPL-3.0
+authors: Postmodern
+email: postmodern.mod3@gmail.com
+homepage: https://ronin-rb.dev/
+has_yard: true
+
+metadata:
+  documentation_uri: https://rubydoc.info/gems/ronin-db-activerecord
+  source_code_uri:   https://github.com/ronin-rb/ronin-db-activerecord
+  bug_tracker_uri:   https://github.com/ronin-rb/ronin-db-activerecord/issues
+  changelog_uri:     https://github.com/ronin-rb/ronin-db-activerecord/blob/master/ChangeLog.md
+  rubygems_mfa_required: 'true'
+
+required_ruby_version: ">= 2.7.0"
+
+dependencies:
+  uri-query_params: ~> 0.6
+  activerecord: ~> 7.0
+
+development_dependencies:
+  bundler: ~> 2.0
