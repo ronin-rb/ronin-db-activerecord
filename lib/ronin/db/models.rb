@@ -42,7 +42,7 @@ require 'ronin/db/url_query_param'
 require 'ronin/db/url_scheme'
 require 'ronin/db/url'
 require 'ronin/db/user_name'
-require 'ronin/db/vendor'
+require 'ronin/db/software_vendor'
 require 'ronin/db/web_credential'
 
 module Ronin
@@ -72,7 +72,7 @@ module Ronin
         URLScheme,
         URL,
         UserName,
-        Vendor,
+        SoftwareVendor,
         WebCredential
       ]
 
