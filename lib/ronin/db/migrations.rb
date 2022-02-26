@@ -27,6 +27,68 @@ require 'active_record/migration'
 module Ronin
   module DB
     module Migrations
+      #
+      # Migrates the database to the target version.
+      #
+      # @param [Integer, nil] target_version
+      #   The desired target version.
+      #
+      # @api semipublic
+      #
+      def self.migrate(target_version=nil)
+        context.migrate(target_version)
+      end
+
+      # 
+      # Explicitly migrates up the database to the target version.
+      #
+      # @param [Integer, nil] target_version
+      #   The desired target version.
+      #
+      # @api semipublic
+      #
+      def self.up(target_version=nil,&block)
+        context.up(target_version,&block)
+      end
+
+      # 
+      # Explicitly migrates down the database to the target version.
+      # 
+      # @param [Integer, nil] target_version
+      #   The desired target version.
+      #
+      # @api semipublic
+      #
+      def self.down(target_version=nil,&block)
+        context.down(target_version,&block)
+      end
+
+      # 
+      # Rollbacks the last number of migrations.
+      #
+      # @param [Integer] steps
+      #   The number of migrations to rollback.
+      #
+      # @api semipublic
+      #
+      def self.rollback(steps=1)
+        context.rollback(steps)
+      end
+
+      # 
+      # Applies the next number of migrations.
+      #
+      # @param [Integer] steps
+      #   The number of migrations to rollback.
+      #
+      # @api semipublic
+      #
+      def self.foreward(steps=1)
+        context.rollback(steps)
+      end
+
+      private
+
       # Path to the `db/migrate/` directory in `ronin-db-activerecord`.
       DIR = File.expand_path('../../../db/migrate',__dir__)
 
@@ -46,63 +108,12 @@ module Ronin
       end
 
       #
-      # Migrates the database to the target version.
+      # The migration context.
       #
-      # @param [Integer, nil] target_version
-      #   The desired target version.
+      # @return [MigrationContext]
       #
-      # @api semipublic
-      #
-      def self.migrate(target_version=nil)
-        MigrationContext.new.migrate(target_version)
-      end
-
-      # 
-      # Explicitly migrates up the database to the target version.
-      #
-      # @param [Integer, nil] target_version
-      #   The desired target version.
-      #
-      # @api semipublic
-      #
-      def self.up(target_version=nil,&block)
-        MigrationContext.new.up(target_version,&block)
-      end
-
-      # 
-      # Explicitly migrates down the database to the target version.
-      # 
-      # @param [Integer, nil] target_version
-      #   The desired target version.
-      #
-      # @api semipublic
-      #
-      def self.down(target_version=nil,&block)
-        MigrationContext.new.down(target_version,&block)
-      end
-
-      # 
-      # Rollbacks the last number of migrations.
-      #
-      # @param [Integer] steps
-      #   The number of migrations to rollback.
-      #
-      # @api semipublic
-      #
-      def self.rollback(steps=1)
-        MigrationContext.new.rollback(steps)
-      end
-
-      # 
-      # Applies the next number of migrations.
-      #
-      # @param [Integer] steps
-      #   The number of migrations to rollback.
-      #
-      # @api semipublic
-      #
-      def self.foreward(steps=1)
-        MigrationContext.new.rollback(steps)
+      def self.context
+        @migrations ||= MigrationContext.new
       end
     end
   end
