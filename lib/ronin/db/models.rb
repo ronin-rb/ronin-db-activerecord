@@ -48,7 +48,7 @@ require 'ronin/db/web_credential'
 module Ronin
   module DB
     module Models
-      MODELS = [
+      ALL = [
         Address,
         Arch,
         Credential,
@@ -82,7 +82,7 @@ module Ronin
       # @api semipublic
       #
       def self.connect
-        MODELS.each(&:connection)
+        ALL.each(&:connection)
       end
     end
   end
