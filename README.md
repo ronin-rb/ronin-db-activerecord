@@ -46,7 +46,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
 
 ## Requirements
 
-* [Ruby] >= 2.7.0
+* [Ruby] >= 3.0.0
 * [activerecord] ~> 7.0
 
 ## Install
