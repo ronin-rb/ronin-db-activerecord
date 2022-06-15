@@ -44,6 +44,33 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * `UserName`
   * `WebCredential`
 
+## Examples
+
+Create a database:
+
+```ruby
+require 'ronin/db/migrations'
+
+ActiveRecord::Base.establish_connection(
+  adapter: 'sqlite3',
+  database: 'path/to/db.sqlite3'
+)
+
+Ronin::DB::Migrations.up
+```
+
+Connect to the database:
+
+```ruby
+ActiveRecord::Base.establish_connection(
+  adapter: 'sqlite3',
+  database: 'path/to/db.sqlite3'
+)
+
+require 'ronin/db/models'
+Ronin::DB::Models.connect
+```
+
 ## Requirements
 
 * [Ruby] >= 3.0.0
