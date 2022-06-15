@@ -19,30 +19,30 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
 ## Features
 
 * Can be used both as a standalone library or in a web app.
-* Provides common models:
-  * `Arch`
-  * `EmailAddress`
-  * `HostName`
-  * `IPAddress`
-  * `HostNameIPAddress`
-  * `MACAddress`
-  * `IPAddressMACAddress`
-  * `Port`
-  * `OpenPort`
-  * `Organization`
-  * `OS`
-  * `OSGuess`
-  * `Password`
-  * `Service`
-  * `ServiceCredential`
-  * `Software`
-  * `SoftwareVendor`
-  * `URL`
-  * `URLScheme`
-  * `URLQueryParam`
-  * `URLQueryParamName`
-  * `UserName`
-  * `WebCredential`
+* Provides common [ActiveRecord] models:
+  * {Ronin::DB::Arch}
+  * {Ronin::DB::EmailAddress}
+  * {Ronin::DB::HostName}
+  * {Ronin::DB::IPAddress}
+  * {Ronin::DB::HostNameIPAddress}
+  * {Ronin::DB::MACAddress}
+  * {Ronin::DB::IPAddressMACAddress}
+  * {Ronin::DB::Port}
+  * {Ronin::DB::OpenPort}
+  * {Ronin::DB::Organization}
+  * {Ronin::DB::OS}
+  * {Ronin::DB::OSGuess}
+  * {Ronin::DB::Password}
+  * {Ronin::DB::Service}
+  * {Ronin::DB::ServiceCredential}
+  * {Ronin::DB::Software}
+  * {Ronin::DB::SoftwareVendor}
+  * {Ronin::DB::URL}
+  * {Ronin::DB::URLScheme}
+  * {Ronin::DB::URLQueryParam}
+  * {Ronin::DB::URLQueryParamName}
+  * {Ronin::DB::UserName}
+  * {Ronin::DB::WebCredential}
 
 ## Examples
 
