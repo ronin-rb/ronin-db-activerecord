@@ -28,6 +28,15 @@ module Ronin
   module DB
     module Migrations
       #
+      # The current migration version of the database.
+      #
+      # @return [Integer]
+      #
+      def self.current_version
+        context.current_version
+      end
+
+      #
       # Determines if the database needs migrating up.
       #
       # @return [Boolean]

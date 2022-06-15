@@ -4,6 +4,14 @@ require 'ronin/db/migrations'
 describe Ronin::DB::Migrations do
   let(:migration_context) { subject.send(:context) }
 
+  describe ".current_version" do
+    it "must call .current_version on the MigrationContext object" do
+      expect(migration_context).to receive(:current_version)
+
+      subject.current_version
+    end
+  end
+
   describe ".needs_migration?" do
     it "must call .needs_migration? on the MigrationContext object" do
       expect(migration_context).to receive(:needs_migration?)
