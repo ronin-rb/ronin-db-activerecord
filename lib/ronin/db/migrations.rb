@@ -93,7 +93,7 @@ module Ronin
       # @api semipublic
       #
       def self.foreward(steps=1)
-        context.rollback(steps)
+        context.foreward(steps)
       end
 
       private
