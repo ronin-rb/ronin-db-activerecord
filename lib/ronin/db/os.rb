@@ -38,6 +38,9 @@ module Ronin
       # Primary key
       attribute :id, :integer
 
+      # Flavor of the OS (Linux, BSD)
+      attribute :flavor, :string
+
       # Version of the Operating System
       attribute :version, :string
       validates :version, presence: true,
@@ -60,7 +63,7 @@ module Ronin
       # @return [OS]
       #
       def self.linux(version)
-        find_or_create_by(name: 'Linux', version: version)
+        find_or_create_by(name: 'Linux', flavor: 'Linux', version: version)
       end
 
       #
@@ -72,7 +75,7 @@ module Ronin
       # @return [OS]
       #
       def self.freebsd(version)
-        find_or_create_by(name: 'FreeBSD', version: version)
+        find_or_create_by(name: 'FreeBSD', flavor: 'BSD', version: version)
       end
 
       #
@@ -84,7 +87,7 @@ module Ronin
       # @return [OS]
       #
       def self.openbsd(version)
-        find_or_create_by(name: 'OpenBSD', version: version)
+        find_or_create_by(name: 'OpenBSD', flavor: 'BSD', version: version)
       end
 
       #
@@ -96,7 +99,7 @@ module Ronin
       # @return [OS]
       #
       def self.netbsd(version)
-        find_or_create_by(name: 'NetBSD', version: version)
+        find_or_create_by(name: 'NetBSD', flavor: 'BSD', version: version)
       end
 
       #
@@ -108,7 +111,7 @@ module Ronin
       # @return [OS]
       #
       def self.macos(version)
-        find_or_create_by(name: 'macOS', version: version)
+        find_or_create_by(name: 'macOS', flavor: 'BSD', version: version)
       end
 
       #
