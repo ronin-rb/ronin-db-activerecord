@@ -28,6 +28,15 @@ module Ronin
   module DB
     module Migrations
       #
+      # Determines if the database needs migrating up.
+      #
+      # @return [Boolean]
+      #
+      def self.needs_migration?
+        context.needs_migration?
+      end
+
+      #
       # Migrates the database to the target version.
       #
       # @param [Integer, nil] target_version
