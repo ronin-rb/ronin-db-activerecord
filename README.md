@@ -43,6 +43,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * {Ronin::DB::URLQueryParamName}
   * {Ronin::DB::UserName}
   * {Ronin::DB::WebCredential}
+  * {Ronin::DB::ASN}
 
 ## Examples
 
