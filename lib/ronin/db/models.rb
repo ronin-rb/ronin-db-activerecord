@@ -44,6 +44,7 @@ require 'ronin/db/url'
 require 'ronin/db/user_name'
 require 'ronin/db/software_vendor'
 require 'ronin/db/web_credential'
+require 'ronin/db/asn'
 
 module Ronin
   module DB
@@ -73,7 +74,8 @@ module Ronin
         URL,
         UserName,
         SoftwareVendor,
-        WebCredential
+        WebCredential,
+        ASN
       ]
 
       #
