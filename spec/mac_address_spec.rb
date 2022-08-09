@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 require 'ronin/db/mac_address'
 
 describe Ronin::DB::MACAddress do

@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 require 'ronin/db/software'
 
 describe Ronin::DB::Software do

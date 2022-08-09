@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 require 'ronin/db/email_address'
 
 describe Ronin::DB::EmailAddress do
