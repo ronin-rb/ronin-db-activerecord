@@ -75,12 +75,16 @@ describe Ronin::DB::URLQueryParam do
       expect(subject.to_s).to eq("#{name}=#{value}")
     end
 
-    context "with empty or nil values" do
-      subject do
-        described_class.new(
-          name: Ronin::DB::URLQueryParamName.new(name: name)
-        )
+    context "when an empty value" do
+      let(:value) { '' }
+
+      it "should ignore empty or nil values" do
+        expect(subject.to_s).to eq("#{name}=")
       end
+    end
+
+    context "when a nil value" do
+      let(:value) { nil }
 
       it "should ignore empty or nil values" do
         expect(subject.to_s).to eq("#{name}=")
