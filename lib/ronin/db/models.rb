@@ -45,6 +45,13 @@ require 'ronin/db/user_name'
 require 'ronin/db/software_vendor'
 require 'ronin/db/web_credential'
 require 'ronin/db/asn'
+require 'ronin/db/http_query_param_name'
+require 'ronin/db/http_query_param'
+require 'ronin/db/http_header_name'
+require 'ronin/db/http_request_header'
+require 'ronin/db/http_response_header'
+require 'ronin/db/http_request'
+require 'ronin/db/http_response'
 
 module Ronin
   module DB
@@ -75,7 +82,14 @@ module Ronin
         UserName,
         SoftwareVendor,
         WebCredential,
-        ASN
+        ASN,
+        HTTPQueryParamName,
+        HTTPQueryParam,
+        HTTPHeaderName,
+        HTTPRequestHeader,
+        HTTPResponseHeader,
+        HTTPRequest,
+        HTTPResponse
       ]
 
       #
