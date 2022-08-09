@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 require 'ronin/db/url'
 
 describe Ronin::DB::URL do
