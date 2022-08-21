@@ -24,12 +24,30 @@ class CreateRoninVulnerabilitiesTable < ActiveRecord::Migration[7.0]
 
   def change
     create_table :ronin_vulnerabilities, if_not_exists: true do |t|
-      t.references :mac_address, null: true, foreign_key: true
-      t.references :ip_address, null: true, foreign_key: true
-      t.references :host_name, null: true, foreign_key: true
-      t.references :open_port, null: true, foreign_key: true
-      t.references :url, null: true, foreign_key: true
-      t.references :advisory, null: false, foreign_key: true
+      t.references :mac_address, null: true,
+                                foreign_key: {
+                                  to_table: :ronin_mac_addresses
+                                }
+      t.references :ip_address, null: true,
+                                foreign_key: {
+                                  to_table: :ronin_ip_addresses
+                                }
+      t.references :host_name, null: true,
+                               foreign_key: {
+                                 to_table: :ronin_host_names
+                               }
+      t.references :open_port, null: true,
+                              foreign_key: {
+                                to_table: :ronin_open_ports
+                              }
+      t.references :url, null: true,
+                         foreign_key: {
+                           to_table: :ronin_urls
+                         }
+      t.references :advisory, null: false,
+                              foreign_key: {
+                                to_table: :ronin_advisories
+                              }
 
       t.index :mac_address_id
       t.index :ip_address_id
