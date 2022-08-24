@@ -40,7 +40,7 @@ describe Ronin::DB::OS do
       os = described_class.linux(version)
 
       expect(os.name).to eq(name)
-      expect(os.flavor).to eq('Linux')
+      expect(os.flavor).to eq('linux')
       expect(os.version).to eq(version)
     end
   end
@@ -52,7 +52,7 @@ describe Ronin::DB::OS do
       os = described_class.freebsd(version)
 
       expect(os.name).to eq(name)
-      expect(os.flavor).to eq('BSD')
+      expect(os.flavor).to eq('bsd')
       expect(os.version).to eq(version)
     end
   end
@@ -64,7 +64,7 @@ describe Ronin::DB::OS do
       os = described_class.openbsd(version)
 
       expect(os.name).to eq(name)
-      expect(os.flavor).to eq('BSD')
+      expect(os.flavor).to eq('bsd')
       expect(os.version).to eq(version)
     end
   end
@@ -76,7 +76,7 @@ describe Ronin::DB::OS do
       os = described_class.netbsd(version)
 
       expect(os.name).to eq(name)
-      expect(os.flavor).to eq('BSD')
+      expect(os.flavor).to eq('bsd')
       expect(os.version).to eq(version)
     end
   end
@@ -88,7 +88,7 @@ describe Ronin::DB::OS do
       os = described_class.macos(version)
 
       expect(os.name).to eq(name)
-      expect(os.flavor).to eq('BSD')
+      expect(os.flavor).to eq('bsd')
       expect(os.version).to eq(version)
     end
   end

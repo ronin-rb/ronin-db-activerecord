@@ -44,8 +44,8 @@ module Ronin
       # @!attribute [rw] flavor
       #   The flavor of the OS (Linux, BSD).
       #
-      #   @return [String]
-      attribute :flavor, :string
+      #   @return [:linux, :bsd]
+      enum :flavor, {linux: 'Linux', bsd: 'BSD'}
 
       # @!attribute [rw] version
       #   The version of the Operating System.
@@ -78,7 +78,7 @@ module Ronin
       # @return [OS]
       #
       def self.linux(version)
-        find_or_create_by(name: 'Linux', flavor: 'Linux', version: version)
+        find_or_create_by(name: 'Linux', flavor: :linux, version: version)
       end
 
       #
@@ -90,7 +90,7 @@ module Ronin
       # @return [OS]
       #
       def self.freebsd(version)
-        find_or_create_by(name: 'FreeBSD', flavor: 'BSD', version: version)
+        find_or_create_by(name: 'FreeBSD', flavor: :bsd, version: version)
       end
 
       #
@@ -102,7 +102,7 @@ module Ronin
       # @return [OS]
       #
       def self.openbsd(version)
-        find_or_create_by(name: 'OpenBSD', flavor: 'BSD', version: version)
+        find_or_create_by(name: 'OpenBSD', flavor: :bsd, version: version)
       end
 
       #
@@ -114,7 +114,7 @@ module Ronin
       # @return [OS]
       #
       def self.netbsd(version)
-        find_or_create_by(name: 'NetBSD', flavor: 'BSD', version: version)
+        find_or_create_by(name: 'NetBSD', flavor: :bsd, version: version)
       end
 
       #
@@ -126,7 +126,7 @@ module Ronin
       # @return [OS]
       #
       def self.macos(version)
-        find_or_create_by(name: 'macOS', flavor: 'BSD', version: version)
+        find_or_create_by(name: 'macOS', flavor: :bsd, version: version)
       end
 
       #
