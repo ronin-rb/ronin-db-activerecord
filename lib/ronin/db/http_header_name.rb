@@ -47,6 +47,12 @@ module Ronin
       # The HTTP requests which contain this HTTP Header name.
       has_many :http_requests, through: :http_request_headers
 
+      # The associated HTTP response headers.
+      has_many :http_response_headers
+
+      # The HTTP responses which contain this HTTP Header name.
+      has_many :http_responses, through: :http_response_headers
+
     end
   end
 end
