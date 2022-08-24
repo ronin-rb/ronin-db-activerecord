@@ -26,18 +26,25 @@ require 'active_record'
 
 module Ronin
   module DB
+    #
+    # Represents a HTTP request or response Header name.
+    #
     class HTTPHeaderName < ActiveRecord::Base
 
       include Model
       include Model::HasUniqueName
 
+      # The primary key of the HTTP header name.
       attribute :id, :integer
 
+      # The Header name.
       attribute :name, :string # length: 256
       validates :name, presence: true, uniqueness: true
 
+      # The associated HTTP request headers.
       has_many :http_headers
 
+      # The HTTP requests which contain this HTTP Header name.
       has_many :http_requests, through: :http_headers
 
     end
