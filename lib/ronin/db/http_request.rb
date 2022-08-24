@@ -68,9 +68,9 @@ module Ronin
       attribute :query, :string
 
       # The additional parsed query params of the HTTP request.
-      has_many :query_param, foreign_key: 'request_id',
-                             class_name: 'HTTPQueryParam',
-                             dependent:  :destroy
+      has_many :query_params, foreign_key: 'request_id',
+                              class_name: 'HTTPQueryParam',
+                              dependent:  :destroy
 
       # The optional body of the HTTP request.
       attribute :body, :text
