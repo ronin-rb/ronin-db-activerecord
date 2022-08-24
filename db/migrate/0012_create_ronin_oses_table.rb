@@ -24,7 +24,7 @@ class CreateRoninOsesTable < ActiveRecord::Migration[7.0]
   def change
     create_table :ronin_oses, if_not_exists: true do |t|
       t.string :name, null: false
-      t.string :flavor
+      t.string :flavor, length: 5
       t.string :version, null: false
 
       t.index [:name, :version], unique: true
