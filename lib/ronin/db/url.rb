@@ -255,20 +255,6 @@ module Ronin
           query = query.joins(:port).where(port: {number: url.port})
         end
 
-        if url.query
-          query = query.joins(:query_param, query_param: [:name])
-
-          # add the query params to the query
-          ::URI::QueryParams.parse(url.query).each do |name,value|
-            query = query.where(
-              query_params: {
-                name:  {name: name},
-                value: value
-              }
-            )
-          end
-        end
-
         return query.first
       end
 
