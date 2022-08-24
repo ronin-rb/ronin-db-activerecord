@@ -52,6 +52,7 @@ describe Ronin::DB::URL do
       host_name:    url_host_name,
       port:         url_port,
       path:         path,
+      query:        query,
       fragment:     fragment,
       query_params: [url_query_param]
     )
@@ -139,10 +140,10 @@ describe Ronin::DB::URL do
   end
 
   describe "#to_s" do
-    subject { url.to_s }
+    subject { url }
 
     it "should convert the URL back into a String URI" do
-      expect(subject).to be == uri.to_s
+      expect(subject.to_s).to be == uri.to_s
     end
   end
 end
