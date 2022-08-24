@@ -364,30 +364,6 @@ module Ronin
       end
 
       #
-      # Sets the query params of the URL.
-      #
-      # @param [String] query
-      #   The query string to parse.
-      #
-      # @return [String]
-      #   The given query string.
-      #
-      # @api public
-      #
-      def query_string=(query)
-        self.query_params.clear
-
-        ::URI::QueryParams.parse(query).each do |name,value|
-          self.query_params.new(
-            name:  URLQueryParamName.find_or_initialize_by(name: name),
-            value: value
-          )
-        end
-
-        return query
-      end
-
-      #
       # Builds a URI object from the URL.
       #
       # @return [URI::HTTP, URI::HTTPS]
