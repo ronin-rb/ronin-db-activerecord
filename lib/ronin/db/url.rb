@@ -364,24 +364,6 @@ module Ronin
       end
 
       #
-      # Dumps the URL query params into a URI query string.
-      #
-      # @return [String]
-      #   The URI query string.
-      #
-      # @api public
-      #
-      def query_string
-        params = {}
-
-        self.query_params.each do |param|
-          params[param.name] = param.value
-        end
-
-        return ::URI::QueryParams.dump(params)
-      end
-
-      #
       # Sets the query params of the URL.
       #
       # @param [String] query
