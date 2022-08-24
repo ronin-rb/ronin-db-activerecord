@@ -23,32 +23,46 @@ require 'ronin/db/model'
 
 module Ronin
   module DB
+    #
+    # Represents an ASN range.
+    #
     class ASN < ActiveRecord::Base
 
       include Model
 
+      # The primary key of the ASN range.
       attribute :id, :integer
 
+      # Whether the ASN range represents an IPv4 or IPv6 range.
       attribute :version, :integer
       validates :version, presence:  true,
                           inclusion: {in: [4, 6]}
 
+      # The starting IP address of the ASN range.
       attribute :range_start, :string
       validates :range_start, presence: true
 
+      # The ending IP address of the ASN range.
       attribute :range_end, :string
       validates :range_end, presence: true
 
+      # The starting IP address of the ASN range, but in network byte-order.
       attribute :range_start_hton, :binary
+
+      # The ending IP address of the ASN range, but in network byte-order.
       attribute :range_end_hton,   :binary
+
       before_save :set_hton
 
+      # The ASN number.
       attribute :number, :integer
       validates :number, presence:   true,
                          uniqueness: {scope: [:range_start, :range_end]}
 
+      # The country code of the ASN.
       attribute :country_code, :string
 
+      # The organization the ASN is currently assigned to.
       attribute :name, :string
 
       #
