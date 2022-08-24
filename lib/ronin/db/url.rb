@@ -361,6 +361,9 @@ module Ronin
         # map the URL scheme to a URI class
         url_class = SCHEMES.fetch(self.scheme.name,::URI::Generic)
 
+        scheme = if self.scheme
+                   self.scheme.name
+                 end
         host = if self.host_name
                  self.host_name.name
                end
@@ -370,7 +373,7 @@ module Ronin
 
         # build the URI
         return url_class.build(
-          scheme:   self.scheme.name,
+          scheme:   scheme,
           host:     host,
           port:     port,
           path:     self.path,
