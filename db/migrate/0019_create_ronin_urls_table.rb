@@ -36,6 +36,7 @@ class CreateRoninUrlsTable < ActiveRecord::Migration[7.0]
                             to_table: :ronin_ports
                           }
       t.string :path
+      t.string :query
       t.string :fragment
       t.datetime :last_scanned_at
       t.datetime :created_at, null: false

@@ -11,7 +11,7 @@ describe Ronin::DB::URL do
   let(:port) { 8080 }
   let(:path) { '/path' }
   let(:query_params) { {'q' => '1'} }
-  let(:query_string) { 'q=1' }
+  let(:query) { 'q=1' }
   let(:fragment) { 'frag' }
 
   let(:uri) do
@@ -20,7 +20,7 @@ describe Ronin::DB::URL do
       host:     host_name,
       port:     port,
       path:     path,
-      query:    query_string,
+      query:    query,
       fragment: fragment
     )
   end
@@ -78,7 +78,7 @@ describe Ronin::DB::URL do
     end
 
     it "should parse query strings" do
-      expect(subject.query_string).to be == query_string
+      expect(subject.query).to be == query
     end
 
     it "should parse URL fragments" do
@@ -123,7 +123,7 @@ describe Ronin::DB::URL do
     end
 
     it "should convert the query string" do
-      expect(subject.query).to be == query_string
+      expect(subject.query).to be == query
     end
 
     it "should omit the query string if there are no query params" do

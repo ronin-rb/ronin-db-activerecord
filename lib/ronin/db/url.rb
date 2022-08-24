@@ -78,6 +78,12 @@ module Ronin
       #   @return [String]
       attribute :path, :string
 
+      # @!attribute [rw] query
+      #   The query string part of the URL.
+      #
+      #   @return [String, nil]
+      attribute :query, :string
+
       # @!attribute [rw] fragment
       #   The fragment of the URL.
       #   
@@ -240,6 +246,7 @@ module Ronin
           scheme:    {name: url.scheme},
           host_name: {name: url.host},
           path:      normalized_path(url),
+          query:     url.query,
           fragment:  url.fragment
         )
 
@@ -288,6 +295,7 @@ module Ronin
                     end
 
         path     = normalized_path(uri)
+        query    = uri.query
         fragment = uri.fragment
 
         query_params = []
@@ -308,6 +316,7 @@ module Ronin
           host_name:    host_name,
           port:         port,
           path:         path,
+          query:        query,
           fragment:     fragment,
           query_params: query_params
         )
