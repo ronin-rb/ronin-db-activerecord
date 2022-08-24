@@ -32,12 +32,15 @@ module Ronin
 
       include Model
 
+      # The primary ID for the HTTP request.
       attribute :id, :integer
 
+      # The HTTP version of the HTTP request.
       attribute :version, :string
       validates :version, presence: true,
                           inclusion: {in: %w[1.0 1.1 2.0]}
 
+      # The request method.
       enum request_method: [
         :copy,
         :delete,
@@ -57,24 +60,31 @@ module Ronin
       ], _suffix: :requests
       validates :request_method, presence: true
 
+      # The path of the HTTP request.
       attribute :path, :string
       validates :path, presence: true
 
+      # The query string of the HTTP request.
       attribute :query, :string
 
+      # The additional parsed query params of the HTTP request.
       has_many :query_param, foreign_key: 'request_id',
                              class_name: 'HTTPQueryParam',
                              dependent:  :destroy
 
+      # The optional body of the HTTP request.
       attribute :body, :text
 
+      # The additional headers of HTTP request.
       has_many :headers, foreign_key: 'request_id',
                          class_name:  'HTTPRequestHeader',
                          dependent:   :destroy
 
+      # The optional HTTP response associated with the HTTP request.
       belongs_to :response, class_name: 'HTTPResponse',
                             dependent:  :destroy
 
+      # When the HTTP request was created.
       attribute :created_at, :time
 
     end

@@ -44,7 +44,7 @@ module Ronin
       # The value of the HTTP query param
       attribute :value, :text
 
-      # The HTTP
+      # The HTTP request which contains this HTTP query param.
       belongs_to :request, required:   true,
                            class_name: 'HTTPRequest'
 

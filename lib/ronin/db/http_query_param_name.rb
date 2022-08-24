@@ -45,6 +45,7 @@ module Ronin
       has_many :query_params, class_name:  'HTTPQueryParam',
                               foreign_key: :name_id
 
+      # When the HTTP query param name was first created.
       attribute :created_at, :time
 
       #
