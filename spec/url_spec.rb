@@ -46,7 +46,7 @@ describe Ronin::DB::URL do
     )
   end
 
-  let(:url) do
+  subject do
     described_class.new(
       scheme:       url_scheme,
       host_name:    url_host_name,
@@ -105,7 +105,7 @@ describe Ronin::DB::URL do
   end
 
   describe "#to_uri" do
-    subject { url.to_uri }
+    subject { super().to_uri }
 
     it "should convert the scheme" do
       expect(subject.scheme).to be == scheme
@@ -140,8 +140,6 @@ describe Ronin::DB::URL do
   end
 
   describe "#to_s" do
-    subject { url }
-
     it "should convert the URL back into a String URI" do
       expect(subject.to_s).to be == uri.to_s
     end
