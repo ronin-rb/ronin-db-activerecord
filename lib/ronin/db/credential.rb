@@ -32,16 +32,28 @@ module Ronin
 
       include Model
 
-      # Primary key of the credential
+      # @!attribute [rw] id
+      #   Primary key of the credential.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # User name of the credential
+      # @!attribute [rw] user_name
+      #   User name of the credential.
+      #
+      #   @return [UserName]
       belongs_to :user_name, required: true
 
-      # The optional email address associated with the Credential
+      # @!attribute [rw] email_address
+      #   The optional email address associated with the Credential
+      #
+      #   @return [EmailAddress]
       belongs_to :email_address, optional: true
 
-      # Password of the credential
+      # @!attribute [rw] password
+      #   Password of the credential.
+      #
+      #   @return [Password]
       belongs_to :password, required: true
 
       #

@@ -37,16 +37,28 @@ module Ronin
 
       self.table_name = 'ronin_user_names'
 
-      # The primary key of the user name
+      # @!attribute [rw] id
+      #   The primary key of the user name.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # Tracks when the user-name was created.
+      # @!attribute [r] created_at
+      #   Tracks when the user-name was created.
+      #
+      #   @return [Time]
       attribute :created_at, :time
 
-      # Any credentials belonging to the user
+      # @!attribute [rw] credentials
+      #   Any credentials belonging to the user.
+      #
+      #   @return [Array<Credential>]
       has_many :credentials, dependent: :destroy
 
-      # Email addresses of the user
+      # @!attribute [rw] email_addresses
+      #   The email addresses of the user.
+      #
+      #   @return [Array<EmailAddress>]
       has_many :email_addresses, dependent: :destroy
 
     end

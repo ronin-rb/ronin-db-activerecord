@@ -34,9 +34,16 @@ module Ronin
 
       include Model
 
-      # The primary key of the email address.
+      # @!attribute [rw] id
+      #   The primary key of the email address.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
+      # @!attribute [rw] address
+      #   The raw string of the email address.
+      #
+      #   @return [String]
       attribute :address, :string
       validates :address, presence: true,
                           uniqueness: true,
@@ -46,21 +53,36 @@ module Ronin
                             message: 'Must be a valid email address'
                           }
 
-      # The user-name component of the email address.
+      # @!attribute [rw] user_name
+      #   The user-name component of the email address.
+      #
+      #   @return [UserName]
       belongs_to :user_name, required: true
       validates :user_name, uniqueness: {scope: [:host_name_id]}
 
-      # The host-name component of the email address.
+      # @!attribute [rw] host_name
+      #   The host-name component of the email address.
+      #
+      #   @return [HostName]
       belongs_to :host_name, required: true
 
-      # Any IP addresses associated with the host name.
+      # @!attribute [rw] ip_addresses
+      #   Any IP addresses associated with the host name.
+      #
+      #   @return [Array<IPAddress>]
       has_many :ip_addresses, through:    :host_name,
                               class_name: 'IPAddress'
 
-      # Any web credentials that are associated with the email address.
+      # @!attribute [rw] credentials
+      #   Any web credentials that are associated with the email address.
+      #
+      #   @return [Array<Credential>]
       has_many :credentials, dependent: :destroy
 
-      # Tracks when the email address was created at.
+      # @!attribute [rw] created_at
+      #   Tracks when the email address was created at.
+      #
+      #   @return [Time]
       attribute :created_at, :time
 
       #

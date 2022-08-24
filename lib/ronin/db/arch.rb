@@ -36,14 +36,23 @@ module Ronin
       include Model
       include Model::HasUniqueName
 
-      # Primary key
+      # @!attribute [rw] id
+      #   The primary key of the arch.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # Endianness of the architecture
+      # @!attribute [rw] endian
+      #   Endianness of the architecture.
+      #
+      #   @return [:little, :big]
       enum :endian, {little: 'little', big: 'big'}
       validates :endian, presence: true
 
-      # Address length of the architecture
+      # @!attribute [rw] word_size
+      #   Address length of the architecture.
+      #
+      #   @return [Integer]
       attribute :word_size, :integer
       validates :word_size, presence: true,
                             inclusion: {in: [4, 8]}

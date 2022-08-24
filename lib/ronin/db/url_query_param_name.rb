@@ -34,17 +34,30 @@ module Ronin
       include Model
       include Model::HasUniqueName
 
-      # The primary-key of the URL query param
+      # @!attribute [rw] id
+      #   The primary-key of the URL query param.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The name of the URL query param
+      # @!attribute [rw] name
+      #   The name of the URL query param.
+      #
+      #   @return [String]
       attribute :name, :string # length:   256
       validates :name, presence: true, uniqueness: true
 
-      # The URL query params
+      # @!attribute [rw] query_params
+      #   The URL query params.
+      #
+      #   @return [Array<URLQueryParam>]
       has_many :query_params, class_name:  'URLQueryParam',
                               foreign_key: :name_id
 
+      # @!attribute [r] created_at
+      #   When the URL query param name was first created.
+      #
+      #   @return [Time]
       attribute :created_at, :time
 
       #

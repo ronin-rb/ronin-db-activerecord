@@ -34,29 +34,53 @@ module Ronin
       include Model
       include Model::LastScannedAt
 
-      # The primary key of the open port
+      # @!attribute [rw] id
+      #   The primary key of the open port.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The IP Address that was scanned
+      # @!attribute [rw] ip_address
+      #   The IP Address that was scanned.
+      #
+      #   @return [IPAddress]
       belongs_to :ip_address, required: true,
                               class_name: 'IPAddress'
 
-      # The port
+      # @!attribute [rw] port
+      #   The port.
+      #
+      #   @return [Port]
       belongs_to :port, required: true
 
-      # The service detected on the port
+      # @!attribute [rw] service
+      #   The service detected on the port
+      #
+      #   @return [Service, nil]
       belongs_to :service, optional: true
 
-      # The software running on the open port
+      # @!attribute [rw] software
+      #   The software running on the open port
+      #
+      #   @return [Software]
       belongs_to :software, optional: true
 
-      # Credentials used by the service running on the port
+      # @!attribute [rw] service_credentials
+      #   Credentials used by the service running on the port
+      #
+      #   @return [Array<ServiceCredential>]
       has_many :service_credentials, dependent: :destroy
 
-      # Specifies whether the service requires SSL.
+      # @!attribute [rw] ssl
+      #   Specifies whether the service requires SSL.
+      #
+      #   @return [Boolean]
       attribute :ssl, :boolean
 
-      # Define the created_at timestamp
+      # @!attribute [r] created_at
+      #   Define the created_at timestamp
+      #
+      #   @return [Time]
       attribute :created_at, :time
 
       #

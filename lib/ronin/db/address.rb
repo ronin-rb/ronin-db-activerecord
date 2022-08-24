@@ -40,14 +40,23 @@ module Ronin
 
       self.abstract_class = true
 
-      # The primary key of the Address
+      # @!attribute [rw] id
+      #   The primary key of the Address
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The Address
+      # @!attribute [rw] address
+      #   The Address
+      #
+      #   @return [String]
       attribute :address, :string
       validates :address, presence: true, uniqueness: true
 
-      # Tracks when the IP Address was first created
+      # @!attribute [rw] created_at
+      #   Tracks when the IP Address was first created
+      #
+      #   @return [Time]
       attribute :created_at, :time
 
       #

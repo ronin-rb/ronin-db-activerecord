@@ -28,7 +28,10 @@ module Ronin
     #
     class ServiceCredential < Credential
 
-      # The open port the credential belongs to
+      # @!attribute [rw] open_port
+      #   The open port the credential belongs to.
+      #
+      #   @return [OpenPort, nil]
       belongs_to :open_port, optional: true
 
     end

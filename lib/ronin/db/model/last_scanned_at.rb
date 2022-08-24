@@ -24,6 +24,13 @@ module Ronin
     module Model
       module LastScannedAt
         #
+        # @!attribute [rw] last_scanned_at
+        #   Whenever the model was last scanned.
+        #
+        #   @return [Time, nil]
+        #
+
+        #
         # Adds the `last_scanned_at` attribute to the model.
         #
         # @param [Class<ActiveRecord::Base>] model

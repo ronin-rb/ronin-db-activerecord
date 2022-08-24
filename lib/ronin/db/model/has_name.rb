@@ -29,12 +29,19 @@ module Ronin
       #
       module HasName
         #
+        # @!attribute [rw] name
+        #   The name attribute of the model.
+        #
+        #   @return [String]
+        #
+
+        #
         # Adds the `name` property and {ClassMethods} to the model.
         #
         # @param [Class] base
         #   The model.
         #
-        # @api semipublic
+        # @api private
         #
         def self.included(base)
           base.send :include, Model, InstanceMethods

@@ -30,39 +30,66 @@ module Ronin
 
       include Model
 
-      # The primary key of the ASN range.
+      # @!attribute [rw] id
+      #   The primary key of the ASN range.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # Whether the ASN range represents an IPv4 or IPv6 range.
+      # @!attribute [rw] version
+      #   Whether the ASN range represents an IPv4 or IPv6 range.
+      #
+      #   @return [Integer]
       attribute :version, :integer
       validates :version, presence:  true,
                           inclusion: {in: [4, 6]}
 
-      # The starting IP address of the ASN range.
+      # @!attribute [rw] range_start
+      #   The starting IP address of the ASN range.
+      #
+      #   @return [String]
       attribute :range_start, :string
       validates :range_start, presence: true
 
-      # The ending IP address of the ASN range.
+      # @!attribute [rw] range_end
+      #   The ending IP address of the ASN range.
+      #
+      #   @return [String]
       attribute :range_end, :string
       validates :range_end, presence: true
 
-      # The starting IP address of the ASN range, but in network byte-order.
+      # @!attribute [r] range_start_hton
+      #   The starting IP address of the ASN range, but in network byte-order.
+      #
+      #   @return [String]
       attribute :range_start_hton, :binary
 
-      # The ending IP address of the ASN range, but in network byte-order.
-      attribute :range_end_hton,   :binary
+      # @!attribute [r] range_end_hton
+      #   The ending IP address of the ASN range, but in network byte-order.
+      #
+      #   @return [String]
+      attribute :range_end_hton, :binary
 
       before_save :set_hton
 
-      # The ASN number.
+      # @!attribute [rw] number
+      #   The ASN number.
+      #
+      #   @return [Integer]
       attribute :number, :integer
       validates :number, presence:   true,
                          uniqueness: {scope: [:range_start, :range_end]}
 
-      # The country code of the ASN.
+      # @!attribute [rw] country_code
+      #   The country code of the ASN.
+      #
+      #   @return [String]
       attribute :country_code, :string
 
-      # The organization the ASN is currently assigned to.
+      # @!attribute [rw] name
+      #   The organization the ASN is currently assigned to.
+      #
+      #   @return [String]
       attribute :name, :string
 
       #

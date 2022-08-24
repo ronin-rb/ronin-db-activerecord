@@ -46,33 +46,60 @@ module Ronin
         'ftp'   => ::URI::FTP
       }
 
-      # Primary key of the URL
+      # @!attribute [rw] id
+      #   The primary key of the URL.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The scheme of the URL
+      # @!attribute [rw] scheme
+      #   The scheme of the URL.
+      #
+      #   @return [URLScheme]
       belongs_to :scheme, required:   true,
                           class_name: 'URLScheme'
 
-      # The host name of the URL
+      # @!attribute [rw] host_name
+      #   The host name of the URL
+      #
+      #   @return [HostName]
       belongs_to :host_name, required: true
 
-      # Port of the URL
+      # @!attribute [rw] port
+      #   The port of the URL.
+      #
+      #   @return [Port, nil]
       belongs_to :port, optional:   true,
                         class_name: 'Port'
 
-      # Path of the URL
+      # @!attribute [rw] path
+      #   The path of the URL.
+      #
+      #   @return [String]
       attribute :path, :string
 
-      # The fragment of the URL
+      # @!attribute [rw] fragment
+      #   The fragment of the URL.
+      #   
+      #   @return [String, nil]
       attribute :fragment, :string
 
-      # The query params of the URL
+      # @!attribute [rw] query_params
+      #   The query params of the URL.
+      #
+      #   @return [Array<URLQueryParam>]
       has_many :query_params, class_name: 'URLQueryParam'
 
-      # Any credentials used with the URL
+      # @!attribute [rw] web_credentials
+      #   Any credentials used with the URL.
+      #
+      #   @return [Array<WebCredential>]
       has_many :web_credentials
 
-      # Defines the created_at timestamp
+      # @!attribute [r] created_at
+      #   Defines the created_at timestamp
+      #
+      #   @return [Time]
       attribute :created_at, :time
 
       #

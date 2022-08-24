@@ -33,17 +33,29 @@ module Ronin
 
       include Model
 
-      # Primary key of the password
+      # @!attribute [rw] id
+      #   The primary key of the password.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The clear-text of the password
+      # @!attribute [rw] clear_text
+      #   The clear-text of the password.
+      #
+      #   @return [String]
       attribute :clear_text, :string # length:   256,
       validates :clear_text, presence: true, uniqueness: true
 
-      # The credentials which use the password
+      # @!attribute [rw] credentials
+      #   The credentials which use the password.
+      #
+      #   @return [Array<Credential>]
       has_many :credentials, dependent: :destroy
 
-      # The user names which use the password
+      # @!attribute [rw] user_names
+      #   The user names which use the password.
+      #
+      #   @return [Array<UserName>]
       has_many :user_names, through: :credentials
 
       #

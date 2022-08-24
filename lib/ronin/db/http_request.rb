@@ -32,15 +32,24 @@ module Ronin
 
       include Model
 
-      # The primary ID for the HTTP request.
+      # @!attribute [rw] id
+      #   The primary ID for the HTTP request.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The HTTP version of the HTTP request.
+      # @!attribute [rw] version
+      #   The HTTP version of the HTTP request.
+      #
+      #   @return [String]
       attribute :version, :string
       validates :version, presence: true,
                           inclusion: {in: %w[1.0 1.1 2.0]}
 
-      # The request method.
+      # @!attribute [rw] request_method
+      #   The request method.
+      #
+      #   @return [:copy, :delete, :get, :head, :lock, :mkcol, :move, :options, :patch, :post, :propfind, :proppatch, :put, :trace, :unlock]
       enum request_method: [
         :copy,
         :delete,
@@ -60,31 +69,51 @@ module Ronin
       ], _suffix: :requests
       validates :request_method, presence: true
 
-      # The path of the HTTP request.
+      # @!attribute [rw] path
+      #   The path of the HTTP request.
+      #
+      #   @return [String]
       attribute :path, :string
       validates :path, presence: true
 
-      # The query string of the HTTP request.
+      # @!attribute [rw] query
+      #   The query string of the HTTP request.
+      #
+      #   @return [String, nil]
       attribute :query, :string
 
-      # The additional parsed query params of the HTTP request.
+      # @!attribute [rw] query_params
+      #   The additional parsed query params of the HTTP request.
+      #
+      #   @return [Array<HTTPQueryParam>]
       has_many :query_params, foreign_key: 'request_id',
                               class_name: 'HTTPQueryParam',
                               dependent:  :destroy
-
-      # The optional body of the HTTP request.
+      # @!attribute [rw] body
+      #   The optional body of the HTTP request.
+      #
+      #   @return [String, nil]
       attribute :body, :text
 
-      # The additional headers of HTTP request.
+      # @!attribute [rw] headers
+      #   The additional headers of HTTP request.
+      #
+      #   @return [Array<HTTPRequestHeader>]
       has_many :headers, foreign_key: 'request_id',
                          class_name:  'HTTPRequestHeader',
                          dependent:   :destroy
 
-      # The optional HTTP response associated with the HTTP request.
+      # @!attribute [rw] response
+      #   The optional HTTP response associated with the HTTP request.
+      #
+      #   @return [HTTPResponse, nil]
       belongs_to :response, class_name: 'HTTPResponse',
                             dependent:  :destroy
 
-      # When the HTTP request was created.
+      # @!attribute [rw] created_at
+      #   When the HTTP request was created.
+      #
+      #   @return [Time]
       attribute :created_at, :time
 
     end

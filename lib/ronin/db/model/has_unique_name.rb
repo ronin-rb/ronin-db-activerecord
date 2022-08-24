@@ -29,6 +29,13 @@ module Ronin
       #
       module HasUniqueName
         #
+        # @!attribute [rw] name
+        #   The unqiue name of the model.
+        #
+        #   @return [String]
+        #
+
+        #
         # Adds the unique `name` property and {HasName::ClassMethods} to the
         # model.
         #

@@ -34,10 +34,16 @@ module Ronin
       include Model
       include Model::HasUniqueName
 
-      # Primary key of the organization
+      # @!attribute [rw] id
+      #   Primary key of the organization
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # Tracks when the organization was first created
+      # @!attribute [r] created_at
+      #   Tracks when the organization was first created
+      #
+      #   @return [Time]
       attribute :created_at, :time
 
     end

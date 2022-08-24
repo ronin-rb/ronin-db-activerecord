@@ -33,18 +33,30 @@ module Ronin
 
       include Model
 
-      # The primary-key of the URL query param
+      # @!attribute [rw] id
+      #   The primary-key of the URL query param
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The name of the URL query param
+      # @!attribute [rw] name
+      #   The name of the URL query param.
+      #
+      #   @return [URLQueryParamName]
       belongs_to :name, required:   true,
                         class_name: 'URLQueryParamName'
       validates :name_id, uniqueness: {scope: :url_id}
 
-      # The value of the URL query param
+      # @!attribute [rw] value
+      #   The value of the URL query param
+      #
+      #   @return [String]
       attribute :value, :text
 
-      # The URL
+      # @!attribute [rw] url
+      #   The URL that the query param belongs to.
+      #
+      #   @return [URL]
       belongs_to :url, required:   true,
                        class_name: 'URL'
 

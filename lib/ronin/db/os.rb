@@ -35,22 +35,37 @@ module Ronin
 
       self.table_name = 'ronin_oses'
 
-      # Primary key
+      # @!attribute [rw] id
+      #   The primary key of the OS.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # Flavor of the OS (Linux, BSD)
+      # @!attribute [rw] flavor
+      #   The flavor of the OS (Linux, BSD).
+      #
+      #   @return [String]
       attribute :flavor, :string
 
-      # Version of the Operating System
+      # @!attribute [rw] version
+      #   The version of the Operating System.
+      #
+      #   @return [String]
       attribute :version, :string
       validates :version, presence: true,
                           uniqueness: {scope: :name}
 
-      # Any OS guesses for the Operating System
+      # @!attribute [rw] os_guesses
+      #   Any OS guesses for the Operating System.
+      #
+      #   @return [Array<OSGuess>]
       has_many :os_guesses, dependent: :destroy,
                             class_name: 'OSGuess'
 
-      # Any IP Addresses that might be running the Operating System
+      # @!attribute [rw] ip_addresses
+      #   Any IP Addresses that might be running the Operating System
+      #
+      #   @return [Array<IPAddress>]
       has_many :ip_addresses, through:    :os_guesses,
                               class_name: 'IPAddress'
 

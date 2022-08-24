@@ -32,10 +32,16 @@ module Ronin
 
       include Model
 
-      # The primary ID of the HTTP reponse.
+      # @!attribute [rw] id
+      #   The primary ID of the HTTP reponse.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The HTTP status code of the response.
+      # @!attribute [rw] status
+      #   The HTTP status code of the response.
+      #
+      #   @return [Integer]
       attribute :status, :integer
       validates :status, presence: true,
                          inclusion: {
@@ -51,18 +57,30 @@ module Ronin
                            ]
                          }
 
-      # The associated headers of the HTTP response.
+      # @!attribute [rw] headers
+      #   The associated headers of the HTTP response.
+      #
+      #   @return [Array<HTTPResponseHeader>]
       has_many :headers, foreign_key: :request_id,
                          class_name:  'HTTPResponseHeader',
                          dependent:   :destroy
 
-      # The optional body of the HTTP response.
+      # @!attribute [rw] body
+      #   The optional body of the HTTP response.
+      #
+      #   @return [String, nil]
       attribute :body, :text
 
-      # When the HTTP response was created.
+      # @!attribute [r] created_at
+      #   When the HTTP response was created.
+      #
+      #   @return [Time]
       attribute :created_at, :time
 
-      # The associated HTTP request that the response was returned for.
+      # @!attribute [rw] request
+      #   The associated HTTP request that the response was returned for.
+      #
+      #   @return [HTTPRequest]
       has_one :request, required:   true,
                         foreign_key: :response_id,
                         class_name: 'HTTPRequest'

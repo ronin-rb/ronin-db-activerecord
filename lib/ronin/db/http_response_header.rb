@@ -32,18 +32,30 @@ module Ronin
 
       include Model
 
-      # The primary ID of the HTTP response header.
+      # @!attribute [rw] id
+      #   The primary ID of the HTTP response header.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The name of the HTTP response header.
+      # @!attribute [rw] name
+      #   The name of the HTTP response header.
+      #
+      #   @return [HTTPHeaderName]
       belongs_to :name, required:   true,
                         class_name: 'HTTPHeaderName'
 
-      # The value of the HTTP response header.
+      # @!attribute [rw] value
+      #   The value of the HTTP response header.
+      #
+      #   @return [String]
       attribute :value, :string
       validates :value, presence: true
 
-      # The associated HTTP response that the HTTP response header belongs to.
+      # @!attribute [rw] response
+      #   The associated HTTP response that the HTTP response header belongs to.
+      #
+      #   @return [HTTPResponse]
       belongs_to :response, required:   true,
                             class_name: 'HTTPResponse'
 

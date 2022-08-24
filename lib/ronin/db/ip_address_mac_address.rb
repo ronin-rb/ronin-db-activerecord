@@ -32,18 +32,30 @@ module Ronin
 
       include Model
 
-      # The primary-key of the join model.
+      # @!attribute [rw] id
+      #   The primary-key of the join model.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The IP Address
+      # @!attribute [rw] ip_address
+      #   The IP Address.
+      #
+      #   @return [IPAddress]
       belongs_to :ip_address, required:   true,
                               class_name: 'IPAddress'
 
-      # The Mac Address
+      # @!attribute [rw] mac_address
+      #   The Mac Address.
+      #
+      #   @return [MACAddress]
       belongs_to :mac_address, required:   true,
                                class_name: 'MACAddress'
 
-      # Tracks when an IP Address becomes associated with a MAC Address
+      # @!attribute [r] created_at
+      #   Tracks when an IP Address becomes associated with a MAC Address.
+      #
+      #   @return [Time]
       attribute :created_at, :time
 
     end

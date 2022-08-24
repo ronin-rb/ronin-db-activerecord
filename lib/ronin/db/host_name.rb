@@ -36,10 +36,16 @@ module Ronin
       include Model
       include Model::LastScannedAt
 
-      # Primary ID
+      # @!attribute [rw] id
+      #   The primary ID of the host nmae.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The address of the host name
+      # @!attribute [rw] name
+      #   The address of the host name.
+      #
+      #   @return [String]
       attribute :name, :string
       validates :name, presence: true,
                        uniqueness: true,
@@ -49,27 +55,48 @@ module Ronin
                          message: 'Must be a valid host-name'
                        }
 
-      # When the host name was first created
+      # @!attribute [rw] created_at
+      #   When the host name was first created.
+      #
+      #   @return [Time]
       attribute :created_at, :time
 
-      # The IP Address associations
+      # @!attribute [rw] host_name_ip_addresses
+      #   The IP Address associations.
+      #
+      #   @return [Array<HostNameIPAddress>]
       has_many :host_name_ip_addresses, dependent: :destroy,
                                         class_name: 'HostNameIPAddress'
 
-      # The IP Addresses that host the host name
+      # @!attribute [rw] ip_addresses
+      #   The IP Addresses that host the host name.
+      #
+      #   @return [Array<IPAddress>]
       has_many :ip_addresses, through:    :host_name_ip_addresses,
                               class_name: 'IPAddress'
 
-      # Open ports of the host
+      # @!attribute [rw] open_ports
+      #   The open ports of the host.
+      #
+      #   @return [Array<OpenPort>]
       has_many :open_ports, through: :ip_addresses
 
-      # Ports of the host
+      # @!attribute [rw] ports
+      #   The ports of the host.
+      #
+      #   @return [Array<Port>]
       has_many :ports, through: :ip_addresses
 
-      # The email addresses that are associated with the host-name.
+      # @!attribute [rw] email_addresses
+      #   The email addresses that are associated with the host-name.
+      #
+      #   @return [Array<EmailAddress>]
       has_many :email_addresses
 
-      # URLs that point to this host name
+      # @!attribute [rw] urls
+      #   The URLs that point to this host name.
+      #
+      #   @return [Array<URL>]
       has_many :urls, class_name: 'URL'
 
       #
@@ -156,7 +183,7 @@ module Ronin
       #
       # The IP Address that was most recently used by the host name.
       #
-      # @return [IpAddress]
+      # @return [IPAddress]
       #   The IP Address that most recently used by the host name.
       #
       # @api public

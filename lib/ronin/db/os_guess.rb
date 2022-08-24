@@ -34,18 +34,30 @@ module Ronin
 
       self.table_name = 'ronin_os_guesses'
 
-      # The primary-key of the OS guess.
+      # @!attribute [rw] id
+      #   The primary-key of the OS guess.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The IP Address the OS guess was made against.
+      # @!attribute [rw] ip_address
+      #   The IP Address the OS guess was made against.
+      #
+      #   @return [IPAddress]
       belongs_to :ip_address, required:   true,
                               class_name: 'IPAddress'
 
-      # The guessed OS.
+      # @!attribute [rw] os
+      #   The guessed OS.
+      #
+      #   @return [OS]
       belongs_to :os, required:   true,
                       class_name: 'OS'
 
-      # Tracks when an OS guess is made against an IP Address.
+      # @!attribute [r] created_at
+      #   Tracks when an OS guess is made against an IP Address.
+      #
+      #   @return [Time]
       attribute :created_at, :time
 
     end

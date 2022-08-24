@@ -32,14 +32,23 @@ module Ronin
 
       include Model
 
-      # Primary key of the port
+      # @!attribute [rw] id
+      #   The primary key of the port.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The protocol of the port (either `'tcp'` / `'udp'`)
+      # @!attribute [rw] protocol
+      #   The protocol of the port (either `'tcp'` / `'udp'`).
+      #
+      #   @return [:tcp, :udp]
       enum :protocol, {tcp: 'tcp', udp: 'udp'}
       validates :protocol, presence: true
 
-      # The port number
+      # @!attribute [rw] number
+      #   The port number.
+      #
+      #   @return [Integer]
       attribute :number, :integer
       validates :number, presence: true,
                          numericality: {
@@ -48,7 +57,10 @@ module Ronin
                          },
                          uniqueness: {scope: :protocol}
 
-      # The open ports
+      # @!attribute [rw] open_ports
+      #   The open ports.
+      #
+      #   @return [Array<OpenPort>]
       has_many :open_ports, dependent: :destroy
 
       #

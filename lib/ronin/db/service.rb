@@ -32,10 +32,16 @@ module Ronin
       include Model
       include Model::HasUniqueName
 
-      # Primary key of the service
+      # @!attribute [rw] id
+      #   Primary key of the service
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The open ports running the service
+      # @!attribute [rw] open_ports
+      #   The open ports running the service
+      #
+      #   @return [Array<OpenPort>]
       has_many :open_ports
 
     end

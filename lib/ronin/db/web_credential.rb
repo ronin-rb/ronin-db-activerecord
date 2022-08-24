@@ -28,7 +28,10 @@ module Ronin
     #
     class WebCredential < Credential
 
-      # The URL the credential can be used with.
+      # @!attribute [rw] url
+      #   The URL the credential can be used with.
+      #
+      #   @return [URL, nil]
       belongs_to :url, optional:   true,
                        class_name: 'URL'
 

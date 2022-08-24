@@ -33,7 +33,10 @@ module Ronin
     #
     class IPAddress < Address
 
-      # The IP Address
+      # @!attribute [rw] address
+      #   The IP Address.
+      #
+      #   @return [String]
       attribute :address, :string
       validates :address, presence: true,
                           uniqueness: true,
@@ -43,41 +46,71 @@ module Ronin
                             message: 'Must be a valid IP address'
                           }
 
-      # Type of the address
+      # @!attribute [rw] version
+      #   Type of the address.
+      #
+      #   @return [Integer]
       attribute :version, :integer
       validates :version, inclusion: {in: [4, 6]}
 
-      # The MAC Addresses associations
+      # @!attribute [rw] ip_address_mac_addresses
+      #   The MAC Addresses associations.
+      #
+      #   @return [Array<IPAddressMACAddress>]
       has_many :ip_address_mac_addresses, dependent:  :destroy,
                                           class_name: 'IPAddressMACAddress'
 
-      # The MAC Addresses associated with the IP Address
+      # @!attribute [rw] mac_addresses
+      #   The MAC Addresses associated with the IP Address.
+      #
+      #   @return [Array<MACAddress>]
       has_many :mac_addresses, through: :ip_address_mac_addresses,
                                class_name: 'MACAddress'
 
-      # The host-names that the IP Address serves
+      # @!attribute [rw] host_name_ip_addresses
+      #   The host-names that the IP Address serves.
+      #
+      #   @return [Array<HostNameIPAddress>]
       has_many :host_name_ip_addresses, dependent: :destroy,
                                         class_name: 'HostNameIPAddress'
 
-      # The host-names associated with the IP Address
+      # @!attribute [rw] host_names
+      #   The host-names associated with the IP Address.
+      #
+      #   @return [Array<HostName>]
       has_many :host_names, through: :host_name_ip_addresses
 
-      # Open ports of the host
+      # @!attribute [rw] open_ports
+      #   The open ports of the host.
+      #
+      #   @return [Array<OpenPort>]
       has_many :open_ports, dependent: :destroy
 
-      # Ports of the host
+      # @!attribute [rw] ports
+      #   The ports of the host.
+      #
+      #   @return [Array<Port>]
       has_many :ports, through: :open_ports
 
-      # Any OS guesses against the IP Address
+      # @!attribute [rw] os_guesses
+      #   Any OS guesses against the IP Address.
+      #
+      #   @return [Array<OSGuess>]
       has_many :os_guesses, dependent: :destroy,
                             class_name: 'OSGuess'
 
-      # Any OSes that the IP Address might be running
+      # @!attribute [rw] oses
+      #   Any OSes that the IP Address might be running
+      #
+      #   @return [Array<OS>]
       has_many :oses, through: :os_guesses,
                       class_name: 'OS'
 
       #
       # Initializes the IP address record.
+      #
+      # @param [Array] arguments
+      #   Additional attribute arguments.
       #
       # @param [Hash{Symbol => Object}] kwargs
       #   Additional attribute values.
@@ -197,7 +230,7 @@ module Ronin
       #
       # The MAC Address that was most recently used by the IP Address.
       #
-      # @return [MacAddress]
+      # @return [MACAddress]
       #   The MAC Address that most recently used the IP Address.
       #
       # @api public

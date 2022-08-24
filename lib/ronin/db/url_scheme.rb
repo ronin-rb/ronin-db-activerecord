@@ -36,10 +36,16 @@ module Ronin
 
       self.table_name = 'ronin_url_schemes'
       
-      # primary key of the URL Scheme
+      # @!attribute [rw] id
+      #   The primary key of the URL scheme.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The URLs that use the scheme
+      # @!attribute [rw] urls
+      #   The URLs that use the scheme.
+      #
+      #   @return [Array<URL>]
       has_many :urls, class_name: 'URL',
                       foreign_key: :scheme_id
 

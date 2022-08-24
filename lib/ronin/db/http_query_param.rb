@@ -33,18 +33,30 @@ module Ronin
 
       include Model
 
-      # The primary-key of the HTTP query param
+      # @!attribute [rw] id
+      #   The primary-key of the HTTP query param
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The name of the HTTP query param
+      # @!attribute [rw] name
+      #   The name of the HTTP query param
+      #
+      #   @return [HTTPQueryParamName]
       belongs_to :name, required:   true,
                         class_name: 'HTTPQueryParamName'
       validates :name_id, uniqueness: {scope: :request_id}
 
-      # The value of the HTTP query param
+      # @!attribute [rw] value
+      #   The value of the HTTP query param
+      #
+      #   @return [String]
       attribute :value, :text
 
-      # The HTTP request which contains this HTTP query param.
+      # @!attribute [rw] request
+      #   The HTTP request which contains this HTTP query param.
+      #
+      #   @return [HTTPRequest]
       belongs_to :request, required:   true,
                            class_name: 'HTTPRequest'
 

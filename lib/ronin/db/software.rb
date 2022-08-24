@@ -32,23 +32,38 @@ module Ronin
 
       include Model
 
-      # Primary key
+      # @!attribute [rw] id
+      #   The primary key of the software.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # Name
+      # @!attribute [rw] name
+      #   The software's name.
+      #
+      #   @return [String]
       attribute :name, :string
       validates :name, presence: true
 
-      # Version
+      # @!attribute [rw] version
+      #   The software's Version.
+      #
+      #   @return [String]
       attribute :version, :string
       validates :version, presence: true,
                           uniqueness: {scope: :name}
 
-      # The vendor of the software
+      # @!attribute [rw] vendor
+      #   The vendor of the software
+      #
+      #   @return [SoftwareVendor, nil]
       belongs_to :vendor, optional: true,
                           class_name: 'SoftwareVendor'
 
-      # The open ports running the software
+      # @!attribute [rw] open_ports
+      #   The open ports running the software
+      #
+      #   @return [Array<OpenPort>]
       has_many :open_ports
 
       #

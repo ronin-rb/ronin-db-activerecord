@@ -34,23 +34,41 @@ module Ronin
       include Model
       include Model::HasUniqueName
 
-      # The primary key of the HTTP header name.
+      # @!attribute [rw] id
+      #   The primary key of the HTTP header name.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The Header name.
+      # @!attribute [rw] name
+      #   The Header name.
+      #
+      #   @return [String]
       attribute :name, :string # length: 256
       validates :name, presence: true, uniqueness: true
 
-      # The associated HTTP request headers.
+      # @!attribute [rw] http_request_headers
+      #   The associated HTTP request headers.
+      #
+      #   @return [Array<HTTPRequestHeader>]
       has_many :http_request_headers
 
-      # The HTTP requests which contain this HTTP Header name.
+      # @!attribute [rw] http_requests
+      #   The HTTP requests which contain this HTTP Header name.
+      #
+      #   @return [Array<HTTPRequest>]
       has_many :http_requests, through: :http_request_headers
 
-      # The associated HTTP response headers.
+      # @!attribute [rw] http_response_headers
+      #   The associated HTTP response headers.
+      #
+      #   @return [Array<HTTPResponseHeader>]
       has_many :http_response_headers
 
-      # The HTTP responses which contain this HTTP Header name.
+      # @!attribute [rw] http_responses
+      #   The HTTP responses which contain this HTTP Header name.
+      #
+      #   @return [Array<HTTPResponse>]
       has_many :http_responses, through: :http_response_headers
 
     end

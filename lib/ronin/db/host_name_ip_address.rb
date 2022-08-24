@@ -34,19 +34,31 @@ module Ronin
 
       # self.table_name = 'ronin_host_name_ip_addresses'
 
-      # The primary-key of the join model.
+      # @!attribute [rw] id
+      #   The primary-key of the join model.
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # The host name pointing to the IP Address
+      # @!attribute [rw] host_name
+      #   The host name pointing to the IP Address
+      #
+      #   @return [HostName]
       belongs_to :host_name, required: true,
                              inverse_of: :host_name_ip_addresses
 
-      # The IP Address
+      # @!attribute [rw] ip_address
+      #   The associated IP address.
+      #
+      #   @return [IPAddress]
       belongs_to :ip_address, required:   true,
                               inverse_of: :host_name_ip_addresses,
                               class_name: 'IPAddress'
 
-      # Tracks when a IP Address is associated with a host name
+      # @!attribute [rw] created_at
+      #   Tracks when a IP Address is associated with a host name
+      #
+      #   @return [Time]
       attribute :created_at, :time
 
     end

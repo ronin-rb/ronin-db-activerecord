@@ -31,7 +31,10 @@ module Ronin
     #
     class MACAddress < Address
 
-      # The MAC address
+      # @!attribute [rw] address
+      #   The MAC address.
+      #
+      #   @return [String]
       attribute :address, :string # length: 17..17,
       validates :address, presence:   true,
                           uniqueness: true,
@@ -41,18 +44,24 @@ module Ronin
                             message: 'Must be a valid MAC address'
                           }
 
-      # The IP Addresses the MAC Address hosts
+      # @!attribute [rw] ip_address_mac_addresses
+      #   The IP Addresses the MAC Address hosts
+      #
+      #   @return [Array<IPAddressMACAddress>]
       has_many :ip_address_mac_addresses, dependent: :destroy,
                                           class_name: 'IPAddressMACAddress'
 
-      # The IP Addresses associated with the MAC Address
+      # @!attribute [rw] ip_addresses
+      #   The IP Addresses associated with the MAC Address
+      #
+      #   @return [Array<IPAddress>]
       has_many :ip_addresses, through:    :ip_address_mac_addresses,
                               class_name: 'IPAddress'
 
       #
       # The IP Address that most recently used the MAC Address.
       #
-      # @return [IpAddress]
+      # @return [IPAddress]
       #   The IP Address that most recently used the MAC Address.
       #
       # @api public
