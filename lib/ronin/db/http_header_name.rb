@@ -42,10 +42,10 @@ module Ronin
       validates :name, presence: true, uniqueness: true
 
       # The associated HTTP request headers.
-      has_many :http_headers
+      has_many :http_request_headers
 
       # The HTTP requests which contain this HTTP Header name.
-      has_many :http_requests, through: :http_headers
+      has_many :http_requests, through: :http_request_headers
 
     end
   end
