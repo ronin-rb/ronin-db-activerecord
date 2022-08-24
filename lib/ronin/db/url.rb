@@ -382,17 +382,13 @@ module Ronin
                  self.port.number
                end
 
-        query = unless self.query_params.empty?
-                  self.query_string
-                end
-
         # build the URI
         return url_class.build(
           scheme:   self.scheme.name,
           host:     host,
           port:     port,
           path:     self.path,
-          query:    query,
+          query:    self.query,
           fragment: self.fragment
         )
       end
