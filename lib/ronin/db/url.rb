@@ -20,6 +20,7 @@
 #
 
 require 'ronin/db/model'
+require 'ronin/db/model/last_scanned_at'
 
 require 'active_record'
 require 'uri/generic'
@@ -36,6 +37,7 @@ module Ronin
     class URL < ActiveRecord::Base
 
       include Model
+      include Model::LastScannedAt
 
       # Mapping of URL Schemes and URI classes
       SCHEMES = {
@@ -69,9 +71,6 @@ module Ronin
 
       # Any credentials used with the URL
       has_many :web_credentials
-
-      # When the URL was last scanned
-      attribute :last_scanned_at, :time
 
       # Defines the created_at timestamp
       attribute :created_at, :time
