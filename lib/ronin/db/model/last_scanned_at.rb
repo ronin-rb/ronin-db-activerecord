@@ -23,6 +23,14 @@ module Ronin
   module DB
     module Model
       module LastScannedAt
+        #
+        # Adds the `last_scanned_at` attribute to the model.
+        #
+        # @param [Class<ActiveRecord::Base>] model
+        #   The ActiveRecord model which is including {LastScannedAt}.
+        #
+        # @api private
+        #
         def self.included(model)
           model.class_eval do
             attribute :last_scanned_at, :time

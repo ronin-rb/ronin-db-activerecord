@@ -22,6 +22,14 @@
 module Ronin
   module DB
     module Model
+      #
+      # Sets the models `table_name_prefix` to `ronin_`.
+      #
+      # @param [Class<ActiveRecord::Base>] model
+      #   The ActiveRecord model class which is including {Model}.
+      #
+      # @api private
+      #
       def self.included(model)
         model.table_name_prefix = 'ronin_'
       end

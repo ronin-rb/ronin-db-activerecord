@@ -25,18 +25,25 @@ require 'active_record'
 
 module Ronin
   module DB
+    #
+    # Represents a HTTP header belonging to an HTTP response.
+    #
     class HTTPResponseHeader < ActiveRecord::Base
 
       include Model
 
+      # The primary ID of the HTTP response header.
       attribute :id, :integer
 
+      # The name of the HTTP response header.
       belongs_to :name, required:   true,
                         class_name: 'HTTPHeaderName'
 
+      # The value of the HTTP response header.
       attribute :value, :string
       validates :value, presence: true
 
+      # The associated HTTP response that the HTTP response header belongs to.
       belongs_to :response, required:   true,
                             class_name: 'HTTPResponse'
 
