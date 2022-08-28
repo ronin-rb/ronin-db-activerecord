@@ -52,6 +52,7 @@ require 'ronin/db/http_request_header'
 require 'ronin/db/http_response_header'
 require 'ronin/db/http_request'
 require 'ronin/db/http_response'
+require 'ronin/db/advisory'
 
 module Ronin
   module DB
@@ -89,7 +90,8 @@ module Ronin
         HTTPRequestHeader,
         HTTPResponseHeader,
         HTTPRequest,
-        HTTPResponse
+        HTTPResponse,
+        Advisory
       ]
 
       #

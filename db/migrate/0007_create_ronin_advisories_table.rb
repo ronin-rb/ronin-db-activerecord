@@ -29,14 +29,13 @@ class CreateRoninAdvisoriesTable < ActiveRecord::Migration[7.0]
     create_table :ronin_advisories, id: false, if_not_exists: true do |t|
       t.string :id, primary_key: true, null: false
 
-      t.string :publisher, null: false
-      t.integer :year
-      t.integer :number, null: false
+      t.string :prefix, null: false
+      t.integer :year, null: true
+      t.string :identifier, null: false
 
       t.index :id, unique: true
       t.index :publisher
       t.index :year
-      t.index :number
     end
   end
 
