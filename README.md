@@ -45,6 +45,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * {Ronin::DB::WebCredential}
   * {Ronin::DB::ASN}
   * {Ronin::DB::Advisory}
+  * {Ronin::DB::Vulnerability}
 
 ## Examples
 
