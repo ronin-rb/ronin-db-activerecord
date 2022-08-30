@@ -164,7 +164,7 @@ describe Ronin::DB::ASN do
     end
 
     after do
-      described_class.delete_all
+      described_class.destroy_all
     end
   end
 

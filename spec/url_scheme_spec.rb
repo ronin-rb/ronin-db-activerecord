@@ -32,7 +32,7 @@ describe Ronin::DB::URLScheme do
           ["has already been taken"]
         )
 
-        described_class.delete_all
+        described_class.destroy_all
       end
     end
   end

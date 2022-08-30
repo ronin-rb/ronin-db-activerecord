@@ -56,9 +56,9 @@ describe Ronin::DB::Credential do
     end
 
     after do
-      Ronin::DB::Credential.delete_all
-      Ronin::DB::Password.delete_all
-      Ronin::DB::UserName.delete_all
+      Ronin::DB::Credential.destroy_all
+      Ronin::DB::Password.destroy_all
+      Ronin::DB::UserName.destroy_all
     end
   end
 
@@ -83,9 +83,9 @@ describe Ronin::DB::Credential do
     end
 
     after do
-      Ronin::DB::Credential.delete_all
-      Ronin::DB::Password.delete_all
-      Ronin::DB::UserName.delete_all
+      Ronin::DB::Credential.destroy_all
+      Ronin::DB::Password.destroy_all
+      Ronin::DB::UserName.destroy_all
     end
   end
 

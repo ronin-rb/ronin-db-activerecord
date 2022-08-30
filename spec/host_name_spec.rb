@@ -29,7 +29,7 @@ describe Ronin::DB::HostName do
         host_name = described_class.new(name: name)
         expect(host_name).to_not be_valid
 
-        described_class.delete_all
+        described_class.destroy_all
       end
     end
   end
@@ -61,7 +61,7 @@ describe Ronin::DB::HostName do
       end
 
       after do
-        described_class.delete_all
+        described_class.destroy_all
       end
     end
   end
@@ -86,9 +86,9 @@ describe Ronin::DB::HostName do
     end
 
     after do
-      Ronin::DB::HostNameIPAddress.delete_all
-      Ronin::DB::IPAddress.delete_all
-      Ronin::DB::HostName.delete_all
+      Ronin::DB::HostNameIPAddress.destroy_all
+      Ronin::DB::IPAddress.destroy_all
+      Ronin::DB::HostName.destroy_all
     end
   end
 
@@ -117,11 +117,11 @@ describe Ronin::DB::HostName do
     end
 
     after do
-      Ronin::DB::OpenPort.delete_all
-      Ronin::DB::Port.delete_all
-      Ronin::DB::HostNameIPAddress.delete_all
-      Ronin::DB::IPAddress.delete_all
-      Ronin::DB::HostName.delete_all
+      Ronin::DB::OpenPort.destroy_all
+      Ronin::DB::Port.destroy_all
+      Ronin::DB::HostNameIPAddress.destroy_all
+      Ronin::DB::IPAddress.destroy_all
+      Ronin::DB::HostName.destroy_all
     end
   end
 
@@ -143,7 +143,7 @@ describe Ronin::DB::HostName do
     end
 
     after do
-      described_class.delete_all
+      described_class.destroy_all
     end
   end
 
@@ -164,7 +164,7 @@ describe Ronin::DB::HostName do
         expect(host.name).to eq(domain)
       end
 
-      after { subject.delete_all }
+      after { subject.destroy_all }
 
       context "when other sub-domain names exist in the database" do
         let(:sub_domain1) { 'www.example.com'  }
@@ -188,7 +188,7 @@ describe Ronin::DB::HostName do
           expect(hosts[2].name).to eq(sub_domain2)
         end
 
-        after { subject.delete_all }
+        after { subject.destroy_all }
       end
     end
   end

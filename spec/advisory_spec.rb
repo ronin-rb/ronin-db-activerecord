@@ -161,7 +161,7 @@ describe Ronin::DB::Advisory do
         expect(advisory).to eq(existing_advisory)
       end
 
-      after { described_class.delete_all }
+      after { described_class.destroy_all }
     end
 
     context "when no Advisory exists with the given id" do

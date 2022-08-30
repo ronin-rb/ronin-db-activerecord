@@ -60,6 +60,6 @@ describe Ronin::DB::Model::HasName do
       expect(resources[1].name).to be == name2
     end
 
-    after { subject.delete_all }
+    after { subject.destroy_all }
   end
 end

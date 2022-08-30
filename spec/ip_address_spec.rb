@@ -62,7 +62,7 @@ describe Ronin::DB::IPAddress do
     end
 
     after do
-      subject.delete_all
+      subject.destroy_all
     end
   end
 
@@ -84,7 +84,7 @@ describe Ronin::DB::IPAddress do
     end
 
     after do
-      subject.delete_all
+      subject.destroy_all
     end
   end
 
@@ -107,9 +107,9 @@ describe Ronin::DB::IPAddress do
     end
 
     after do
-      Ronin::DB::IPAddressMACAddress.delete_all
-      Ronin::DB::IPAddress.delete_all
-      Ronin::DB::MACAddress.delete_all
+      Ronin::DB::IPAddressMACAddress.destroy_all
+      Ronin::DB::IPAddress.destroy_all
+      Ronin::DB::MACAddress.destroy_all
     end
   end
 
@@ -132,9 +132,9 @@ describe Ronin::DB::IPAddress do
     end
 
     after do
-      Ronin::DB::HostNameIPAddress.delete_all
-      Ronin::DB::IPAddress.delete_all
-      Ronin::DB::HostName.delete_all
+      Ronin::DB::HostNameIPAddress.destroy_all
+      Ronin::DB::IPAddress.destroy_all
+      Ronin::DB::HostName.destroy_all
     end
   end
 
@@ -159,9 +159,9 @@ describe Ronin::DB::IPAddress do
     end
 
     after do
-      Ronin::DB::OpenPort.delete_all
-      Ronin::DB::IPAddress.delete_all
-      Ronin::DB::Port.delete_all
+      Ronin::DB::OpenPort.destroy_all
+      Ronin::DB::IPAddress.destroy_all
+      Ronin::DB::Port.destroy_all
     end
   end
 

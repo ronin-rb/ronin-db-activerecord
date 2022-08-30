@@ -55,7 +55,7 @@ describe Ronin::DB::Model::HasUniqueName do
         expect(record).to_not be_valid
       end
 
-      after { model.delete_all }
+      after { model.destroy_all }
     end
   end
 end

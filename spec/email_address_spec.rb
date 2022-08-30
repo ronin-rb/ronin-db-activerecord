@@ -100,7 +100,7 @@ describe Ronin::DB::EmailAddress do
           ["has already been taken"]
         )
 
-        described_class.delete_all
+        described_class.destroy_all
         user_name.destroy
         host_name.destroy
       end
@@ -166,7 +166,7 @@ describe Ronin::DB::EmailAddress do
           ["has already been taken"]
         )
 
-        described_class.delete_all
+        described_class.destroy_all
         user_name.destroy
         host_name.destroy
       end
@@ -195,7 +195,7 @@ describe Ronin::DB::EmailAddress do
     end
 
     after do
-      described_class.delete_all
+      described_class.destroy_all
       user_name.destroy
       host_name.destroy
     end
@@ -227,7 +227,7 @@ describe Ronin::DB::EmailAddress do
     end
 
     after do
-      described_class.delete_all
+      described_class.destroy_all
       ip_address.destroy
       user_name.destroy
       host_name.destroy
@@ -256,7 +256,7 @@ describe Ronin::DB::EmailAddress do
     end
 
     after do
-      described_class.delete_all
+      described_class.destroy_all
       user_name.destroy
       host_name.destroy
     end
