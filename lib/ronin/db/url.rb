@@ -142,7 +142,7 @@ module Ronin
       # @api public
       #
       def self.with_host_name(name)
-        joins(:host).where(host: {address: name})
+        joins(:host_name).where(host_name: {name: name})
       end
 
       #
