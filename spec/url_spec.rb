@@ -185,7 +185,7 @@ describe Ronin::DB::URL do
     let(:host_name2) { 'example2.com' }
 
     before do
-      http_scheme  = Ronin::DB::URLScheme.create(name: 'http')
+      http_scheme = Ronin::DB::URLScheme.create(name: 'http')
 
       host1 = Ronin::DB::HostName.create(name: host_name1)
       host2 = Ronin::DB::HostName.create(name: host_name2)
@@ -236,9 +236,8 @@ describe Ronin::DB::URL do
     let(:port_number2) { 443 }
 
     before do
-      http_scheme  = Ronin::DB::URLScheme.create(name: 'http')
-
-      host = Ronin::DB::HostName.create(name: 'example.com')
+      http_scheme = Ronin::DB::URLScheme.create(name: 'http')
+      host        = Ronin::DB::HostName.create(name: 'example.com')
 
       port1 = Ronin::DB::Port.create(number: port_number1)
       port2 = Ronin::DB::Port.create(number: port_number2)
