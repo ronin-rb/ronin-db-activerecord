@@ -130,6 +130,51 @@ describe Ronin::DB::URL do
 
     after do
       described_class.destroy_all
+      Ronin::DB::URLScheme.destroy_all
+      Ronin::DB::HostName.destroy_all
+      Ronin::DB::Port.destroy_all
+    end
+  end
+
+  describe ".https" do
+    subject { described_class }
+
+    before do
+      http_scheme  = Ronin::DB::URLScheme.create(name: 'http')
+      https_scheme = Ronin::DB::URLScheme.create(name: 'https')
+
+      host = Ronin::DB::HostName.create(name: 'example.com')
+
+      port_80  = Ronin::DB::Port.create(number: 80)
+      port_443 = Ronin::DB::Port.create(number: 443)
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host,
+        port:      port_80,
+        path:      '/'
+      )
+
+      described_class.create(
+        scheme:    https_scheme,
+        host_name: host,
+        port:      port_443,
+        path:      '/'
+      )
+    end
+
+    it "must query all #{described_class} with the 'https' scheme" do
+      urls = subject.https
+
+      expect(urls).to_not be_empty
+      expect(urls.map { |url| url.scheme.name }.uniq).to eq(['https'])
+    end
+
+    after do
+      described_class.destroy_all
+      Ronin::DB::URLScheme.destroy_all
+      Ronin::DB::HostName.destroy_all
+      Ronin::DB::Port.destroy_all
     end
   end
 
