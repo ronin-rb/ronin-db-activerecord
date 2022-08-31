@@ -326,7 +326,7 @@ describe Ronin::DB::URL do
     end
   end
 
-  describe ".with_ext" do
+  describe ".with_file_ext" do
     subject { described_class }
 
     let(:ext) { 'xml' }
@@ -359,7 +359,7 @@ describe Ronin::DB::URL do
     end
 
     it "must query all #{described_class} with the matching file extension" do
-      urls = subject.with_ext(ext)
+      urls = subject.with_file_ext(ext)
 
       expect(urls).to_not be_empty
       expect(urls.map(&:path)).to all(end_with(".#{ext}"))

@@ -188,7 +188,7 @@ module Ronin
       #
       # @api public
       #
-      def self.with_ext(ext)
+      def self.with_file_ext(ext)
         path_column = self.arel_table[:path]
 
         where(path_column.matches("%.#{sanitize_sql_like(ext)}"))
