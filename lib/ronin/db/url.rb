@@ -141,7 +141,7 @@ module Ronin
       #
       # @api public
       #
-      def self.with_host(name)
+      def self.with_host_name(name)
         joins(:host).where(host: {address: name})
       end
 
@@ -156,7 +156,7 @@ module Ronin
       #
       # @api public
       #
-      def self.with_port(number)
+      def self.with_port_number(number)
         joins(:port).where(port: {number: number})
       end
 
