@@ -174,7 +174,7 @@ module Ronin
       def self.with_directory(root_dir)
         path_column = self.arel_table[:path]
 
-        where(path: root_dir).or(where(path_column.match("#{root_dir}/%")))
+        where(path: root_dir).or(where(path_column.matches("#{root_dir}/%")))
       end
 
       #
