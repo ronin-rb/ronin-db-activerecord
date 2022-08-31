@@ -40,7 +40,7 @@ module Ronin
       #   The protocol of the port (either `'tcp'` / `'udp'`).
       #
       #   @return [:tcp, :udp]
-      enum :protocol, {tcp: 'tcp', udp: 'udp'}
+      enum :protocol, {tcp: 'tcp', udp: 'udp'}, default: :tcp
       validates :protocol, presence: true
 
       # @!attribute [rw] number
