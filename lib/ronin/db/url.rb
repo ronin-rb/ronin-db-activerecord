@@ -127,7 +127,7 @@ module Ronin
       # @api public
       #
       def self.https
-        joins(:scheme).all(scheme: {name: 'https'})
+        joins(:scheme).where(scheme: {name: 'https'})
       end
 
       #
