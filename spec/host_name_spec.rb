@@ -107,13 +107,23 @@ describe Ronin::DB::HostName do
       ip_address.ports.create(protocol: :tcp, number: port2)
     end
 
-    it "must find the #{described_class} with the associated port numbers" do
-      host = subject.with_port_number(ports).first
+    it "must find the #{described_class} with the associated port number" do
+      host = subject.with_port_number(port2).first
 
       expect(host).to be_kind_of(described_class)
       expect(host.name).to eq(name)
-      expect(host.ports[0].number).to eq(port1)
-      expect(host.ports[1].number).to eq(port2)
+      expect(host.ports.map(&:number)).to include(port2)
+    end
+
+    context "when given an Array of port numbers" do
+      it "must find the #{described_class} with the associated port numbers" do
+        host = subject.with_port_number(ports).first
+
+        expect(host).to be_kind_of(described_class)
+        expect(host.name).to eq(name)
+        expect(host.ports[0].number).to eq(port1)
+        expect(host.ports[1].number).to eq(port2)
+      end
     end
 
     after do
