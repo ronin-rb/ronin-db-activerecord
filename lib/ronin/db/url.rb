@@ -133,7 +133,7 @@ module Ronin
       #
       # Searches for URLs with specific host name(s).
       #
-      # @param [Array<String>, String] names
+      # @param [String, Array<String>] name
       #   The host name(s) to search for.
       #
       # @return [Array<URL>]
@@ -141,23 +141,23 @@ module Ronin
       #
       # @api public
       #
-      def self.with_hosts(names)
-        joins(:host).where(host: {address: names})
+      def self.with_host(name)
+        joins(:host).where(host: {address: name})
       end
 
       #
       # Searches for URLs with the specific port number(s).
       #
-      # @param [Array<Integer>, Integer] numbers
-      #   The port numbers to search for.
+      # @param [Integer, Array<Integer>] number
+      #   The port number(s) to search for.
       #
       # @return [Array<URL>]
       #   The matching URLs.
       #
       # @api public
       #
-      def self.with_ports(numbers)
-        joins(:port).where(port: {number: numbers})
+      def self.with_port(number)
+        joins(:port).where(port: {number: number})
       end
 
       #
