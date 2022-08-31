@@ -326,6 +326,53 @@ describe Ronin::DB::URL do
     end
   end
 
+  describe ".with_ext" do
+    subject { described_class }
+
+    let(:ext) { 'xml' }
+
+    before do
+      http_scheme = Ronin::DB::URLScheme.create(name: 'http')
+      host        = Ronin::DB::HostName.create(name: 'example.com')
+      port        = Ronin::DB::Port.create(number: 80)
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host,
+        port:      port,
+        path:      "/foo.#{ext}"
+      )
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host,
+        port:      port,
+        path:      '/foo.txt'
+      )
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host,
+        port:      port,
+        path:      "/bar.#{ext}"
+      )
+    end
+
+    it "must query all #{described_class} with the matching file extension" do
+      urls = subject.with_ext(ext)
+
+      expect(urls).to_not be_empty
+      expect(urls.map(&:path)).to all(end_with(".#{ext}"))
+    end
+
+    after do
+      described_class.destroy_all
+      Ronin::DB::URLScheme.destroy_all
+      Ronin::DB::HostName.destroy_all
+      Ronin::DB::Port.destroy_all
+    end
+  end
+
   describe "#host" do
     subject do
       described_class.new(host_name: url_host_name)
