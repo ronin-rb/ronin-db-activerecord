@@ -138,7 +138,7 @@ module Ronin
       #
       # @api public
       #
-      def self.with_port(number)
+      def self.with_port_number(number)
         joins(:ports).where(ports: {number: number})
       end
 

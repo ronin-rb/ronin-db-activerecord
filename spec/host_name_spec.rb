@@ -92,7 +92,7 @@ describe Ronin::DB::HostName do
     end
   end
 
-  describe ".with_port" do
+  describe ".with_port_number" do
     subject { described_class }
 
     let(:port1) { 80  }
@@ -108,7 +108,7 @@ describe Ronin::DB::HostName do
     end
 
     it "must find the #{described_class} with the associated port numbers" do
-      host = subject.with_port(ports).first
+      host = subject.with_port_number(ports).first
 
       expect(host).to be_kind_of(described_class)
       expect(host.name).to eq(name)
