@@ -228,6 +228,58 @@ describe Ronin::DB::URL do
       Ronin::DB::Port.destroy_all
     end
   end
+
+  describe ".with_port_number" do
+    subject { described_class }
+
+    let(:port_number1) { 80  }
+    let(:port_number2) { 443 }
+
+    before do
+      http_scheme  = Ronin::DB::URLScheme.create(name: 'http')
+
+      host = Ronin::DB::HostName.create(name: 'example.com')
+
+      port1 = Ronin::DB::Port.create(number: port_number1)
+      port2 = Ronin::DB::Port.create(number: port_number2)
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host,
+        port:      port1,
+        path:      '/'
+      )
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host,
+        port:      port2,
+        path:      '/'
+      )
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host,
+        port:      port1,
+        path:      '/other'
+      )
+    end
+
+    it "must query all #{described_class} with the matching port number" do
+      urls = subject.with_port_number(port_number1)
+
+      expect(urls).to_not be_empty
+      expect(urls.map { |url| url.port.number }.uniq).to eq([port_number1])
+    end
+
+    after do
+      described_class.destroy_all
+      Ronin::DB::URLScheme.destroy_all
+      Ronin::DB::HostName.destroy_all
+      Ronin::DB::Port.destroy_all
+    end
+  end
+
   describe "#host" do
     subject do
       described_class.new(host_name: url_host_name)
