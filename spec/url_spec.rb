@@ -178,6 +178,56 @@ describe Ronin::DB::URL do
     end
   end
 
+  describe ".with_host_name" do
+    subject { described_class }
+
+    let(:host_name1) { 'example1.com' }
+    let(:host_name2) { 'example2.com' }
+
+    before do
+      http_scheme  = Ronin::DB::URLScheme.create(name: 'http')
+
+      host1 = Ronin::DB::HostName.create(name: host_name1)
+      host2 = Ronin::DB::HostName.create(name: host_name2)
+
+      port_80 = Ronin::DB::Port.create(number: 443)
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host1,
+        port:      port_80,
+        path:      '/'
+      )
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host2,
+        port:      port_80,
+        path:      '/'
+      )
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host1,
+        port:      port_80,
+        path:      '/other'
+      )
+    end
+
+    it "must query all #{described_class} with the matching host name" do
+      urls = subject.with_host_name(host_name1)
+
+      expect(urls).to_not be_empty
+      expect(urls.map { |url| url.host_name.name }.uniq).to eq([host_name1])
+    end
+
+    after do
+      described_class.destroy_all
+      Ronin::DB::URLScheme.destroy_all
+      Ronin::DB::HostName.destroy_all
+      Ronin::DB::Port.destroy_all
+    end
+  end
   describe "#host" do
     subject do
       described_class.new(host_name: url_host_name)
