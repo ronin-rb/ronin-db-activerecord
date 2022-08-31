@@ -14,14 +14,6 @@ describe Ronin::DB::Port do
   end
 
   describe "validations" do
-    context "when not given a protocol" do
-      subject { described_class.new(number: number) }
-
-      it "must require a protocol" do
-        expect(subject).not_to be_valid
-      end
-    end
-
     context "when not given a port number" do
       subject { described_class.new(protocol: protocol) }
 
