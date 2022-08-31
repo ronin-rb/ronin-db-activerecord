@@ -195,18 +195,45 @@ module Ronin
       end
 
       #
-      # Searches for URLs with the given query param.
+      # Searches for URLs with the given query param name and value.
       #
-      # @param [Array<String>, String] name
+      # @param [String, Array<String>] name
       #   The query param name to search for.
+      #
+      # @param [String, Array<String>] value
+      #   The query param value to search for.
       #
       # @return [Array<URL>]
       #   The URLs with the given query param.
       #
       # @api public
       #
-      def self.with_query_param(name)
-        joins(query_params: [:name]).where(query_params: {name: {name: name}})
+      def self.with_query_param(name,value)
+        joins(query_params: [:name]).where(
+          query_params: {
+            name:  {name: name},
+            value: value
+          }
+        )
+      end
+
+      #
+      # Search for all URLs with a given query param name.
+      #
+      # @param [Array<String>, String] name
+      #   The query param name to search for.
+      #
+      # @return [Array<URL>]
+      #   The URLs with the given query param name.
+      #
+      # @api public
+      #
+      def self.with_query_name(name)
+        joins(query_params: [:name]).where(
+          query_params: {
+            name: {name: name}
+          }
+        )
       end
 
       #
