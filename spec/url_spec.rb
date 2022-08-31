@@ -94,6 +94,45 @@ describe Ronin::DB::URL do
     end
   end
 
+  describe ".http" do
+    subject { described_class }
+
+    before do
+      http_scheme  = Ronin::DB::URLScheme.create(name: 'http')
+      https_scheme = Ronin::DB::URLScheme.create(name: 'https')
+
+      host = Ronin::DB::HostName.create(name: 'example.com')
+
+      port_80  = Ronin::DB::Port.create(number: 80)
+      port_443 = Ronin::DB::Port.create(number: 443)
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host,
+        port:      port_80,
+        path:      '/'
+      )
+
+      described_class.create(
+        scheme:    https_scheme,
+        host_name: host,
+        port:      port_443,
+        path:      '/'
+      )
+    end
+
+    it "must query all #{described_class} with the 'http' scheme" do
+      urls = subject.http
+
+      expect(urls).to_not be_empty
+      expect(urls.map { |url| url.scheme.name }.uniq).to eq(['http'])
+    end
+
+    after do
+      described_class.destroy_all
+    end
+  end
+
   describe "#host" do
     subject do
       described_class.new(host_name: url_host_name)
