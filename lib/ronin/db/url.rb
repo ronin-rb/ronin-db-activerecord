@@ -248,7 +248,7 @@ module Ronin
       #
       # @api public
       #
-      def self.with_query_value(value)
+      def self.with_query_param_value(value)
         joins(:query_params).where(query_params: {value: value})
       end
 
