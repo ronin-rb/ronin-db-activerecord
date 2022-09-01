@@ -640,6 +640,88 @@ describe Ronin::DB::URL do
     end
   end
 
+  describe ".find_url" do
+    subject { described_class }
+
+    let(:scheme) { 'https' }
+    let(:host)   { 'example.com' }
+    let(:port)   { 443 }
+    let(:path)   { '/path' }
+
+    before do
+      http_scheme  = Ronin::DB::URLScheme.create(name: 'http')
+      https_scheme = Ronin::DB::URLScheme.create(name: scheme)
+
+      host1 = Ronin::DB::HostName.create(name: 'example1.com')
+      host2 = Ronin::DB::HostName.create(name: host)
+      host3 = Ronin::DB::HostName.create(name: 'example2.com')
+
+      port_80  = Ronin::DB::Port.create(number: 80)
+      port_443 = Ronin::DB::Port.create(number: port)
+
+      path1 = '/foo'
+      path2 = path
+      path3 = '/bar'
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host1,
+        port:      port_80,
+        path:      path1
+      )
+
+      described_class.create(
+        scheme:    https_scheme,
+        host_name: host2,
+        port:      port_443,
+        path:      path2
+      )
+
+      described_class.create(
+        scheme:    https_scheme,
+        host_name: host3,
+        port:      port_443,
+        path:      path3
+      )
+    end
+
+    let(:uri) do
+      URI::HTTPS.build(
+        scheme: scheme,
+        host:   host,
+        port:   port,
+        path:   path
+      )
+    end
+
+    context "when given a URI object" do
+      it "must find the #{described_class} with the URI's scheme, host, port, and path" do
+        url = subject.find_url(uri)
+
+        expect(url).to_not be(nil)
+        expect(url.to_uri).to eq(uri)
+      end
+    end
+
+    context "when given a String" do
+      let(:string) { uri.to_s }
+
+      it "must parse the String before querying the #{described_class} with the URI's same scheme, host, port, and path" do
+        url = subject.find_url(string)
+
+        expect(url).to_not be(nil)
+        expect(url.to_uri).to eq(uri)
+      end
+    end
+
+    after do
+      described_class.destroy_all
+      Ronin::DB::URLScheme.destroy_all
+      Ronin::DB::HostName.destroy_all
+      Ronin::DB::Port.destroy_all
+    end
+  end
+
   describe "#host" do
     subject do
       described_class.new(host_name: url_host_name)
