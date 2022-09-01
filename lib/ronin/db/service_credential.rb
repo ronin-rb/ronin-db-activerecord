@@ -32,6 +32,18 @@ module Ronin
       #   @return [OpenPort, nil]
       belongs_to :open_port, optional: true
 
+      #
+      # Converts the service credential to a String.
+      #
+      # @return [String]
+      #   The service credential string.
+      #
+      def to_s
+        if self.open_port then "#{super} (#{self.open_port})"
+        else                   super
+        end
+      end
+
     end
   end
 end
