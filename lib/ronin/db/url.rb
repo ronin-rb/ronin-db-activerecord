@@ -449,8 +449,9 @@ module Ronin
   end
 end
 
+require 'ronin/db/host_name'
+require 'ronin/db/port'
 require 'ronin/db/url_scheme'
 require 'ronin/db/url_query_param_name'
 require 'ronin/db/url_query_param'
-require 'ronin/db/host_name'
-require 'ronin/db/port'
+require 'ronin/db/web_credential'
