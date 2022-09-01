@@ -92,7 +92,8 @@ module Ronin
       #   The query params of the URL.
       #
       #   @return [Array<URLQueryParam>]
-      has_many :query_params, class_name: 'URLQueryParam'
+      has_many :query_params, class_name: 'URLQueryParam',
+                              dependent:  :destroy
 
       # @!attribute [rw] web_credentials
       #   Any credentials used with the URL.
