@@ -108,6 +108,9 @@ gem.add_dependency 'ronin-db-activerecord', '~> 0.1'
 7. `bundle exec rake spec`
 8. `git push origin my_feature`
 
+If you want to test your changes locally, run `rake db:console` to start a
+local database console.
+
 ## License
 
 Copyright (c) 2022 Hal Brodigan (postmodern.mod3@gmail.com)
