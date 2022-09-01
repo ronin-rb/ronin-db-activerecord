@@ -93,8 +93,8 @@ module Ronin
 
         return joins(email_address: [:user_name, :host_name]).where(
           email_address: {
-            user_name: {name: user},
-            host_name: {address: domain}
+            ronin_user_names: {name: user},
+            ronin_host_names: {name: domain}
           }
         )
       end
