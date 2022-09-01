@@ -50,3 +50,5 @@ module Ronin
     end
   end
 end
+
+require 'ronin/db/url'
