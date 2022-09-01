@@ -79,11 +79,14 @@ module Ronin
       # @return [Array<WebCredential>]
       #   The web credentials associated with the email address.
       #
+      # @raise [ArgumentError]
+      #   The given email address was not a valid email address.
+      #
       # @api public
       #
       def self.with_email_address(email)
         unless email.include?('@')
-          raise("invalid email address #{email.dump}")
+          raise(ArgumentError,"invalid email address #{email.inspect}")
         end
 
         user, domain = email.split('@',2)
