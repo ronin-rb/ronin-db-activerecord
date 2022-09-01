@@ -39,13 +39,13 @@ module Ronin
       # @!attribute [rw] user_name
       #   User name of the credential.
       #
-      #   @return [UserName]
-      belongs_to :user_name, required: true
+      #   @return [UserName, nil]
+      belongs_to :user_name, optional: true
 
       # @!attribute [rw] email_address
       #   The optional email address associated with the Credential
       #
-      #   @return [EmailAddress]
+      #   @return [EmailAddress, nil]
       belongs_to :email_address, optional: true
 
       # @!attribute [rw] password

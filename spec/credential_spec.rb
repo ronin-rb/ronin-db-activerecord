@@ -10,18 +10,6 @@ describe Ronin::DB::Credential do
   let(:clear_text) { 'secret' }
 
   describe "validations" do
-    describe "user_name" do
-      it "must require a user_name" do
-        credential = described_class.new(
-          password: Ronin::DB::Password.new(clear_text: clear_text)
-        )
-        expect(credential).to_not be_valid
-        expect(credential.errors[:user_name]).to eq(
-          ["must exist"]
-        )
-      end
-    end
-
     describe "password" do
       it "must require a password" do
         credential = described_class.new(

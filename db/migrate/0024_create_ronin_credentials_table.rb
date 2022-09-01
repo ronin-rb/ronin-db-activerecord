@@ -23,7 +23,7 @@ class CreateRoninCredentialsTable < ActiveRecord::Migration[7.0]
 
   def change
     create_table :ronin_credentials, if_not_exists: true do |t|
-      t.references :user_name, null: false,
+      t.references :user_name, null: true,
                                foreign_key: {
                                  to_table: :ronin_user_names
                                }
