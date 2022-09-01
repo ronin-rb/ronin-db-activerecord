@@ -34,33 +34,6 @@ module Ronin
                        class_name: 'URL'
 
       #
-      # Searches all web credentials that are associated with an
-      # email address.
-      #
-      # @param [String] email
-      #   The email address to search for.
-      #
-      # @return [Array<WebCredential>]
-      #   The web credentials associated with the email address.
-      #
-      # @api public
-      #
-      def self.with_email(email)
-        unless email.include?('@')
-          raise("invalid email address #{email.dump}")
-        end
-
-        user, domain = email.split('@',2)
-
-        return joins(email_address: [:user_name, :host_name]).where(
-          email_address: {
-            user_name: {name: user},
-            host_name: {address: domain}
-          }
-        )
-      end
-
-      #
       # Converts the web credential to a String.
       #
       # @return [String]
