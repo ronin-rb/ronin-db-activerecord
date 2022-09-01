@@ -99,7 +99,7 @@ module Ronin
       #   Any credentials used with the URL.
       #
       #   @return [Array<WebCredential>]
-      has_many :web_credentials
+      has_many :web_credentials, dependent: :destroy
 
       # @!attribute [r] created_at
       #   Defines the created_at timestamp
