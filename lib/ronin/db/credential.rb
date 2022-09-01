@@ -41,12 +41,16 @@ module Ronin
       #
       #   @return [UserName, nil]
       belongs_to :user_name, optional: true
+      validates :user_name, presence: true,
+                            if: ->(cred) { cred.email_address.nil? }
 
       # @!attribute [rw] email_address
       #   The optional email address associated with the Credential
       #
       #   @return [EmailAddress, nil]
       belongs_to :email_address, optional: true
+      validates :email_address, presence: true,
+                                if: ->(cred) { cred.user_name.nil? }
 
       # @!attribute [rw] password
       #   Password of the credential.

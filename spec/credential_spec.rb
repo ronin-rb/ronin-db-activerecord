@@ -10,6 +10,58 @@ describe Ronin::DB::Credential do
   let(:clear_text) { 'secret' }
 
   describe "validations" do
+    describe "user_name" do
+      context "when email_address is nil" do
+        it "must require a user_name" do
+          credential = described_class.new(
+            password: Ronin::DB::Password.new(clear_text: clear_text)
+          )
+          expect(credential).to_not be_valid
+          expect(credential.errors[:user_name]).to eq(
+            ["can't be blank"]
+          )
+        end
+      end
+
+      context "when email_address is not nil" do
+        it "must allow user_name to be nil" do
+          credential = described_class.new(
+            password:      Ronin::DB::Password.new(clear_text: clear_text),
+            email_address: Ronin::DB::EmailAddress.new(
+              address:   'john.smith@example.com',
+              user_name: Ronin::DB::UserName.new(name: 'john.smith'),
+              host_name: Ronin::DB::HostName.new(name: 'example.com')
+            )
+          )
+          expect(credential).to be_valid
+        end
+      end
+    end
+
+    describe "email_address" do
+      context "when user_name is nil" do
+        it "must require an email_address" do
+          credential = described_class.new(
+            password: Ronin::DB::Password.new(clear_text: clear_text)
+          )
+          expect(credential).to_not be_valid
+          expect(credential.errors[:email_address]).to eq(
+            ["can't be blank"]
+          )
+        end
+      end
+
+      context "when user_name is not nil" do
+        it "must allow email_address to be nil" do
+          credential = described_class.new(
+            password:  Ronin::DB::Password.new(clear_text: clear_text),
+            user_name: Ronin::DB::UserName.new(name: 'admin')
+          )
+          expect(credential).to be_valid
+        end
+      end
+    end
+
     describe "password" do
       it "must require a password" do
         credential = described_class.new(
