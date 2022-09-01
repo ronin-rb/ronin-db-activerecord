@@ -210,9 +210,9 @@ module Ronin
       # @api public
       #
       def self.with_query_param(name,value)
-        joins(query_params: [:name]).where(
+        joins(query_params: :name).where(
           query_params: {
-            name:  {name: name},
+            ronin_url_query_param_names:  {name: name},
             value: value
           }
         )
@@ -232,7 +232,7 @@ module Ronin
       def self.with_query_name(name)
         joins(query_params: [:name]).where(
           query_params: {
-            name: {name: name}
+            ronin_url_query_param_names: {name: name}
           }
         )
       end
