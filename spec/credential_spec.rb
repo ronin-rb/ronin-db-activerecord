@@ -62,6 +62,47 @@ describe Ronin::DB::Credential do
     end
   end
 
+  describe ".with_email_address" do
+    let(:user)   { 'john.smith'  }
+    let(:domain) { 'example.com' }
+    let(:email)  { "#{user}@#{domain}" }
+
+    before do
+      user_name     = Ronin::DB::UserName.create(name: user)
+      host_name     = Ronin::DB::HostName.create(name: domain)
+      email_address = Ronin::DB::EmailAddress.create(
+        address:   email,
+        user_name: user_name,
+        host_name: host_name
+      )
+
+      password  = Ronin::DB::Password.create(clear_text: clear_text)
+
+      credential = described_class.create(
+        email_address: email_address,
+        password:      password
+      )
+    end
+
+    subject { described_class }
+
+    it "must query all #{described_class} with the matching email address" do
+      credential = subject.with_email_address(email).first
+
+      expect(credential).to be_kind_of(described_class)
+      expect(credential.email_address.user_name.name).to eq(user)
+      expect(credential.email_address.host_name.name).to eq(domain)
+   end
+
+    after do
+      Ronin::DB::Credential.destroy_all
+      Ronin::DB::Password.destroy_all
+      Ronin::DB::EmailAddress.destroy_all
+      Ronin::DB::UserName.destroy_all
+      Ronin::DB::HostName.destroy_all
+    end
+  end
+
   describe ".with_password" do
     before do
       user_name = Ronin::DB::UserName.create(name: name)
