@@ -373,6 +373,94 @@ describe Ronin::DB::URL do
     end
   end
 
+  describe ".with_query_param" do
+    subject { described_class }
+
+    let(:name)  { 'id' }
+    let(:value) { '2'  }
+
+    before do
+      http_scheme = Ronin::DB::URLScheme.create(name: 'http')
+      host        = Ronin::DB::HostName.create(name: 'example.com')
+      port        = Ronin::DB::Port.create(number: 80)
+
+      query_param_name1 = Ronin::DB::URLQueryParamName.create(name: 'foo')
+      query_param_name2 = Ronin::DB::URLQueryParamName.create(name: name)
+      query_param_name3 = Ronin::DB::URLQueryParamName.create(name: 'bar')
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host,
+        port:      port,
+        path:      '/foo',
+        query_params: [
+          Ronin::DB::URLQueryParam.new(
+            name:  query_param_name1,
+            value: 'abc'
+          )
+        ]
+      )
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host,
+        port:      port,
+        path:      '/bar',
+        query_params: [
+          Ronin::DB::URLQueryParam.new(
+            name:  query_param_name2,
+            value: value
+          )
+        ]
+      )
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host,
+        port:      port,
+        path:      '/baz',
+        query_params: [
+          Ronin::DB::URLQueryParam.new(
+            name:  query_param_name3,
+            value: 'xyz'
+          )
+        ]
+      )
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host,
+        port:      port,
+        path:      '/qux',
+        query_params: [
+          Ronin::DB::URLQueryParam.new(
+            name:  query_param_name2,
+            value: value
+          )
+        ]
+      )
+
+    end
+
+    it "must query all #{described_class} with the matching query_param name and value" do
+      urls = subject.with_query_param(name,value)
+
+      expect(urls).to_not be_empty
+      expect(
+        urls.flat_map(&:query_params).map { |param|
+          [param.name.name, param.value] 
+        }.uniq
+      ).to eq([ [name, value] ])
+    end
+
+    after do
+      described_class.destroy_all
+      Ronin::DB::URLQueryParamName.destroy_all
+      Ronin::DB::URLScheme.destroy_all
+      Ronin::DB::HostName.destroy_all
+      Ronin::DB::Port.destroy_all
+    end
+  end
+
   describe "#host" do
     subject do
       described_class.new(host_name: url_host_name)
