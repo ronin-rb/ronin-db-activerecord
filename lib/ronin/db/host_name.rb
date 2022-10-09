@@ -18,6 +18,7 @@
 #
 
 require 'ronin/db/model'
+require 'ronin/db/model/importable'
 require 'ronin/db/model/last_scanned_at'
 
 require 'active_record'
@@ -32,6 +33,7 @@ module Ronin
     class HostName < ActiveRecord::Base
 
       include Model
+      include Model::Importable
       include Model::LastScannedAt
 
       # @!attribute [rw] id
@@ -98,18 +100,29 @@ module Ronin
       has_many :urls, class_name: 'URL'
 
       #
-      # Parses the host name.
+      # Looks up the host name.
       #
       # @param [String] name
-      #   The host name to parse.
+      #   The raw host name.
+      #
+      # @return [HostName, nil]
+      #   The found host name.
+      #
+      def self.lookup(name)
+        find_by(name: name)
+      end
+
+      #
+      # Creates a new host name.
+      #
+      # @param [String] name
+      #   The host name.
       #
       # @return [HostName]
-      #   The new or previously saved host name record.
+      #   The created host name record.
       #
-      # @api public
-      #
-      def self.parse(name)
-        find_or_initialize_by(name: name)
+      def self.import(name)
+        create(name: name)
       end
 
       #

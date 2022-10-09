@@ -18,6 +18,7 @@
 #
 
 require 'ronin/db/model'
+require 'ronin/db/model/importable'
 require 'ronin/db/model/last_scanned_at'
 
 require 'active_record'
@@ -35,6 +36,7 @@ module Ronin
     class URL < ActiveRecord::Base
 
       include Model
+      include Model::Importable
       include Model::LastScannedAt
 
       # Mapping of URL Schemes and URI classes
@@ -263,22 +265,21 @@ module Ronin
       #
       # @api public
       #
-      def self.find_url(url)
-        # optionally parse the URL
-        url = ::URI.parse(url.to_s) unless url.kind_of?(::URI)
+      def self.lookup(url)
+        uri = URI(url)
 
         # create the initial query
         query = joins(:scheme, :host_name).where(
-          scheme:    {name: url.scheme},
-          host_name: {name: url.host},
-          path:      normalized_path(url),
-          query:     url.query,
-          fragment:  url.fragment
+          scheme:    {name: uri.scheme},
+          host_name: {name: uri.host},
+          path:      normalized_path(uri),
+          query:     uri.query,
+          fragment:  uri.fragment
         )
 
-        if url.port
+        if uri.port
           # query the port
-          query = query.joins(:port).where(port: {number: url.port})
+          query = query.joins(:port).where(port: {number: uri.port})
         end
 
         return query.first
@@ -287,7 +288,7 @@ module Ronin
       #
       # Creates a new URL.
       #
-      # @param [URI::HTTP] uri
+      # @param [String, URI::HTTP] uri
       #   The URI to create the URL from.
       #
       # @return [URL]
@@ -295,12 +296,14 @@ module Ronin
       #
       # @api public
       #
-      def self.from(uri)
+      def self.import(uri)
+        uri = URI(uri)
+
         # find or create the URL scheme, host_name and port
-        scheme    = URLScheme.find_or_initialize_by(name: uri.scheme)
-        host_name = HostName.find_or_initialize_by(name: uri.host)
+        scheme    = URLScheme.find_or_create_by(name: uri.scheme)
+        host_name = HostName.find_or_create_by(name: uri.host)
         port      = if uri.port
-                      Port.find_or_initialize_by(
+                      Port.find_or_create_by(
                         protocol: :tcp,
                         number:   uri.port
                       )
@@ -316,14 +319,14 @@ module Ronin
           # find or create the URL query params
           uri.query_params.each do |name,value|
             query_params << URLQueryParam.new(
-              name:  URLQueryParamName.find_or_initialize_by(name: name),
+              name:  URLQueryParamName.find_or_create_by(name: name),
               value: value
             )
           end
         end
 
         # find or create the URL
-        return find_or_initialize_by(
+        return find_or_create_by(
           scheme:       scheme,
           host_name:    host_name,
           port:         port,
@@ -332,23 +335,6 @@ module Ronin
           fragment:     fragment,
           query_params: query_params
         )
-      end
-
-      #
-      # Parses the URL.
-      #
-      # @param [String] url
-      #   The raw URL to parse.
-      #
-      # @return [URL]
-      #   The parsed URL.
-      #
-      # @see URL.from
-      #
-      # @api public
-      #
-      def self.parse(url)
-        from(::URI.parse(url))
       end
 
       #

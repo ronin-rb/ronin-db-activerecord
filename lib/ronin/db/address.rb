@@ -18,6 +18,7 @@
 #
 
 require 'ronin/db/model'
+require 'ronin/db/model/importable'
 require 'ronin/db/model/last_scanned_at'
 
 require 'active_record'
@@ -34,6 +35,7 @@ module Ronin
     class Address < ActiveRecord::Base
 
       include Model
+      include Model::Importable
       include Model::LastScannedAt
 
       self.abstract_class = true
@@ -58,7 +60,20 @@ module Ronin
       attribute :created_at, :time
 
       #
-      # Parses the address.
+      # Looks up the address.
+      #
+      # @param [String] address
+      #   The address to query.
+      #
+      # @return [Address, nil]
+      #   The found address.
+      #
+      def self.lookup(address)
+        find_by(address: address)
+      end
+
+      #
+      # Imports an address.
       #
       # @param [String] address
       #   The address to parse.
@@ -68,8 +83,8 @@ module Ronin
       #
       # @api public
       #
-      def self.parse(address)
-        find_or_initialize_by(address: address)
+      def self.import(address)
+        create(address: address)
       end
 
       #

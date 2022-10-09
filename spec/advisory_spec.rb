@@ -145,43 +145,60 @@ describe Ronin::DB::Advisory do
     end
   end
 
-  describe ".parse" do
-    subject { described_class }
-
-    let(:id) { 'CVE-2022-1234' }
-
-    context "when an #{described_class} with the given id already exists in the database" do
-      let(:existing_advisory) { subject.parse(id) }
-
-      before { existing_advisory.save }
-
-      it "must return the existing #{described_class} from the database" do
-        advisory = subject.parse(id)
-
-        expect(advisory).to eq(existing_advisory)
-      end
-
-      after { described_class.destroy_all }
-    end
-
-    context "when no Advisory exists with the given id" do
-      let(:parsed_id) { described_class::ID.parse(id) }
-
-      it "must parse the ID and return a new #{described_class}" do
-        new_advisory = subject.parse(id)
-
-        expect(new_advisory.id).to eq(id)
-        expect(new_advisory.prefix).to     eq(parsed_id[:prefix])
-        expect(new_advisory.year).to       eq(parsed_id[:year])
-        expect(new_advisory.identifier).to eq(parsed_id[:identifier])
-      end
-    end
-  end
-
   let(:prefix)     { 'CVE'  }
   let(:year)       { 2022   }
   let(:identifier) { '1234' }
   let(:id)         { "#{prefix}-#{year}-#{identifier}" }
+
+  describe ".lookup" do
+    let(:id) { 'CVE-2022-1234' }
+
+    before do
+      described_class.create(
+        id:         'CVE-2000-1234',
+        prefix:     'CVE',
+        year:       2000,
+        identifier: '2000-1234'
+      )
+      described_class.create(
+        id:         id,
+        prefix:     prefix,
+        year:       year,
+        identifier: identifier
+      )
+      described_class.create(
+        id:         'CVE-2000-5678',
+        prefix:     'CVE',
+        year:       2000,
+        identifier: '2000-5678'
+      )
+    end
+
+    it "must query the #{described_class} with the matching ID" do
+      advisory = described_class.lookup(id)
+
+      expect(advisory).to be_kind_of(described_class)
+      expect(advisory.id).to eq(id)
+    end
+
+    after { described_class.destroy_all }
+  end
+
+  describe ".import" do
+    let(:id)        { 'CVE-2022-1234' }
+    let(:parsed_id) { described_class::ID.parse(id) }
+
+    subject { described_class.import(id) }
+
+    it "must parse and import the advisory ID and return a new #{described_class}" do
+      expect(subject.id).to eq(id)
+      expect(subject.prefix).to     eq(parsed_id[:prefix])
+      expect(subject.year).to       eq(parsed_id[:year])
+      expect(subject.identifier).to eq(parsed_id[:identifier])
+    end
+
+    after { described_class.destroy_all }
+  end
 
   subject do
     described_class.new(

@@ -45,34 +45,47 @@ describe Ronin::DB::Port do
     end
   end
 
-  describe ".parse" do
-    let(:string) { number.to_s }
-
-    subject { described_class.parse(string) }
-
-    it "must parse the port number and set #number" do
-      expect(subject.number).to eq(number)
+  describe ".lookup" do
+    before do
+      described_class.create(number: 1111)
+      described_class.create(number: number)
+      described_class.create(number: 2222)
     end
+
+    it "must query the #{described_class} with the matching port number" do
+      port = described_class.lookup(number)
+
+      expect(port).to be_kind_of(described_class)
+      expect(port.number).to eq(number)
+    end
+
+    after { described_class.destroy_all }
   end
 
-  describe ".from" do
+  describe ".import" do
+    context "when given an Integer" do
+      subject { described_class.import(number) }
+
+      it "must import the port number and set #number" do
+        expect(subject).to be_kind_of(described_class)
+        expect(subject.id).to_not be(nil)
+        expect(subject.number).to eq(number)
+      end
+    end
+
     context "when given a String" do
       let(:string) { number.to_s }
 
-      subject { described_class.from(string) }
+      subject { described_class.import(string) }
 
-      it "must convert the String to an Integer and set #number" do
+      it "must parse and import the port number and set #number" do
+        expect(subject).to be_kind_of(described_class)
+        expect(subject.id).to_not be(nil)
         expect(subject.number).to eq(number)
       end
     end
 
-    context "when given an Integer" do
-      subject { described_class.from(number) }
-
-      it "must return a #{described_class} with #number set" do
-        expect(subject.number).to eq(number)
-      end
-    end
+    after { described_class.destroy_all }
   end
 
   describe "#to_i" do

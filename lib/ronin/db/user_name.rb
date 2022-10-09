@@ -18,6 +18,7 @@
 #
 
 require 'ronin/db/model'
+require 'ronin/db/model/importable'
 require 'ronin/db/model/has_unique_name'
 
 require 'active_record'
@@ -31,6 +32,7 @@ module Ronin
     class UserName < ActiveRecord::Base
 
       include Model
+      include Model::Importable
       include Model::HasUniqueName
 
       self.table_name = 'ronin_user_names'
@@ -58,6 +60,32 @@ module Ronin
       #
       #   @return [Array<EmailAddress>]
       has_many :email_addresses, dependent: :destroy
+
+      #
+      # Looks up the user name.
+      #
+      # @param [String] name
+      #   The user name to lookup.
+      #
+      # @return [UserName, nil]
+      #   The found user name.
+      #
+      def self.lookup(name)
+        find_by(name: name)
+      end
+
+      #
+      # Imports a user name.
+      #
+      # @param [String] name
+      #   The user name to import.
+      #
+      # @return [UserName]
+      #   The imported user name.
+      #
+      def self.import(name)
+        create(name: name)
+      end
 
     end
   end

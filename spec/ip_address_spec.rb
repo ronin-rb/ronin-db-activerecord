@@ -165,6 +165,35 @@ describe Ronin::DB::IPAddress do
     end
   end
 
+  describe ".lookup" do
+    before do
+      described_class.create(address: '1.2.4.5')
+      described_class.create(address: address)
+      described_class.create(address: '6.7.8.9')
+    end
+
+    it "must query the #{described_class} with the matching IP address" do
+      ip_address = described_class.lookup(address)
+
+      expect(ip_address).to be_kind_of(described_class)
+      expect(ip_address.address).to eq(address)
+    end
+
+    after { described_class.destroy_all }
+  end
+
+  describe ".import" do
+    subject { described_class.import(address) }
+
+    it "must parse and import the IP address and set #address" do
+      expect(subject).to be_kind_of(described_class)
+      expect(subject.id).to_not be(nil)
+      expect(subject.address).to eq(address)
+    end
+
+    after { described_class.destroy_all }
+  end
+
   describe "#ip_addr" do
     it "must automatically parse #address and return an IPAddr" do
       expect(subject.ip_addr).to be_kind_of(IPAddr)

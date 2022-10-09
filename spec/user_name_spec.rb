@@ -23,4 +23,32 @@ describe Ronin::DB::UserName do
       expect(user).to be_valid
     end
   end
+
+  describe ".lookup" do
+    before do
+      described_class.create(name: 'other1')
+      described_class.create(name: name)
+      described_class.create(name: 'other2')
+    end
+
+    it "must query the #{described_class} with the matching name" do
+      user_name = described_class.lookup(name)
+
+      expect(user_name).to be_kind_of(described_class)
+      expect(user_name.name).to eq(name)
+    end
+
+    after { described_class.destroy_all }
+  end
+
+  describe ".import" do
+    subject { described_class.import(name) }
+
+    it "must import the #{described_class} for the user name" do
+      expect(subject).to be_kind_of(described_class)
+      expect(subject.name).to eq(name)
+    end
+
+    after { subject.destroy }
+  end
 end

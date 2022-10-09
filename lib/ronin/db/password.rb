@@ -57,18 +57,33 @@ module Ronin
       has_many :user_names, through: :credentials
 
       #
-      # Parses a password.
+      # Looks up the password.
       #
       # @param [#to_s] password
-      #   The password to parse.
+      #   The password to lookup.
       #
-      # @return [Password]
-      #   The parsed password.
+      # @return [Password, nil]
+      #   The found password.
       #
       # @api public
       #
-      def self.parse(password)
-        find_or_initialize_by(plain_text: password.to_s)
+      def self.lookup(password)
+        find_by(plain_text: password.to_s)
+      end
+
+      #
+      # Parses a password.
+      #
+      # @param [#to_s] password
+      #   The password to import.
+      #
+      # @return [Password]
+      #   The imported password.
+      #
+      # @api public
+      #
+      def self.import(password)
+        create(plain_text: password.to_s)
       end
 
       #
@@ -145,3 +160,5 @@ module Ronin
     end
   end
 end
+
+require 'ronin/db/credential'

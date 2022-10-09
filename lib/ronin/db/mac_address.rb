@@ -85,3 +85,6 @@ module Ronin
     end
   end
 end
+
+require 'ronin/db/ip_address_mac_address'
+require 'ronin/db/ip_address'

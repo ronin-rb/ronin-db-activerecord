@@ -262,61 +262,93 @@ describe Ronin::DB::EmailAddress do
     end
   end
 
-  describe ".parse" do
-    subject { described_class }
+  describe ".lookup" do
+    let(:user_name) { Ronin::DB::UserName.create(name: user) }
+    let(:host_name) { Ronin::DB::HostName.create(name: host) }
 
-    it "should parse email addresses" do
-      email_address = subject.parse(address)
+    before do
+      described_class.create(
+        address: 'other_user1@other_host1.com',
+        user_name: Ronin::DB::UserName.create(name: 'other_user1'),
+        host_name: Ronin::DB::HostName.create(name: 'other_host1')
+      )
 
-      expect(email_address.user_name.name).to eq(user)
-      expect(email_address.host_name.name).to eq(host)
+      described_class.create(
+        address:   address,
+        user_name: user_name,
+        host_name: host_name
+      )
+
+      described_class.create(
+        address: 'other_user2@other_host2.com',
+        user_name: Ronin::DB::UserName.create(name: 'other_user2'),
+        host_name: Ronin::DB::HostName.create(name: 'other_host2')
+      )
+    end
+
+    it "must query the #{described_class} with the given address" do
+      email_address = described_class.lookup(address)
+
+      expect(email_address.address).to eq(address)
+    end
+
+    after do
+      described_class.destroy_all
+      user_name.destroy
+      host_name.destroy
+    end
+  end
+
+  describe ".import" do
+    context "when given a valid email address" do
+      subject { described_class.import(address) }
+
+      it "must parse and import the email address" do
+        expect(subject.user_name.name).to eq(user)
+        expect(subject.host_name.name).to eq(host)
+      end
+
+      after do
+        subject.destroy
+        subject.user_name.destroy
+        subject.host_name.destroy
+      end
     end
 
     context "when the email address does not have a user name" do
+      subject { described_class }
+
       let(:address) { "@#{host}" }
 
       it do
         expect {
-          subject.parse(address)
+          subject.import(address)
         }.to raise_error(ArgumentError,"email address #{address.inspect} must have a user name")
       end
     end
 
     context "when the email address does not have a host name" do
+      subject { described_class }
+
       let(:address) { "#{user}@" }
 
       it do
         expect {
-          subject.parse(address)
+          subject.import(address)
         }.to raise_error(ArgumentError,"email address #{address.inspect} must have a host name")
       end
     end
 
     context "when the email address contains spaces" do
+      subject { described_class }
+
       let(:address) { "#{user} @ #{host}" }
 
       it do
         expect {
-          subject.parse(address)
+          subject.import(address)
         }.to raise_error(ArgumentError,"email address #{address.inspect} must not contain spaces")
       end
-    end
-  end
-
-  describe ".from" do
-    it "should accept Strings" do
-      email_address = described_class.from(address)
-
-      expect(email_address.user_name.name).to eq(user)
-      expect(email_address.host_name.name).to eq(host)
-    end
-
-    it "should accept URI::MailTo objects" do
-      uri = URI("mailto:#{address}")
-      email_address = described_class.from(uri)
-
-      expect(email_address.user_name.name).to eq(user)
-      expect(email_address.host_name.name).to eq(host)
     end
   end
 

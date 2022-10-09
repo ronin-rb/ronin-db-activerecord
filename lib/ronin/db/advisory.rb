@@ -18,6 +18,7 @@
 #
 
 require 'ronin/db/model'
+require 'ronin/db/model/importable'
 
 require 'active_record'
 
@@ -30,6 +31,7 @@ module Ronin
     class Advisory < ActiveRecord::Base
 
       include Model
+      include Model::Importable
 
       self.primary_key = :id
 
@@ -108,6 +110,17 @@ module Ronin
       end
 
       #
+      # Looks up the advisory.
+      #
+      # @param [String] id
+      #
+      # @return [Advisory, nil]
+      #
+      def self.lookup(id)
+        find_by(id: id)
+      end
+
+      #
       # Parses an Advisory ID String.
       #
       # @param [String] id
@@ -118,12 +131,8 @@ module Ronin
       #
       # @api public
       #
-      def self.parse(id)
-        if (advisory = find_by(id: id))
-          advisory
-        else
-          new(**ID.parse(id))
-        end
+      def self.import(id)
+        create(**ID.parse(id))
       end
 
       #

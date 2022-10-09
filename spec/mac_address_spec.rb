@@ -25,6 +25,35 @@ describe Ronin::DB::MACAddress do
     end
   end
 
+  describe ".lookup" do
+    before do
+      described_class.create(address: '11:12:13:14:15:16')
+      described_class.create(address: address)
+      described_class.create(address: '21:22:23:24:25:26')
+    end
+
+    it "must query the #{described_class} with the matching MAC address" do
+      ip_address = described_class.lookup(address)
+
+      expect(ip_address).to be_kind_of(described_class)
+      expect(ip_address.address).to eq(address)
+    end
+
+    after { described_class.destroy_all }
+  end
+
+  describe ".import" do
+    subject { described_class.import(address) }
+
+    it "must parse and import the MAC address and set #address" do
+      expect(subject).to be_kind_of(described_class)
+      expect(subject.id).to_not be(nil)
+      expect(subject.address).to eq(address)
+    end
+
+    after { described_class.destroy_all }
+  end
+
   describe "#recent_ip_address" do
   end
 

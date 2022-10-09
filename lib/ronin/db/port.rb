@@ -62,6 +62,21 @@ module Ronin
       has_many :open_ports, dependent: :destroy
 
       #
+      # Looks up a port by it's number.
+      #
+      # @param [String, Integer] number
+      #   The port number to query.
+      #
+      # @return [Port, nil]
+      #   The found port number.
+      #
+      # @api public
+      #
+      def self.lookup(number)
+        find_by(number: number)
+      end
+
+      #
       # Creates a new Port.
       #
       # @param [String, Integer] number
@@ -72,23 +87,8 @@ module Ronin
       #
       # @api public
       #
-      def self.from(number)
-        find_or_initialize_by(number: number)
-      end
-
-      #
-      # Parses a port number.
-      #
-      # @param [String, Integer] number
-      #   The port number to parse.
-      #
-      # @return [Port]
-      #   The parsed port.
-      #
-      # @api public
-      #
-      def self.parse(number)
-        from(number.to_i)
+      def self.import(number)
+        create(number: number)
       end
 
       #

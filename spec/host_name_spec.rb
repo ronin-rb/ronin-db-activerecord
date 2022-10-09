@@ -34,38 +34,6 @@ describe Ronin::DB::HostName do
     end
   end
 
-  describe ".parse" do
-    subject { described_class }
-
-    let(:name) { 'example.com' }
-
-    context "when the host name is not already in the database" do
-      it "must return a new unsaved #{described_class} record" do
-        host = subject.parse(name)
-
-        expect(host).to be_kind_of(described_class)
-        expect(host.id).to be(nil)
-        expect(host.name).to eq(name)
-      end
-    end
-
-    context "when the host nmae is already in the database" do
-      before { subject.create(name: name) }
-
-      it "must return the previously saved #{described_class} record" do
-        host = subject.parse(name)
-
-        expect(host).to be_kind_of(described_class)
-        expect(host.id).to_not be(nil)
-        expect(host.name).to eq(name)
-      end
-
-      after do
-        described_class.destroy_all
-      end
-    end
-  end
-
   describe ".with_ip_address" do
     subject { described_class }
 
@@ -201,6 +169,37 @@ describe Ronin::DB::HostName do
         after { subject.destroy_all }
       end
     end
+  end
+
+  describe ".lookup" do
+    before do
+      described_class.create(name: 'other.host1.com')
+      described_class.create(name: name)
+      described_class.create(name: 'other.host2.com')
+    end
+
+    it "must query the #{described_class} with the matching name" do
+      host_name = described_class.lookup(name)
+
+      expect(host_name).to be_kind_of(described_class)
+      expect(host_name.name).to eq(name)
+    end
+
+    after { described_class.destroy_all }
+  end
+
+  describe ".import" do
+    let(:name) { 'example.com' }
+
+    subject { described_class.import(name) }
+
+    it "must import the host name and return a new #{described_class} record" do
+      expect(subject).to be_kind_of(described_class)
+      expect(subject.id).to_not be(nil)
+      expect(subject.name).to eq(name)
+    end
+
+    after { described_class.destroy_all }
   end
 
   describe "#recent_ip_address" do

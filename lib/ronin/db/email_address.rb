@@ -18,6 +18,7 @@
 #
 
 require 'ronin/db/model'
+require 'ronin/db/model/importable'
 
 require 'active_record'
 require 'uri/mailto'
@@ -31,6 +32,7 @@ module Ronin
     class EmailAddress < ActiveRecord::Base
 
       include Model
+      include Model::Importable
 
       # @!attribute [rw] id
       #   The primary key of the email address.
@@ -129,7 +131,20 @@ module Ronin
       end
 
       #
-      # Parses an email address.
+      # Looks up the email address.
+      #
+      # @param [String] email
+      #   The raw email address string.
+      #
+      # @return [EmailAddress, nil]
+      #   The found email address.
+      #
+      def self.lookup(email)
+        find_by(address: email)
+      end
+
+      #
+      # Imports an email address.
       #
       # @param [String] email
       #   The email address to parse.
@@ -142,7 +157,7 @@ module Ronin
       #
       # @api public
       #
-      def self.parse(email)
+      def self.import(email)
         if email =~ /\s/
           raise(ArgumentError,"email address #{email.inspect} must not contain spaces")
         end
@@ -158,31 +173,11 @@ module Ronin
           raise(ArgumentError,"email address #{email.inspect} must have a host name")
         end
 
-        return find_or_initialize_by(
+        return create(
           address:   normalized_email,
-          user_name: UserName.find_or_initialize_by(name: user),
-          host_name: HostName.find_or_initialize_by(name: host)
+          user_name: UserName.find_or_import(user),
+          host_name: HostName.find_or_import(host)
         )
-      end
-
-      #
-      # Creates a new Email Address.
-      #
-      # @param [URI::MailTo, #to_s] email
-      #   The URI or String to create the Email Address from.
-      #
-      # @return [EmailAddress]
-      #   The new Email Address.
-      #
-      # @api public
-      #
-      def self.from(email)
-        email = case email
-                when URI::MailTo then email.to # URI::MailTo#to
-                else                  email.to_s
-                end
-
-        return parse(email.to_s)
       end
 
       #

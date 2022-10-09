@@ -58,42 +58,6 @@ describe Ronin::DB::URL do
     )
   end
 
-  describe ".from" do
-    subject { described_class.from(uri) }
-
-    it "should parse URL schemes" do
-      expect(subject.scheme).not_to be_nil
-      expect(subject.scheme.name).to be == scheme
-    end
-
-    it "should parse host names" do
-      expect(subject.host_name.name).to be == host_name
-    end
-
-    it "should parse port numbers" do
-      expect(subject.port.number).to be == port
-    end
-
-    it "should parse paths" do
-      expect(subject.path).to be == path
-    end
-
-    it "should parse query strings" do
-      expect(subject.query).to be == query
-    end
-
-    it "should parse URL fragments" do
-      expect(subject.fragment).to be == fragment
-    end
-
-    it "should normalize the paths of HTTP URIs" do
-      uri = URI('http://www.example.com')
-      url = described_class.from(uri)
-
-      expect(url.path).to be == '/'
-    end
-  end
-
   describe ".http" do
     subject { described_class }
 
@@ -640,7 +604,7 @@ describe Ronin::DB::URL do
     end
   end
 
-  describe ".find_url" do
+  describe ".lookup" do
     subject { described_class }
 
     let(:scheme) { 'https' }
@@ -696,7 +660,7 @@ describe Ronin::DB::URL do
 
     context "when given a URI object" do
       it "must find the #{described_class} with the URI's scheme, host, port, and path" do
-        url = subject.find_url(uri)
+        url = subject.lookup(uri)
 
         expect(url).to_not be(nil)
         expect(url.to_uri).to eq(uri)
@@ -707,10 +671,56 @@ describe Ronin::DB::URL do
       let(:string) { uri.to_s }
 
       it "must parse the String before querying the #{described_class} with the URI's same scheme, host, port, and path" do
-        url = subject.find_url(string)
+        url = subject.lookup(string)
 
         expect(url).to_not be(nil)
         expect(url.to_uri).to eq(uri)
+      end
+    end
+
+    after do
+      described_class.destroy_all
+      Ronin::DB::URLScheme.destroy_all
+      Ronin::DB::HostName.destroy_all
+      Ronin::DB::Port.destroy_all
+    end
+  end
+
+  describe ".import" do
+    context "when given a URI::HTTP object" do
+      subject { described_class.import(uri) }
+
+      it "should parse URL schemes" do
+        expect(subject.scheme).not_to be_nil
+        expect(subject.scheme.name).to be == scheme
+      end
+
+      it "should parse host names" do
+        expect(subject.host_name.name).to be == host_name
+      end
+
+      it "should parse port numbers" do
+        expect(subject.port.number).to be == port
+      end
+
+      it "should parse paths" do
+        expect(subject.path).to be == path
+      end
+
+      it "should parse query strings" do
+        expect(subject.query).to be == query
+      end
+
+      it "should parse URL fragments" do
+        expect(subject.fragment).to be == fragment
+      end
+
+      context "when the URIs path is empty" do
+        let(:uri) { URI('http://www.example.com') }
+
+        it "must default the path to '/'" do
+          expect(subject.path).to eq('/')
+        end
       end
     end
 
@@ -753,13 +763,6 @@ describe Ronin::DB::URL do
 
     it "should convert the query string" do
       expect(subject.query).to be == query
-    end
-
-    it "should omit the query string if there are no query params" do
-      new_url = described_class.parse('https://www.example.com:8080/path')
-      new_uri = new_url.to_uri
-
-      expect(new_uri.query).to be_nil
     end
 
     it "should convert the fragment" do
