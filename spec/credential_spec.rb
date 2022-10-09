@@ -7,14 +7,14 @@ describe Ronin::DB::Credential do
   end
 
   let(:name)       { 'alice'  }
-  let(:clear_text) { 'secret' }
+  let(:plain_text) { 'secret' }
 
   describe "validations" do
     describe "user_name" do
       context "when email_address is nil" do
         it "must require a user_name" do
           credential = described_class.new(
-            password: Ronin::DB::Password.new(clear_text: clear_text)
+            password: Ronin::DB::Password.new(plain_text: plain_text)
           )
           expect(credential).to_not be_valid
           expect(credential.errors[:user_name]).to eq(
@@ -26,7 +26,7 @@ describe Ronin::DB::Credential do
       context "when email_address is not nil" do
         it "must allow user_name to be nil" do
           credential = described_class.new(
-            password:      Ronin::DB::Password.new(clear_text: clear_text),
+            password:      Ronin::DB::Password.new(plain_text: plain_text),
             email_address: Ronin::DB::EmailAddress.new(
               address:   'john.smith@example.com',
               user_name: Ronin::DB::UserName.new(name: 'john.smith'),
@@ -42,7 +42,7 @@ describe Ronin::DB::Credential do
       context "when user_name is nil" do
         it "must require an email_address" do
           credential = described_class.new(
-            password: Ronin::DB::Password.new(clear_text: clear_text)
+            password: Ronin::DB::Password.new(plain_text: plain_text)
           )
           expect(credential).to_not be_valid
           expect(credential.errors[:email_address]).to eq(
@@ -54,7 +54,7 @@ describe Ronin::DB::Credential do
       context "when user_name is not nil" do
         it "must allow email_address to be nil" do
           credential = described_class.new(
-            password:  Ronin::DB::Password.new(clear_text: clear_text),
+            password:  Ronin::DB::Password.new(plain_text: plain_text),
             user_name: Ronin::DB::UserName.new(name: 'admin')
           )
           expect(credential).to be_valid
@@ -78,7 +78,7 @@ describe Ronin::DB::Credential do
   describe ".for_user" do
     before do
       user_name = Ronin::DB::UserName.create(name: name)
-      password  = Ronin::DB::Password.create(clear_text: clear_text)
+      password  = Ronin::DB::Password.create(plain_text: plain_text)
 
       described_class.create(
         user_name: user_name,
@@ -116,7 +116,7 @@ describe Ronin::DB::Credential do
         host_name: host_name
       )
 
-      password  = Ronin::DB::Password.create(clear_text: clear_text)
+      password  = Ronin::DB::Password.create(plain_text: plain_text)
 
       credential = described_class.create(
         email_address: email_address,
@@ -146,7 +146,7 @@ describe Ronin::DB::Credential do
   describe ".with_password" do
     before do
       user_name = Ronin::DB::UserName.create(name: name)
-      password  = Ronin::DB::Password.create(clear_text: clear_text)
+      password  = Ronin::DB::Password.create(plain_text: plain_text)
 
       described_class.create(
         user_name: user_name,
@@ -157,10 +157,10 @@ describe Ronin::DB::Credential do
     subject { described_class }
 
     it "must query all #{described_class} with the matching password" do
-      credential = subject.with_password(clear_text).first
+      credential = subject.with_password(plain_text).first
 
       expect(credential).to be_kind_of(described_class)
-      expect(credential.password.clear_text).to eq(clear_text)
+      expect(credential.password.plain_text).to eq(plain_text)
     end
 
     after do
@@ -173,7 +173,7 @@ describe Ronin::DB::Credential do
   subject do
     described_class.new(
       user_name: Ronin::DB::UserName.new(name: name),
-      password:  Ronin::DB::Password.new(clear_text: clear_text)
+      password:  Ronin::DB::Password.new(plain_text: plain_text)
     )
   end
 
@@ -183,15 +183,15 @@ describe Ronin::DB::Credential do
     end
   end
 
-  describe "#clear_text" do
+  describe "#plain_text" do
     it "should provide the clear-text password String" do
-      expect(subject.clear_text).to eq(clear_text)
+      expect(subject.plain_text).to eq(plain_text)
     end
   end
 
   describe "#to_s" do
     it "should include the user name and password" do
-      expect(subject.to_s).to eq("#{name}:#{clear_text}")
+      expect(subject.to_s).to eq("#{name}:#{plain_text}")
     end
   end
 end

@@ -115,7 +115,7 @@ module Ronin
       # @api public
       #
       def self.with_password(password)
-        joins(:password).where(password: {clear_text: password})
+        joins(:password).where(password: {plain_text: password})
       end
 
       #
@@ -138,8 +138,8 @@ module Ronin
       #
       # @api public
       #
-      def clear_text
-        self.password.clear_text if self.password
+      def plain_text
+        self.password.plain_text if self.password
       end
 
       #

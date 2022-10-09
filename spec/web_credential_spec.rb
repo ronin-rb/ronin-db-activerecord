@@ -47,7 +47,7 @@ describe Ronin::DB::WebCredential do
   end
 
   let(:user_name) { Ronin::DB::UserName.new(name: 'admin') }
-  let(:password)  { Ronin::DB::Password.new(clear_text: 'secret') }
+  let(:password)  { Ronin::DB::Password.new(plain_text: 'secret') }
 
   subject do
     described_class.new(

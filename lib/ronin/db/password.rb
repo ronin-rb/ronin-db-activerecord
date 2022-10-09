@@ -37,12 +37,12 @@ module Ronin
       #   @return [Integer]
       attribute :id, :integer
 
-      # @!attribute [rw] clear_text
+      # @!attribute [rw] plain_text
       #   The clear-text of the password.
       #
       #   @return [String]
-      attribute :clear_text, :string # length:   256,
-      validates :clear_text, presence: true, uniqueness: true
+      attribute :plain_text, :string # length:   256,
+      validates :plain_text, presence: true, uniqueness: true
 
       # @!attribute [rw] credentials
       #   The credentials which use the password.
@@ -68,7 +68,7 @@ module Ronin
       # @api public
       #
       def self.parse(password)
-        find_or_initialize_by(clear_text: password.to_s)
+        find_or_initialize_by(plain_text: password.to_s)
       end
 
       #
@@ -90,7 +90,7 @@ module Ronin
       #   Unknown Digest algorithm.
       #
       # @example
-      #   pass = Password.new(clear_text: 'secret')
+      #   pass = Password.new(plain_text: 'secret')
       #   
       #   pass.digest(:sha1)
       #   # => "e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4"
@@ -112,7 +112,7 @@ module Ronin
 
         hash = digest_class.new
         hash << prepend_salt.to_s if prepend_salt
-        hash << self.clear_text
+        hash << self.plain_text
         hash << append_salt.to_s if append_salt
 
         return hash.hexdigest
@@ -139,7 +139,7 @@ module Ronin
       # @api public
       #
       def to_s
-        self.clear_text
+        self.plain_text
       end
 
     end

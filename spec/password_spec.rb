@@ -8,14 +8,14 @@ describe Ronin::DB::Password do
 
   let(:password) { 'secret' }
 
-  subject { described_class.new(clear_text: password) }
+  subject { described_class.new(plain_text: password) }
 
   describe "validations" do
     it "should require a clear-text password" do
       pass = described_class.new
       expect(pass).not_to be_valid
 
-      pass.clear_text = password
+      pass.plain_text = password
       expect(pass).to be_valid
     end
   end

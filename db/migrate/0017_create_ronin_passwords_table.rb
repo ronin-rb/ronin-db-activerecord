@@ -23,9 +23,9 @@ class CreateRoninPasswordsTable < ActiveRecord::Migration[7.0]
 
   def change
     create_table :ronin_passwords, if_not_exists: true do |t|
-      t.string :clear_text, null: false
+      t.string :plain_text, null: false
 
-      t.index :clear_text, unique: true
+      t.index :plain_text, unique: true
     end
   end
 

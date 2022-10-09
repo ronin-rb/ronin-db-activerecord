@@ -8,7 +8,7 @@ describe Ronin::DB::ServiceCredential do
 
   let(:user)        { 'admin' }
   let(:user_name)   { Ronin::DB::UserName.new(name: user) }
-  let(:password)    { Ronin::DB::Password.new(clear_text: 'secret') }
+  let(:password)    { Ronin::DB::Password.new(plain_text: 'secret') }
   let(:port_number) { 22 }
   let(:ip_address)  { Ronin::DB::IPAddress.new(address: '1.2.3.4') }
   let(:port)        { Ronin::DB::Port.new(number: port_number) }
