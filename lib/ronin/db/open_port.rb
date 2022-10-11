@@ -63,12 +63,6 @@ module Ronin
       #   @return [Software]
       belongs_to :software, optional: true
 
-      # @!attribute [rw] service_credentials
-      #   Credentials used by the service running on the port
-      #
-      #   @return [Array<ServiceCredential>]
-      has_many :service_credentials, dependent: :destroy
-
       # @!attribute [rw] ssl
       #   Specifies whether the service requires SSL.
       #
@@ -80,6 +74,18 @@ module Ronin
       #
       #   @return [Time]
       attribute :created_at, :time
+
+      # @!attribute [rw] service_credentials
+      #   Credentials used by the service running on the port
+      #
+      #   @return [Array<ServiceCredential>]
+      has_many :service_credentials, dependent: :destroy
+
+      # @!attribute [rw] credentials
+      #   The credentials that will work with this open port.
+      #
+      #   @return [Array<Credential>]
+      has_many :credentials, through: :service_credentials
 
       #
       # The IP Address of the open port.
@@ -139,4 +145,3 @@ require 'ronin/db/ip_address'
 require 'ronin/db/port'
 require 'ronin/db/service'
 require 'ronin/db/service_credential'
-require 'ronin/db/port'

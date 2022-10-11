@@ -18,6 +18,7 @@
 #
 
 require 'ronin/db/model'
+require 'ronin/db/model/importable'
 
 require 'active_record'
 
@@ -29,6 +30,7 @@ module Ronin
     class Credential < ActiveRecord::Base
 
       include Model
+      include Model::Importable
 
       # @!attribute [rw] id
       #   Primary key of the credential.
@@ -57,6 +59,30 @@ module Ronin
       #
       #   @return [Password]
       belongs_to :password, required: true
+
+      # @!attribute [rw] service_credentials
+      #   The service credentials.
+      #
+      #   @return [Array<ServiceCredential>]
+      has_many :service_credentials, dependent: :destroy
+
+      # @!attribute [rw] open_ports
+      #   The open ports that accept this credential pair.
+      #
+      #   @return [Array<OpenPort>]
+      has_many :open_ports, through: :service_credentials
+
+      # @!attribute [rw] web_credentials
+      #   The Web credentials.
+      #
+      #   @return [Array<WebCredential>]
+      has_many :web_credentials, dependent: :destroy
+
+      # @!attribute [rw] urls
+      #   The URLs that accept this credential pair.
+      #
+      #   @return [Array<URL>]
+      has_many :urls, through: :web_credentials
 
       #
       # Searches for all credentials for a specific user.

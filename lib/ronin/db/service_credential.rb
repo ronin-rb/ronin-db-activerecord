@@ -17,20 +17,35 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/credential'
+require 'ronin/db/model'
+
+require 'active_record'
 
 module Ronin
   module DB
     #
     # Represents Credentials used to access a TCP/UDP {Service}.
     #
-    class ServiceCredential < Credential
+    class ServiceCredential < ActiveRecord::Base
+
+      include Model
+
+      # @!attribute [rw] id
+      #   Primary key of the service credential.
+      #
+      #   @return [Integer]
+      attribute :id, :integer
+
+      # @!attribute [rw] credential
+      #
+      #   @return [Credential]
+      belongs_to :credential
 
       # @!attribute [rw] open_port
       #   The open port the credential belongs to.
       #
-      #   @return [OpenPort, nil]
-      belongs_to :open_port, optional: true
+      #   @return [OpenPort]
+      belongs_to :open_port
 
       #
       # Converts the service credential to a String.
@@ -39,11 +54,12 @@ module Ronin
       #   The service credential string.
       #
       def to_s
-        if self.open_port then "#{super} (#{self.open_port})"
-        else                   super
-        end
+        "#{self.credential} (#{self.open_port})"
       end
 
     end
   end
 end
+
+require 'ronin/db/credential'
+require 'ronin/db/open_port'

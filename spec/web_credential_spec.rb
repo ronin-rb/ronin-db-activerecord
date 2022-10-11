@@ -2,8 +2,8 @@ require 'spec_helper'
 require 'ronin/db/web_credential'
 
 describe Ronin::DB::WebCredential do
-  it "must use the 'ronin_credentials' table" do
-    expect(described_class.table_name).to eq('ronin_credentials')
+  it "must use the 'ronin_web_credentials' table" do
+    expect(described_class.table_name).to eq('ronin_web_credentials')
   end
 
   let(:scheme) { 'https' }
@@ -48,12 +48,17 @@ describe Ronin::DB::WebCredential do
 
   let(:user_name) { Ronin::DB::UserName.new(name: 'admin') }
   let(:password)  { Ronin::DB::Password.new(plain_text: 'secret') }
+  let(:credential) do
+    Ronin::DB::Credential.new(
+      user_name: user_name,
+      password:  password
+    )
+  end
 
   subject do
     described_class.new(
-      user_name: user_name,
-      password:  password,
-      url:       url
+      credential: credential,
+      url:        url
     )
   end
 

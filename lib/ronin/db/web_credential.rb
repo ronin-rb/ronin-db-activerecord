@@ -17,14 +17,29 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/credential'
+require 'ronin/db/model'
+
+require 'active_record'
 
 module Ronin
   module DB
     #
     # Represents Credentials used to access websites at specified {URL}s.
     #
-    class WebCredential < Credential
+    class WebCredential < ActiveRecord::Base
+
+      include Model
+
+      # @!attribute [rw] id
+      #   Primary key of the service credential.
+      #
+      #   @return [Integer]
+      attribute :id, :integer
+
+      # @!attribute [rw] credential
+      #
+      #   @return [Credential]
+      belongs_to :credential
 
       # @!attribute [rw] url
       #   The URL the credential can be used with.
@@ -42,13 +57,12 @@ module Ronin
       # @api public
       #
       def to_s
-        if self.url then "#{super} (#{self.url})"
-        else             super
-        end
+        "#{self.credential} (#{self.url})"
       end
 
     end
   end
 end
 
+require 'ronin/db/credential'
 require 'ronin/db/url'

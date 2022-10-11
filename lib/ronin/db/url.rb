@@ -90,6 +90,12 @@ module Ronin
       #   @return [String, nil]
       attribute :fragment, :string
 
+      # @!attribute [r] created_at
+      #   Defines the created_at timestamp
+      #
+      #   @return [Time]
+      attribute :created_at, :time
+
       # @!attribute [rw] query_params
       #   The query params of the URL.
       #
@@ -103,11 +109,11 @@ module Ronin
       #   @return [Array<WebCredential>]
       has_many :web_credentials, dependent: :destroy
 
-      # @!attribute [r] created_at
-      #   Defines the created_at timestamp
+      # @!attribute [rw] credentials
+      #   The credentials that will work with this URL.
       #
-      #   @return [Time]
-      attribute :created_at, :time
+      #   @return [Array<Credentials>]
+      has_many :credentials, through: :web_credentials
 
       #
       # Searches for all URLs using HTTP.
