@@ -135,6 +135,82 @@ describe Ronin::DB::ASN do
     end
   end
 
+  describe ".v4" do
+    subject { described_class }
+
+    before do
+      subject.create(
+        version:      6,
+        range_start:  '64:ff9b::1:0:0',
+        range_end:    '100::ffff:ffff:ffff:ffff',
+        number:       0
+      )
+
+      subject.create(
+        version:      4,
+        range_start:  range_start,
+        range_end:    range_end,
+        number:       number,
+        country_code: country_code,
+        name:         name
+      )
+
+      subject.create(
+        version:      6,
+        range_start:  '::',
+        range_end:    '::1',
+        number:       0
+      )
+    end
+
+    it "must query all IPv4 ASNs" do
+      asns = subject.v4
+
+      expect(asns).to_not be_empty
+      expect(asns.map(&:version)).to all(eq(4))
+    end
+
+    after { described_class.destroy_all }
+  end
+
+  describe ".v6" do
+    subject { described_class }
+
+    before do
+      subject.create(
+        version:      4,
+        range_start:  '1.0.0.0',
+        range_end:    '1.0.0.255',
+        number:       13335,
+        country_code: 'US',
+        name:         'CLOUDFLARENET'
+      )
+
+      subject.create(
+        version:      6,
+        range_start:  '64:ff9b::1:0:0',
+        range_end:    '100::ffff:ffff:ffff:ffff',
+        number:       0
+      )
+
+      subject.create(
+        version:      4,
+        range_start:  '1.0.1.0',
+        range_end:    '1.0.3.255',
+        number:       0
+      )
+    end
+
+    it "must query all IPv6 ASNs" do
+      asns = subject.v6
+
+      expect(asns).to_not be_empty
+      expect(asns.map(&:version)).to all(eq(6))
+    end
+
+    after { described_class.destroy_all }
+  end
+
   describe ".containing_ip" do
     subject { described_class }
 
@@ -163,9 +239,7 @@ describe Ronin::DB::ASN do
       expect(asn.name).to eq(name)
     end
 
-    after do
-      described_class.destroy_all
-    end
+    after { described_class.destroy_all }
   end
 
   subject do

@@ -91,6 +91,30 @@ module Ronin
       attribute :name, :string
 
       #
+      # Searches for all IPv4 ASNs.
+      #
+      # @return [Array<ASN>]
+      #   The IPv4 ASNs.
+      #
+      # @api public
+      #
+      def self.v4
+        where(version: 4)
+      end
+
+      #
+      # Searches for all IPv6 ASNs.
+      #
+      # @return [Array<ASNs>]
+      #   The IPv6 ASNs.
+      #
+      # @api public
+      #
+      def self.v6
+        where(version: 6)
+      end
+
+      #
       # Queries the ASN that contains the given IP address.
       #
       # @param [IPAddr, String] ip
