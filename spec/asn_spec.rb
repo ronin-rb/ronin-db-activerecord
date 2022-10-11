@@ -17,8 +17,8 @@ describe Ronin::DB::ASN do
     describe "version" do
       it "must require a version" do
         asn = described_class.new(
-          range_start:     range_start,
-          range_end:      range_end,
+          range_start:  range_start,
+          range_end:    range_end,
           number:       number,
           country_code: country_code,
           name:         name
@@ -33,8 +33,8 @@ describe Ronin::DB::ASN do
       it "must accept a value of 4" do
         asn = described_class.new(
           version:      4,
-          range_start:     range_start,
-          range_end:      range_end,
+          range_start:  range_start,
+          range_end:    range_end,
           number:       number,
           country_code: country_code,
           name:         name
@@ -46,8 +46,8 @@ describe Ronin::DB::ASN do
       it "must accept a value of 6" do
         asn = described_class.new(
           version:      6,
-          range_start:     range_start,
-          range_end:      range_end,
+          range_start:  range_start,
+          range_end:    range_end,
           number:       number,
           country_code: country_code,
           name:         name
@@ -61,7 +61,7 @@ describe Ronin::DB::ASN do
       it "must require #range_start" do
         asn = described_class.new(
           version:      version,
-          range_end:      range_end,
+          range_end:    range_end,
           number:       number,
           country_code: country_code,
           name:         name
@@ -78,7 +78,7 @@ describe Ronin::DB::ASN do
       it "must require #range_end" do
         asn = described_class.new(
           version:      version,
-          range_start:     range_start,
+          range_start:  range_start,
           number:       number,
           country_code: country_code,
           name:         name
@@ -95,8 +95,8 @@ describe Ronin::DB::ASN do
       it "must require #number" do
         asn = described_class.new(
           version:      version,
-          range_start:     range_start,
-          range_end:      range_end,
+          range_start:  range_start,
+          range_end:    range_end,
           country_code: country_code,
           name:         name
         )
@@ -112,8 +112,8 @@ describe Ronin::DB::ASN do
       it "must omit the name if unrouted" do
         asn = described_class.new(
           version:      version,
-          range_start:     range_start,
-          range_end:      range_end,
+          range_start:  range_start,
+          range_end:    range_end,
           number:       number
         )
 
@@ -125,8 +125,8 @@ describe Ronin::DB::ASN do
       it "must omit the name if unrouted" do
         asn = described_class.new(
           version:      version,
-          range_start:     range_start,
-          range_end:      range_end,
+          range_start:  range_start,
+          range_end:    range_end,
           number:       number
         )
 
@@ -141,8 +141,8 @@ describe Ronin::DB::ASN do
     before do
       subject.create(
         version:      version,
-        range_start:     range_start,
-        range_end:      range_end,
+        range_start:  range_start,
+        range_end:    range_end,
         number:       number,
         country_code: country_code,
         name:         name
@@ -171,8 +171,8 @@ describe Ronin::DB::ASN do
   subject do
     described_class.new(
       version:      version,
-      range_start:     range_start,
-      range_end:      range_end,
+      range_start:  range_start,
+      range_end:    range_end,
       number:       number,
       country_code: country_code,
       name:         name
