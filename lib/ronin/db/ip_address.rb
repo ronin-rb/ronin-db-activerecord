@@ -125,9 +125,9 @@ module Ronin
       def initialize(*arguments,**kwargs)
         super(*arguments,**kwargs)
 
-        self.version ||= if ip_addr
-                           if ip_addr.ipv6? then 6
-                           else                  4
+        self.version ||= if ipaddr
+                           if ipaddr.ipv6? then 6
+                           else                 4
                            end
                          end
       end
@@ -142,7 +142,7 @@ module Ronin
       #   The IP address'es new address.
       #
       def address=(new_address)
-        @ip_addr = nil
+        @ipaddr = nil
         super(new_address)
       end
 
@@ -154,13 +154,13 @@ module Ronin
       #
       # @api public
       #
-      def ip_addr
-        @ip_addr ||= if self.address
-                       begin
-                         IPAddr.new(self.address)
-                       rescue IPAddr::InvalidAddressError
-                       end
-                     end
+      def ipaddr
+        @ipaddr ||= if self.address
+                      begin
+                        IPAddr.new(self.address)
+                      rescue IPAddr::InvalidAddressError
+                      end
+                    end
       end
 
       #
@@ -269,7 +269,7 @@ module Ronin
         self.os_guesses.order('created_at DESC').oses.first
       end
 
-      alias to_ip ip_addr
+      alias to_ip ipaddr
 
       #
       # Converts the address to an Integer.
@@ -280,7 +280,7 @@ module Ronin
       # @api public
       #
       def to_i
-        ip_addr.to_i
+        ipaddr.to_i
       end
 
       private
@@ -289,7 +289,7 @@ module Ronin
       # Sets the `hton` attribute.
       #
       def set_hton
-        self.hton = self.ip_addr.hton
+        self.hton = self.ipaddr.hton
       end
 
     end

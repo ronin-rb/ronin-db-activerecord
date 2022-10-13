@@ -194,17 +194,17 @@ describe Ronin::DB::IPAddress do
     after { described_class.destroy_all }
   end
 
-  describe "#ip_addr" do
+  describe "#ipaddr" do
     it "must automatically parse #address and return an IPAddr" do
-      expect(subject.ip_addr).to be_kind_of(IPAddr)
-      expect(subject.ip_addr.to_s).to eq(address)
+      expect(subject.ipaddr).to be_kind_of(IPAddr)
+      expect(subject.ipaddr.to_s).to eq(address)
     end
 
     context "when the address is an IPv4 address" do
       let(:address) { ipv4_address }
 
       it "must return an IPv4 IPAddr" do
-        expect(subject.ip_addr.ipv4?).to be(true)
+        expect(subject.ipaddr.ipv4?).to be(true)
       end
     end
 
@@ -212,7 +212,7 @@ describe Ronin::DB::IPAddress do
       let(:address) { ipv6_address }
 
       it "must return an IPv6 IPAddr" do
-        expect(subject.ip_addr.ipv6?).to be(true)
+        expect(subject.ipaddr.ipv6?).to be(true)
       end
     end
 
@@ -220,7 +220,7 @@ describe Ronin::DB::IPAddress do
       let(:address) { '0' }
 
       it "must return nil" do
-        expect(subject.ip_addr).to be(nil)
+        expect(subject.ipaddr).to be(nil)
       end
     end
   end
@@ -258,7 +258,7 @@ describe Ronin::DB::IPAddress do
     subject { described_class.create(address: address) }
 
     it "must set hton" do
-      expect(subject.hton).to eq(subject.ip_addr.hton)
+      expect(subject.hton).to eq(subject.ipaddr.hton)
     end
 
     after { subject.destroy }
