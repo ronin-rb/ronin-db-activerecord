@@ -253,11 +253,11 @@ describe Ronin::DB::ASN do
     )
   end
 
-  describe "#range_startaddr" do
+  describe "#range_start_ipaddr" do
     context "when #range_start is set" do
       it "must return an IPAddr of #range_start" do
-        expect(subject.range_startaddr).to be_kind_of(IPAddr)
-        expect(subject.range_startaddr.to_s).to eq(subject.range_start)
+        expect(subject.range_start_ipaddr).to be_kind_of(IPAddr)
+        expect(subject.range_start_ipaddr.to_s).to eq(subject.range_start)
       end
     end
 
@@ -265,16 +265,16 @@ describe Ronin::DB::ASN do
       subject { described_class.new }
 
       it "must return nil" do
-        expect(subject.range_startaddr).to be(nil)
+        expect(subject.range_start_ipaddr).to be(nil)
       end
     end
   end
 
-  describe "#range_endaddr" do
+  describe "#range_end_ipaddr" do
     context "when #range_end is set" do
       it "must return an IPAddr of #range_end" do
-        expect(subject.range_endaddr).to be_kind_of(IPAddr)
-        expect(subject.range_endaddr.to_s).to eq(subject.range_end)
+        expect(subject.range_end_ipaddr).to be_kind_of(IPAddr)
+        expect(subject.range_end_ipaddr.to_s).to eq(subject.range_end)
       end
     end
 
@@ -282,7 +282,7 @@ describe Ronin::DB::ASN do
       subject { described_class.new }
 
       it "must return nil" do
-        expect(subject.range_endaddr).to be(nil)
+        expect(subject.range_end_ipaddr).to be(nil)
       end
     end
   end
@@ -300,11 +300,11 @@ describe Ronin::DB::ASN do
     end
 
     it "must set #range_start_hton" do
-      expect(subject.range_start_hton).to eq(subject.range_startaddr.hton)
+      expect(subject.range_start_hton).to eq(subject.range_start_ipaddr.hton)
     end
 
     it "must set #range_end_hton" do
-      expect(subject.range_end_hton).to eq(subject.range_endaddr.hton)
+      expect(subject.range_end_hton).to eq(subject.range_end_ipaddr.hton)
     end
 
     after { subject.destroy }

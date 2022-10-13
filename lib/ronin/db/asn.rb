@@ -134,19 +134,19 @@ module Ronin
       #
       # @return [IPAddr, nil]
       #
-      def range_startaddr
-        @range_startaddr ||= if self.range_start
-                            IPAddr.new(self.range_start)
-                          end
+      def range_start_ipaddr
+        @range_start_ipaddr ||= if self.range_start
+                                  IPAddr.new(self.range_start)
+                                end
       end
 
       #
       # @return [IPAddr, nil]
       #
-      def range_endaddr
-        @range_endaddr ||= if self.range_end
-                           IPAddr.new(self.range_end)
-                         end
+      def range_end_ipaddr
+        @range_end_ipaddr ||= if self.range_end
+                                IPAddr.new(self.range_end)
+                              end
       end
 
       private
@@ -155,8 +155,8 @@ module Ronin
       # Sets the `range_start_hton` and `range_end_hton` attributes.
       #
       def set_hton
-        self.range_start_hton = range_startaddr.hton
-        self.range_end_hton   = range_endaddr.hton
+        self.range_start_hton = range_start_ipaddr.hton
+        self.range_end_hton   = range_end_ipaddr.hton
       end
 
     end
