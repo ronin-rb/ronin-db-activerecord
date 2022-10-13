@@ -286,4 +286,27 @@ describe Ronin::DB::ASN do
       end
     end
   end
+
+  describe "#save" do
+    subject do
+      described_class.create(
+        version:      4,
+        range_start:  range_start,
+        range_end:    range_end,
+        number:       number,
+        country_code: country_code,
+        name:         name
+      )
+    end
+
+    it "must set #range_start_hton" do
+      expect(subject.range_start_hton).to eq(subject.range_startaddr.hton)
+    end
+
+    it "must set #range_end_hton" do
+      expect(subject.range_end_hton).to eq(subject.range_endaddr.hton)
+    end
+
+    after { subject.destroy }
+  end
 end
