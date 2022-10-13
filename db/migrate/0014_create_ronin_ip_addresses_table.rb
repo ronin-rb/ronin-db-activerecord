@@ -24,6 +24,7 @@ class CreateRoninIpAddressesTable < ActiveRecord::Migration[7.0]
   def change
     create_table :ronin_ip_addresses, if_not_exists: true do |t|
       t.string :address, length: 39, null: false
+      t.binary :hton, null: false, length: 16
       t.integer :version, null: false
       t.datetime :created_at, null: false
 

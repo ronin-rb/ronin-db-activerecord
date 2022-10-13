@@ -254,6 +254,16 @@ describe Ronin::DB::IPAddress do
   describe "#recent_os_guess" do
   end
 
+  describe "#save" do
+    subject { described_class.create(address: address) }
+
+    it "must set hton" do
+      expect(subject.hton).to eq(subject.ip_addr.hton)
+    end
+
+    after { subject.destroy }
+  end
+
   describe "#to_ip" do
   end
 

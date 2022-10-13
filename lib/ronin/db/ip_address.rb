@@ -44,6 +44,13 @@ module Ronin
                             message: 'Must be a valid IP address'
                           }
 
+      # @!attribute [rw] hton
+      #   The IP address, but in network byte-order.
+      #
+      #   @return [String]
+      attribute :hton, :binary
+      before_save :set_hton
+
       # @!attribute [rw] version
       #   Type of the address.
       #
@@ -274,6 +281,15 @@ module Ronin
       #
       def to_i
         ip_addr.to_i
+      end
+
+      private
+
+      #
+      # Sets the `hton` attribute.
+      #
+      def set_hton
+        self.hton = self.ip_addr.hton
       end
 
     end
