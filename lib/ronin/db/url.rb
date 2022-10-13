@@ -187,6 +187,23 @@ module Ronin
       end
 
       #
+      # Searches for all URLs sharing a common base name.
+      #
+      # @param [String] basename
+      #   The base name to search for.
+      #
+      # @return [Array<URL>]
+      #   The URL with the common base name.
+      #
+      # @api public
+      #
+      def self.with_basename(basename)
+        path_column = self.arel_table[:path]
+
+        where(path_column.matches("%/#{basename}"))
+      end
+
+      #
       # Searches for all URLs with a common file-extension.
       #
       # @param [String] ext
