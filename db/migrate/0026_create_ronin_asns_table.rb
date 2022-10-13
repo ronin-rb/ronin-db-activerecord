@@ -28,8 +28,8 @@ class CreateRoninAsnsTable < ActiveRecord::Migration[7.0]
       t.string :range_start, null: false
       t.string :range_end,   null: false
 
-      t.binary :range_start_hton, null: false
-      t.binary :range_end_hton,   null: false
+      t.binary :range_start_hton, null: false, length: 16
+      t.binary :range_end_hton,   null: false, length: 16
 
       t.integer :number, null: false
       t.string :country_code, null: true
