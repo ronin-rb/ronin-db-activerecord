@@ -145,6 +145,62 @@ module Ronin
       end
 
       #
+      # Looks up the given credential.
+      #
+      # @param [String] cred
+      #   The credential String
+      #   (ex: `user:password` or `user@example.com:password`).
+      #
+      # @return [Credential, nil]
+      #   The found credential.
+      #
+      def self.lookup(cred)
+        unless cred.include?(':')
+          raise(ArgumentError,"credential must be of the form user:password or email:password: #{cred.inspect}")
+        end
+
+        user_or_email, password = cred.split(':',2)
+
+        query = if user_or_email.include?('@')
+                  with_email_address(user_or_email)
+                else
+                  for_user(user_or_email)
+                end
+        query.with_password(password)
+        return query.first
+      end
+
+      #
+      # Imports the given credential.
+      #
+      # @param [String] cred
+      #   The credential String
+      #   (ex: `user:password` or `user@example.com:password`).
+      #
+      # @return [Credential]
+      #   The imported credential.
+      #
+      def self.import(cred)
+        unless cred.include?(':')
+          raise(ArgumentError,"credential must be of the form user:password or email:password: #{cred.inspect}")
+        end
+
+        user_or_email, password = cred.split(':',2)
+
+        if user_or_email.include?('@')
+          create(
+            email_address: EmailAddress.find_or_import(user_or_email),
+            password:      Password.find_or_import(password)
+          )
+        else
+          create(
+            user_name: UserName.find_or_import(user_or_email),
+            password:  Password.find_or_import(password)
+          )
+        end
+      end
+
+      #
       # The user the credential belongs to.
       #
       # @return [String]
@@ -187,3 +243,5 @@ end
 require 'ronin/db/user_name'
 require 'ronin/db/email_address'
 require 'ronin/db/password'
+require 'ronin/db/service_credential'
+require 'ronin/db/web_credential'

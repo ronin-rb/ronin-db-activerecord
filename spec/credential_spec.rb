@@ -177,6 +177,171 @@ describe Ronin::DB::Credential do
     )
   end
 
+  describe ".lookup" do
+    subject { described_class }
+
+    context "when the user-name part contains a '@' character" do
+      let(:host)  { 'example.com' }
+      let(:email) { "#{name}@#{host}" }
+      let(:cred)  { "#{email}:#{plain_text}" }
+
+      before do
+        described_class.create(
+          email_address: Ronin::DB::EmailAddress.create(
+            address:   "other_user1@other_host1",
+            user_name: Ronin::DB::UserName.create(name: 'other_user1'),
+            host_name: Ronin::DB::HostName.create(name: 'other_host1')
+          ),
+          password:  Ronin::DB::Password.new(plain_text: 'other_password1')
+        )
+
+        described_class.create(
+          email_address: Ronin::DB::EmailAddress.create(
+            address:   email,
+            user_name: Ronin::DB::UserName.create(name: name),
+            host_name: Ronin::DB::HostName.create(name: host)
+          ),
+          password:  Ronin::DB::Password.new(plain_text: plain_text)
+        )
+
+        described_class.create(
+          email_address: Ronin::DB::EmailAddress.create(
+            address:   "other_user2@other_host2",
+            user_name: Ronin::DB::UserName.create(name: 'other_user2'),
+            host_name: Ronin::DB::HostName.create(name: 'other_host2')
+          ),
+          password:  Ronin::DB::Password.new(plain_text: 'other_password2')
+        )
+      end
+
+      it "must query the Credential which has the given EmailAddress and Password" do
+        credential = subject.lookup(cred)
+
+        expect(credential).to be_kind_of(described_class)
+        expect(credential.email_address).to be_kind_of(Ronin::DB::EmailAddress)
+        expect(credential.email_address.address).to eq(email)
+        expect(credential.email_address.user_name).to be_kind_of(Ronin::DB::UserName)
+        expect(credential.email_address.user_name.name).to eq(name)
+        expect(credential.email_address.host_name).to be_kind_of(Ronin::DB::HostName)
+        expect(credential.email_address.host_name.name).to eq(host)
+        expect(credential.password).to be_kind_of(Ronin::DB::Password)
+        expect(credential.password.plain_text).to eq(plain_text)
+      end
+    end
+
+    context "when the user-name part does not contain a '@' character" do
+      before do
+        described_class.create(
+          user_name: Ronin::DB::UserName.create(name: 'other_user1'),
+          password:  Ronin::DB::Password.create(plain_text: 'other_password1')
+        )
+
+        described_class.create(
+          user_name: Ronin::DB::UserName.create(name: name),
+          password:  Ronin::DB::Password.create(plain_text: plain_text)
+        )
+
+        described_class.create(
+          user_name: Ronin::DB::UserName.create(name: 'other_user2'),
+          password:  Ronin::DB::Password.create(plain_text: 'other_password2')
+        )
+      end
+
+      let(:cred) { "#{name}:#{plain_text}" }
+
+      it "must query the Credential which has the given UserName and Password" do
+        credential = subject.lookup(cred)
+
+        expect(credential).to be_kind_of(described_class)
+        expect(credential.user_name).to be_kind_of(Ronin::DB::UserName)
+        expect(credential.user_name.name).to eq(name)
+        expect(credential.password).to be_kind_of(Ronin::DB::Password)
+        expect(credential.password.plain_text).to eq(plain_text)
+      end
+    end
+
+    context "when the string does not contain a ':' character" do
+      let(:cred) { "foo" }
+
+      it do
+        expect {
+          subject.lookup(cred)
+        }.to raise_error(ArgumentError,"credential must be of the form user:password or email:password: #{cred.inspect}")
+      end
+    end
+
+    after do
+      described_class.destroy_all
+      Ronin::DB::EmailAddress.destroy_all
+      Ronin::DB::UserName.destroy_all
+      Ronin::DB::HostName.destroy_all
+      Ronin::DB::Password.destroy_all
+    end
+  end
+
+  describe ".import" do
+    subject { described_class }
+
+    context "when the user-name part contains a '@' character" do
+      let(:host)  { 'example.com' }
+      let(:email) { "#{name}@#{host}" }
+      let(:cred)  { "#{email}:#{plain_text}" }
+
+      it "must create a Credential with an EmailAddress and a Password" do
+        credential = subject.import(cred)
+
+        expect(credential).to be_kind_of(described_class)
+        expect(credential.email_address).to be_kind_of(Ronin::DB::EmailAddress)
+        expect(credential.email_address.id).to_not be(nil)
+        expect(credential.email_address.address).to eq(email)
+        expect(credential.email_address.user_name).to be_kind_of(Ronin::DB::UserName)
+        expect(credential.email_address.user_name.id).to_not be(nil)
+        expect(credential.email_address.user_name.name).to eq(name)
+        expect(credential.email_address.host_name).to be_kind_of(Ronin::DB::HostName)
+        expect(credential.email_address.host_name.id).to_not be(nil)
+        expect(credential.email_address.host_name.name).to eq(host)
+        expect(credential.password).to be_kind_of(Ronin::DB::Password)
+        expect(credential.password.id).to_not be(nil)
+        expect(credential.password.plain_text).to eq(plain_text)
+      end
+    end
+
+    context "when the user-name part does not contain a '@' character" do
+      let(:cred) { "#{name}:#{plain_text}" }
+
+      it "must create a Credential with an UserName and a Password" do
+        credential = subject.import(cred)
+
+        expect(credential).to be_kind_of(described_class)
+        expect(credential.id).to_not be(nil)
+        expect(credential.user_name).to be_kind_of(Ronin::DB::UserName)
+        expect(credential.user_name.id).to_not be(nil)
+        expect(credential.user_name.name).to eq(name)
+        expect(credential.password).to be_kind_of(Ronin::DB::Password)
+        expect(credential.password.id).to_not be(nil)
+        expect(credential.password.plain_text).to eq(plain_text)
+      end
+    end
+
+    context "when the string does not contain a ':' character" do
+      let(:cred) { "foo" }
+
+      it do
+        expect {
+          subject.import(cred)
+        }.to raise_error(ArgumentError,"credential must be of the form user:password or email:password: #{cred.inspect}")
+      end
+    end
+
+    after do
+      described_class.destroy_all
+      Ronin::DB::EmailAddress.destroy_all
+      Ronin::DB::UserName.destroy_all
+      Ronin::DB::HostName.destroy_all
+      Ronin::DB::Password.destroy_all
+    end
+  end
+
   describe "#user" do
     it "must return the username String" do
       expect(subject.user).to eq(name)
