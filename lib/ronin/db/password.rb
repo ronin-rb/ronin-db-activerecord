@@ -18,6 +18,7 @@
 #
 
 require 'ronin/db/model'
+require 'ronin/db/model/importable'
 
 require 'active_record'
 require 'digest'
@@ -30,6 +31,7 @@ module Ronin
     class Password < ActiveRecord::Base
 
       include Model
+      include Model::Importable
 
       # @!attribute [rw] id
       #   The primary key of the password.
