@@ -287,6 +287,32 @@ describe Ronin::DB::ASN do
     end
   end
 
+  describe "#ip_addresses" do
+    let(:address1) { '4.1.1.1' }
+    let(:address2) { '4.2.2.2' }
+    let(:address3) { '4.3.3.3' }
+
+    before do
+      Ronin::DB::IPAddress.create(address: '3.255.255.255')
+      Ronin::DB::IPAddress.create(address: address1)
+      Ronin::DB::IPAddress.create(address: address2)
+      Ronin::DB::IPAddress.create(address: address3)
+      Ronin::DB::IPAddress.create(address: '4.7.169.0')
+    end
+
+    it "must query all IP addresses that are in between the first and last IP address" do
+      ip_addresses = subject.ip_addresses
+
+      expect(ip_addresses.length).to eq(3)
+      expect(ip_addresses).to all(be_kind_of(Ronin::DB::IPAddress))
+      expect(ip_addresses[0].address).to eq(address1)
+      expect(ip_addresses[1].address).to eq(address2)
+      expect(ip_addresses[2].address).to eq(address3)
+    end
+
+    after { Ronin::DB::IPAddress.destroy_all }
+  end
+
   describe "#save" do
     subject do
       described_class.create(

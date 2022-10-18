@@ -149,6 +149,15 @@ module Ronin
                               end
       end
 
+      #
+      # Queries all IP addresses within the ASN IP range.
+      #
+      # @return [Array<IPAddress>]
+      #
+      def ip_addresses
+        IPAddress.between(range_start,range_end)
+      end
+
       private
 
       #
@@ -162,3 +171,5 @@ module Ronin
     end
   end
 end
+
+require 'ronin/db/ip_address'
