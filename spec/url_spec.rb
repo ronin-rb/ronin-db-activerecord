@@ -304,6 +304,70 @@ describe Ronin::DB::URL do
     end
   end
 
+  describe ".with_fragment" do
+    subject { described_class }
+
+    let(:host_name1) { 'example1.com' }
+    let(:host_name2) { 'example2.com' }
+    let(:fragment)   { 'fragment'     }
+
+    before do
+      http_scheme = Ronin::DB::URLScheme.create(name: 'http')
+      other_host  = Ronin::DB::HostName.create(name: 'other-host.com')
+      host1       = Ronin::DB::HostName.create(name: host_name1)
+      host2       = Ronin::DB::HostName.create(name: host_name2)
+      port        = Ronin::DB::Port.create(number: 80)
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: other_host,
+        port:      port,
+        path:      '/other_path1'
+      )
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host1,
+        port:      port,
+        path:      '/path1',
+        fragment:  fragment
+      )
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: host2,
+        port:      port,
+        path:      '/path2',
+        fragment:  fragment
+      )
+
+      described_class.create(
+        scheme:    http_scheme,
+        host_name: other_host,
+        port:      port,
+        path:      '/other_path2'
+      )
+    end
+
+    it "must query the URLs with the matching fragment" do
+      urls = subject.with_fragment(fragment)
+
+      expect(urls.length).to eq(2)
+      expect(urls).to all(be_kind_of(described_class))
+      expect(urls[0].host_name.name).to eq(host_name1)
+      expect(urls[0].fragment).to eq(fragment)
+      expect(urls[1].host_name.name).to eq(host_name2)
+      expect(urls[1].fragment).to eq(fragment)
+    end
+
+    after do
+      described_class.destroy_all
+      Ronin::DB::URLScheme.destroy_all
+      Ronin::DB::HostName.destroy_all
+      Ronin::DB::Port.destroy_all
+    end
+  end
+
   describe ".with_directory" do
     subject { described_class }
 

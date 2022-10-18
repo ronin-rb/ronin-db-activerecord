@@ -185,6 +185,21 @@ module Ronin
       end
 
       #
+      # Searches for all URLs with the exact fragment.
+      #
+      # @param [String] fragment
+      #   The fragment to search for.
+      #
+      # @return [Array<URL>]
+      #   The URL with the matching fragment.
+      #
+      # @api public
+      #
+      def self.with_fragment(fragment)
+        where(fragment: fragment)
+      end
+
+      #
       # Searches for all URLs sharing a common sub-directory.
       #
       # @param [String] root_dir
