@@ -127,6 +127,18 @@ module Ronin
       end
 
       #
+      # Searches for all ASNs with the matching country code.
+      #
+      # @param [String] country_code
+      #   The two letter country code to search for.
+      #
+      # @return [Array<ASN>]
+      #
+      def self.with_country_code(country_code)
+        where(country_code: country_code)
+      end
+
+      #
       # Queries the ASN that contains the given IP address.
       #
       # @param [IPAddr, String] ip

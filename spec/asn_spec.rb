@@ -266,6 +266,61 @@ describe Ronin::DB::ASN do
     after { described_class.destroy_all }
   end
 
+  describe ".with_country_code" do
+    subject { described_class }
+
+    let(:country_code) { 'US' }
+
+    before do
+      subject.create(
+        version:      4,
+        range_start:  '3.30.0.0',
+        range_end:    '3.32.255.255',
+        number:       8987,
+        country_code: 'IE',
+        name:         'AMAZON EXPANSION'
+      )
+
+      subject.create(
+        version:      4,
+        range_start:  '4.0.0.0',
+        range_end:    '4.7.168.255',
+        number:       3356,
+        country_code: country_code,
+        name:         'LEVEL3'
+      )
+
+      subject.create(
+        version:      4,
+        range_start:  '4.7.169.0',
+        range_end:    '4.23.87.255',
+        number:       3356,
+        country_code: country_code,
+        name:         'LEVEL3'
+      )
+
+      subject.create(
+        version:      4,
+        range_start:  '5.0.0.0',
+        range_end:    '5.0.255.255',
+        number:       29256,
+        country_code: 'SV',
+        name:         'INT-PDN-STE-AS STE PDN Internal AS'
+      )
+    end
+
+    it "must query the ASN recrds with the matching country code" do
+      asns = subject.with_country_code(country_code)
+
+      expect(asns.length).to eq(2)
+      expect(asns).to all(be_kind_of(described_class))
+      expect(asns[0].country_code).to eq(country_code)
+      expect(asns[1].country_code).to eq(country_code)
+    end
+
+    after { described_class.destroy_all }
+  end
+
   describe ".containing_ip" do
     subject { described_class }
 
