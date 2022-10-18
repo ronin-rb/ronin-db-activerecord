@@ -106,7 +106,7 @@ describe Ronin::DB::IPAddress do
     it "must query all IP addresses that are in between the first and last IP address" do
       ip_addresses = subject.between(address1,address3)
 
-      expect(ip_addresses).to_not be_empty
+      expect(ip_addresses.length).to eq(3)
       expect(ip_addresses).to all(be_kind_of(described_class))
       expect(ip_addresses[0].address).to eq(address1)
       expect(ip_addresses[1].address).to eq(address2)
@@ -135,7 +135,7 @@ describe Ronin::DB::IPAddress do
     it "must query all IP addresses that are in between the first and last IP address" do
       ip_addresses = subject.in_range(range)
 
-      expect(ip_addresses).to_not be_empty
+      expect(ip_addresses.length).to eq(3)
       expect(ip_addresses).to all(be_kind_of(described_class))
       expect(ip_addresses[0].address).to eq(address1)
       expect(ip_addresses[1].address).to eq(address2)
