@@ -112,67 +112,6 @@ module Ronin
                       class_name: 'OS'
 
       #
-      # Initializes the IP address record.
-      #
-      # @param [Array] arguments
-      #   Additional attribute arguments.
-      #
-      # @param [Hash{Symbol => Object}] kwargs
-      #   Additional attribute values.
-      #
-      # @note Also assigns a default value to `version` based on the `address`.
-      #
-      def initialize(*arguments,**kwargs)
-        super(*arguments,**kwargs)
-
-        self.version ||= if ipaddr
-                           if ipaddr.ipv6? then 6
-                           else                 4
-                           end
-                         end
-      end
-
-      #
-      # Sets the IP address'es address.
-      #
-      # @param [String, IPAddr, nil] new_address
-      #   The new address to use.
-      #
-      # @return [String, IPAddr, nil]
-      #   The IP address'es new address.
-      #
-      def address=(new_address)
-        @ipaddr = nil
-        super(new_address)
-      end
-
-      #
-      # Returns an `IPAddr` object for the IP address.
-      #
-      # @return [IPAddr]
-      #   The IPAddr object representing either the IPv4 or IPv6 address.
-      #
-      # @api public
-      #
-      def ipaddr
-        @ipaddr ||= if self.address
-                      begin
-                        IPAddr.new(self.address)
-                      rescue IPAddr::InvalidAddressError
-                      end
-                    end
-      end
-
-      #
-      # Queries the {ASN} record for the IP address.
-      #
-      # @return [ASN, nil]
-      #
-      def asn
-        ASN.containing_ip(ipaddr)
-      end
-
-      #
       # Searches for all IPv4 addresses.
       #
       # @return [Array<IPAddress>]
@@ -239,6 +178,67 @@ module Ronin
       #
       def self.with_port_number(number)
         joins(:ports).where(ports: {number: number})
+      end
+
+      #
+      # Initializes the IP address record.
+      #
+      # @param [Array] arguments
+      #   Additional attribute arguments.
+      #
+      # @param [Hash{Symbol => Object}] kwargs
+      #   Additional attribute values.
+      #
+      # @note Also assigns a default value to `version` based on the `address`.
+      #
+      def initialize(*arguments,**kwargs)
+        super(*arguments,**kwargs)
+
+        self.version ||= if ipaddr
+                           if ipaddr.ipv6? then 6
+                           else                 4
+                           end
+                         end
+      end
+
+      #
+      # Sets the IP address'es address.
+      #
+      # @param [String, IPAddr, nil] new_address
+      #   The new address to use.
+      #
+      # @return [String, IPAddr, nil]
+      #   The IP address'es new address.
+      #
+      def address=(new_address)
+        @ipaddr = nil
+        super(new_address)
+      end
+
+      #
+      # Returns an `IPAddr` object for the IP address.
+      #
+      # @return [IPAddr]
+      #   The IPAddr object representing either the IPv4 or IPv6 address.
+      #
+      # @api public
+      #
+      def ipaddr
+        @ipaddr ||= if self.address
+                      begin
+                        IPAddr.new(self.address)
+                      rescue IPAddr::InvalidAddressError
+                      end
+                    end
+      end
+
+      #
+      # Queries the {ASN} record for the IP address.
+      #
+      # @return [ASN, nil]
+      #
+      def asn
+        ASN.containing_ip(ipaddr)
       end
 
       #
