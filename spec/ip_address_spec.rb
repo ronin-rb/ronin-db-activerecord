@@ -245,6 +245,63 @@ describe Ronin::DB::IPAddress do
     end
   end
 
+  describe "#asn" do
+    let(:asn_version)      { 4 }
+    let(:asn_range_start)  { '4.0.0.0' }
+    let(:asn_range_end)    { '4.7.168.255' }
+    let(:asn_number)       { 3356 }
+    let(:asn_country_code) { 'US' }
+    let(:asn_name)         { 'LEVEL3' }
+
+    before do
+      Ronin::DB::ASN.create(
+        version:      6,
+        range_start:  '64:ff9b::1:0:0',
+        range_end:    '100::ffff:ffff:ffff:ffff',
+        number:       0
+      )
+
+      Ronin::DB::ASN.create(
+        version:      asn_version,
+        range_start:  asn_range_start,
+        range_end:    asn_range_end,
+        number:       asn_number,
+        country_code: asn_country_code,
+        name:         asn_name
+      )
+
+      Ronin::DB::ASN.create(
+        version:      6,
+        range_start:  '::',
+        range_end:    '::1',
+        number:       0
+      )
+    end
+
+    let(:version) { 4 }
+    let(:address) { '4.4.4.4' }
+
+    subject do
+      described_class.new(
+        version: version,
+        address: address
+      )
+    end
+
+    it "must lookup the ASN record containing the IP address" do
+      asn = subject.asn
+
+      expect(asn).to be_kind_of(Ronin::DB::ASN)
+      expect(asn.version).to eq(version)
+      expect(asn.range_start).to eq('4.0.0.0')
+      expect(asn.range_end).to eq('4.7.168.255')
+    end
+
+    after do
+      Ronin::DB::ASN.destroy_all
+    end
+  end
+
   describe "#recent_mac_address" do
   end
 

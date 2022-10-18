@@ -164,6 +164,15 @@ module Ronin
       end
 
       #
+      # Queries the {ASN} record for the IP address.
+      #
+      # @return [ASN, nil]
+      #
+      def asn
+        ASN.containing_ip(ipaddr)
+      end
+
+      #
       # Searches for all IPv4 addresses.
       #
       # @return [Array<IPAddress>]
@@ -305,3 +314,4 @@ require 'ronin/db/port'
 require 'ronin/db/host_name'
 require 'ronin/db/os_guess'
 require 'ronin/db/os'
+require 'ronin/db/asn'
