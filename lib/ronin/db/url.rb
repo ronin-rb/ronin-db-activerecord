@@ -170,6 +170,21 @@ module Ronin
       end
 
       #
+      # Searches for all URLs with the exact path.
+      #
+      # @param [String] path
+      #   The path to search for.
+      #
+      # @return [Array<URL>]
+      #   The URL with the matching path.
+      #
+      # @api public
+      #
+      def self.with_path(path)
+        where(path: path)
+      end
+
+      #
       # Searches for all URLs sharing a common sub-directory.
       #
       # @param [String] root_dir
