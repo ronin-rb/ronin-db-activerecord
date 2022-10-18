@@ -157,6 +157,18 @@ module Ronin
       end
 
       #
+      # Queries all IP addresses that exist in the range of IP addresses.
+      #
+      # @param [Range, #begin, #end] range
+      #   The IP range to query.
+      #
+      # @return [Array<IPAddress>]
+      #
+      def self.in_range(range)
+        between(range.begin,range.end)
+      end
+
+      #
       # Searches for all IP addresses associated with specific MAC address(es).
       #
       # @param [Array<String>, String] mac

@@ -116,6 +116,35 @@ describe Ronin::DB::IPAddress do
     after { described_class.destroy_all }
   end
 
+  describe ".in_range" do
+    subject { described_class }
+
+    let(:address1) { '4.1.1.1' }
+    let(:address2) { '4.2.2.2' }
+    let(:address3) { '4.3.3.3' }
+    let(:range)    { address1..address3 }
+
+    before do
+      described_class.create(address: '4.0.0.0')
+      described_class.create(address: address1)
+      described_class.create(address: address2)
+      described_class.create(address: address3)
+      described_class.create(address: '4.4.4.4')
+    end
+
+    it "must query all IP addresses that are in between the first and last IP address" do
+      ip_addresses = subject.in_range(range)
+
+      expect(ip_addresses).to_not be_empty
+      expect(ip_addresses).to all(be_kind_of(described_class))
+      expect(ip_addresses[0].address).to eq(address1)
+      expect(ip_addresses[1].address).to eq(address2)
+      expect(ip_addresses[2].address).to eq(address3)
+    end
+
+    after { described_class.destroy_all }
+  end
+
   describe ".with_mac_address" do
     subject { described_class }
 
