@@ -136,6 +136,27 @@ module Ronin
       end
 
       #
+      # Queries all IP address that are between the first IP address and last IP
+      # address.
+      #
+      # @param [String] first_ip
+      #   The first IP of the IP range.
+      #
+      # @param [String] last_ip
+      #   The last IP of the IP range.
+      #
+      # @return [Array<IPAddress>]
+      #
+      def self.between(first_ip,last_ip)
+        first_ip_hton = IPAddr.new(first_ip).hton
+        last_ip_hton  = IPAddr.new(last_ip).hton
+
+        hton = arel_table[:hton]
+
+        where(hton.gteq(first_ip_hton).and(hton.lteq(last_ip_hton)))
+      end
+
+      #
       # Searches for all IP addresses associated with specific MAC address(es).
       #
       # @param [Array<String>, String] mac
