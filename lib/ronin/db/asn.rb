@@ -115,6 +115,18 @@ module Ronin
       end
 
       #
+      # Searches for all ASNs with the matching AS number.
+      #
+      # @param [Integer] number
+      #   The AS number to search for.
+      #
+      # @return [Array<ASN>]
+      #
+      def self.with_number(number)
+        where(number: number)
+      end
+
+      #
       # Queries the ASN that contains the given IP address.
       #
       # @param [IPAddr, String] ip
