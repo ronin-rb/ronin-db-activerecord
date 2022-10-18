@@ -321,6 +321,62 @@ describe Ronin::DB::ASN do
     after { described_class.destroy_all }
   end
 
+  describe ".with_name" do
+    subject { described_class }
+
+    let(:number) { 3356     }
+    let(:name)   { 'LEVEL3' }
+
+    before do
+      subject.create(
+        version:      4,
+        range_start:  '3.248.0.0',
+        range_end:    '3.255.255.255',
+        number:       16509,
+        country_code: 'US',
+        name:         'AMAZON-02'
+      )
+
+      subject.create(
+        version:      4,
+        range_start:  '4.0.0.0',
+        range_end:    '4.7.168.255',
+        number:       number,
+        country_code: 'US',
+        name:         name 
+      )
+
+      subject.create(
+        version:      4,
+        range_start:  '4.7.169.0',
+        range_end:    '4.23.87.255',
+        number:       number,
+        country_code: 'US',
+        name:         name
+      )
+
+      subject.create(
+        version:      4,
+        range_start:  '4.23.88.0',
+        range_end:    '4.23.89.255',
+        number:       46164,
+        country_code: 'US',
+        name:         'ATT-MOBILITY-LABS'
+      )
+    end
+
+    it "must query the ASN recrds with the matching number" do
+      asns = subject.with_name(name)
+
+      expect(asns.length).to eq(2)
+      expect(asns).to all(be_kind_of(described_class))
+      expect(asns[0].name).to eq(name)
+      expect(asns[1].name).to eq(name)
+    end
+
+    after { described_class.destroy_all }
+  end
+
   describe ".containing_ip" do
     subject { described_class }
 

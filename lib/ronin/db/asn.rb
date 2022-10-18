@@ -139,6 +139,18 @@ module Ronin
       end
 
       #
+      # Searches for all ASNs with the matching name.
+      #
+      # @param [String] name 
+      #   The name to search for.
+      #
+      # @return [Array<ASN>]
+      #
+      def self.with_name(name)
+        where(name: name)
+      end
+
+      #
       # Queries the ASN that contains the given IP address.
       #
       # @param [IPAddr, String] ip
