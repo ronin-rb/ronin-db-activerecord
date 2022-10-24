@@ -23,6 +23,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * {Ronin::DB::Arch}
   * {Ronin::DB::EmailAddress}
   * {Ronin::DB::HostName}
+  * {Ronin::DB::ASN}
   * {Ronin::DB::IPAddress}
   * {Ronin::DB::HostNameIPAddress}
   * {Ronin::DB::MACAddress}
@@ -41,9 +42,15 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * {Ronin::DB::URLScheme}
   * {Ronin::DB::URLQueryParam}
   * {Ronin::DB::URLQueryParamName}
+  * {Ronin::DB::HTTPRequest}
+  * {Ronin::DB::HTTPRequestHeader}
+  * {Ronin::DB::HTTPResponse}
+  * {Ronin::DB::HTTPResponseHeader}
+  * {Ronin::DB::HTTPHeaderName}
+  * {Ronin::DB::HTTPQueryParam}
+  * {Ronin::DB::HTTPQueryParamName}
   * {Ronin::DB::UserName}
   * {Ronin::DB::WebCredential}
-  * {Ronin::DB::ASN}
   * {Ronin::DB::Advisory}
   * {Ronin::DB::Vulnerability}
 
