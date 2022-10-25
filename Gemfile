@@ -18,4 +18,5 @@ group :development do
   gem 'yard-spellcheck', require: false
 
   gem 'dead_end',        require: false
+  gem 'sord',            require: false
 end
