@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'sqlite3', '~> 1.0', platform: :mri
+gem 'sqlite3', '~> 1.0', platforms: [:mri, :truffleruby]
 
 platform :jruby do
   gem 'jruby-openssl',	'~> 0.7'
