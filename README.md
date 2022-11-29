@@ -53,6 +53,8 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * {Ronin::DB::UserName}
   * {Ronin::DB::Vulnerability}
   * {Ronin::DB::WebCredential}
+* Has 96% documentation coverage.
+* Has 99% test coverage.
 
 ## Examples
 
