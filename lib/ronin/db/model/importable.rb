@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # ronin-db-activerecord - ActiveRecord backend for the Ronin Database.
 #
