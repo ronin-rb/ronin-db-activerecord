@@ -29,7 +29,7 @@ module Ronin
       module HasUniqueName
         #
         # @!attribute [rw] name
-        #   The unqiue name of the model.
+        #   The unique name of the model.
         #
         #   @return [String]
         #

@@ -32,7 +32,7 @@ module Ronin
       include Model
 
       # @!attribute [rw] id
-      #   The primary ID of the HTTP reponse.
+      #   The primary ID of the HTTP response.
       #
       #   @return [Integer]
       attribute :id, :integer

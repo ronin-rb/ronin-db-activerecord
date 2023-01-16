@@ -72,7 +72,7 @@ module Ronin
       #
       module ID
         #
-        # Parses a security avdisory ID.
+        # Parses a security advisory ID.
         #
         # @param [String] string
         #   The security advisory ID String to split.

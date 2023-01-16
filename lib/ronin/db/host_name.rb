@@ -38,7 +38,7 @@ module Ronin
       include Model::LastScannedAt
 
       # @!attribute [rw] id
-      #   The primary ID of the host nmae.
+      #   The primary ID of the host name.
       #
       #   @return [Integer]
       attribute :id, :integer
