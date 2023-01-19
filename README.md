@@ -21,41 +21,75 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
 
 * Can be used both as a standalone library or in a web app.
 * Provides common [ActiveRecord] models:
-  * {Ronin::DB::Advisory}
-  * {Ronin::DB::Arch}
-  * {Ronin::DB::ASN}
-  * {Ronin::DB::EmailAddress}
-  * {Ronin::DB::HostName}
-  * {Ronin::DB::HostNameIPAddress}
-  * {Ronin::DB::HTTPHeaderName}
-  * {Ronin::DB::HTTPQueryParam}
-  * {Ronin::DB::HTTPQueryParamName}
-  * {Ronin::DB::HTTPRequest}
-  * {Ronin::DB::HTTPRequestHeader}
-  * {Ronin::DB::HTTPResponse}
-  * {Ronin::DB::HTTPResponseHeader}
-  * {Ronin::DB::IPAddress}
-  * {Ronin::DB::IPAddressMACAddress}
-  * {Ronin::DB::MACAddress}
-  * {Ronin::DB::OpenPort}
-  * {Ronin::DB::Organization}
-  * {Ronin::DB::OS}
-  * {Ronin::DB::OSGuess}
-  * {Ronin::DB::Password}
-  * {Ronin::DB::Port}
-  * {Ronin::DB::Service}
-  * {Ronin::DB::ServiceCredential}
-  * {Ronin::DB::Software}
-  * {Ronin::DB::SoftwareVendor}
-  * {Ronin::DB::URL}
-  * {Ronin::DB::URLQueryParam}
-  * {Ronin::DB::URLQueryParamName}
-  * {Ronin::DB::URLScheme}
-  * {Ronin::DB::UserName}
-  * {Ronin::DB::Vulnerability}
-  * {Ronin::DB::WebCredential}
+  * [Ronin::DB::Advisory]
+  * [Ronin::DB::Arch]
+  * [Ronin::DB::ASN]
+  * [Ronin::DB::EmailAddress]
+  * [Ronin::DB::HostName]
+  * [Ronin::DB::HostNameIPAddress]
+  * [Ronin::DB::HTTPHeaderName]
+  * [Ronin::DB::HTTPQueryParam]
+  * [Ronin::DB::HTTPQueryParamName]
+  * [Ronin::DB::HTTPRequest]
+  * [Ronin::DB::HTTPRequestHeader]
+  * [Ronin::DB::HTTPResponse]
+  * [Ronin::DB::HTTPResponseHeader]
+  * [Ronin::DB::IPAddress]
+  * [Ronin::DB::IPAddressMACAddress]
+  * [Ronin::DB::MACAddress]
+  * [Ronin::DB::OpenPort]
+  * [Ronin::DB::Organization]
+  * [Ronin::DB::OS]
+  * [Ronin::DB::OSGuess]
+  * [Ronin::DB::Password]
+  * [Ronin::DB::Port]
+  * [Ronin::DB::Service]
+  * [Ronin::DB::ServiceCredential]
+  * [Ronin::DB::Software]
+  * [Ronin::DB::SoftwareVendor]
+  * [Ronin::DB::URL]
+  * [Ronin::DB::URLQueryParam]
+  * [Ronin::DB::URLQueryParamName]
+  * [Ronin::DB::URLScheme]
+  * [Ronin::DB::UserName]
+  * [Ronin::DB::Vulnerability]
+  * [Ronin::DB::WebCredential]
 * Has 96% documentation coverage.
 * Has 99% test coverage.
+
+[Ronin::DB::Advisory]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Advisory.html
+[Ronin::DB::Arch]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Arch.html
+[Ronin::DB::ASN]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/ASN.html
+[Ronin::DB::EmailAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/EmailAddress.html
+[Ronin::DB::HostName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/HostName.html
+[Ronin::DB::HostNameIPAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/HostNameIPAddress.html
+[Ronin::DB::HTTPHeaderName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/HTTPHeaderName.html
+[Ronin::DB::HTTPQueryParam]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/HTTPQueryParam.html
+[Ronin::DB::HTTPQueryParamName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/HTTPQueryParamName.html
+[Ronin::DB::HTTPRequest]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/HTTPRequest.html
+[Ronin::DB::HTTPRequestHeader]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/HTTPRequestHeader.html
+[Ronin::DB::HTTPResponse]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/HTTPResponse.html
+[Ronin::DB::HTTPResponseHeader]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/HTTPResponseHeader.html
+[Ronin::DB::IPAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/IPAddress.html
+[Ronin::DB::IPAddressMACAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/IPAddressMACAddress.html
+[Ronin::DB::MACAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/MACAddress.html
+[Ronin::DB::OpenPort]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OpenPort.html
+[Ronin::DB::Organization]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Organization.html
+[Ronin::DB::OS]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OS.html
+[Ronin::DB::OSGuess]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OSGuess.html
+[Ronin::DB::Password]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Password.html
+[Ronin::DB::Port]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Port.html
+[Ronin::DB::Service]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Service.html
+[Ronin::DB::ServiceCredential]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/ServiceCredential.html
+[Ronin::DB::Software]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Software.html
+[Ronin::DB::SoftwareVendor]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/SoftwareVendor.html
+[Ronin::DB::URL]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/URL.html
+[Ronin::DB::URLQueryParam]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/URLQueryParam.html
+[Ronin::DB::URLQueryParamName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/URLQueryParamName.html
+[Ronin::DB::URLScheme]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/URLScheme.html
+[Ronin::DB::UserName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/UserName.html
+[Ronin::DB::Vulnerability]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Vulnerability.html
+[Ronin::DB::WebCredential]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/WebCredential.html
 
 ## Examples
 
