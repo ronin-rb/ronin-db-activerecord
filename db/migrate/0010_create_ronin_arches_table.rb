@@ -20,6 +20,8 @@
 #
 
 #
+# Creates the `ronin_arches` table.
+#
 # @api private
 #
 class CreateRoninArchesTable < ActiveRecord::Migration[7.0]

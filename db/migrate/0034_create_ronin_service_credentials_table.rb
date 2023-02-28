@@ -19,6 +19,9 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
+#
+# Creates the `ronin_service_credentials` table.
+#
 class CreateRoninServiceCredentialsTable < ActiveRecord::Migration[7.0]
 
   def change

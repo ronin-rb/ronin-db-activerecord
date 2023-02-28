@@ -19,6 +19,9 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
+#
+# Creates the `ronin_software_vendors` table.
+#
 class CreateRoninSoftwareVendorsTable < ActiveRecord::Migration[7.0]
 
   def change

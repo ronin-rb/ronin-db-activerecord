@@ -20,6 +20,9 @@
 # along with ronin-exploits.  If not, see <https://www.gnu.org/licenses/>
 #
 
+#
+# Creates the `ronin_vulnerabilities` table.
+#
 class CreateRoninVulnerabilitiesTable < ActiveRecord::Migration[7.0]
 
   def change

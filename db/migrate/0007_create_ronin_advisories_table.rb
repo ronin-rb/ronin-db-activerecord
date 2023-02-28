@@ -21,6 +21,8 @@
 #
 
 #
+# Creates the `ronin_advisories` table.
+#
 # @api private
 #
 class CreateRoninAdvisoriesTable < ActiveRecord::Migration[7.0]

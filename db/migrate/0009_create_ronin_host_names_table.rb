@@ -19,6 +19,9 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
+#
+# Creates the `ronin_host_names` table.
+#
 class CreateRoninHostNamesTable < ActiveRecord::Migration[7.0]
 
   def change
