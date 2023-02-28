@@ -58,8 +58,7 @@ describe Ronin::DB::URLQueryParam do
       end
     end
 
-    describe "url" do
-    end
+    describe "url"
   end
 
   subject do
@@ -92,7 +91,7 @@ describe Ronin::DB::URLQueryParam do
     end
 
     context "with special characters" do
-      let(:value)         { 'bar baz'         }
+      let(:value)         { 'bar baz' }
       let(:encoded_value) { URI::DEFAULT_PARSER.escape(value) }
 
       subject do

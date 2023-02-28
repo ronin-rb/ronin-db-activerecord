@@ -95,7 +95,7 @@ describe Ronin::DB::Arch do
         arch = described_class.new(
           name:      name,
           endian:    endian,
-          word_size: 4 
+          word_size: 4
         )
         expect(arch).to be_valid
       end
@@ -104,7 +104,7 @@ describe Ronin::DB::Arch do
         arch = described_class.new(
           name:      name,
           endian:    endian,
-          word_size: 8 
+          word_size: 8
         )
         expect(arch).to be_valid
       end

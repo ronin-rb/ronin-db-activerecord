@@ -87,7 +87,7 @@ module Ronin
 
       # @!attribute [rw] fragment
       #   The fragment of the URL.
-      #   
+      #
       #   @return [String, nil]
       attribute :fragment, :string
 
@@ -368,7 +368,7 @@ module Ronin
         fragment = uri.fragment
 
         query_params = []
-        
+
         if uri.respond_to?(:query_params)
           # find or create the URL query params
           uri.query_params.each do |name,value|
@@ -430,9 +430,11 @@ module Ronin
         scheme = if self.scheme
                    self.scheme.name
                  end
+
         host = if self.host_name
                  self.host_name.name
                end
+
         port = if self.port
                  self.port.number
                end
@@ -459,8 +461,6 @@ module Ronin
       def to_s
         self.to_uri.to_s
       end
-
-      protected
 
       #
       # Normalizes the path of a URI.

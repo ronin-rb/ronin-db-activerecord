@@ -61,7 +61,7 @@ describe Ronin::DB::EmailAddress do
 
       it "must not allow email addresses longer than 320 characters" do
         email_address = described_class.new(
-          address: ('a' * 320) + "@example.com",
+          address:   "#{'a' * 320}@example.com",
           user_name: user_name,
           host_name: host_name
         )
@@ -71,7 +71,7 @@ describe Ronin::DB::EmailAddress do
         )
 
         email_address = described_class.new(
-          address: address,
+          address:   address,
           user_name: user_name,
           host_name: host_name
         )
@@ -180,7 +180,7 @@ describe Ronin::DB::EmailAddress do
     let(:host_name) { Ronin::DB::HostName.create(name: host) }
 
     before do
-      email_address = described_class.create(
+      described_class.create(
         address:   address,
         user_name: user_name,
         host_name: host_name
@@ -241,7 +241,7 @@ describe Ronin::DB::EmailAddress do
     let(:host_name) { Ronin::DB::HostName.create(name: host) }
 
     before do
-      email_address = described_class.create(
+      described_class.create(
         address:   address,
         user_name: user_name,
         host_name: host_name

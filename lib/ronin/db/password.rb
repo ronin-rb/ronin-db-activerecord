@@ -109,13 +109,13 @@ module Ronin
       #
       # @example
       #   pass = Password.new(plain_text: 'secret')
-      #   
+      #
       #   pass.digest(:sha1)
       #   # => "e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4"
-      #   
+      #
       #   pass.digest(:sha1, prepend_salt: "A\x90\x00")
       #   # => "e2817656a48c49f24839ccf9295b389d8f985904"
-      #   
+      #
       #   pass.digest(:sha1, append_salt: "BBBB")
       #   # => "aa6ca21e446d425fc044bbb26e950a788444a5b8"
       #

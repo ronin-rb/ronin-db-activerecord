@@ -78,8 +78,8 @@ module Ronin
       # @api public
       #
       def to_i
-        self.address.split(':').inject(0) do |bits,char|
-          bits = ((bits << 8) | char.hex)
+        self.address.split(':').reduce(0) do |bits,char|
+          ((bits << 8) | char.hex)
         end
       end
 

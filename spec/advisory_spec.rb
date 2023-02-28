@@ -76,9 +76,6 @@ describe Ronin::DB::Advisory do
 
   describe "validations" do
     describe "prefix" do
-      subject do
-      end
-
       it "must require a preifx" do
         advisory = described_class.new(
           id:         'CVE-2022-1234',
@@ -104,11 +101,10 @@ describe Ronin::DB::Advisory do
           id:         'GHSA-3hhc-qp5v-9p2j',
           prefix:     'GHSA',
           year:       nil,
-          identifier: '3hhc-qp5v-9p2j',
+          identifier: '3hhc-qp5v-9p2j'
         )
 
         advisory.valid?
-        p advisory.errors
         expect(advisory).to be_valid
       end
 
@@ -252,7 +248,7 @@ describe Ronin::DB::Advisory do
 
     context "when #prefix is 'GHSA'" do
       let(:prefix)     { 'GHSA' }
-      let(:identifier) { '3hhc-qp5v-9p2j'     }
+      let(:identifier) { '3hhc-qp5v-9p2j' }
       let(:id)         { "#{prefix}-#{identifier}" }
 
       subject do

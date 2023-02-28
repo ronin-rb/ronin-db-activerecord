@@ -67,20 +67,20 @@ describe Ronin::DB::URL do
 
       host = Ronin::DB::HostName.create(name: 'example.com')
 
-      port_80  = Ronin::DB::Port.create(number: 80)
-      port_443 = Ronin::DB::Port.create(number: 443)
+      http_port  = Ronin::DB::Port.create(number: 80)
+      https_port = Ronin::DB::Port.create(number: 443)
 
       described_class.create(
         scheme:    http_scheme,
         host_name: host,
-        port:      port_80,
+        port:      http_port,
         path:      '/'
       )
 
       described_class.create(
         scheme:    https_scheme,
         host_name: host,
-        port:      port_443,
+        port:      https_port,
         path:      '/'
       )
     end
@@ -109,20 +109,20 @@ describe Ronin::DB::URL do
 
       host = Ronin::DB::HostName.create(name: 'example.com')
 
-      port_80  = Ronin::DB::Port.create(number: 80)
-      port_443 = Ronin::DB::Port.create(number: 443)
+      http_port  = Ronin::DB::Port.create(number: 80)
+      https_port = Ronin::DB::Port.create(number: 443)
 
       described_class.create(
         scheme:    http_scheme,
         host_name: host,
-        port:      port_80,
+        port:      http_port,
         path:      '/'
       )
 
       described_class.create(
         scheme:    https_scheme,
         host_name: host,
-        port:      port_443,
+        port:      https_port,
         path:      '/'
       )
     end
@@ -154,26 +154,26 @@ describe Ronin::DB::URL do
       host1 = Ronin::DB::HostName.create(name: host_name1)
       host2 = Ronin::DB::HostName.create(name: host_name2)
 
-      port_80 = Ronin::DB::Port.create(number: 443)
+      http_port = Ronin::DB::Port.create(number: 443)
 
       described_class.create(
         scheme:    http_scheme,
         host_name: host1,
-        port:      port_80,
+        port:      http_port,
         path:      '/'
       )
 
       described_class.create(
         scheme:    http_scheme,
         host_name: host2,
-        port:      port_80,
+        port:      http_port,
         path:      '/'
       )
 
       described_class.create(
         scheme:    http_scheme,
         host_name: host1,
-        port:      port_80,
+        port:      http_port,
         path:      '/other'
       )
     end
@@ -575,7 +575,6 @@ describe Ronin::DB::URL do
           )
         ]
       )
-
     end
 
     it "must query all #{described_class} with the matching query_param name and value" do
@@ -584,9 +583,13 @@ describe Ronin::DB::URL do
       expect(urls).to_not be_empty
       expect(
         urls.flat_map(&:query_params).map { |param|
-          [param.name.name, param.value] 
+          [param.name.name, param.value]
         }.uniq
-      ).to eq([ [name, value] ])
+      ).to eq(
+        [
+          [name, value]
+        ]
+      )
     end
 
     after do
@@ -664,7 +667,6 @@ describe Ronin::DB::URL do
           )
         ]
       )
-
     end
 
     it "must query all #{described_class} with the matching query_param name" do
@@ -673,9 +675,14 @@ describe Ronin::DB::URL do
       expect(urls).to_not be_empty
       expect(
         urls.flat_map(&:query_params).map { |param|
-          [param.name.name, param.value] 
+          [param.name.name, param.value]
         }.uniq
-      ).to eq([ [name, value1], [name, value2] ])
+      ).to eq(
+        [
+          [name, value1],
+          [name, value2]
+        ]
+      )
     end
 
     after do
@@ -754,7 +761,6 @@ describe Ronin::DB::URL do
           )
         ]
       )
-
     end
 
     it "must query all #{described_class} with the matching query_param value" do
@@ -763,9 +769,14 @@ describe Ronin::DB::URL do
       expect(urls).to_not be_empty
       expect(
         urls.flat_map(&:query_params).map { |param|
-          [param.name.name, param.value] 
+          [param.name.name, param.value]
         }.uniq
-      ).to eq([ [name1, value], [name2, value] ])
+      ).to eq(
+        [
+          [name1, value],
+          [name2, value]
+        ]
+      )
     end
 
     after do
@@ -793,8 +804,8 @@ describe Ronin::DB::URL do
       host2 = Ronin::DB::HostName.create(name: host)
       host3 = Ronin::DB::HostName.create(name: 'example2.com')
 
-      port_80  = Ronin::DB::Port.create(number: 80)
-      port_443 = Ronin::DB::Port.create(number: port)
+      http_port  = Ronin::DB::Port.create(number: 80)
+      https_port = Ronin::DB::Port.create(number: port)
 
       path1 = '/foo'
       path2 = path
@@ -803,21 +814,21 @@ describe Ronin::DB::URL do
       described_class.create(
         scheme:    http_scheme,
         host_name: host1,
-        port:      port_80,
+        port:      http_port,
         path:      path1
       )
 
       described_class.create(
         scheme:    https_scheme,
         host_name: host2,
-        port:      port_443,
+        port:      https_port,
         path:      path2
       )
 
       described_class.create(
         scheme:    https_scheme,
         host_name: host3,
-        port:      port_443,
+        port:      https_port,
         path:      path3
       )
     end
@@ -921,7 +932,7 @@ describe Ronin::DB::URL do
     it "should convert the scheme" do
       expect(subject.scheme).to be == scheme
     end
-    
+
     it "should convert the host name" do
       expect(subject.host).to be == host_name
     end

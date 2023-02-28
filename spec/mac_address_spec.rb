@@ -54,8 +54,7 @@ describe Ronin::DB::MACAddress do
     after { described_class.destroy_all }
   end
 
-  describe "#recent_ip_address" do
-  end
+  describe "#recent_ip_address"
 
   describe "#to_i" do
     let(:integer) { 0x000102030405 }

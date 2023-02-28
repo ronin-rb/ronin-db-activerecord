@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # ronin-db-activerecord - ActiveRecord backend for the Ronin Database.
 #
@@ -28,9 +29,7 @@ class CreateRoninSoftwaresTable < ActiveRecord::Migration[7.0]
     create_table :ronin_softwares, if_not_exists: true do |t|
       t.string :name, null: false
       t.string :version, null: false
-      t.references :vendor, foreign_key: {
-                              to_table: :ronin_software_vendors
-                            }
+      t.references :vendor, foreign_key: {to_table: :ronin_software_vendors}
 
       t.index [:name, :version], unique: true
       t.index :name

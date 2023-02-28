@@ -118,7 +118,7 @@ describe Ronin::DB::Credential do
 
       password  = Ronin::DB::Password.create(plain_text: plain_text)
 
-      credential = described_class.create(
+      described_class.create(
         email_address: email_address,
         password:      password
       )
@@ -132,7 +132,7 @@ describe Ronin::DB::Credential do
       expect(credential).to be_kind_of(described_class)
       expect(credential.email_address.user_name.name).to eq(user)
       expect(credential.email_address.host_name.name).to eq(domain)
-   end
+    end
 
     after do
       Ronin::DB::Credential.destroy_all

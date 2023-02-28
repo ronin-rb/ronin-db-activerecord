@@ -34,7 +34,7 @@ module Ronin
       include Model::HasUniqueName
 
       self.table_name = 'ronin_url_schemes'
-      
+
       # @!attribute [rw] id
       #   The primary key of the URL scheme.
       #

@@ -142,7 +142,7 @@ module Ronin
       #
       # Searches for all ASNs with the matching name.
       #
-      # @param [String] name 
+      # @param [String] name
       #   The name to search for.
       #
       # @return [Array<ASN>]
@@ -159,11 +159,11 @@ module Ronin
       # @return [ASN, nil]
       #
       def self.containing_ip(ip)
-        ip = IPAddr.new(ip) unless ip.kind_of?(IPAddr)
+        ip      = IPAddr.new(ip) unless ip.kind_of?(IPAddr)
         ip_hton = ip.hton
 
         range_start_hton = self.arel_table[:range_start_hton]
-        range_end_hton  = self.arel_table[:range_end_hton]
+        range_end_hton   = self.arel_table[:range_end_hton]
 
         where(range_start_hton.lteq(ip_hton).and(range_end_hton.gteq(ip_hton))).first
       end

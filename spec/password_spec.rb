@@ -53,25 +53,24 @@ describe Ronin::DB::Password do
 
     it "should calculate the digest of the password" do
       digest = subject.digest(:sha1)
-      
+
       expect(digest).to eq(Digest::SHA1.hexdigest(plain_text))
     end
 
     it "should calculate the digest of the password and prepended salt" do
       digest = subject.digest(:sha1, prepend_salt: salt)
-      
+
       expect(digest).to eq(Digest::SHA1.hexdigest(salt + plain_text))
     end
 
     it "should calculate the digest of the password and appended salt" do
       digest = subject.digest(:sha1, append_salt: salt)
-      
+
       expect(digest).to eq(Digest::SHA1.hexdigest(plain_text + salt))
     end
   end
 
-  describe "#count" do
-  end
+  describe "#count"
 
   describe "#to_s" do
     it "should return the plain text password" do

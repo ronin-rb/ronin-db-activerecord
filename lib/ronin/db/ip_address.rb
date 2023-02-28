@@ -262,6 +262,7 @@ module Ronin
                       begin
                         IPAddr.new(self.address)
                       rescue IPAddr::InvalidAddressError
+                        nil
                       end
                     end
       end
@@ -345,7 +346,6 @@ require 'ronin/db/host_name_ip_address'
 require 'ronin/db/host_name'
 require 'ronin/db/open_port'
 require 'ronin/db/port'
-require 'ronin/db/host_name'
 require 'ronin/db/os_guess'
 require 'ronin/db/os'
 require 'ronin/db/asn'

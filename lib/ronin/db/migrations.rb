@@ -59,7 +59,7 @@ module Ronin
         context.migrate(target_version)
       end
 
-      # 
+      #
       # Explicitly migrates up the database to the target version.
       #
       # @param [Integer, nil] target_version
@@ -71,9 +71,9 @@ module Ronin
         context.up(target_version,&block)
       end
 
-      # 
+      #
       # Explicitly migrates down the database to the target version.
-      # 
+      #
       # @param [Integer, nil] target_version
       #   The desired target version.
       #
@@ -83,7 +83,7 @@ module Ronin
         context.down(target_version,&block)
       end
 
-      # 
+      #
       # Rollbacks the last number of migrations.
       #
       # @param [Integer] steps
@@ -95,7 +95,7 @@ module Ronin
         context.rollback(steps)
       end
 
-      # 
+      #
       # Applies the next number of migrations.
       #
       # @param [Integer] steps
@@ -106,8 +106,6 @@ module Ronin
       def self.foreward(steps=1)
         context.foreward(steps)
       end
-
-      private
 
       # Path to the `db/migrate/` directory in `ronin-db-activerecord`.
       DIR = File.expand_path('../../../db/migrate',__dir__)
@@ -132,8 +130,10 @@ module Ronin
       #
       # @return [MigrationContext]
       #
+      # @api private
+      #
       def self.context
-        @migrations ||= MigrationContext.new
+        @context ||= MigrationContext.new
       end
     end
   end

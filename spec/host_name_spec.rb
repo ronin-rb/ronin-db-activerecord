@@ -202,6 +202,5 @@ describe Ronin::DB::HostName do
     after { described_class.destroy_all }
   end
 
-  describe "#recent_ip_address" do
-  end
+  describe "#recent_ip_address"
 end

@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe 'ronin/db/models' do
   it "must load all models" do
-    expect(require 'ronin/db/models').to eq(true)
+    expect(require('ronin/db/models')).to eq(true)
   end
 end
 
-describe 'Ronin::DB::Models'do
+describe 'Ronin::DB::Models' do
   before(:all) { require 'ronin/db/models' }
 
   subject { Ronin::DB::Models }

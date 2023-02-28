@@ -44,11 +44,9 @@ module Ronin
         # @api semipublic
         #
         def self.included(base)
-          base.send :include, Model,
-                              HasName::InstanceMethods
+          base.send :include, Model, HasName::InstanceMethods
 
-          base.send :extend,  HasName::ClassMethods,
-                              HasUniqueName::ClassMethods
+          base.send :extend, HasName::ClassMethods, HasUniqueName::ClassMethods
 
           base.module_eval do
             # The name of the model

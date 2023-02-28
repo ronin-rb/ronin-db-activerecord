@@ -56,9 +56,9 @@ module Ronin
       attribute :year, :integer
       validates :year, allow_nil:  true,
                        comparison: {
-                                     greater_than: 1990,
-                                     less_than_or_equal_to: Date.today.year
-                                   }
+                         greater_than: 1990,
+                         less_than_or_equal_to: Date.today.year
+                       }
 
       # @!attribute [rw] identifier
       #   The advisory identifier
@@ -84,7 +84,7 @@ module Ronin
         #   The ID does not appear to be a valid security ID.
         #
         def self.parse(string)
-          if (match = string.match(/\A([A-Z]+)-(\d{4})[:-]([0-9][0-9-]+)\z/))
+          if    (match = string.match(/\A([A-Z]+)-(\d{4})[:-]([0-9][0-9-]+)\z/))
             {
               id:         match[0],
               prefix:     match[1],

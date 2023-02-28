@@ -343,7 +343,7 @@ describe Ronin::DB::ASN do
         range_end:    '4.7.168.255',
         number:       number,
         country_code: 'US',
-        name:         name 
+        name:         name
       )
 
       subject.create(

@@ -86,7 +86,7 @@ describe Ronin::DB::HTTPQueryParam do
     end
 
     context "with special characters" do
-      let(:value)         { 'bar baz'         }
+      let(:value)         { 'bar baz' }
       let(:encoded_value) { URI::DEFAULT_PARSER.escape(value) }
 
       subject do

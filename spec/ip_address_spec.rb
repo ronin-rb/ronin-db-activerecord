@@ -28,7 +28,7 @@ describe Ronin::DB::IPAddress do
         ip_address = described_class.new(address: ipv4_address)
         expect(ip_address).to be_valid
       end
-      
+
       it "must accept IPv6 addresses" do
         ip_address = described_class.new(address: ipv6_address)
         expect(ip_address).to be_valid
@@ -359,14 +359,11 @@ describe Ronin::DB::IPAddress do
     end
   end
 
-  describe "#recent_mac_address" do
-  end
+  describe "#recent_mac_address"
 
-  describe "#recent_host_name" do
-  end
+  describe "#recent_host_name"
 
-  describe "#recent_os_guess" do
-  end
+  describe "#recent_os_guess"
 
   describe "#save" do
     subject { described_class.create(address: address) }
@@ -378,9 +375,7 @@ describe Ronin::DB::IPAddress do
     after { subject.destroy }
   end
 
-  describe "#to_ip" do
-  end
+  describe "#to_ip"
 
-  describe "#to_i" do
-  end
+  describe "#to_i"
 end

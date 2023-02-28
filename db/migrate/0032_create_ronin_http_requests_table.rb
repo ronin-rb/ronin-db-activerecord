@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # ronin-db-activerecord - ActiveRecord backend for the Ronin Database.
 #
@@ -31,9 +32,7 @@ class CreateRoninHttpRequestsTable < ActiveRecord::Migration[7.0]
       t.string :path, null: false
       t.text :body
 
-      t.references :response, foreign_key: {
-                                to_table: :ronin_http_responses
-                              }
+      t.references :response, foreign_key: {to_table: :ronin_http_responses}
 
       t.datetime :created_at, null: false
 

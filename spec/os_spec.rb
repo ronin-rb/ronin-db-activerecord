@@ -103,8 +103,7 @@ describe Ronin::DB::OS do
     end
   end
 
-  describe "#recent_ip_address" do
-  end
+  describe "#recent_ip_address"
 
   describe "#to_s" do
     it "must return the OS name and version" do
