@@ -20,6 +20,9 @@
 
 module Ronin
   module DB
+    #
+    # Mixin for all `ronin-db-activerecord` models.
+    #
     module Model
       #
       # Sets the models `table_name_prefix` to `ronin_`.
