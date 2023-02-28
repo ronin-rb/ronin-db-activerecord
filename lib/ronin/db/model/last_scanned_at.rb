@@ -21,6 +21,9 @@
 module Ronin
   module DB
     module Model
+      #
+      # Mixin which adds a `last_scanned_at` attribute to a model.
+      #
       module LastScannedAt
         #
         # @!attribute [rw] last_scanned_at
