@@ -37,6 +37,9 @@ module Ronin
           model.extend ClassMethods
         end
 
+        #
+        # Class-methods which will be added to the model.
+        #
         module ClassMethods
           #
           # Looks up a record with the given value.
