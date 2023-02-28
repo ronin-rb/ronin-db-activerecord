@@ -25,6 +25,9 @@ require 'active_record/migration'
 
 module Ronin
   module DB
+    #
+    # Handles migrating the database.
+    #
     module Migrations
       #
       # The current migration version of the database.
