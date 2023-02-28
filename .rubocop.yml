@@ -1,0 +1,16 @@
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.1
+
+inherit_gem:
+  rubocop-ronin: rubocop.yml
+
+#
+# ronin-db-activerecord specific exceptions
+#
+
+# robucop mistakes :x86_64 for a "symbol number"
+Naming/VariableNumber:
+  AllowedIdentifiers:
+    - x86_64
