@@ -56,6 +56,9 @@ require 'ronin/db/vulnerability'
 
 module Ronin
   module DB
+    #
+    # Manages all models defined in `ronin-db-activerecord`.
+    #
     module Models
       ALL = [
         Address,
