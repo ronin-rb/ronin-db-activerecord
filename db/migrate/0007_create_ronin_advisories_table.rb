@@ -36,7 +36,7 @@ class CreateRoninAdvisoriesTable < ActiveRecord::Migration[7.0]
       t.string :identifier, null: false
 
       t.index :id, unique: true
-      t.index :publisher
+      t.index :prefix
       t.index :year
     end
   end
