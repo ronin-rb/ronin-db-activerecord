@@ -48,6 +48,7 @@ class CreateRoninUrlsTable < ActiveRecord::Migration[7.0]
       t.index :scheme_id
       t.index :host_name_id
       t.index :port_id
+      t.index [:scheme_id, :host_name_id, :port_id, :path, :query, :fragment], unique: true, name: 'url_index'
     end
   end
 
