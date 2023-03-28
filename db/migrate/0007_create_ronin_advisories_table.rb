@@ -38,6 +38,7 @@ class CreateRoninAdvisoriesTable < ActiveRecord::Migration[7.0]
       t.index :id, unique: true
       t.index :prefix
       t.index :year
+      t.index :identifier
     end
   end
 
