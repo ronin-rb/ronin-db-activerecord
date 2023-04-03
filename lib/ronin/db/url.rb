@@ -362,33 +362,30 @@ module Ronin
                         number:   uri.port
                       )
                     end
+        path      = normalized_path(uri)
+        query     = uri.query
+        fragment  = uri.fragment
 
-        path     = normalized_path(uri)
-        query    = uri.query
-        fragment = uri.fragment
-
-        query_params = []
-
-        if uri.respond_to?(:query_params)
-          # find or create the URL query params
-          uri.query_params.each do |name,value|
-            query_params << URLQueryParam.new(
-              name:  URLQueryParamName.find_or_create_by(name: name),
-              value: value
-            )
-          end
-        end
-
-        # find or create the URL
+        # try to query a pre-existing URI then fallback to creating the URL
+        # with query params.
         return find_or_create_by(
           scheme:       scheme,
           host_name:    host_name,
           port:         port,
           path:         path,
           query:        query,
-          fragment:     fragment,
-          query_params: query_params
-        )
+          fragment:     fragment
+        ) do |new_url|
+          if uri.respond_to?(:query_params)
+            # find or create the URL query params
+            uri.query_params.each do |name,value|
+              new_url.query_params << URLQueryParam.new(
+                name:  URLQueryParamName.find_or_create_by(name: name),
+                value: value
+              )
+            end
+          end
+        end
       end
 
       #

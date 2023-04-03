@@ -906,6 +906,35 @@ describe Ronin::DB::URL do
           expect(subject.path).to eq('/')
         end
       end
+
+      context "when the URIs query params are not empty" do
+        let(:uri) { URI('http://www.example.com/?a=1&b=2') }
+
+        it "must populate #query_params" do
+          expect(subject.query_params.length).to be(2)
+          expect(subject.query_params[0].name.name).to eq('a')
+          expect(subject.query_params[0].value).to eq('1')
+          expect(subject.query_params[1].name.name).to eq('b')
+          expect(subject.query_params[1].value).to eq('2')
+        end
+      end
+
+      context "when the URIs query params are empty" do
+        let(:uri) { URI('http://www.example.com/') }
+
+        it "must not populate #query_params" do
+          expect(subject.query_params).to be_empty
+        end
+      end
+
+      context "but the URL was previously imported into the database" do
+        it "must query the pre-existing URL" do
+          imported_url1 = described_class.import(uri)
+          imported_url2 = described_class.import(uri)
+
+          expect(imported_url2).to eq(imported_url1)
+        end
+      end
     end
 
     after do
