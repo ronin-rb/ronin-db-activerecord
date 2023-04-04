@@ -1,3 +1,13 @@
+### 0.1.1 / 2023-04-04
+
+* Reordered database migrations so they can be ran in correct order on
+  PostgreSQL databases.
+* Fixed {Ronin::DB::URL.import} to correctly de-duplicate pre-existing URLs.
+* Fixed `ronin_advisories.publisher` index on non-existent column.
+* Added an index on the `ronin_advisories.identifier` column.
+* Added missing unique index to `ronin_urls` table.
+* Documentation improvements.
+
 ### 0.1.0 / 2023-02-01
 
 * Initial release:
