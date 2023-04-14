@@ -6,7 +6,7 @@ describe Ronin::DB::Service do
     expect(described_class.table_name).to eq('ronin_services')
   end
 
-  let(:name) { 'Apache' }
+  let(:name) { 'ssh' }
 
   describe "validations" do
     describe "name" do
@@ -33,6 +33,34 @@ describe Ronin::DB::Service do
         described_class.destroy_all
       end
     end
+  end
+
+  describe ".lookup" do
+    before do
+      described_class.create(name: 'http')
+      described_class.create(name: name)
+      described_class.create(name: 'https')
+    end
+
+    it "must query the #{described_class} with the matching name" do
+      user_name = described_class.lookup(name)
+
+      expect(user_name).to be_kind_of(described_class)
+      expect(user_name.name).to eq(name)
+    end
+
+    after { described_class.destroy_all }
+  end
+
+  describe ".import" do
+    subject { described_class.import(name) }
+
+    it "must import the #{described_class} for the user name" do
+      expect(subject).to be_kind_of(described_class)
+      expect(subject.name).to eq(name)
+    end
+
+    after { subject.destroy }
   end
 
   subject { described_class.new(name: name) }
