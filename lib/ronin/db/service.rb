@@ -20,6 +20,7 @@
 
 require 'ronin/db/model'
 require 'ronin/db/model/has_unique_name'
+require 'ronin/db/model/importable'
 
 module Ronin
   module DB
@@ -29,6 +30,7 @@ module Ronin
     class Service < ActiveRecord::Base
 
       include Model
+      include Model::Importable
       include Model::HasUniqueName
 
       # @!attribute [rw] id
@@ -42,6 +44,36 @@ module Ronin
       #
       #   @return [Array<OpenPort>]
       has_many :open_ports
+
+      #
+      # Looks up the service.
+      #
+      # @param [String] name
+      #   The service name to lookup.
+      #
+      # @return [Service, nil]
+      #   The found service.
+      #
+      # @since 0.2.0
+      #
+      def self.lookup(name)
+        find_by(name: name)
+      end
+
+      #
+      # Imports a service.
+      #
+      # @param [String] name
+      #   The service name to import.
+      #
+      # @return [Service]
+      #   The imported service.
+      #
+      # @since 0.2.0
+      #
+      def self.import(name)
+        create(name: name)
+      end
 
     end
   end
