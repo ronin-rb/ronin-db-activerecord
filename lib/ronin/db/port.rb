@@ -70,6 +70,14 @@ module Ronin
       #   @since 0.2.0
       has_many :ip_addresses, through: :open_ports
 
+      # @!attribute [rw] services
+      #   The services that that use this port.
+      #
+      #   @return [Array<Service>]
+      #
+      #   @since 0.2.0
+      has_many :services, through: :open_ports
+
       #
       # Looks up a port by it's number.
       #
