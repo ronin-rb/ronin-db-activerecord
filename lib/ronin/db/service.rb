@@ -45,6 +45,14 @@ module Ronin
       #   @return [Array<OpenPort>]
       has_many :open_ports
 
+      # @!attribute [rw] ip_addresses
+      #   The IP Addresses that that run this service.
+      #
+      #   @return [Array<IPAddress>]
+      #
+      #   @since 0.2.0
+      has_many :ip_addresses, through: :open_ports
+
       #
       # Looks up the service.
       #
