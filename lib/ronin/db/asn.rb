@@ -195,6 +195,18 @@ module Ronin
         IPAddress.between(range_start,range_end)
       end
 
+      #
+      # Converts the ASN to a String.
+      #
+      # @return [String]
+      #   The `AS<number>` String.
+      #
+      # @since 0.2.0
+      #
+      def to_s
+        "AS#{self.number}"
+      end
+
       private
 
       #
