@@ -91,6 +91,14 @@ module Ronin
       #   @since 0.2.0
       has_many :ip_addresses, through: :vulnerabilities
 
+      # @!attribute [rw] open_ports
+      #   The Open Ports that are vulnerable to this advisory.
+      #
+      #   @return [Array<OpenPort>]
+      #
+      #   @since 0.2.0
+      has_many :open_ports, through: :vulnerabilities
+
       # @!attribute [rw] host_names
       #   The Host Names that are vulnerable to this advisory.
       #
@@ -211,5 +219,6 @@ end
 require 'ronin/db/vulnerability'
 require 'ronin/db/mac_address'
 require 'ronin/db/ip_address'
+require 'ronin/db/open_port'
 require 'ronin/db/host_name'
 require 'ronin/db/url'
