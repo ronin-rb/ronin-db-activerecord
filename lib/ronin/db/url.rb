@@ -124,6 +124,14 @@ module Ronin
       #   @since 0.2.0
       has_many :vulnerabilities, dependent: :destroy
 
+      # @!attribute [rw] advisories
+      #   The advisories that the URLs is vulnerable to.
+      #
+      #   @return [Array<Advisory>]
+      #
+      #   @since 0.2.0
+      has_many :advisories, through: :vulnerabilities
+
       #
       # Searches for all URLs using HTTP.
       #
@@ -501,3 +509,4 @@ require 'ronin/db/url_query_param_name'
 require 'ronin/db/url_query_param'
 require 'ronin/db/web_credential'
 require 'ronin/db/vulnerability'
+require 'ronin/db/advisory'
