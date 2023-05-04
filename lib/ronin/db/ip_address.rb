@@ -112,6 +112,14 @@ module Ronin
       has_many :oses, through: :os_guesses,
                       class_name: 'OS'
 
+      # @!attribute [rw] vulnerabilities
+      #   The vulnerabilities which reference the IP Address.
+      #
+      #   @return [Array<Vulnerability>]
+      #
+      #   @since 0.2.0
+      has_many :vulnerabilities, dependent: :destroy
+
       #
       # Searches for all IPv4 addresses.
       #
@@ -349,3 +357,4 @@ require 'ronin/db/port'
 require 'ronin/db/os_guess'
 require 'ronin/db/os'
 require 'ronin/db/asn'
+require 'ronin/db/vulnerability'
