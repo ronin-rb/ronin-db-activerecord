@@ -109,6 +109,14 @@ module Ronin
       #   @since 0.2.0
       has_many :vulnerabilities, dependent: :destroy
 
+      # @!attribute [rw] advisories
+      #   The advisories that the host names is vulnerable to.
+      #
+      #   @return [Array<Advisory>]
+      #
+      #   @since 0.2.0
+      has_many :advisories, through: :vulnerabilities
+
       #
       # Looks up the host name.
       #
@@ -232,3 +240,4 @@ end
 require 'ronin/db/host_name_ip_address'
 require 'ronin/db/ip_address'
 require 'ronin/db/vulnerability'
+require 'ronin/db/advisory'
