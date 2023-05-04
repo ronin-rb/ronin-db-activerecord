@@ -120,6 +120,14 @@ module Ronin
       #   @since 0.2.0
       has_many :vulnerabilities, dependent: :destroy
 
+      # @!attribute [rw] advisories
+      #   The advisories that the IP Address is vulnerable to.
+      #
+      #   @return [Array<Advisory>]
+      #
+      #   @since 0.2.0
+      has_many :advisories, through: :vulnerabilities
+
       #
       # Searches for all IPv4 addresses.
       #
@@ -358,3 +366,4 @@ require 'ronin/db/os_guess'
 require 'ronin/db/os'
 require 'ronin/db/asn'
 require 'ronin/db/vulnerability'
+require 'ronin/db/advisory'
