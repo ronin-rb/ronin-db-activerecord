@@ -65,6 +65,14 @@ module Ronin
       #   @since 0.2.0
       has_many :vulnerabilities, dependent: :destroy
 
+      # @!attribute [rw] advisories
+      #   The advisories that the MAC Address is vulnerable to.
+      #
+      #   @return [Array<Advisory>]
+      #
+      #   @since 0.2.0
+      has_many :advisories, through: :vulnerabilities
+
       #
       # The IP Address that most recently used the MAC Address.
       #
@@ -98,3 +106,4 @@ end
 require 'ronin/db/ip_address_mac_address'
 require 'ronin/db/ip_address'
 require 'ronin/db/vulnerability'
+require 'ronin/db/advisory'
