@@ -96,6 +96,14 @@ module Ronin
       #   @since 0.2.0
       has_many :vulnerabilities, dependent: :destroy
 
+      # @!attribute [rw] advisories
+      #   The advisories that the open port is vulnerable to.
+      #
+      #   @return [Array<Advisory>]
+      #
+      #   @since 0.2.0
+      has_many :advisories, through: :vulnerabilities
+
       #
       # The IP Address of the open port.
       #
@@ -155,3 +163,4 @@ require 'ronin/db/port'
 require 'ronin/db/service'
 require 'ronin/db/service_credential'
 require 'ronin/db/vulnerability'
+require 'ronin/db/advisory'
