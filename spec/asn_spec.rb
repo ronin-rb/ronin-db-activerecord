@@ -501,4 +501,10 @@ describe Ronin::DB::ASN do
 
     after { subject.destroy }
   end
+
+  describe "#to_s" do
+    it "must return the 'AS...' String" do
+      expect(subject.to_s).to eq("AS#{number}")
+    end
+  end
 end
