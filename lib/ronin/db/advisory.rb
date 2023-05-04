@@ -92,7 +92,7 @@ module Ronin
       has_many :ip_addresses, through: :vulnerabilities
 
       # @!attribute [rw] open_ports
-      #   The Open Ports that are vulnerable to this advisory.
+      #   The open ports that are vulnerable to this advisory.
       #
       #   @return [Array<OpenPort>]
       #
@@ -100,7 +100,7 @@ module Ronin
       has_many :open_ports, through: :vulnerabilities
 
       # @!attribute [rw] host_names
-      #   The Host Names that are vulnerable to this advisory.
+      #   The host names that are vulnerable to this advisory.
       #
       #   @return [Array<HostName>]
       #
