@@ -101,6 +101,14 @@ module Ronin
       has_many :urls, dependent: :destroy,
                       class_name: 'URL'
 
+      # @!attribute [rw] vulnerabilities
+      #   The vulnerabilities which reference the host name.
+      #
+      #   @return [Array<Vulnerability>]
+      #
+      #   @since 0.2.0
+      has_many :vulnerabilities, dependent: :destroy
+
       #
       # Looks up the host name.
       #
@@ -223,3 +231,4 @@ end
 
 require 'ronin/db/host_name_ip_address'
 require 'ronin/db/ip_address'
+require 'ronin/db/vulnerability'
