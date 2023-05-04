@@ -99,6 +99,14 @@ module Ronin
       #   @since 0.2.0
       has_many :host_names, through: :vulnerabilities
 
+      # @!attribute [rw] urls
+      #   The URLs that are vulnerable to this advisory.
+      #
+      #   @return [Array<URL>]
+      #
+      #   @since 0.2.0
+      has_many :urls, through: :vulnerabilities
+
       #
       # @api private
       #
@@ -204,3 +212,4 @@ require 'ronin/db/vulnerability'
 require 'ronin/db/mac_address'
 require 'ronin/db/ip_address'
 require 'ronin/db/host_name'
+require 'ronin/db/url'
