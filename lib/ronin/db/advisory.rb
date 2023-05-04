@@ -67,6 +67,14 @@ module Ronin
       attribute :identifier, :string
       validates :identifier, presence: true
 
+      # @!attribute [rw] vulnerabilities
+      #   The vulnerabilities which reference the advisory.
+      #
+      #   @return [Array<Vulnerability>]
+      #
+      #   @since 0.2.0
+      has_many :vulnerabilities, dependent: :destroy
+
       #
       # @api private
       #
@@ -167,3 +175,5 @@ module Ronin
     end
   end
 end
+
+require 'ronin/db/vulnerability'
