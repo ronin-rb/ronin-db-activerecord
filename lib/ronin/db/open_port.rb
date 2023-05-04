@@ -88,6 +88,14 @@ module Ronin
       #   @return [Array<Credential>]
       has_many :credentials, through: :service_credentials
 
+      # @!attribute [rw] vulnerabilities
+      #   The vulnerabilities which reference the open port.
+      #
+      #   @return [Array<Vulnerability>]
+      #
+      #   @since 0.2.0
+      has_many :vulnerabilities, dependent: :destroy
+
       #
       # The IP Address of the open port.
       #
@@ -146,3 +154,4 @@ require 'ronin/db/ip_address'
 require 'ronin/db/port'
 require 'ronin/db/service'
 require 'ronin/db/service_credential'
+require 'ronin/db/vulnerability'
