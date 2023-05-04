@@ -83,6 +83,14 @@ module Ronin
       #   @since 0.2.0
       has_many :mac_addresses, through: :vulnerabilities
 
+      # @!attribute [rw] ip_addresses
+      #   The IP Addresses that are vulnerable to this advisory.
+      #
+      #   @return [Array<IPAddress>]
+      #
+      #   @since 0.2.0
+      has_many :ip_addresses, through: :vulnerabilities
+
       #
       # @api private
       #
@@ -186,3 +194,4 @@ end
 
 require 'ronin/db/vulnerability'
 require 'ronin/db/mac_address'
+require 'ronin/db/ip_address'
