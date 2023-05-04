@@ -75,6 +75,14 @@ module Ronin
       #   @since 0.2.0
       has_many :vulnerabilities, dependent: :destroy
 
+      # @!attribute [rw] mac_addresses
+      #   The MAC Addresses that are vulnerable to this advisory.
+      #
+      #   @return [Array<MACAddress>]
+      #
+      #   @since 0.2.0
+      has_many :mac_addresses, through: :vulnerabilities
+
       #
       # @api private
       #
@@ -177,3 +185,4 @@ module Ronin
 end
 
 require 'ronin/db/vulnerability'
+require 'ronin/db/mac_address'
