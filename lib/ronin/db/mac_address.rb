@@ -57,6 +57,14 @@ module Ronin
       has_many :ip_addresses, through:    :ip_address_mac_addresses,
                               class_name: 'IPAddress'
 
+      # @!attribute [rw] vulnerabilities
+      #   The vulnerabilities which reference the MAC Address.
+      #
+      #   @return [Array<Vulnerability>]
+      #
+      #   @since 0.2.0
+      has_many :vulnerabilities, dependent: :destroy
+
       #
       # The IP Address that most recently used the MAC Address.
       #
@@ -89,3 +97,4 @@ end
 
 require 'ronin/db/ip_address_mac_address'
 require 'ronin/db/ip_address'
+require 'ronin/db/vulnerability'
