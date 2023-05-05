@@ -51,14 +51,14 @@ module Ronin
       #
       #   @return [String]
       attribute :version, :string
-      validates :version, presence: true,
+      validates :version, presence:   true,
                           uniqueness: {scope: :name}
 
       # @!attribute [rw] os_guesses
       #   Any OS guesses for the Operating System.
       #
       #   @return [Array<OSGuess>]
-      has_many :os_guesses, dependent: :destroy,
+      has_many :os_guesses, dependent:  :destroy,
                             class_name: 'OSGuess'
 
       # @!attribute [rw] ip_addresses

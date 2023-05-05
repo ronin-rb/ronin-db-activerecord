@@ -49,14 +49,14 @@ module Ronin
       #
       #   @return [String]
       attribute :version, :string
-      validates :version, presence: true,
+      validates :version, presence:   true,
                           uniqueness: {scope: :name}
 
       # @!attribute [rw] vendor
       #   The vendor of the software
       #
       #   @return [SoftwareVendor, nil]
-      belongs_to :vendor, optional: true,
+      belongs_to :vendor, optional:   true,
                           class_name: 'SoftwareVendor'
 
       # @!attribute [rw] open_ports
