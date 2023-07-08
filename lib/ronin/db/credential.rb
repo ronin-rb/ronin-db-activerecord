@@ -85,6 +85,14 @@ module Ronin
       #   @return [Array<URL>]
       has_many :urls, through: :web_credentials
 
+      # @!attribute [rw] notes
+      #   The associated notes.
+      #
+      #   @return [Array<Note>]
+      #
+      #   @since 0.2.0
+      has_many :notes, dependent: :destroy
+
       #
       # Searches for all credentials for a specific user.
       #
@@ -246,3 +254,4 @@ require 'ronin/db/email_address'
 require 'ronin/db/password'
 require 'ronin/db/service_credential'
 require 'ronin/db/web_credential'
+require 'ronin/db/note'

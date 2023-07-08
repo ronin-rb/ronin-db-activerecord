@@ -59,6 +59,14 @@ module Ronin
       #   @return [Array<UserName>]
       has_many :user_names, through: :credentials
 
+      # @!attribute [rw] notes
+      #   The associated notes.
+      #
+      #   @return [Array<Note>]
+      #
+      #   @since 0.2.0
+      has_many :notes, dependent: :destroy
+
       #
       # Looks up the password.
       #
@@ -165,3 +173,4 @@ module Ronin
 end
 
 require 'ronin/db/credential'
+require 'ronin/db/note'

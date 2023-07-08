@@ -58,6 +58,7 @@ require 'ronin/db/cert_issuer'
 require 'ronin/db/cert_subject'
 require 'ronin/db/cert_subject_alt_name'
 require 'ronin/db/cert'
+require 'ronin/db/note'
 
 module Ronin
   module DB
@@ -105,7 +106,8 @@ module Ronin
         CertIssuer,
         CertSubject,
         CertSubjectAltName,
-        Cert
+        Cert,
+        Note
       ]
 
       #
