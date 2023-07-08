@@ -62,6 +62,14 @@ module Ronin
       #   @return [Array<EmailAddress>]
       has_many :email_addresses, dependent: :destroy
 
+      # @!attribute [rw] notes
+      #   The associated notes.
+      #
+      #   @return [Array<Note>]
+      #
+      #   @since 0.2.0
+      has_many :notes, dependent: :destroy
+
       #
       # Looks up the user name.
       #
@@ -94,3 +102,4 @@ end
 
 require 'ronin/db/credential'
 require 'ronin/db/email_address'
+require 'ronin/db/note'

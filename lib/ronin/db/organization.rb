@@ -45,6 +45,16 @@ module Ronin
       #   @return [Time]
       attribute :created_at, :datetime
 
+      # @!attribute [rw] notes
+      #   The associated notes.
+      #
+      #   @return [Array<Note>]
+      #
+      #   @since 0.2.0
+      has_many :notes, dependent: :destroy
+
     end
   end
 end
+
+require 'ronin/db/note'

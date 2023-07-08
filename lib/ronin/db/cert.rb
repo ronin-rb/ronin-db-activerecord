@@ -149,6 +149,14 @@ module Ronin
       #   @return [Array<IPAddress>]
       has_many :ip_addresses, through: :open_ports
 
+      # @!attribute [rw] notes
+      #   The associated notes.
+      #
+      #   @return [Array<Note>]
+      #
+      #   @since 0.2.0
+      has_many :notes
+
       #
       # Queries all active certificates.
       #
@@ -484,3 +492,4 @@ require 'ronin/db/cert_issuer'
 require 'ronin/db/cert_subject'
 require 'ronin/db/cert_subject_alt_name'
 require 'ronin/db/open_port'
+require 'ronin/db/note'

@@ -69,6 +69,14 @@ module Ronin
       #   @since 0.2.0
       has_many :ports, through: :open_ports
 
+      # @!attribute [rw] notes
+      #   The associated notes.
+      #
+      #   @return [Array<Note>]
+      #
+      #   @since 0.2.0
+      has_many :notes, dependent: :destroy
+
       #
       # Looks up the service.
       #
@@ -102,3 +110,5 @@ module Ronin
     end
   end
 end
+
+require 'ronin/db/note'
