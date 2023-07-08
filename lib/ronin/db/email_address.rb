@@ -86,6 +86,14 @@ module Ronin
       #   @return [Time]
       attribute :created_at, :datetime
 
+      # @!attribute [rw] notes
+      #   The associated notes.
+      #
+      #   @return [Array<Note>]
+      #
+      #   @since 0.2.0
+      has_many :notes, dependent: :destroy
+
       #
       # Searches for email addresses associated with the given host name(s).
       #
@@ -223,3 +231,4 @@ end
 
 require 'ronin/db/user_name'
 require 'ronin/db/host_name'
+require 'ronin/db/note'
