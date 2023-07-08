@@ -56,6 +56,14 @@ module Ronin
                          },
                          uniqueness: {scope: :protocol}
 
+      # @!attribute [r] created_at
+      #   Defines the created_at timestamp
+      #
+      #   @return [Time]
+      #
+      #   @since 0.2.0
+      attribute :created_at, :datetime
+
       # @!attribute [rw] open_ports
       #   The open ports.
       #
