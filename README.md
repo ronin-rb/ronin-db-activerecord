@@ -41,6 +41,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * [Ronin::DB::IPAddress]
   * [Ronin::DB::IPAddressMACAddress]
   * [Ronin::DB::MACAddress]
+  * [Ronin::DB::Note]
   * [Ronin::DB::OpenPort]
   * [Ronin::DB::Organization]
   * [Ronin::DB::OS]
@@ -82,6 +83,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
 [Ronin::DB::IPAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/IPAddress.html
 [Ronin::DB::IPAddressMACAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/IPAddressMACAddress.html
 [Ronin::DB::MACAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/MACAddress.html
+[Ronin::DB::Note]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Note.html
 [Ronin::DB::OpenPort]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OpenPort.html
 [Ronin::DB::Organization]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Organization.html
 [Ronin::DB::OS]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OS.html
