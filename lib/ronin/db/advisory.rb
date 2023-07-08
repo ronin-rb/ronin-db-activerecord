@@ -115,6 +115,14 @@ module Ronin
       #   @since 0.2.0
       has_many :urls, through: :vulnerabilities
 
+      # @!attribute [rw] notes
+      #   The associated notes.
+      #
+      #   @return [Array<Note>]
+      #
+      #   @since 0.2.0
+      has_many :notes, dependent: :destroy
+
       #
       # @api private
       #
@@ -222,3 +230,4 @@ require 'ronin/db/ip_address'
 require 'ronin/db/open_port'
 require 'ronin/db/host_name'
 require 'ronin/db/url'
+require 'ronin/db/note'
