@@ -23,6 +23,11 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * [Ronin::DB::Advisory]
   * [Ronin::DB::Arch]
   * [Ronin::DB::ASN]
+  * [Ronin::DB::Cert]
+  * [Ronin::DB::CertIssuer]
+  * [Ronin::DB::CertName]
+  * [Ronin::DB::CertSubject]
+  * [Ronin::DB::CertSubjectAltName]
   * [Ronin::DB::EmailAddress]
   * [Ronin::DB::HostName]
   * [Ronin::DB::HostNameIPAddress]
@@ -59,6 +64,11 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
 [Ronin::DB::Advisory]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Advisory.html
 [Ronin::DB::Arch]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Arch.html
 [Ronin::DB::ASN]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/ASN.html
+[Ronin::DB::Cert]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Cert.html
+[Ronin::DB::CertIssuer]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/CertIssuer.html
+[Ronin::DB::CertName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/CertName.html
+[Ronin::DB::CertSubject]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/CertSubject.html
+[Ronin::DB::CertSubjectAltName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/CertSubjectAltName.html
 [Ronin::DB::EmailAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/EmailAddress.html
 [Ronin::DB::HostName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/HostName.html
 [Ronin::DB::HostNameIPAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/HostNameIPAddress.html

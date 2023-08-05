@@ -70,6 +70,12 @@ module Ronin
       #   @return [Boolean]
       attribute :ssl, :boolean
 
+      # @!attribute [rw] cert
+      #   The SSL/TLS certificate used by the open port.
+      #
+      #   @return [Cert, nil]
+      belongs_to :cert, optional: true
+
       # @!attribute [r] created_at
       #   Define the created_at timestamp
       #

@@ -53,6 +53,11 @@ require 'ronin/db/http_request'
 require 'ronin/db/http_response'
 require 'ronin/db/advisory'
 require 'ronin/db/vulnerability'
+require 'ronin/db/cert_name'
+require 'ronin/db/cert_issuer'
+require 'ronin/db/cert_subject'
+require 'ronin/db/cert_subject_alt_name'
+require 'ronin/db/cert'
 
 module Ronin
   module DB
@@ -95,7 +100,12 @@ module Ronin
         HTTPRequest,
         HTTPResponse,
         Advisory,
-        Vulnerability
+        Vulnerability,
+        CertName,
+        CertIssuer,
+        CertSubject,
+        CertSubjectAltName,
+        Cert
       ]
 
       #
