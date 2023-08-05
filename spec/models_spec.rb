@@ -46,6 +46,11 @@ describe 'Ronin::DB::Models' do
     it { expect(subject).to include(Ronin::DB::HTTPResponseHeader) }
     it { expect(subject).to include(Ronin::DB::HTTPRequest) }
     it { expect(subject).to include(Ronin::DB::HTTPResponse) }
+    it { expect(subject).to include(Ronin::DB::CertName) }
+    it { expect(subject).to include(Ronin::DB::CertIssuer) }
+    it { expect(subject).to include(Ronin::DB::CertSubject) }
+    it { expect(subject).to include(Ronin::DB::CertSubjectAltName) }
+    it { expect(subject).to include(Ronin::DB::Cert) }
   end
 
   describe ".connect" do
