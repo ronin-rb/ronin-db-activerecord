@@ -113,7 +113,7 @@ module Ronin
       #   When the HTTP request was created.
       #
       #   @return [Time]
-      attribute :created_at, :time
+      attribute :created_at, :datetime
 
     end
   end

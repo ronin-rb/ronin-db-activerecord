@@ -74,7 +74,7 @@ module Ronin
       #   Define the created_at timestamp
       #
       #   @return [Time]
-      attribute :created_at, :time
+      attribute :created_at, :datetime
 
       # @!attribute [rw] service_credentials
       #   Credentials used by the service running on the port

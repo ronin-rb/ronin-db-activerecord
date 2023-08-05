@@ -58,7 +58,7 @@ module Ronin
       #   Tracks when the IP Address was first created
       #
       #   @return [Time]
-      attribute :created_at, :time
+      attribute :created_at, :datetime
 
       #
       # Looks up the address.

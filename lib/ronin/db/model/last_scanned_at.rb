@@ -42,7 +42,7 @@ module Ronin
         #
         def self.included(model)
           model.class_eval do
-            attribute :last_scanned_at, :time
+            attribute :last_scanned_at, :datetime
           end
         end
       end

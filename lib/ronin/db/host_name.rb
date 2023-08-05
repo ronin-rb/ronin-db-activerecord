@@ -60,7 +60,7 @@ module Ronin
       #   When the host name was first created.
       #
       #   @return [Time]
-      attribute :created_at, :time
+      attribute :created_at, :datetime
 
       # @!attribute [rw] host_name_ip_addresses
       #   The IP Address associations.

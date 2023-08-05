@@ -57,7 +57,7 @@ module Ronin
       #   When the URL query param name was first created.
       #
       #   @return [Time]
-      attribute :created_at, :time
+      attribute :created_at, :datetime
 
       #
       # Converts the URL query param name to a String.

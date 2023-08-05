@@ -95,7 +95,7 @@ module Ronin
       #   Defines the created_at timestamp
       #
       #   @return [Time]
-      attribute :created_at, :time
+      attribute :created_at, :datetime
 
       # @!attribute [rw] query_params
       #   The query params of the URL.

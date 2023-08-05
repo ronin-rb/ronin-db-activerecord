@@ -84,7 +84,7 @@ module Ronin
       #   Tracks when the email address was created at.
       #
       #   @return [Time]
-      attribute :created_at, :time
+      attribute :created_at, :datetime
 
       #
       # Searches for email addresses associated with the given host name(s).

@@ -58,7 +58,7 @@ module Ronin
       #   Tracks when a IP Address is associated with a host name
       #
       #   @return [Time]
-      attribute :created_at, :time
+      attribute :created_at, :datetime
 
     end
   end

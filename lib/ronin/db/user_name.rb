@@ -48,7 +48,7 @@ module Ronin
       #   Tracks when the user-name was created.
       #
       #   @return [Time]
-      attribute :created_at, :time
+      attribute :created_at, :datetime
 
       # @!attribute [rw] credentials
       #   Any credentials belonging to the user.

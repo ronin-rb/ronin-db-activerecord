@@ -55,7 +55,7 @@ module Ronin
       #   Tracks when an IP Address becomes associated with a MAC Address.
       #
       #   @return [Time]
-      attribute :created_at, :time
+      attribute :created_at, :datetime
 
     end
   end

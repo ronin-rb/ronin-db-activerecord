@@ -43,7 +43,7 @@ module Ronin
       #   Tracks when the organization was first created
       #
       #   @return [Time]
-      attribute :created_at, :time
+      attribute :created_at, :datetime
 
     end
   end

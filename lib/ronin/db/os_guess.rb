@@ -57,7 +57,7 @@ module Ronin
       #   Tracks when an OS guess is made against an IP Address.
       #
       #   @return [Time]
-      attribute :created_at, :time
+      attribute :created_at, :datetime
 
     end
   end

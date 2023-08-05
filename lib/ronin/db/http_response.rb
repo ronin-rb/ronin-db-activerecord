@@ -74,7 +74,7 @@ module Ronin
       #   When the HTTP response was created.
       #
       #   @return [Time]
-      attribute :created_at, :time
+      attribute :created_at, :datetime
 
       # @!attribute [rw] request
       #   The associated HTTP request that the response was returned for.
