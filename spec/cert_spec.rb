@@ -1884,10 +1884,18 @@ describe Ronin::DB::Cert do
       let(:cert_file) { 'ec_cert.crt' }
 
       it "must set #public_key_algorithm to 'ec'" do
+        if RUBY_ENGINE == 'jruby'
+          skip "JRuby's openssl does not provide OpenSSL::PKey::EC#to_text"
+        end
+
         expect(subject.public_key_algorithm).to eq('ec')
       end
 
       it "must set #public_key_size to the EC key's bit size" do
+        if RUBY_ENGINE == 'jruby'
+          skip "JRuby's openssl does not provide OpenSSL::PKey::EC#to_text"
+        end
+
         expect(subject.public_key_size).to eq(256)
       end
     end
