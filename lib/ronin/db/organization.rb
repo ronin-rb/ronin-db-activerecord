@@ -20,6 +20,7 @@
 
 require 'ronin/db/model'
 require 'ronin/db/model/has_unique_name'
+require 'ronin/db/model/importable'
 
 require 'active_record'
 
@@ -32,6 +33,7 @@ module Ronin
 
       include Model
       include Model::HasUniqueName
+      include Model::Importable
 
       # @!attribute [rw] id
       #   Primary key of the organization
@@ -52,6 +54,40 @@ module Ronin
       #
       #   @since 0.2.0
       has_many :notes, dependent: :destroy
+
+      #
+      # Looks up the organization.
+      #
+      # @param [String] name
+      #   The organization name to query.
+      #
+      # @return [Organization, nil]
+      #   The found organization.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.lookup(name)
+        find_by(name: name)
+      end
+
+      #
+      # Imports an organization.
+      #
+      # @param [String] name
+      #   The organization name to import.
+      #
+      # @return [Organization]
+      #   The imported organization.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.import(name)
+        create(name: name)
+      end
 
     end
   end
