@@ -115,6 +115,12 @@ module Ronin
       #   @return [Array<Person>]
       has_many :people, through: :personal_phone_numbers
 
+      # @!attribute [rw] organization_department
+      #   The organization department that uses the email address.
+      #
+      #   @return [OrganizationDepartment, nil]
+      has_one :organization_department, dependent: :nullify
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
@@ -192,4 +198,5 @@ end
 
 require 'ronin/db/personal_phone_number'
 require 'ronin/db/person'
+require 'ronin/db/organization_department'
 require 'ronin/db/note'
