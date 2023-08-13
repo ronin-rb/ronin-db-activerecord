@@ -69,6 +69,8 @@ module Ronin
       # @return [Address, nil]
       #   The found address.
       #
+      # @api public
+      #
       def self.lookup(address)
         find_by(address: address)
       end
