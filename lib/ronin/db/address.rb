@@ -80,7 +80,7 @@ module Ronin
       #   The address to parse.
       #
       # @return [Address]
-      #   The parsed address.
+      #   The imported address.
       #
       # @api public
       #
