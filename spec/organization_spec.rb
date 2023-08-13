@@ -8,6 +8,30 @@ describe Ronin::DB::Organization do
 
   let(:name) { 'ACME, Corp.' }
 
+  describe "validations" do
+    it "must require a unique #name" do
+      described_class.create(name: name)
+
+      organization2 = described_class.new(name: name)
+
+      expect(organization2).to_not be_valid
+      expect(organization2.errors[:name]).to eq(['has already been taken'])
+    end
+
+    it "must allow duplicate #name values if #parent is different" do
+      parent_org1 = described_class.create(name: 'Parent Org1')
+      parent_org2 = described_class.create(name: 'Parent Org2')
+
+      subsidiary1 = described_class.new(name: 'Subsidary', parent: parent_org1)
+      subsidiary2 = described_class.new(name: 'Subsidary', parent: parent_org2)
+
+      expect(subsidiary1).to be_valid
+      expect(subsidiary2).to be_valid
+    end
+
+    after { described_class.destroy_all }
+  end
+
   describe ".lookup" do
     before do
       described_class.create(name: 'Foo, Inc.')
