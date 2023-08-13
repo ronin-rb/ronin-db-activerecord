@@ -19,7 +19,7 @@
 #
 
 require 'ronin/db/model'
-require 'ronin/db/model/has_unique_name'
+require 'ronin/db/model/has_name'
 require 'ronin/db/model/importable'
 
 require 'active_record'
@@ -32,7 +32,7 @@ module Ronin
     class Organization < ActiveRecord::Base
 
       include Model
-      include Model::HasUniqueName
+      include Model::HasName
       include Model::Importable
 
       # @!attribute [rw] id
@@ -59,6 +59,18 @@ module Ronin
       #
       #   @return [Time]
       attribute :created_at, :datetime
+
+      # @!attribute [rw] parent
+      #   The optional parent organization.
+      #
+      #   @return [Organization, nil]
+      #
+      #   @since 0.2.0
+      belongs_to :parent, optional:   true,
+                          class_name: 'Organization'
+
+      # NOTE: ensure the name is unique with respect to the parent organization
+      validates :name, uniqueness: {scope: [:parent_id]}
 
       #
       # Looks up the organization.
