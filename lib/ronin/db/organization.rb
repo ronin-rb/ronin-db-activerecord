@@ -41,6 +41,19 @@ module Ronin
       #   @return [Integer]
       attribute :id, :integer
 
+      # @!attribute [rw] type
+      #   The type for the organization.
+      #
+      #   @return [String, nil]
+      #
+      #   @since 0.2.0
+      enum :type, {
+        department: 'department',
+        company:    'company',
+        government: 'government',
+        military:   'military'
+      }, prefix: 'is_'
+
       # @!attribute [r] created_at
       #   Tracks when the organization was first created
       #
