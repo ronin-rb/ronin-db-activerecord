@@ -6,5 +6,5 @@ describe Ronin::DB::Organization do
     expect(described_class.table_name).to eq('ronin_organizations')
   end
 
-  let(:name) { 'ACEM, Corp.' }
+  let(:name) { 'ACME, Corp.' }
 end
