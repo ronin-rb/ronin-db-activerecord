@@ -48,7 +48,6 @@ module Ronin
       #
       #   @since 0.2.0
       enum :type, {
-        department: 'department',
         company:    'company',
         government: 'government',
         military:   'military'
@@ -71,6 +70,15 @@ module Ronin
 
       # NOTE: ensure the name is unique with respect to the parent organization
       validates :name, uniqueness: {scope: [:parent_id]}
+
+      # @!attribute [rw] departments
+      #   The associated departments of the organization.
+      #
+      #   @return [Array<OrganizationDepartment>]
+      #
+      #   @since 0.2.0
+      has_many :departments, class_name: 'OrganizationDepartment',
+                             dependent:  :destroy
 
       # @!attribute [rw] notes
       #   The associated notes.
@@ -118,4 +126,5 @@ module Ronin
   end
 end
 
+require 'ronin/db/organization_department'
 require 'ronin/db/note'

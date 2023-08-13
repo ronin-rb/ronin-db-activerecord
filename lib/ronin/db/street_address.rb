@@ -125,6 +125,12 @@ module Ronin
       #   @return [Array<Note>]
       has_many :notes
 
+      # @!attribute [rw] organization_departments
+      #   The organization departments located at the street address.
+      #
+      #   @return [Array<OrganizationDepartment>]
+      has_many :organization_departments, dependent: :nullify
+
       #
       # Alias for {#state}.
       #
@@ -194,4 +200,5 @@ end
 
 require 'ronin/db/personal_street_address'
 require 'ronin/db/person'
+require 'ronin/db/organization_department'
 require 'ronin/db/note'
