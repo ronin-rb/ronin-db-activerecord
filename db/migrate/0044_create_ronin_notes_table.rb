@@ -95,6 +95,11 @@ class CreateRoninNotesTable < ActiveRecord::Migration[7.0]
                                 to_table: :ronin_advisories
                               }
 
+      t.references :phone_number, null: true,
+                                  foreign_key: {
+                                    to_table: :ronin_phone_numbers
+                                  }
+
       t.index :mac_address_id
       t.index :ip_address_id
       t.index :host_name_id
@@ -108,6 +113,7 @@ class CreateRoninNotesTable < ActiveRecord::Migration[7.0]
       t.index :password_id
       t.index :credential_id
       t.index :advisory_id
+      t.index :phone_number_id
     end
   end
 
