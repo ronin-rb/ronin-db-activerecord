@@ -53,6 +53,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * [Ronin::DB::ServiceCredential]
   * [Ronin::DB::Software]
   * [Ronin::DB::SoftwareVendor]
+  * [Ronin::DB::StreetAddress]
   * [Ronin::DB::URL]
   * [Ronin::DB::URLQueryParam]
   * [Ronin::DB::URLQueryParamName]
@@ -97,6 +98,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
 [Ronin::DB::ServiceCredential]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/ServiceCredential.html
 [Ronin::DB::Software]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Software.html
 [Ronin::DB::SoftwareVendor]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/SoftwareVendor.html
+[Ronin::DB::StreetAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/StreetAddress.html
 [Ronin::DB::URL]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/URL.html
 [Ronin::DB::URLQueryParam]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/URLQueryParam.html
 [Ronin::DB::URLQueryParamName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/URLQueryParamName.html
