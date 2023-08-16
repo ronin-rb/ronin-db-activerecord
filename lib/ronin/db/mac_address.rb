@@ -34,7 +34,7 @@ module Ronin
       #   The MAC address.
       #
       #   @return [String]
-      attribute :address, :string # length: 17..17,
+      attribute :address, :string
       validates :address, presence:   true,
                           uniqueness: true,
                           length: {maximum: 17},
