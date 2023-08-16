@@ -95,6 +95,11 @@ class CreateRoninNotesTable < ActiveRecord::Migration[7.0]
                                 to_table: :ronin_advisories
                               }
 
+      t.references :street_address, null: true,
+                                    foreign_key: {
+                                      to_table: :ronin_street_addresses
+                                    }
+
       t.references :phone_number, null: true,
                                   foreign_key: {
                                     to_table: :ronin_phone_numbers
