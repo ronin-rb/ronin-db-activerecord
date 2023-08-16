@@ -39,7 +39,7 @@ module Ronin
                           uniqueness: true,
                           length: {maximum: 17},
                           format: {
-                            with: /[0-9a-fA-F]{2}(?::[0-9a-fA-F]{2}){5}/,
+                            with: /\A[0-9a-fA-F]{2}(?::[0-9a-fA-F]{2}){5}\z/,
                             message: 'Must be a valid MAC address'
                           }
 
