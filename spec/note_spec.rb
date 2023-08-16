@@ -17,7 +17,7 @@ describe Ronin::DB::Note do
 
       expect(note).to_not be_valid
       expect(note.errors[:base]).to eq(
-        ['note must be associated with a MACAddress, IPAddress, HostName, Port, Service, OpenPort, Cert, URL, UserName, EmailAddress, Password, Credential, Advisory, PhoneNumber, or Organization']
+        ['note must be associated with a MACAddress, IPAddress, HostName, Port, Service, OpenPort, Cert, URL, UserName, EmailAddress, Password, Credential, Advisory, PhoneNumber, StreetAddress, or Organization']
       )
 
       note = described_class.new(
