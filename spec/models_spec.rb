@@ -27,6 +27,7 @@ describe 'Ronin::DB::Models' do
     it { expect(subject).to include(Ronin::DB::OpenPort) }
     it { expect(subject).to include(Ronin::DB::Organization) }
     it { expect(subject).to include(Ronin::DB::Password) }
+    it { expect(subject).to include(Ronin::DB::Person) }
     it { expect(subject).to include(Ronin::DB::Port) }
     it { expect(subject).to include(Ronin::DB::Service) }
     it { expect(subject).to include(Ronin::DB::ServiceCredential) }
