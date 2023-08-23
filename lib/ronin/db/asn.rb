@@ -82,13 +82,13 @@ module Ronin
       # @!attribute [rw] country_code
       #   The country code of the ASN.
       #
-      #   @return [String]
+      #   @return [String, nil]
       attribute :country_code, :string
 
       # @!attribute [rw] name
       #   The organization the ASN is currently assigned to.
       #
-      #   @return [String]
+      #   @return [String, nil]
       attribute :name, :string
 
       #
