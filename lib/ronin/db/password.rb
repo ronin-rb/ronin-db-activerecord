@@ -59,6 +59,14 @@ module Ronin
       #   @return [Array<UserName>]
       has_many :user_names, through: :credentials
 
+      # @!attribute [rw] email_addresses
+      #   The email addresses which use the password.
+      #
+      #   @return [Array<EmailAddress>]
+      #
+      #   @since 0.2.0
+      has_many :email_addresses, through: :credentials
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
