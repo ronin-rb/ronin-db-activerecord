@@ -6,6 +6,10 @@ describe Ronin::DB::ASN do
     expect(described_class.table_name).to eq('ronin_asns')
   end
 
+  it "must extend Ronin::DB::Model::HasName::ClassMethods" do
+    expect(described_class).to be_kind_of(Ronin::DB::Model::HasName::ClassMethods)
+  end
+
   let(:version)      { 4 }
   let(:range_start)  { '4.0.0.0' }
   let(:range_end)    { '4.7.168.255' }
