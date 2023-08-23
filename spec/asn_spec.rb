@@ -109,7 +109,7 @@ describe Ronin::DB::ASN do
     end
 
     describe "country_code" do
-      it "must omit the name if unrouted" do
+      it "must omit the #country_code if unrouted" do
         asn = described_class.new(
           version:      version,
           range_start:  range_start,
@@ -122,7 +122,7 @@ describe Ronin::DB::ASN do
     end
 
     describe "name" do
-      it "must omit the name if unrouted" do
+      it "must omit the #name if unrouted" do
         asn = described_class.new(
           version:      version,
           range_start:  range_start,
