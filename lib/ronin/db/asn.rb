@@ -19,6 +19,7 @@
 #
 
 require 'ronin/db/model'
+require 'ronin/db/model/has_name'
 
 module Ronin
   module DB
@@ -28,6 +29,7 @@ module Ronin
     class ASN < ActiveRecord::Base
 
       include Model
+      extend Model::HasName::ClassMethods
 
       # @!attribute [rw] id
       #   The primary key of the ASN range.
