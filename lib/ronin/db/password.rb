@@ -67,6 +67,14 @@ module Ronin
       #   @since 0.2.0
       has_many :email_addresses, through: :credentials
 
+      # @!attribute [rw] service_credentials
+      #   The service credentials that use the password.
+      #
+      #   @return [Array<ServiceCredential>]
+      #
+      #   @since 0.2.0
+      has_many :service_credentials, through: :credentials
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
