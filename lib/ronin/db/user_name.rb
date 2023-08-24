@@ -95,6 +95,29 @@ module Ronin
       has_many :notes, dependent: :destroy
 
       #
+      # Queries all user names that are associated with the password.
+      #
+      # @param [String] password
+      #   The plain-text password.
+      #
+      # @return [Array<UserName>]
+      #   The user names that are associated with the password.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_password(password)
+        joins(credentials: :password).where(
+          credentials: {
+            ronin_passwords: {
+              plain_text: password
+            }
+          }
+        )
+      end
+
+      #
       # Looks up the user name.
       #
       # @param [String] name
