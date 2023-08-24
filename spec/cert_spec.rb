@@ -1843,6 +1843,137 @@ describe Ronin::DB::Cert do
     end
   end
 
+  describe ".with_subject_alt_name" do
+    subject { described_class }
+
+    before do
+      described_class.create(
+        serial:  serial,
+        version: version,
+
+        not_before: Time.now - one_year,
+        not_after:  Time.now + one_year,
+
+        subject: Ronin::DB::CertSubject.create(
+          common_name:         Ronin::DB::CertName.create(name: 'test1.com'),
+          organization:        'Test Co.',
+          organizational_unit: 'Test Dept',
+          locality:            'Test City',
+          state:               'NY',
+          country:             'US'
+        ),
+
+        public_key_algorithm: public_key_algorithm,
+        public_key_size:      public_key_size,
+
+        signing_algorithm: signing_algorithm,
+
+        sha1_fingerprint:   Digest::SHA1.hexdigest("Cert #1"),
+        sha256_fingerprint: Digest::SHA256.hexdigest("Cert #1"),
+
+        pem: <<~PEM
+          -----BEGIN CERTIFICATE-----
+          Cert #1
+          -----END CERTIFICATE-----
+        PEM
+      )
+
+      described_class.create(
+        serial:  serial + 1,
+        version: version,
+
+        not_before: Time.now - one_year,
+        not_after:  Time.now + one_year,
+
+        subject: Ronin::DB::CertSubject.create(
+          common_name:         Ronin::DB::CertName.create(name: 'test2.com'),
+          organization:        'Test Co.',
+          organizational_unit: 'Test Dept',
+          locality:            'Test City',
+          state:               'NY',
+          country:             'US'
+        ),
+
+        subject_alt_names: [
+          Ronin::DB::CertSubjectAltName.new(
+            name: Ronin::DB::CertName.create(name: 'alt1.test2.com')
+          ),
+          Ronin::DB::CertSubjectAltName.new(
+            name: Ronin::DB::CertName.create(name: 'alt2.test2.com')
+          ),
+          Ronin::DB::CertSubjectAltName.new(
+            name: Ronin::DB::CertName.create(name: 'alt3.test2.com')
+          )
+        ],
+
+        public_key_algorithm: public_key_algorithm,
+        public_key_size:      public_key_size,
+
+        signing_algorithm: signing_algorithm,
+
+        sha1_fingerprint:   Digest::SHA1.hexdigest("Cert #2"),
+        sha256_fingerprint: Digest::SHA256.hexdigest("Cert #2"),
+
+        pem: <<~PEM
+          -----BEGIN CERTIFICATE-----
+          Cert #2
+          -----END CERTIFICATE-----
+        PEM
+      )
+
+      described_class.create(
+        serial:  serial + 2,
+        version: version,
+
+        not_before: Time.now - one_year,
+        not_after:  Time.now + one_year,
+
+        subject: Ronin::DB::CertSubject.create(
+          common_name:         Ronin::DB::CertName.create(name: 'test3.com'),
+          organization:        'Test Co.',
+          organizational_unit: 'Test Dept',
+          locality:            'Test City',
+          state:               'NY',
+          country:             'US'
+        ),
+
+        public_key_algorithm: public_key_algorithm,
+        public_key_size:      public_key_size,
+
+        signing_algorithm: signing_algorithm,
+
+        sha1_fingerprint:   Digest::SHA1.hexdigest("Cert #3"),
+        sha256_fingerprint: Digest::SHA256.hexdigest("Cert #3"),
+
+        pem: <<~PEM
+          -----BEGIN CERTIFICATE-----
+          Cert #3
+          -----END CERTIFICATE-----
+        PEM
+      )
+    end
+
+    it "must query all #{described_class} with the matching subject common name" do
+      certs = subject.with_subject_alt_name('alt2.test2.com')
+
+      expect(certs.length).to eq(1)
+
+      expect(certs[0].subject).to be_kind_of(Ronin::DB::CertSubject)
+      expect(certs[0].subject.common_name.name).to eq('test2.com')
+      expect(certs[0].subject_alt_names[0].name.name).to eq('alt1.test2.com')
+      expect(certs[0].subject_alt_names[1].name.name).to eq('alt2.test2.com')
+      expect(certs[0].subject_alt_names[2].name.name).to eq('alt3.test2.com')
+    end
+
+    after do
+      Ronin::DB::Cert.destroy_all
+      Ronin::DB::CertSubjectAltName.destroy_all
+      Ronin::DB::CertIssuer.destroy_all
+      Ronin::DB::CertSubject.destroy_all
+      Ronin::DB::CertName.destroy_all
+    end
+  end
+
   describe ".import" do
     subject { described_class.import(cert) }
 
