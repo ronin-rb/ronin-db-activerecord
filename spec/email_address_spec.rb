@@ -262,6 +262,44 @@ describe Ronin::DB::EmailAddress do
     end
   end
 
+  describe ".with_password" do
+    let(:plain_text) { 'secret' }
+
+    before do
+      user_name     = Ronin::DB::UserName.create(name: user)
+      host_name     = Ronin::DB::HostName.create(name: host)
+      email_address = Ronin::DB::EmailAddress.create(
+        address:   address,
+        user_name: user_name,
+        host_name: host_name
+      )
+
+      password  = Ronin::DB::Password.create(plain_text: plain_text)
+
+      Ronin::DB::Credential.create(
+        email_address: email_address,
+        password:      password
+      )
+    end
+
+    subject { described_class }
+
+    it "must query all #{described_class} that are associated with the password" do
+      email_address = subject.with_password(plain_text).first
+
+      expect(email_address).to be_kind_of(described_class)
+      expect(email_address.passwords.map(&:plain_text)).to eq([plain_text])
+    end
+
+    after do
+      Ronin::DB::Credential.destroy_all
+      Ronin::DB::Password.destroy_all
+      Ronin::DB::EmailAddress.destroy_all
+      Ronin::DB::UserName.destroy_all
+      Ronin::DB::HostName.destroy_all
+    end
+  end
+
   describe ".lookup" do
     let(:user_name) { Ronin::DB::UserName.create(name: user) }
     let(:host_name) { Ronin::DB::HostName.create(name: host) }
