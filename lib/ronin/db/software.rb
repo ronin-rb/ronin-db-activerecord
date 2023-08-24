@@ -19,6 +19,7 @@
 #
 
 require 'ronin/db/model'
+require 'ronin/db/model/has_name'
 
 require 'active_record'
 
@@ -30,6 +31,7 @@ module Ronin
     class Software < ActiveRecord::Base
 
       include Model
+      include Model::HasName
 
       # @!attribute [rw] id
       #   The primary key of the software.
