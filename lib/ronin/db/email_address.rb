@@ -164,6 +164,29 @@ module Ronin
       end
 
       #
+      # Queries all email addresses that are associated with the password.
+      #
+      # @param [String] password
+      #   The plain-text password.
+      #
+      # @return [Array<EmailAddress>]
+      #   The email addresses that are associated with the password.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_password(password)
+        joins(credentials: :password).where(
+          credentials: {
+            ronin_passwords: {
+              plain_text: password
+            }
+          }
+        )
+      end
+
+      #
       # Looks up the email address.
       #
       # @param [String] email
