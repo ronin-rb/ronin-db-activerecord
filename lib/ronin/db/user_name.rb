@@ -56,6 +56,14 @@ module Ronin
       #   @return [Array<Credential>]
       has_many :credentials, dependent: :destroy
 
+      # @!attribute [rw] web_credentials
+      #   Any web credentials that use the user name.
+      #
+      #   @return [Array<WebCredential>]
+      #
+      #   @since 0.2.0
+      has_many :web_credentials, through: :credentials
+
       # @!attribute [rw] passwords
       #   Any passwords used with the user name.
       #
