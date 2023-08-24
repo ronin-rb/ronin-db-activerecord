@@ -119,6 +119,23 @@ module Ronin
       has_many :notes, dependent: :destroy
 
       #
+      # Queries all open ports associated with the service name.
+      #
+      # @param [String] name
+      #   The service name to search for.
+      #
+      # @return [Array<OpenPort>]
+      #   The open ports associated with the service name.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_service_name(name)
+        joins(:service).where(service: {name: name})
+      end
+
+      #
       # Queries all open ports associated with the IP address.
       #
       # @param [String] address
