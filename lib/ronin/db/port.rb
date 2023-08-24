@@ -112,6 +112,23 @@ module Ronin
       end
 
       #
+      # Queries all ports with the protocol.
+      #
+      # @param [:tcp, ;udp] protocol
+      #   The protocol to search for.
+      #
+      # @return [Array<Port>]
+      #   The ports that use the protocol.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_protocol(protocol)
+        where(protocol: protocol)
+      end
+
+      #
       # Looks up a port by it's number.
       #
       # @param [String, Integer] number

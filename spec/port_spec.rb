@@ -68,6 +68,30 @@ describe Ronin::DB::Port do
     end
   end
 
+  describe ".with_protocol" do
+    before do
+      described_class.create(number: 22)
+      described_class.create(number: 53, protocol: :udp)
+      described_class.create(number: 80)
+      described_class.create(number: 443)
+      described_class.create(number: 8080, protocol: :udp)
+      described_class.create(number: 9000)
+    end
+
+    subject { described_class }
+
+    it "must query all #{described_class} with the matching #protocol" do
+      ports = subject.with_protocol(:udp)
+
+      expect(ports).to_not be_empty
+      expect(ports.map(&:protocol).uniq).to eq(['udp'])
+    end
+
+    after do
+      described_class.destroy_all
+    end
+  end
+
   describe ".lookup" do
     before do
       described_class.create(number: 1111)
