@@ -77,6 +77,23 @@ module Ronin
 
             where(name_column.matches("%#{sanitize_sql_like(fragment)}%"))
           end
+
+          #
+          # Finds all models with the matching name.
+          #
+          # @param [String] name
+          #   The name to search for.
+          #
+          # @return [Array<Model>]
+          #   The found models.
+          #
+          # @api public
+          #
+          # @since 0.2.0
+          #
+          def with_name(name)
+            where(name: name)
+          end
         end
 
         #
