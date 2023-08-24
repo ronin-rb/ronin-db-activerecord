@@ -24,6 +24,35 @@ describe Ronin::DB::UserName do
     end
   end
 
+  describe ".with_password" do
+    let(:plain_text) { 'secret' }
+
+    before do
+      user_name = Ronin::DB::UserName.create(name: name)
+      password  = Ronin::DB::Password.create(plain_text: plain_text)
+
+      Ronin::DB::Credential.create(
+        user_name: user_name,
+        password:  password
+      )
+    end
+
+    subject { described_class }
+
+    it "must query all #{described_class} that are associated with the password" do
+      user_name = subject.with_password(plain_text).first
+
+      expect(user_name).to be_kind_of(described_class)
+      expect(user_name.passwords.map(&:plain_text)).to eq([plain_text])
+    end
+
+    after do
+      Ronin::DB::Credential.destroy_all
+      Ronin::DB::Password.destroy_all
+      Ronin::DB::UserName.destroy_all
+    end
+  end
+
   describe ".lookup" do
     before do
       described_class.create(name: 'other1')
