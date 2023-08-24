@@ -80,6 +80,14 @@ module Ronin
       #   @return [Array<Credential>]
       has_many :credentials, dependent: :destroy
 
+      # @!attribute [rw] service_credentials
+      #   The service credentials that use the email address.
+      #
+      #   @return [Array<ServiceCredential>]
+      #
+      #   @since 0.2.0
+      has_many :service_credentials, through: :credentials
+
       # @!attribute [rw] created_at
       #   Tracks when the email address was created at.
       #
