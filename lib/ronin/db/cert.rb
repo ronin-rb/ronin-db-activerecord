@@ -320,7 +320,7 @@ module Ronin
       def self.with_common_name(name)
         joins(subject: [:common_name]).where(
           subject: {
-            common_name: {
+            ronin_cert_names: {
               name: name
             }
           }
