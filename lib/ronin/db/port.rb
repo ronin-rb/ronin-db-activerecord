@@ -150,6 +150,27 @@ module Ronin
       end
 
       #
+      # Queries all ports associated with the IP address.
+      #
+      # @param [String] address
+      #   The IP address to search by.
+      #
+      # @return [Array<Port>]
+      #   The ports associated with the IP address.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_ip_address(address)
+        joins(open_ports: :ip_address).where(
+          open_ports: {
+            ronin_ip_addresses: {address: address}
+          }
+        )
+      end
+
+      #
       # Looks up a port by it's number.
       #
       # @param [String, Integer] number
