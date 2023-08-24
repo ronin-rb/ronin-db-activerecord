@@ -85,6 +85,23 @@ module Ronin
       end
 
       #
+      # Queries all software with the matching vendor name.
+      #
+      # @param [String] name
+      #   The vendor name to search for.
+      #
+      # @return [Array<Software>]
+      #   The matching software.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_vendor_name(name)
+        joins(:vendor).where(vendor: {name: name})
+      end
+
+      #
       # Converts the software to a String.
       #
       # @return [String]

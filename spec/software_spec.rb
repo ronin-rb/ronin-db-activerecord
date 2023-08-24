@@ -73,6 +73,33 @@ describe Ronin::DB::Software do
     end
   end
 
+  describe ".with_vendor_name" do
+    let(:vendor_name) { 'Microsoft' }
+
+    before do
+      vendor1 = Ronin::DB::SoftwareVendor.create(name: 'Mozilla')
+      vendor2 = Ronin::DB::SoftwareVendor.create(name: vendor_name)
+
+      described_class.create(name: 'Firefox',  version: '12.0', vendor: vendor1)
+      described_class.create(name: 'Solitare', version: '1.0',  vendor: vendor2)
+      described_class.create(name: 'Notepad',  version: '2.0',  vendor: vendor2)
+    end
+
+    subject { described_class }
+
+    it "must find all #{described_class} with the matching version" do
+      software = subject.with_vendor_name(vendor_name)
+
+      expect(software.length).to eq(2)
+      expect(software.map { |s| s.vendor.name }.uniq).to eq([vendor_name])
+    end
+
+    after do
+      Ronin::DB::Software.destroy_all
+      Ronin::DB::SoftwareVendor.destroy_all
+    end
+  end
+
   subject do
     described_class.new(
       name:    name,
