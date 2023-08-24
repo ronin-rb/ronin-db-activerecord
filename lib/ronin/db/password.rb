@@ -93,6 +93,39 @@ module Ronin
       end
 
       #
+      # Searches all passwords that are associated with an email address.
+      #
+      # @param [String] email
+      #   The email address to search for.
+      #
+      # @return [Array<Password>]
+      #   The passwords associated with the email address.
+      #
+      # @raise [ArgumentError]
+      #   The given email address was not a valid email address.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_email_address(email)
+        unless email.include?('@')
+          raise(ArgumentError,"invalid email address #{email.inspect}")
+        end
+
+        user, domain = email.split('@',2)
+
+        return joins(credentials: {email_address: [:user_name, :host_name]}).where(
+          credentials: {
+            email_address: {
+              ronin_user_names: {name: user},
+              ronin_host_names: {name: domain}
+            }
+          }
+        )
+      end
+
+      #
       # Looks up the password.
       #
       # @param [#to_s] password
