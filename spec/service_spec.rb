@@ -67,6 +67,40 @@ describe Ronin::DB::Service do
     end
   end
 
+  describe ".with_protocol" do
+    let(:number)   { 53 }
+    let(:protocol) { :udp }
+    let(:name)     { 'named' }
+
+    before do
+      port       = Ronin::DB::Port.create(number: number, protocol: protocol)
+      service    = Ronin::DB::Service.create(name: name)
+      ip_address = Ronin::DB::IPAddress.create(address: '192.168.1.1')
+
+      Ronin::DB::OpenPort.create(
+        port:       port,
+        service:    service,
+        ip_address: ip_address
+      )
+    end
+
+    subject { described_class }
+
+    it "must query all #{described_class} associated with the protocol" do
+      service = subject.with_protocol(protocol).first
+
+      expect(service).to be_kind_of(described_class)
+      expect(service.ports.map(&:protocol).uniq).to eq([protocol.to_s])
+    end
+
+    after do
+      Ronin::DB::OpenPort.destroy_all
+      Ronin::DB::IPAddress.destroy_all
+      Ronin::DB::Service.destroy_all
+      Ronin::DB::Port.destroy_all
+    end
+  end
+
   describe ".lookup" do
     before do
       described_class.create(name: 'http')

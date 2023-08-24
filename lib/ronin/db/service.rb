@@ -99,6 +99,27 @@ module Ronin
       end
 
       #
+      # Queries all services associated with the protocol.
+      #
+      # @param [:tcp, :udp] protocol
+      #   The port protocol to search by.
+      #
+      # @return [Array<Service>]
+      #   The services associated with the protocol.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_protocol(protocol)
+        joins(open_ports: :port).where(
+          open_ports: {
+            ronin_ports: {protocol: protocol}
+          }
+        )
+      end
+
+      #
       # Looks up the service.
       #
       # @param [String] name
