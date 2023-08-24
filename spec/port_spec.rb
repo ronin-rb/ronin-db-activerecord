@@ -45,26 +45,50 @@ describe Ronin::DB::Port do
     end
   end
 
-  describe ".in_range" do
-    before do
-      described_class.create(number: 22)
-      described_class.create(number: 80)
-      described_class.create(number: 443)
-      described_class.create(number: 8080)
-      described_class.create(number: 9000)
-    end
-
+  describe ".with_number" do
     subject { described_class }
 
-    it "must query all #{described_class} who's #number is within the port range" do
-      ports = subject.in_range(80..1024)
+    context "when given an Integer" do
+      before do
+        described_class.create(number: 22)
+        described_class.create(number: 80, protocol: :tcp)
+        described_class.create(number: 80, protocol: :udp)
+        described_class.create(number: 443)
+        described_class.create(number: 8080)
+        described_class.create(number: 9000)
+      end
 
-      expect(ports).to_not be_empty
-      expect(ports.map(&:number)).to eq([80, 443])
+      it "must query all #{described_class} with the matching #number" do
+        ports = subject.with_number(80)
+
+        expect(ports).to_not be_empty
+        expect(ports.map(&:number).uniq).to eq([80])
+      end
+
+      after do
+        described_class.destroy_all
+      end
     end
 
-    after do
-      described_class.destroy_all
+    context "when given a Range" do
+      before do
+        described_class.create(number: 22)
+        described_class.create(number: 80)
+        described_class.create(number: 443)
+        described_class.create(number: 8080)
+        described_class.create(number: 9000)
+      end
+
+      it "must query all #{described_class} who's #number is within the port range" do
+        ports = subject.with_number(80..1024)
+
+        expect(ports).to_not be_empty
+        expect(ports.map(&:number)).to eq([80, 443])
+      end
+
+      after do
+        described_class.destroy_all
+      end
     end
   end
 
