@@ -43,6 +43,39 @@ describe Ronin::DB::OpenPort do
     end
   end
 
+  describe ".with_protocol" do
+    let(:number) { 53 }
+    let(:name)   { 'named' }
+
+    before do
+      port       = Ronin::DB::Port.create(number: number, protocol: :udp)
+      service    = Ronin::DB::Service.create(name: name)
+      ip_address = Ronin::DB::IPAddress.create(address: '192.168.1.1')
+
+      Ronin::DB::OpenPort.create(
+        port:       port,
+        service:    service,
+        ip_address: ip_address
+      )
+    end
+
+    subject { described_class }
+
+    it "must query all #{described_class} with the matching port protocol" do
+      open_ports = subject.with_protocol(:udp)
+
+      expect(open_ports).to_not be_empty
+      expect(open_ports.map { |o| o.port.protocol }.uniq).to eq(['udp'])
+    end
+
+    after do
+      Ronin::DB::OpenPort.destroy_all
+      Ronin::DB::IPAddress.destroy_all
+      Ronin::DB::Service.destroy_all
+      Ronin::DB::Port.destroy_all
+    end
+  end
+
   describe ".with_service_name" do
     let(:number) { 22 }
     let(:name)   { 'ssh' }
