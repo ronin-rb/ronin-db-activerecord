@@ -336,7 +336,13 @@ module Ronin
       # @return [Array<Cert>]
       #
       def self.with_subject_alt_name(name)
-        joins(subject_alt_names: [:name]).where(subject_alt_names: {name: {name: name}})
+        joins(subject_alt_names: [:name]).where(
+          subject_alt_names: {
+            ronin_cert_names: {
+              name: name
+            }
+          }
+        )
       end
 
       #
