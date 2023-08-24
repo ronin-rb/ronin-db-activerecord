@@ -95,6 +95,23 @@ module Ronin
       has_many :notes, dependent: :destroy
 
       #
+      # Queries all ports in the port number range.
+      #
+      # @param [Range<Integer>] port_range
+      #   The port range.
+      #
+      # @return [Array<Port>]
+      #   The ports that are in the port range.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.in_range(port_range)
+        where(number: port_range)
+      end
+
+      #
       # Looks up a port by it's number.
       #
       # @param [String, Integer] number
