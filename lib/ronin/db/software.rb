@@ -68,6 +68,23 @@ module Ronin
       has_many :open_ports
 
       #
+      # Queries all software with the matching version.
+      #
+      # @param [String] version
+      #   The version number to search for.
+      #
+      # @return [Array<Software>]
+      #   The matching software.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_version(version)
+        where(version: version)
+      end
+
+      #
       # Converts the software to a String.
       #
       # @return [String]
