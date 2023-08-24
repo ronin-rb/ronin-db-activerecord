@@ -75,6 +75,14 @@ module Ronin
       #   @since 0.2.0
       has_many :service_credentials, through: :credentials
 
+      # @!attribute [rw] web_credentials
+      #   Any web credentials that use the password.
+      #
+      #   @return [Array<WebCredential>]
+      #
+      #   @since 0.2.0
+      has_many :web_credentials, through: :credentials
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
