@@ -119,6 +119,23 @@ module Ronin
       has_many :notes, dependent: :destroy
 
       #
+      # Queries all open ports associated with the IP address.
+      #
+      # @param [String] address
+      #   The IP address to search by.
+      #
+      # @return [Array<OpenPort>]
+      #   The open ports associated with the IP address.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_ip_address(address)
+        joins(:ip_address).where(ip_address: {address: address})
+      end
+
+      #
       # The IP Address of the open port.
       #
       # @return [String]

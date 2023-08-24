@@ -43,6 +43,40 @@ describe Ronin::DB::OpenPort do
     end
   end
 
+  describe ".with_ip_address" do
+    let(:number)  { 22 }
+    let(:name)    { 'ssh' }
+    let(:address) { '192.168.1.42' }
+
+    before do
+      port       = Ronin::DB::Port.create(number: number)
+      service    = Ronin::DB::Service.create(name: name)
+      ip_address = Ronin::DB::IPAddress.create(address: address)
+
+      Ronin::DB::OpenPort.create(
+        port:       port,
+        service:    service,
+        ip_address: ip_address
+      )
+    end
+
+    subject { described_class }
+
+    it "must query all #{described_class} associated with the IP address" do
+      open_port = subject.with_ip_address(address).first
+
+      expect(open_port).to be_kind_of(described_class)
+      expect(open_port.ip_address.address).to eq(address)
+    end
+
+    after do
+      Ronin::DB::OpenPort.destroy_all
+      Ronin::DB::IPAddress.destroy_all
+      Ronin::DB::Service.destroy_all
+      Ronin::DB::Port.destroy_all
+    end
+  end
+
   subject { described_class.new(ip_address: ip_address, port: port) }
 
   describe "#address" do
