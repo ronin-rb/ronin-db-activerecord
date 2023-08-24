@@ -231,8 +231,8 @@ module Ronin
       # @api public
       #
       def to_s
-        if self.service then "#{self.port} (#{self.service})"
-        else                 "#{self.port}"
+        if self.service then "#{self.ip_address} #{self.port} (#{self.service})"
+        else                 "#{self.ip_address} #{self.port}"
         end
       end
 
