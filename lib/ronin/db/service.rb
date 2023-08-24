@@ -78,6 +78,27 @@ module Ronin
       has_many :notes, dependent: :destroy
 
       #
+      # Queries all services associated with the port number.
+      #
+      # @param [Integer] number
+      #   The port number to search by.
+      #
+      # @return [Array<Service>]
+      #   The services associated with the port number.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_port_number(number)
+        joins(open_ports: :port).where(
+          open_ports: {
+            ronin_ports: {number: number}
+          }
+        )
+      end
+
+      #
       # Looks up the service.
       #
       # @param [String] name
