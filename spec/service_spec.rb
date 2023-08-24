@@ -101,6 +101,39 @@ describe Ronin::DB::Service do
     end
   end
 
+  describe ".with_ip_address" do
+    let(:number)  { 22 }
+    let(:address) { '192.168.1.42' }
+
+    before do
+      port       = Ronin::DB::Port.create(number: number)
+      service    = Ronin::DB::Service.create(name: name)
+      ip_address = Ronin::DB::IPAddress.create(address: address)
+
+      Ronin::DB::OpenPort.create(
+        port:       port,
+        service:    service,
+        ip_address: ip_address
+      )
+    end
+
+    subject { described_class }
+
+    it "must query all #{described_class} associated with the IP address" do
+      service = subject.with_ip_address(address).first
+
+      expect(service).to be_kind_of(described_class)
+      expect(service.ip_addresses.map(&:address).uniq).to eq([address])
+    end
+
+    after do
+      Ronin::DB::OpenPort.destroy_all
+      Ronin::DB::IPAddress.destroy_all
+      Ronin::DB::Service.destroy_all
+      Ronin::DB::Port.destroy_all
+    end
+  end
+
   describe ".lookup" do
     before do
       described_class.create(name: 'http')
