@@ -69,6 +69,23 @@ module Ronin
                               class_name: 'IPAddress'
 
       #
+      # Queries all OSes with the matching version.
+      #
+      # @param [String] version
+      #   The version number to search for.
+      #
+      # @return [Array<OS>]
+      #   The matching OSes.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_version(version)
+        where(version: version)
+      end
+
+      #
       # The Linux OS
       #
       # @param [String] version
