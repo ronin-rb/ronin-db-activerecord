@@ -119,6 +119,23 @@ module Ronin
       has_many :notes, dependent: :destroy
 
       #
+      # Queries all open ports with the port number.
+      #
+      # @param [Integer] number
+      #   The port number to search for.
+      #
+      # @return [Array<OpenPort>]
+      #   The open ports that use the port number.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_port_number(number)
+        joins(:port).where(port: {number: number})
+      end
+
+      #
       # Queries all open ports with the protocol.
       #
       # @param [:tcp, ;udp] protocol
