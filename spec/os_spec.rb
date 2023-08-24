@@ -33,6 +33,29 @@ describe Ronin::DB::OS do
     end
   end
 
+  describe ".with_flavor" do
+    let(:flavor) { :linux }
+
+    before do
+      described_class.create(name: 'macOS',   flavor: :bsd,   version: '10.5')
+      described_class.create(name: 'Linux',   flavor: flavor, version: '6.2.1')
+      described_class.create(name: 'Ubuntu',  flavor: flavor, version: '22.0.1')
+    end
+
+    subject { described_class }
+
+    it "must find all #{described_class} with the matching version" do
+      software = subject.with_flavor(flavor)
+
+      expect(software.length).to eq(2)
+      expect(software.map(&:flavor).uniq).to eq([flavor.to_s])
+    end
+
+    after do
+      described_class.destroy_all
+    end
+  end
+
   describe ".with_version" do
     let(:version) { '1.2.3' }
 
