@@ -56,6 +56,14 @@ module Ronin
       #   @return [Array<Credential>]
       has_many :credentials, dependent: :destroy
 
+      # @!attribute [rw] passwords
+      #   Any passwords used with the user name.
+      #
+      #   @return [Array<Password>]
+      #
+      #   @since 0.2.0
+      has_many :passwords, through: :credentials
+
       # @!attribute [rw] email_addresses
       #   The email addresses of the user.
       #
@@ -101,5 +109,6 @@ module Ronin
 end
 
 require 'ronin/db/credential'
+require 'ronin/db/password'
 require 'ronin/db/email_address'
 require 'ronin/db/note'
