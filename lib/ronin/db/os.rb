@@ -69,6 +69,23 @@ module Ronin
                               class_name: 'IPAddress'
 
       #
+      # Queries all OSes with the matching flavor.
+      #
+      # @param [:linux, :bsd] flavor
+      #   The flavor to search for.
+      #
+      # @return [Array<OS>]
+      #   The matching OSes.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_flavor(flavor)
+        where(flavor: flavor)
+      end
+
+      #
       # Queries all OSes with the matching version.
       #
       # @param [String] version
