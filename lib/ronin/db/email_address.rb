@@ -88,6 +88,14 @@ module Ronin
       #   @since 0.2.0
       has_many :service_credentials, through: :credentials
 
+      # @!attribute [rw] web_credentials
+      #   Any web credentials that use the email address.
+      #
+      #   @return [Array<WebCredential>]
+      #
+      #   @since 0.2.0
+      has_many :web_credentials, through: :credentials
+
       # @!attribute [rw] created_at
       #   Tracks when the email address was created at.
       #
