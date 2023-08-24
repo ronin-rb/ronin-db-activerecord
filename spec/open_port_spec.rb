@@ -197,8 +197,8 @@ describe Ronin::DB::OpenPort do
   end
 
   describe "#to_s" do
-    it "must return the port protocol/number associated with the open port" do
-      expect(subject.to_s).to eq("#{port_number}/#{port_protocol}")
+    it "must return the IP address and port protocol/number associated with the open port" do
+      expect(subject.to_s).to eq("#{ip_address} #{port_number}/#{port_protocol}")
     end
 
     context "when #service is also set" do
@@ -212,8 +212,8 @@ describe Ronin::DB::OpenPort do
           service:    service
         )
       end
-      it "must return the port number and service name" do
-        expect(subject.to_s).to eq("#{port_number}/#{port_protocol} (#{service_name})")
+      it "must return the IP address, port number, and service name" do
+        expect(subject.to_s).to eq("#{ip_address} #{port_number}/#{port_protocol} (#{service_name})")
       end
     end
   end
