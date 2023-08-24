@@ -129,6 +129,27 @@ module Ronin
       end
 
       #
+      # Queries all ports associated with the service name.
+      #
+      # @param [String] name
+      #   The service name to search for.
+      #
+      # @return [Array<Port>]
+      #   The ports associated with the service name.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.with_service_name(name)
+        joins(open_ports: :service).where(
+          open_ports: {
+            ronin_services: {name: name}
+          }
+        )
+      end
+
+      #
       # Looks up a port by it's number.
       #
       # @param [String, Integer] number
