@@ -76,6 +76,23 @@ module Ronin
       has_many :notes, dependent: :destroy
 
       #
+      # Searches for all passwords used by a specific user.
+      #
+      # @param [String] name
+      #   The name of the user.
+      #
+      # @return [Array<Password>]
+      #   The passwords for the user.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.for_user(name)
+        joins(credentials: :user_name).where(credentials: {ronin_user_names: {name: name}})
+      end
+
+      #
       # Looks up the password.
       #
       # @param [#to_s] password
