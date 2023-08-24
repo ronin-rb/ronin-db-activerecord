@@ -50,6 +50,29 @@ describe Ronin::DB::Software do
     end
   end
 
+  describe ".with_version" do
+    let(:version) { '1.2.3' }
+
+    before do
+      described_class.create(name: 'Minesweeper', version: '0.1')
+      described_class.create(name: 'Solitare',    version: version)
+      described_class.create(name: 'Notepad',     version: version)
+    end
+
+    subject { described_class }
+
+    it "must find all #{described_class} with the matching version" do
+      software = subject.with_version(version)
+
+      expect(software.length).to eq(2)
+      expect(software.map(&:version).uniq).to eq([version])
+    end
+
+    after do
+      described_class.destroy_all
+    end
+  end
+
   subject do
     described_class.new(
       name:    name,
