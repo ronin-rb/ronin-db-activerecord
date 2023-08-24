@@ -40,6 +40,13 @@ module Ronin
       #   @return [Integer]
       attribute :id, :integer
 
+      # @!attribute [rw] name
+      #   The name of the OS.
+      #
+      #   @return [String]
+      attribute :name, :string
+      validates :name, presence: true
+
       # @!attribute [rw] flavor
       #   The flavor of the OS (Linux, BSD).
       #
