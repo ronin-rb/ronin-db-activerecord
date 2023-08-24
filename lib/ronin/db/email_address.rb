@@ -80,6 +80,14 @@ module Ronin
       #   @return [Array<Credential>]
       has_many :credentials, dependent: :destroy
 
+      # @!attribute [rw] passwords
+      #   Any passwords used with the email address.
+      #
+      #   @return [Array<EmailAddress>]
+      #
+      #   @since 0.2.0
+      has_many :passwords, through: :credentials
+
       # @!attribute [rw] service_credentials
       #   The service credentials that use the email address.
       #
