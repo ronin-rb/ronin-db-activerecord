@@ -62,4 +62,27 @@ describe Ronin::DB::Model::HasName do
 
     after { subject.destroy_all }
   end
+
+  describe ".with_name" do
+    subject { model }
+
+    let(:name1) { 'foo1' }
+    let(:name2) { 'foo2' }
+    let(:name3) { 'foo3' }
+
+    before do
+      subject.create(name: name1)
+      subject.create(name: name2)
+      subject.create(name: name3)
+    end
+
+    it "should be able to find resources with the matching name" do
+      records = subject.with_name(name2)
+
+      expect(records.length).to eq(1)
+      expect(records[0].name).to be == name2
+    end
+
+    after { subject.destroy_all }
+  end
 end
