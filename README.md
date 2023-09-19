@@ -45,6 +45,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * [Ronin::DB::OpenPort]
   * [Ronin::DB::Organization]
   * [Ronin::DB::OrganizationDepartment]
+  * [Ronin::DB::OrganizationMember]
   * [Ronin::DB::OS]
   * [Ronin::DB::OSGuess]
   * [Ronin::DB::Password]
@@ -96,6 +97,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
 [Ronin::DB::OpenPort]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OpenPort.html
 [Ronin::DB::Organization]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Organization.html
 [Ronin::DB::OrganizationDepartment]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationDepartment.html
+[Ronin::DB::OrganizationMember]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationMember.html
 [Ronin::DB::OS]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OS.html
 [Ronin::DB::OSGuess]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OSGuess.html
 [Ronin::DB::Password]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Password.html

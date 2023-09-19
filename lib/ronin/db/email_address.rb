@@ -134,6 +134,14 @@ module Ronin
       #   @since 0.2.0
       has_one :organization_department, dependent: :nullify
 
+      # @!attribute [rw] organization_members
+      #   The organization member that uses the email address.
+      #
+      #   @return [OrganizationMember, nil]
+      #
+      #   @since 0.2.0
+      has_one :organization_member, dependent: :nullify
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
@@ -304,4 +312,5 @@ require 'ronin/db/user_name'
 require 'ronin/db/host_name'
 require 'ronin/db/personal_email_address'
 require 'ronin/db/organization_department'
+require 'ronin/db/organization_member'
 require 'ronin/db/note'

@@ -81,6 +81,12 @@ module Ronin
                                 foreign_key: :parent_department_id,
                                 dependent:   :destroy
 
+      # @!attribute [rw] members
+      #   The members that belong to the department.
+      #
+      #   @return [Array<OrganizationMember>]
+      has_many :members, class_name: 'OrganizationMember'
+
     end
   end
 end
