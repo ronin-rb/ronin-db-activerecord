@@ -80,6 +80,14 @@ module Ronin
       has_many :departments, class_name: 'OrganizationDepartment',
                              dependent:  :destroy
 
+      # @!attribute [rw] members
+      #   The members that belong to the organization.
+      #
+      #   @return [Array<OrganizationMember>]
+      #
+      #   @since 0.2.0
+      has_many :members, class_name: 'OrganizationMember'
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
@@ -127,4 +135,5 @@ module Ronin
 end
 
 require 'ronin/db/organization_department'
+require 'ronin/db/organization_member'
 require 'ronin/db/note'
