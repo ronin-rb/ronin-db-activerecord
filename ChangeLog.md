@@ -1,3 +1,10 @@
+### 0.1.2 / 2023-09-19
+
+* Fix {Ronin::DB::MACAddress#address} validation regex to match the whole
+  string.
+* Use `:datetime` instead of `:time` for `created_at` attributes.
+* Documentation improvements.
+
 ### 0.1.1 / 2023-04-04
 
 * Reordered database migrations so they can be ran in correct order on
