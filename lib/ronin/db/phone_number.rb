@@ -121,6 +121,12 @@ module Ronin
       #   @return [OrganizationDepartment, nil]
       has_one :organization_department, dependent: :nullify
 
+      # @!attribute [rw] organization_members
+      #   The organization member that use the phone number.
+      #
+      #   @return [OrganizationMember, nil]
+      has_one :organization_member, dependent: :nullify
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
@@ -199,4 +205,5 @@ end
 require 'ronin/db/personal_phone_number'
 require 'ronin/db/person'
 require 'ronin/db/organization_department'
+require 'ronin/db/organization_member'
 require 'ronin/db/note'
