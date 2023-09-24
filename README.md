@@ -44,6 +44,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * [Ronin::DB::Note]
   * [Ronin::DB::OpenPort]
   * [Ronin::DB::Organization]
+  * [Ronin::DB::OrganizationCustomer]
   * [Ronin::DB::OrganizationDepartment]
   * [Ronin::DB::OrganizationMember]
   * [Ronin::DB::OS]
@@ -96,6 +97,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
 [Ronin::DB::Note]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Note.html
 [Ronin::DB::OpenPort]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OpenPort.html
 [Ronin::DB::Organization]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Organization.html
+[Ronin::DB::OrganizationCustomer]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationCustomer.html
 [Ronin::DB::OrganizationDepartment]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationDepartment.html
 [Ronin::DB::OrganizationMember]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationMember.html
 [Ronin::DB::OS]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OS.html
