@@ -173,6 +173,20 @@ module Ronin
       has_many :connected_people, through: :personal_connections,
                                   source:  :other_person
 
+      # @!attribute [rw] organization_customers
+      #   The perons's customer relationships with other organizations.
+      #
+      #   @return [Array<OrganizationCustomer>]
+      has_many :organization_customers, class_name:  'OrganizationCustomer',
+                                        foreign_key: :customer_id,
+                                        dependent:   :destroy
+
+      # @!attribute [rw] vendors
+      #   The vendor organizations of the person.
+      #
+      #   @return [Array<Organization>]
+      has_many :vendors, through: :organization_customers
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
@@ -344,4 +358,6 @@ end
 require 'ronin/db/personal_street_address'
 require 'ronin/db/personal_phone_number'
 require 'ronin/db/personal_connection'
+require 'ronin/db/organization_customer'
+require 'ronin/db/organization'
 require 'ronin/db/note'
