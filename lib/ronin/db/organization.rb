@@ -88,6 +88,50 @@ module Ronin
       #   @since 0.2.0
       has_many :members, class_name: 'OrganizationMember'
 
+      # @!attribute [rw] organization_customers
+      #   The organization's customer relationships.
+      #
+      #   @return [Array<OrganizationCustomer>]
+      #
+      #   @since 0.2.0
+      has_many :organization_customers, class_name:  'OrganizationCustomer',
+                                        foreign_key: :vendor_id,
+                                        dependent:   :destroy
+
+      # @!attribute [rw] customers
+      #   The individual customers (B2C) of the organization/
+      #
+      #   @return [Array<Person>]
+      #
+      #   @since 0.2.0
+      has_many :customers, through: :organization_customers
+
+      # @!attribute [rw] customer_organizations
+      #   The other customer organizations (B2B) of the organization.
+      #
+      #   @return [Array<Organization>]
+      #
+      #   @since 0.2.0
+      has_many :customer_organizations, through: :organization_customers
+
+      # @!attribute [rw] vendor_relationships
+      #   The organization's vendor relationships with other organizations.
+      #
+      #   @return [Array<OrganizationCustomer>]
+      #
+      #   @since 0.2.0
+      has_many :organization_vendors, class_name:  'OrganizationCustomer',
+                                      foreign_key: :customer_organization_id,
+                                      dependent:   :destroy
+
+      # @!attribute [rw] vendors
+      #   The vendor companies that the organization is a customer of.
+      #
+      #   @return [Array<Organization>]
+      #
+      #   @since 0.2.0
+      has_many :vendors, through: :organization_vendors
+
       #
       # Looks up the organization.
       #
@@ -128,3 +172,4 @@ end
 
 require 'ronin/db/organization_department'
 require 'ronin/db/organization_member'
+require 'ronin/db/organization_customer'
