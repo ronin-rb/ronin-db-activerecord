@@ -1,5 +1,5 @@
 name: ronin-db-activerecord
-version: 0.1.2
+version: 0.1.3
 summary: ActiveRecord backend for the Ronin Database
 description:
   ronin-db-activerecord contains ActiveRecord models and migrations for the
@@ -22,7 +22,7 @@ required_ruby_version: ">= 3.0.0"
 
 dependencies:
   uri-query_params: ~> 0.6
-  activerecord: ~> 7.0, < 7.0.8
+  activerecord: ~> 7.0, < 7.1.0
 
 development_dependencies:
   bundler: ~> 2.0
