@@ -120,7 +120,9 @@ Ronin::DB::Models.connect
 ## Requirements
 
 * [Ruby] >= 3.0.0
-* [activerecord] ~> 7.0
+* [activerecord] ~> 7.0, < 7.1.0
+  * **Note:** [activerecord] 7.1.0 changed it's internal migration APIs which
+    `ronin-db-activerecord` was using to run migrations.
 
 ## Install
 
