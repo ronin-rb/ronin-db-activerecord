@@ -1,3 +1,9 @@
+### 0.1.3 / 2023-10-14
+
+* Require [activerecord] `~> 7.0, < 7.1.0`.
+  * **Note:** [activerecord] 7.1.0 changed it's internal migration APIs which
+    `ronin-db-activerecord` was using to run migrations.
+
 ### 0.1.2 / 2023-09-19
 
 * Fix {Ronin::DB::MACAddress#address} validation regex to match the whole
@@ -54,3 +60,4 @@
     * {Ronin::DB::Vulnerability}
     * {Ronin::DB::WebCredential}
 
+[activerecord]: https://github.com/rails/rails/tree/main/activerecord#readme
