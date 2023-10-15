@@ -120,7 +120,7 @@ module Ronin
       class MigrationContext < ActiveRecord::MigrationContext
 
         def initialize
-          super([Ronin::DB::Migrations::DIR],Ronin::DB::SchemaMigration)
+          super([Ronin::DB::Migrations::DIR],Ronin::DB::SchemaMigration.new(connection))
         end
 
       end

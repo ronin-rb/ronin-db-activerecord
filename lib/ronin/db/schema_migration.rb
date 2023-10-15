@@ -28,7 +28,9 @@ module Ronin
     # migrations.
     #
     class SchemaMigration < ActiveRecord::SchemaMigration
-      self.table_name_prefix = 'ronin_'
+      def table_name
+        'ronin_schema_migrations'
+      end
     end
   end
 end
