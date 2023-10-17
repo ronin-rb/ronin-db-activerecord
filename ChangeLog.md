@@ -1,3 +1,9 @@
+### 0.1.4 / 2023-10-16
+
+* Require [activerecord] `~> 7.0`.
+* Switched to using the default `schema_migrations` table for storing migration
+  versions and avoid using ActiveRecord's private API.
+
 ### 0.1.3 / 2023-10-14
 
 * Require [activerecord] `~> 7.0, < 7.1.0`.
