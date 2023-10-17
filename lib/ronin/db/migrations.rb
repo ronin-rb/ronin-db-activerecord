@@ -18,8 +18,6 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/schema_migration'
-
 require 'active_record'
 require 'active_record/migration'
 
@@ -111,29 +109,14 @@ module Ronin
       DIR = File.expand_path('../../../db/migrate',__dir__)
 
       #
-      # Extensions `ActiveRecord::MigrationContext` to load our migrations from
-      # the `db/migrate/` directory and update our
-      # `ronin_schema_migration` table.
-      #
-      # @api private
-      #
-      class MigrationContext < ActiveRecord::MigrationContext
-
-        def initialize
-          super([Ronin::DB::Migrations::DIR],Ronin::DB::SchemaMigration.new(connection))
-        end
-
-      end
-
-      #
       # The migration context.
       #
-      # @return [MigrationContext]
+      # @return [ActiveRecord::MigrationContext]
       #
       # @api private
       #
       def self.context
-        @context ||= MigrationContext.new
+        @context ||= ActiveRecord::MigrationContext.new([DIR])
       end
     end
   end
