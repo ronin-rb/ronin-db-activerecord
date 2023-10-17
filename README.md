@@ -120,7 +120,7 @@ Ronin::DB::Models.connect
 ## Requirements
 
 * [Ruby] >= 3.0.0
-* [activerecord] ~> 7.1
+* [activerecord] ~> 7.0
 
 ## Install
 
