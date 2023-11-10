@@ -87,6 +87,24 @@ module Ronin
       #   @since 0.2.0
       has_many :phone_numbers, through: :organization_phone_numbers
 
+      # @!attribute [rw] organization_email_addresses
+      #   The association of email addresses associated directly with the
+      #   organization.
+      #
+      #   @return [Array<OrganizationEmailAddress>]
+      #
+      #   @since 0.2.0
+      has_many :organization_email_addresses, dependent: :destroy
+
+      # @!attribute [rw] organization_email_addresses
+      #   The email addresses directly associated directly with the
+      #   organization.
+      #
+      #   @return [Array<EmailAddress>]
+      #
+      #   @since 0.2.0
+      has_many :email_addresses, through: :organization_email_addresses
+
       # @!attribute [rw] departments
       #   The associated departments of the organization.
       #
@@ -103,6 +121,15 @@ module Ronin
       #
       #   @since 0.2.0
       has_many :members, class_name: 'OrganizationMember'
+
+      # @!attribute [rw] member_email_addresses
+      #   The email addresses used by members of the organization.
+      #
+      #   @return [Array<EmailAddress>]
+      #
+      #   @since 0.2.0
+      has_many :member_email_addresses, through: :members,
+                                        source:  :email_address
 
       # @!attribute [rw] organization_customers
       #   The organization's customer relationships.
@@ -187,6 +214,7 @@ module Ronin
 end
 
 require 'ronin/db/organization_phone_number'
+require 'ronin/db/organization_email_address'
 require 'ronin/db/organization_department'
 require 'ronin/db/organization_member'
 require 'ronin/db/organization_customer'
