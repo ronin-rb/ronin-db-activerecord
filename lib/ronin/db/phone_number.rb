@@ -103,6 +103,18 @@ module Ronin
       #   @return [Time]
       attribute :created_at, :datetime
 
+      # @!attribute [rw] personal_phone_numbers
+      #   The association of people that use this phone number.
+      #
+      #   @return [Array<PersonalPhoneNumber>]
+      has_many :personal_phone_numbers, dependent: :destroy
+
+      # @!attribute [rw] people
+      #   The people that use this phone number.
+      #
+      #   @return [Array<Person>]
+      has_many :people, through: :personal_phone_numbers
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
@@ -178,4 +190,6 @@ module Ronin
   end
 end
 
+require 'ronin/db/personal_phone_number'
+require 'ronin/db/person'
 require 'ronin/db/note'
