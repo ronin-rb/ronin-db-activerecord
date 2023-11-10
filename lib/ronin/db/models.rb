@@ -34,6 +34,7 @@ require 'ronin/db/os_guess'
 require 'ronin/db/password'
 require 'ronin/db/person'
 require 'ronin/db/personal_connection'
+require 'ronin/db/personal_phone_number'
 require 'ronin/db/port'
 require 'ronin/db/service'
 require 'ronin/db/service_credential'
@@ -86,6 +87,7 @@ module Ronin
         Password,
         Person,
         PersonalConnection,
+        PersonalPhoneNumber,
         Port,
         Service,
         ServiceCredential,
