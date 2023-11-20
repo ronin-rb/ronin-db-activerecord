@@ -43,6 +43,19 @@ module Ronin
       belongs_to :url, required:   true,
                        class_name: 'URL'
 
+      # @!attribute [rw] type
+      #   The type of vuln.
+      #
+      #   @return [String, nil]
+      enum :type, {
+        lfi:           'lfi',
+        rfi:           'rfi',
+        sqli:          'sqli',
+        ssti:          'ssti',
+        open_redirect: 'open_redirect',
+        reflected_xss: 'reflected_xss'
+      }
+
       # @!attribute [rw] query_param
       #   The query param of the URL.
       #
@@ -72,29 +85,32 @@ module Ronin
       #   The request method for the URL.
       #
       #   @return [:copy, :delete, :get, :head, :lock, :mkcol, :move, :options, :patch, :post, :propfind, :proppatch, :put, :trace, :unlock]
-      enum request_method: [
-        :copy,
-        :delete,
-        :get,
-        :head,
-        :lock,
-        :mkcol,
-        :move,
-        :options,
-        :patch,
-        :post,
-        :propfind,
-        :proppatch,
-        :put,
-        :trace,
-        :unlock
-      ], _suffix: :requests
+      enum request_method: {
+        copy:      'copy',
+        delete:    'delete',
+        get:       'get',
+        head:      'head',
+        lock:      'lock',
+        mkcol:     'mkcol',
+        move:      'move',
+        options:   'options',
+        patch:     'patch',
+        post:      'post',
+        propfind:  'propfind',
+        proppatch: 'proppatch',
+        put:       'put',
+        trace:     'trace',
+        unlock:    'unlock'
+      }, _suffix: :requests
 
       # @!attribute [rw] lfi_os
       #   The lfi os.
       #
       #   @return [:unix, :windows, nil]
-      enum lfi_os: [:unix, :windows]
+      enum lfi_os: {
+        unix:    'unix',
+        windows: 'windows'
+      }
 
       # @!attribute [rw] lfi_depth
       #   The lfi depth.
@@ -106,19 +122,34 @@ module Ronin
       #   The lfi filter bypass.
       #
       #   @return [:null_byte, :base64, :rot13, :zlib, nil]
-      enum lfi_filter_bypass: [:lfi_null_byte, :base64, :rot13, :zlib]
+      enum lfi_filter_bypass: {
+        null_byte: 'null_byte',
+        base64:    'base64',
+        rot13:     'rot13',
+        zlib:      'zlib'
+      }
 
       # @!attribute [rw] rfi_script_lang
       #   The rfi script lang.
       #
       #   @return [:asp, :asp_net, :cold_fusion, :jsp, :php, :perl, nil]
-      enum rfi_script_lang: [:asp, :asp_net, :cold_fusion, :jsp, :php, :perl]
+      enum rfi_script_lang: {
+        asp:         'asp',
+        asp_net:     'asp_net',
+        cold_fusion: 'cold_fusion',
+        jsp:         'jsp',
+        php:         'php',
+        perl:        'perl'
+      }
 
       # @!attribute [rw] rfi_filter_bypass
       #   The rfi filter bypass.
       #
       #   @return [:null_byte, :double_encode, nil]
-      enum rfi_filter_bypass: [:rfi_null_byte, :double_encode]
+      enum rfi_filter_bypass: {
+        rfi_null_byte: 'rfi_null_byte',
+        double_encode: 'double_encode'
+      }
 
       # @!attribute [rw] rfi_filter_bypass
       #   The rfi filter bypass.
@@ -150,8 +181,11 @@ module Ronin
       #   @return [Time]
       attribute :created_at, :datetime
 
+      #
+      # Validates presence of at least one param fields.
+      #
       def param_validation
-        unless [:query_param, :header_name, :cookie_param, :form_param].any? { |field| self.send(field).present? }
+        unless (query_param || header_name || cookie_param || form_param)
           self.errors.add(:base, "query_param, header_name, cookie_param or from_param must be present")
         end
       end

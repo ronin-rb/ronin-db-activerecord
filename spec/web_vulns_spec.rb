@@ -25,7 +25,7 @@ describe Ronin::DB::WebVuln do
     end
 
     context "for WebVuln with at least on param present" do
-      let(:query_param) { "string" }
+      let(:query_param) { "query_param" }
 
       it "must pass the validation" do
         expect(subject.errors).to be_empty
