@@ -27,7 +27,7 @@ class CreateRoninWebVulnsTable < ActiveRecord::Migration[7.0]
 
   def change
     create_table :ronin_web_vulns, if_not_exists: true do |t|
-      t.integer :string, null: false
+      t.string :type, null: false
       t.references :url, null: false,
       foreign_key: {
         to_table: :ronin_urls

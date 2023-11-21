@@ -47,7 +47,7 @@ module Ronin
       #   The type of vuln.
       #
       #   @return [String, nil]
-      enum :type, {
+      enum type: {
         lfi:           'lfi',
         rfi:           'rfi',
         sqli:          'sqli',
@@ -127,7 +127,7 @@ module Ronin
         base64:    'base64',
         rot13:     'rot13',
         zlib:      'zlib'
-      }
+      }, _prefix: true
 
       # @!attribute [rw] rfi_script_lang
       #   The rfi script lang.
@@ -147,9 +147,9 @@ module Ronin
       #
       #   @return [:null_byte, :double_encode, nil]
       enum rfi_filter_bypass: {
-        rfi_null_byte: 'rfi_null_byte',
+        null_byte: 'null_byte',
         double_encode: 'double_encode'
-      }
+      }, _prefix: true
 
       # @!attribute [rw] rfi_filter_bypass
       #   The rfi filter bypass.
