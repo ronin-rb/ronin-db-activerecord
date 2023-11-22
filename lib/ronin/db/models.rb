@@ -33,6 +33,7 @@ require 'ronin/db/os'
 require 'ronin/db/os_guess'
 require 'ronin/db/password'
 require 'ronin/db/person'
+require 'ronin/db/personal_connection'
 require 'ronin/db/port'
 require 'ronin/db/service'
 require 'ronin/db/service_credential'
@@ -84,6 +85,7 @@ module Ronin
         Organization,
         Password,
         Person,
+        PersonalConnection,
         Port,
         Service,
         ServiceCredential,

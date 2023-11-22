@@ -124,6 +124,19 @@ module Ronin
       #   @return [Time]
       attribute :created_at, :datetime
 
+      # @!attribute [rw] personal_connections
+      #   The perons's connections with other people.
+      #
+      #   @return [Array<PersonalConnection>]
+      has_many :personal_connections, dependent: :destroy
+
+      # @!attribute [rw] connected_people
+      #   The other people connected to the person.
+      #
+      #   @return [Array<Person>]
+      has_many :connected_people, through: :personal_connections,
+                                  source:  :other_person
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
@@ -292,4 +305,5 @@ module Ronin
   end
 end
 
+require 'ronin/db/personal_connection'
 require 'ronin/db/note'
