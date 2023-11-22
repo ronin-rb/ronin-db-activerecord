@@ -48,6 +48,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * [Ronin::DB::OSGuess]
   * [Ronin::DB::Password]
   * [Ronin::DB::Person]
+  * [Ronin::DB::PersonalConnection]
   * [Ronin::DB::PhoneNumber]
   * [Ronin::DB::Port]
   * [Ronin::DB::Service]
@@ -94,6 +95,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
 [Ronin::DB::OSGuess]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OSGuess.html
 [Ronin::DB::Password]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Password.html
 [Ronin::DB::Person]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Person.html
+[Ronin::DB::PersonalConnection]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/PersonalConnection.html
 [Ronin::DB::PhoneNumber]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/PhoneNumber.html
 [Ronin::DB::Port]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Port.html
 [Ronin::DB::Service]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Service.html
