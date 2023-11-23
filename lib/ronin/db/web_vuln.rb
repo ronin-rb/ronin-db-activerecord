@@ -147,15 +147,22 @@ module Ronin
       #
       #   @return [:null_byte, :double_encode, nil]
       enum rfi_filter_bypass: {
-        null_byte: 'null_byte',
+        null_byte:     'null_byte',
         double_encode: 'double_encode'
       }, _prefix: true
 
-      # @!attribute [rw] rfi_filter_bypass
-      #   The rfi filter bypass.
+      # @!attribute [rw] ssti_escape_type
+      #   The ssti escape type.
       #
-      #   @return [:null_byte, :double_encode, nil]
-      enum ssti_escape: [:foo, :erb] # ! https://github.com/ronin-rb/ronin-vulns/issues/55
+      #   @return [:double_curly_braces, :ndollar_curly_braces, :dollar_double_curly_braces, :pound_curly_braces, :angle_brackets_percent, :custom, nil]
+      enum ssti_escape_type: {
+        double_curly_braces:        'double_curly_braces',
+        ndollar_curly_braces:       'ndollar_curly_braces',
+        dollar_double_curly_braces: 'dollar_double_curly_braces',
+        pound_curly_braces:         'pound_curly_braces',
+        angle_brackets_percent:     'angle_brackets_percent'
+        custom:                     'custom'
+      }
 
       # @!attribute [rw] sqli_escape_quote
       #   The sqli escape quote.
