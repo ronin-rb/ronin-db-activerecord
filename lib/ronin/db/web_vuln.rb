@@ -160,7 +160,7 @@ module Ronin
         ndollar_curly_braces:       'ndollar_curly_braces',
         dollar_double_curly_braces: 'dollar_double_curly_braces',
         pound_curly_braces:         'pound_curly_braces',
-        angle_brackets_percent:     'angle_brackets_percent'
+        angle_brackets_percent:     'angle_brackets_percent',
         custom:                     'custom'
       }
 
