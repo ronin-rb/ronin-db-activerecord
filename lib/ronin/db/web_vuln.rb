@@ -154,10 +154,10 @@ module Ronin
       # @!attribute [rw] ssti_escape_type
       #   The ssti escape type.
       #
-      #   @return [:double_curly_braces, :ndollar_curly_braces, :dollar_double_curly_braces, :pound_curly_braces, :angle_brackets_percent, :custom, nil]
+      #   @return [:double_curly_braces, :dollar_curly_braces, :dollar_double_curly_braces, :pound_curly_braces, :angle_brackets_percent, :custom, nil]
       enum ssti_escape_type: {
         double_curly_braces:        'double_curly_braces',
-        ndollar_curly_braces:       'ndollar_curly_braces',
+        dollar_curly_braces:        'dollar_curly_braces',
         dollar_double_curly_braces: 'dollar_double_curly_braces',
         pound_curly_braces:         'pound_curly_braces',
         angle_brackets_percent:     'angle_brackets_percent',
