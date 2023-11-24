@@ -116,6 +116,14 @@ module Ronin
       #   @return [Array<Credentials>]
       has_many :credentials, through: :web_credentials
 
+      # @!attribute [rw] web_vulns
+      #   The web vulnerabilities which reference the URL.
+      #
+      #   @return [Array<WebVuln>]
+      #
+      #   @since 0.2.0
+      has_many :web_vulns, dependent: :destroy
+
       # @!attribute [rw] vulnerabilities
       #   The vulnerabilities which reference the URL.
       #
@@ -516,6 +524,7 @@ require 'ronin/db/url_scheme'
 require 'ronin/db/url_query_param_name'
 require 'ronin/db/url_query_param'
 require 'ronin/db/web_credential'
+require 'ronin/db/web_vuln'
 require 'ronin/db/vulnerability'
 require 'ronin/db/advisory'
 require 'ronin/db/note'
