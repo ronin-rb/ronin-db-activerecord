@@ -35,6 +35,7 @@ describe 'Ronin::DB::Models' do
     it { expect(subject).to include(Ronin::DB::URLQueryParam) }
     it { expect(subject).to include(Ronin::DB::URLScheme) }
     it { expect(subject).to include(Ronin::DB::URL) }
+    it { expect(subject).to include(Ronin::DB::WebVuln) }
     it { expect(subject).to include(Ronin::DB::UserName) }
     it { expect(subject).to include(Ronin::DB::SoftwareVendor) }
     it { expect(subject).to include(Ronin::DB::WebCredential) }

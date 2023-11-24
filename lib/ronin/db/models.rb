@@ -40,6 +40,7 @@ require 'ronin/db/url_query_param_name'
 require 'ronin/db/url_query_param'
 require 'ronin/db/url_scheme'
 require 'ronin/db/url'
+require 'ronin/db/web_vuln'
 require 'ronin/db/user_name'
 require 'ronin/db/software_vendor'
 require 'ronin/db/web_credential'
@@ -89,6 +90,7 @@ module Ronin
         URLQueryParam,
         URLScheme,
         URL,
+        WebVuln,
         UserName,
         SoftwareVendor,
         WebCredential,

@@ -58,6 +58,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * [Ronin::DB::URLScheme]
   * [Ronin::DB::UserName]
   * [Ronin::DB::Vulnerability]
+  * [Ronin::DB::WebVuln]
   * [Ronin::DB::WebCredential]
 * Has 98% documentation coverage.
 * Has 99% test coverage.
@@ -100,6 +101,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
 [Ronin::DB::URLScheme]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/URLScheme.html
 [Ronin::DB::UserName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/UserName.html
 [Ronin::DB::Vulnerability]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Vulnerability.html
+[Ronin::DB::WebVuln]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/WebVuln.html
 [Ronin::DB::WebCredential]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/WebCredential.html
 
 ## Examples
