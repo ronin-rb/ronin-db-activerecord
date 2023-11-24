@@ -50,7 +50,7 @@ class CreateRoninWebVulnsTable < ActiveRecord::Migration[7.0]
       t.boolean :sqli_escape_parens, null: true
       t.boolean :sqli_terminate, null: true
 
-      t.index [:type, :query_param, :header_name, :cookie_param, :form_param, :url], unique: true, name: 'vuln_index'
+      t.index [:type, :query_param, :header_name, :cookie_param, :form_param, :url], unique: true, name: 'index_ronin_url_web_vulns_unique'
     end
   end
 
