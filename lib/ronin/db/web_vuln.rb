@@ -46,7 +46,7 @@ module Ronin
       # @!attribute [rw] type
       #   The type of vuln.
       #
-      #   @return [String, nil]
+      #   @return [String]
       enum type: {
         lfi:           'lfi',
         rfi:           'rfi',
@@ -55,6 +55,7 @@ module Ronin
         open_redirect: 'open_redirect',
         reflected_xss: 'reflected_xss'
       }
+      validates :type, presence: true
 
       # @!attribute [rw] query_param
       #   The query param of the URL.
@@ -110,7 +111,7 @@ module Ronin
       enum lfi_os: {
         unix:    'unix',
         windows: 'windows'
-      }
+      }, _prefix: true
 
       # @!attribute [rw] lfi_depth
       #   The lfi depth.
@@ -140,7 +141,7 @@ module Ronin
         jsp:         'jsp',
         php:         'php',
         perl:        'perl'
-      }
+      }, _prefix: true
 
       # @!attribute [rw] rfi_filter_bypass
       #   The rfi filter bypass.
@@ -162,7 +163,7 @@ module Ronin
         pound_curly_braces:         'pound_curly_braces',
         angle_brackets_percent:     'angle_brackets_percent',
         custom:                     'custom'
-      }
+      }, _prefix: true
 
       # @!attribute [rw] sqli_escape_quote
       #   The sqli escape quote.

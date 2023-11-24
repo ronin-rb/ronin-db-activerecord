@@ -29,9 +29,9 @@ class CreateRoninWebVulnsTable < ActiveRecord::Migration[7.0]
     create_table :ronin_web_vulns, if_not_exists: true do |t|
       t.string :type, length: 13, null: false
       t.references :url, null: false,
-      foreign_key: {
-        to_table: :ronin_urls
-      }
+                         foreign_key: {
+                           to_table: :ronin_urls
+                         }
 
       t.string :query_param, length: 225, null: true
       t.string :header_name, length: 225, null: true
@@ -50,7 +50,7 @@ class CreateRoninWebVulnsTable < ActiveRecord::Migration[7.0]
       t.boolean :sqli_escape_parens, null: true
       t.boolean :sqli_terminate, null: true
 
-      t.index :type, unique: true
+      t.index [:type, :query_param, :header_name, :cookie_param, :form_param, :url], unique: true, name: 'vuln_index'
     end
   end
 
