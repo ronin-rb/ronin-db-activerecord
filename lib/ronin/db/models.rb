@@ -35,6 +35,7 @@ require 'ronin/db/password'
 require 'ronin/db/person'
 require 'ronin/db/personal_phone_number'
 require 'ronin/db/personal_email_address'
+require 'ronin/db/personal_street_address'
 require 'ronin/db/personal_connection'
 require 'ronin/db/port'
 require 'ronin/db/service'
@@ -89,6 +90,7 @@ module Ronin
         Person,
         PersonalPhoneNumber,
         PersonalEmailAddress,
+        PersonalStreetAddress,
         PersonalConnection,
         Port,
         Service,
