@@ -30,6 +30,7 @@ describe 'Ronin::DB::Models' do
     it { expect(subject).to include(Ronin::DB::Person) }
     it { expect(subject).to include(Ronin::DB::PersonalPhoneNumber) }
     it { expect(subject).to include(Ronin::DB::PersonalEmailAddress) }
+    it { expect(subject).to include(Ronin::DB::PersonalStreetAddress) }
     it { expect(subject).to include(Ronin::DB::PersonalConnection) }
     it { expect(subject).to include(Ronin::DB::Port) }
     it { expect(subject).to include(Ronin::DB::Service) }
