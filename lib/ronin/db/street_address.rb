@@ -125,6 +125,13 @@ module Ronin
       #   @return [Array<Note>]
       has_many :notes
 
+      # @!attribute [rw] organization_street_addresses
+      #   The association of organizations that associate with the street
+      #   address.
+      #
+      #   @return [Array<OrganizationStreetAddress>]
+      has_many :organization_street_addresses, dependent: :destroy
+
       # @!attribute [rw] organization_departments
       #   The organization departments located at the street address.
       #
@@ -200,5 +207,6 @@ end
 
 require 'ronin/db/personal_street_address'
 require 'ronin/db/person'
+require 'ronin/db/organization_street_address'
 require 'ronin/db/organization_department'
 require 'ronin/db/note'
