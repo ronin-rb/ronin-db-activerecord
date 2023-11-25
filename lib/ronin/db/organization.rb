@@ -71,6 +71,22 @@ module Ronin
       # NOTE: ensure the name is unique with respect to the parent organization
       validates :name, uniqueness: {scope: [:parent_id]}
 
+      # @!attribute [rw] organization_street_addresses
+      #   The association of street addresses associated with the organization.
+      #
+      #   @return [Array<OrganizationStreetAddress>]
+      #
+      #   @since 0.2.0
+      has_many :organization_street_addresses, dependent: :destroy
+
+      # @!attribute [rw] street_addresses
+      #   The street addresses that are associated with the organization.
+      #
+      #   @return [Array<StreetAddress>]
+      #
+      #   @since 0.2.0
+      has_many :street_addresses, through: :organization_street_addresses
+
       # @!attribute [rw] organization_phone_numbers
       #   The association of phone numbers associated with the organization.
       #
@@ -213,6 +229,7 @@ module Ronin
   end
 end
 
+require 'ronin/db/organization_street_address'
 require 'ronin/db/organization_phone_number'
 require 'ronin/db/organization_email_address'
 require 'ronin/db/organization_department'
