@@ -29,6 +29,7 @@ require 'ronin/db/ip_address_mac_address'
 require 'ronin/db/mac_address'
 require 'ronin/db/open_port'
 require 'ronin/db/organization'
+require 'ronin/db/organization_street_address'
 require 'ronin/db/organization_customer'
 require 'ronin/db/organization_department'
 require 'ronin/db/organization_phone_number'
@@ -90,6 +91,7 @@ module Ronin
         OSGuess,
         OpenPort,
         Organization,
+        OrganizationStreetAddress,
         OrganizationCustomer,
         OrganizationDepartment,
         OrganizationPhoneNumber,
