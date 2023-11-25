@@ -107,6 +107,18 @@ module Ronin
       #   @return [Time]
       attribute :created_at, :datetime
 
+      # @!attribute [rw] personal_street_addresses
+      #   The association of people that associate with the street address.
+      #
+      #   @return [Array<PersonalStreetAddress>]
+      has_many :personal_street_addresses, dependent: :destroy
+
+      # @!attribute [rw] people
+      #   The people that are associated with the street addresses.
+      #
+      #   @return [Array<Organization>]
+      has_many :people, through: :personal_street_addresses
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
@@ -180,4 +192,6 @@ module Ronin
   end
 end
 
+require 'ronin/db/personal_street_address'
+require 'ronin/db/person'
 require 'ronin/db/note'
