@@ -124,6 +124,18 @@ module Ronin
       #   @return [Time]
       attribute :created_at, :datetime
 
+      # @!attribute [rw] personal_street_addresses
+      #   The association of street addresses associated with the person.
+      #
+      #   @return [Array<PersonalStreetAddress>]
+      has_many :personal_street_addresses, dependent: :destroy
+
+      # @!attribute [rw] street_addresses
+      #   The street addresses associated with the person.
+      #
+      #   @return [Array<StreetAddress>]
+      has_many :street_addresses, through: :personal_street_addresses
+
       # @!attribute [rw] personal_phone_numbers
       #   The perons's phone numbers.
       #
@@ -329,6 +341,7 @@ module Ronin
   end
 end
 
+require 'ronin/db/personal_street_address'
 require 'ronin/db/personal_phone_number'
 require 'ronin/db/personal_connection'
 require 'ronin/db/note'
