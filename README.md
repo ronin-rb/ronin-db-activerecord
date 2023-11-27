@@ -47,6 +47,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * [Ronin::DB::OrganizationCustomer]
   * [Ronin::DB::OrganizationDepartment]
   * [Ronin::DB::OrganizationMember]
+  * [Ronin::DB::OrganizationPhoneNumber]
   * [Ronin::DB::OS]
   * [Ronin::DB::OSGuess]
   * [Ronin::DB::Password]
@@ -100,6 +101,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
 [Ronin::DB::OrganizationCustomer]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationCustomer.html
 [Ronin::DB::OrganizationDepartment]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationDepartment.html
 [Ronin::DB::OrganizationMember]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationMember.html
+[Ronin::DB::OrganizationPhoneNumber]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationPhoneNumber.html
 [Ronin::DB::OS]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OS.html
 [Ronin::DB::OSGuess]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OSGuess.html
 [Ronin::DB::Password]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Password.html
