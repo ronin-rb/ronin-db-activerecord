@@ -71,6 +71,22 @@ module Ronin
       # NOTE: ensure the name is unique with respect to the parent organization
       validates :name, uniqueness: {scope: [:parent_id]}
 
+      # @!attribute [rw] organization_phone_numbers
+      #   The association of phone numbers associated with the organization.
+      #
+      #   @return [Array<OrganizationPhoneNumber>]
+      #
+      #   @since 0.2.0
+      has_many :organization_phone_numbers, dependent: :destroy
+
+      # @!attribute [rw] phone_numbers
+      #   The phone numbers that are associated with the organization.
+      #
+      #   @return [Array<PhoneNumber>]
+      #
+      #   @since 0.2.0
+      has_many :phone_numbers, through: :organization_phone_numbers
+
       # @!attribute [rw] departments
       #   The associated departments of the organization.
       #
@@ -170,6 +186,7 @@ module Ronin
   end
 end
 
+require 'ronin/db/organization_phone_number'
 require 'ronin/db/organization_department'
 require 'ronin/db/organization_member'
 require 'ronin/db/organization_customer'

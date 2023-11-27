@@ -115,6 +115,12 @@ module Ronin
       #   @return [Array<Person>]
       has_many :people, through: :personal_phone_numbers
 
+      # @!attribute [rw] organization_phone_number
+      #   The association of the organization that use the phone number.
+      #
+      #   @return [OrganiationPhoneNumber, nil]
+      has_one :organization_phone_number, dependent: :destroy
+
       # @!attribute [rw] organization_department
       #   The organization department that uses the email address.
       #
@@ -204,6 +210,7 @@ end
 
 require 'ronin/db/personal_phone_number'
 require 'ronin/db/person'
+require 'ronin/db/organization_phone_number'
 require 'ronin/db/organization_department'
 require 'ronin/db/organization_member'
 require 'ronin/db/note'
