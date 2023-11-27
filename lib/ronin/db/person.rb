@@ -136,6 +136,18 @@ module Ronin
       #   @return [Array<PhoneNumber>]
       has_many :phone_numbers, through: :personal_phone_numbers
 
+      # @!attribute [rw] personal_email_addresss
+      #   The perons's email addresses.
+      #
+      #   @return [Array<PersonalEmailAddress>]
+      has_many :personal_email_addresses, dependent: :destroy
+
+      # @!attribute [rw] email_addresses
+      #   The email addresses associated with the person.
+      #
+      #   @return [Array<EmailAddress>]
+      has_many :email_addresses, through: :personal_email_addresses
+
       # @!attribute [rw] personal_connections
       #   The perons's connections with other people.
       #
