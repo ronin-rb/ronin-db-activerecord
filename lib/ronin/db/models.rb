@@ -31,6 +31,7 @@ require 'ronin/db/open_port'
 require 'ronin/db/organization'
 require 'ronin/db/organization_customer'
 require 'ronin/db/organization_department'
+require 'ronin/db/organization_phone_number'
 require 'ronin/db/os'
 require 'ronin/db/os_guess'
 require 'ronin/db/password'
@@ -90,6 +91,7 @@ module Ronin
         Organization,
         OrganizationCustomer,
         OrganizationDepartment,
+        OrganizationPhoneNumber,
         Password,
         Person,
         PersonalPhoneNumber,
