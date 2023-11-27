@@ -110,6 +110,22 @@ module Ronin
       #   @return [Time]
       attribute :created_at, :datetime
 
+      # @!attribute [rw] personal_email_addresses
+      #   The association between people and the email address.
+      #
+      #   @return [Array<PersonalEmailAddress>]
+      #
+      #   @since 0.2.0
+      has_many :personal_email_addresses, dependent: :destroy
+
+      # @!attribute [rw] people
+      #   The people that use the email address.
+      #
+      #   @return [Array<Person>]
+      #
+      #   @since 0.2.0
+      has_many :people, through: :personal_email_addresses
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
@@ -278,4 +294,5 @@ end
 
 require 'ronin/db/user_name'
 require 'ronin/db/host_name'
+require 'ronin/db/personal_email_address'
 require 'ronin/db/note'
