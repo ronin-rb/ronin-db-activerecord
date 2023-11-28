@@ -35,6 +35,9 @@ module Ronin
       include Model::HasName
       include Model::Importable
 
+      # NOTE: disable STI so we can use the type column as an enum.
+      self.inheritance_column = nil
+
       # @!attribute [rw] id
       #   Primary key of the organization
       #
