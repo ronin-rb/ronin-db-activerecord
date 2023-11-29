@@ -133,6 +133,19 @@ module Ronin
         zlib:      'zlib'
       }, _prefix: true
 
+      # @!attribute [rw] rfi_script_lang
+      #   The RFI script lang.
+      #
+      #   @return [:asp, :asp_net, :cold_fusion, :jsp, :php, :perl, nil]
+      enum rfi_script_lang: {
+        asp:         'asp',
+        asp_net:     'asp_net',
+        cold_fusion: 'cold_fusion',
+        jsp:         'jsp',
+        php:         'php',
+        perl:        'perl'
+      }, _prefix: true
+
       # @!attribute [rw] rfi_filter_bypass
       #   The RFI filter bypass.
       #
