@@ -108,7 +108,7 @@ module Ronin
       }, _suffix: :requests
 
       # @!attribute [rw] lfi_os
-      #   The lfi os.
+      #   The LFI os.
       #
       #   @return [:unix, :windows, nil]
       enum lfi_os: {
@@ -117,13 +117,13 @@ module Ronin
       }, _prefix: true
 
       # @!attribute [rw] lfi_depth
-      #   The lfi depth.
+      #   The LFI depth.
       #
       #   @return [Integer, nil]
       attribute :lfi_depth, :integer
 
       # @!attribute [rw] lfi_filter_bypass
-      #   The lfi filter bypass.
+      #   The LFI filter bypass.
       #
       #   @return [:null_byte, :base64, :rot13, :zlib, nil]
       enum lfi_filter_bypass: {
@@ -133,21 +133,8 @@ module Ronin
         zlib:      'zlib'
       }, _prefix: true
 
-      # @!attribute [rw] rfi_script_lang
-      #   The rfi script lang.
-      #
-      #   @return [:asp, :asp_net, :cold_fusion, :jsp, :php, :perl, nil]
-      enum rfi_script_lang: {
-        asp:         'asp',
-        asp_net:     'asp_net',
-        cold_fusion: 'cold_fusion',
-        jsp:         'jsp',
-        php:         'php',
-        perl:        'perl'
-      }, _prefix: true
-
       # @!attribute [rw] rfi_filter_bypass
-      #   The rfi filter bypass.
+      #   The RFI filter bypass.
       #
       #   @return [:null_byte, :double_encode, nil]
       enum rfi_filter_bypass: {
@@ -156,7 +143,7 @@ module Ronin
       }, _prefix: true
 
       # @!attribute [rw] ssti_escape_type
-      #   The ssti escape type.
+      #   The SSTI escape type.
       #
       #   @return [:double_curly_braces, :dollar_curly_braces, :dollar_double_curly_braces, :pound_curly_braces, :angle_brackets_percent, :custom, nil]
       enum ssti_escape_type: {
@@ -169,19 +156,19 @@ module Ronin
       }, _prefix: true
 
       # @!attribute [rw] sqli_escape_quote
-      #   The sqli escape quote.
+      #   The SQLi escape quote.
       #
       #   @return [Boolean, nil]
       attribute :sqli_escape_quote, :boolean
 
       # @!attribute [rw] sqli_escape_parens
-      #   The sqli escape parens.
+      #   The SQLi escape parens.
       #
       #   @return [Boolean, nil]
       attribute :sqli_escape_parens, :boolean
 
       # @!attribute [rw] sqli_terminate
-      #   The sqli terminate.
+      #   The SQLi terminate.
       #
       #   @return [Boolean, nil]
       attribute :sqli_terminate, :boolean
