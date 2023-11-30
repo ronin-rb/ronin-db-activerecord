@@ -95,19 +95,25 @@ class CreateRoninNotesTable < ActiveRecord::Migration[7.0]
                                 to_table: :ronin_advisories
                               }
 
-      t.index :mac_address_id
-      t.index :ip_address_id
-      t.index :host_name_id
-      t.index :port_id
-      t.index :service_id
-      t.index :open_port_id
-      t.index :cert_id
-      t.index :url_id
-      t.index :user_name_id
-      t.index :email_address_id
-      t.index :password_id
-      t.index :credential_id
-      t.index :advisory_id
+      t.references :street_address, null: true,
+                                    foreign_key: {
+                                      to_table: :ronin_street_addresses
+                                    }
+
+      t.references :phone_number, null: true,
+                                  foreign_key: {
+                                    to_table: :ronin_phone_numbers
+                                  }
+
+      t.references :person, null: true,
+                            foreign_key: {
+                              to_table: :ronin_people
+                            }
+
+      t.references :organization, null: true,
+                                  foreign_key: {
+                                    to_table: :ronin_organizations
+                                  }
     end
   end
 

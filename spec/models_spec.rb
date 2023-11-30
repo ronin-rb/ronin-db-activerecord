@@ -26,7 +26,17 @@ describe 'Ronin::DB::Models' do
     it { expect(subject).to include(Ronin::DB::OSGuess) }
     it { expect(subject).to include(Ronin::DB::OpenPort) }
     it { expect(subject).to include(Ronin::DB::Organization) }
+    it { expect(subject).to include(Ronin::DB::OrganizationStreetAddress) }
+    it { expect(subject).to include(Ronin::DB::OrganizationCustomer) }
+    it { expect(subject).to include(Ronin::DB::OrganizationDepartment) }
+    it { expect(subject).to include(Ronin::DB::OrganizationPhoneNumber) }
+    it { expect(subject).to include(Ronin::DB::OrganizationEmailAddress) }
     it { expect(subject).to include(Ronin::DB::Password) }
+    it { expect(subject).to include(Ronin::DB::Person) }
+    it { expect(subject).to include(Ronin::DB::PersonalPhoneNumber) }
+    it { expect(subject).to include(Ronin::DB::PersonalEmailAddress) }
+    it { expect(subject).to include(Ronin::DB::PersonalStreetAddress) }
+    it { expect(subject).to include(Ronin::DB::PersonalConnection) }
     it { expect(subject).to include(Ronin::DB::Port) }
     it { expect(subject).to include(Ronin::DB::Service) }
     it { expect(subject).to include(Ronin::DB::ServiceCredential) }
@@ -35,6 +45,7 @@ describe 'Ronin::DB::Models' do
     it { expect(subject).to include(Ronin::DB::URLQueryParam) }
     it { expect(subject).to include(Ronin::DB::URLScheme) }
     it { expect(subject).to include(Ronin::DB::URL) }
+    it { expect(subject).to include(Ronin::DB::WebVuln) }
     it { expect(subject).to include(Ronin::DB::UserName) }
     it { expect(subject).to include(Ronin::DB::SoftwareVendor) }
     it { expect(subject).to include(Ronin::DB::WebCredential) }

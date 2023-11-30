@@ -139,6 +139,30 @@ module Ronin
       #   @return [Advisory, nil]
       belongs_to :advisory, optional: true
 
+      # @!attribute [rw] phone_number
+      #   The associated phone number.
+      #
+      #   @return [PhoneNumber, nil]
+      belongs_to :phone_number, optional: true
+
+      # @!attribute [rw] street_address
+      #   The associated street address.
+      #
+      #   @return [StreetAddress, nil]
+      belongs_to :street_address, optional: true
+
+      # @!attribute [rw] person
+      #   The associated person.
+      #
+      #   @return [Person, nil]
+      belongs_to :person, optional: true
+
+      # @!attribute [rw] organization
+      #   The associated organization.
+      #
+      #   @return [Organization, nil]
+      belongs_to :organization, optional: true
+
       validate :validate_at_least_one_belongs_to_set
 
       private
@@ -147,8 +171,8 @@ module Ronin
       # Validates that at least one of the `belongs_to` associations is set.
       #
       def validate_at_least_one_belongs_to_set
-        unless (mac_address || ip_address || host_name || port || service || open_port || cert || url || user_name || email_address || password || credential || advisory)
-          errors.add(:base, 'note must be associated with a MACAddress, IPAddress, HostName, Port, Service, OpenPort, Cert, URL, UserName, EmailAddress, Password, Credential, or Advisory')
+        unless (mac_address || ip_address || host_name || port || service || open_port || cert || url || user_name || email_address || password || credential || advisory || phone_number || street_address || person || organization)
+          errors.add(:base, 'note must be associated with a MACAddress, IPAddress, HostName, Port, Service, OpenPort, Cert, URL, UserName, EmailAddress, Password, Credential, Advisory, PhoneNumber, StreetAddress, Person, or Organization')
         end
       end
 
@@ -169,3 +193,7 @@ require 'ronin/db/email_address'
 require 'ronin/db/password'
 require 'ronin/db/credential'
 require 'ronin/db/advisory'
+require 'ronin/db/street_address'
+require 'ronin/db/phone_number'
+require 'ronin/db/person'
+require 'ronin/db/organization'

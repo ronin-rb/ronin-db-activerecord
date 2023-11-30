@@ -29,9 +29,19 @@ require 'ronin/db/ip_address_mac_address'
 require 'ronin/db/mac_address'
 require 'ronin/db/open_port'
 require 'ronin/db/organization'
+require 'ronin/db/organization_street_address'
+require 'ronin/db/organization_customer'
+require 'ronin/db/organization_department'
+require 'ronin/db/organization_phone_number'
+require 'ronin/db/organization_email_address'
 require 'ronin/db/os'
 require 'ronin/db/os_guess'
 require 'ronin/db/password'
+require 'ronin/db/person'
+require 'ronin/db/personal_phone_number'
+require 'ronin/db/personal_email_address'
+require 'ronin/db/personal_street_address'
+require 'ronin/db/personal_connection'
 require 'ronin/db/port'
 require 'ronin/db/service'
 require 'ronin/db/service_credential'
@@ -40,6 +50,7 @@ require 'ronin/db/url_query_param_name'
 require 'ronin/db/url_query_param'
 require 'ronin/db/url_scheme'
 require 'ronin/db/url'
+require 'ronin/db/web_vuln'
 require 'ronin/db/user_name'
 require 'ronin/db/software_vendor'
 require 'ronin/db/web_credential'
@@ -80,7 +91,17 @@ module Ronin
         OSGuess,
         OpenPort,
         Organization,
+        OrganizationStreetAddress,
+        OrganizationCustomer,
+        OrganizationDepartment,
+        OrganizationPhoneNumber,
+        OrganizationEmailAddress,
         Password,
+        Person,
+        PersonalPhoneNumber,
+        PersonalEmailAddress,
+        PersonalStreetAddress,
+        PersonalConnection,
         Port,
         Service,
         ServiceCredential,
@@ -89,6 +110,7 @@ module Ronin
         URLQueryParam,
         URLScheme,
         URL,
+        WebVuln,
         UserName,
         SoftwareVendor,
         WebCredential,

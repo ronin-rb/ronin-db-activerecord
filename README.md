@@ -44,20 +44,34 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * [Ronin::DB::Note]
   * [Ronin::DB::OpenPort]
   * [Ronin::DB::Organization]
+  * [Ronin::DB::OrganizationCustomer]
+  * [Ronin::DB::OrganizationDepartment]
+  * [Ronin::DB::OrganizationEmailAddress]
+  * [Ronin::DB::OrganizationMember]
+  * [Ronin::DB::OrganizationPhoneNumber]
+  * [Ronin::DB::OrganizationStreetAddress]
   * [Ronin::DB::OS]
   * [Ronin::DB::OSGuess]
   * [Ronin::DB::Password]
+  * [Ronin::DB::Person]
+  * [Ronin::DB::PersonalConnection]
+  * [Ronin::DB::PersonalEmailAddress]
+  * [Ronin::DB::PersonalPhoneNumber]
+  * [Ronin::DB::PersonalStreetAddress]
+  * [Ronin::DB::PhoneNumber]
   * [Ronin::DB::Port]
   * [Ronin::DB::Service]
   * [Ronin::DB::ServiceCredential]
   * [Ronin::DB::Software]
   * [Ronin::DB::SoftwareVendor]
+  * [Ronin::DB::StreetAddress]
   * [Ronin::DB::URL]
   * [Ronin::DB::URLQueryParam]
   * [Ronin::DB::URLQueryParamName]
   * [Ronin::DB::URLScheme]
   * [Ronin::DB::UserName]
   * [Ronin::DB::Vulnerability]
+  * [Ronin::DB::WebVuln]
   * [Ronin::DB::WebCredential]
 * Has 98% documentation coverage.
 * Has 99% test coverage.
@@ -86,20 +100,34 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
 [Ronin::DB::Note]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Note.html
 [Ronin::DB::OpenPort]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OpenPort.html
 [Ronin::DB::Organization]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Organization.html
+[Ronin::DB::OrganizationCustomer]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationCustomer.html
+[Ronin::DB::OrganizationDepartment]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationDepartment.html
+[Ronin::DB::OrganizationEmailAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationEmailAddress.html
+[Ronin::DB::OrganizationMember]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationMember.html
+[Ronin::DB::OrganizationPhoneNumber]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationPhoneNumber.html
+[Ronin::DB::OrganizationStreetAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationStreetAddress.html
 [Ronin::DB::OS]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OS.html
 [Ronin::DB::OSGuess]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OSGuess.html
 [Ronin::DB::Password]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Password.html
+[Ronin::DB::Person]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Person.html
+[Ronin::DB::PersonalConnection]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/PersonalConnection.html
+[Ronin::DB::PersonalEmailAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/PersonalEmailAddress.html
+[Ronin::DB::PersonalPhoneNumber]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/PersonalPhoneNumber.html
+[Ronin::DB::PersonalStreetAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/PersonalStreetAddress.html
+[Ronin::DB::PhoneNumber]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/PhoneNumber.html
 [Ronin::DB::Port]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Port.html
 [Ronin::DB::Service]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Service.html
 [Ronin::DB::ServiceCredential]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/ServiceCredential.html
 [Ronin::DB::Software]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Software.html
 [Ronin::DB::SoftwareVendor]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/SoftwareVendor.html
+[Ronin::DB::StreetAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/StreetAddress.html
 [Ronin::DB::URL]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/URL.html
 [Ronin::DB::URLQueryParam]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/URLQueryParam.html
 [Ronin::DB::URLQueryParamName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/URLQueryParamName.html
 [Ronin::DB::URLScheme]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/URLScheme.html
 [Ronin::DB::UserName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/UserName.html
 [Ronin::DB::Vulnerability]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/Vulnerability.html
+[Ronin::DB::WebVuln]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/WebVuln.html
 [Ronin::DB::WebCredential]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/WebCredential.html
 
 ## Examples

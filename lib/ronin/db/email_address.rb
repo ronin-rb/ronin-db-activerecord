@@ -110,6 +110,46 @@ module Ronin
       #   @return [Time]
       attribute :created_at, :datetime
 
+      # @!attribute [rw] personal_email_addresses
+      #   The association between people and the email address.
+      #
+      #   @return [Array<PersonalEmailAddress>]
+      #
+      #   @since 0.2.0
+      has_many :personal_email_addresses, dependent: :destroy
+
+      # @!attribute [rw] people
+      #   The people that use the email address.
+      #
+      #   @return [Array<Person>]
+      #
+      #   @since 0.2.0
+      has_many :people, through: :personal_email_addresses
+
+      # @!attribute [rw] organization_email_address
+      #   The association of the organization that use the email address.
+      #
+      #   @return [OrganizationEmailAddress, nil]
+      #
+      #   @since 0.2.0
+      has_one :organization_email_address, dependent: :destroy
+
+      # @!attribute [rw] organization_department
+      #   The organization department that uses the email address.
+      #
+      #   @return [OrganizationDepartment, nil]
+      #
+      #   @since 0.2.0
+      has_one :organization_department, dependent: :nullify
+
+      # @!attribute [rw] organization_members
+      #   The organization member that uses the email address.
+      #
+      #   @return [OrganizationMember, nil]
+      #
+      #   @since 0.2.0
+      has_one :organization_member, dependent: :nullify
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
@@ -278,4 +318,8 @@ end
 
 require 'ronin/db/user_name'
 require 'ronin/db/host_name'
+require 'ronin/db/personal_email_address'
+require 'ronin/db/organization_department'
+require 'ronin/db/organization_email_address'
+require 'ronin/db/organization_member'
 require 'ronin/db/note'
