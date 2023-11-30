@@ -21,6 +21,7 @@
 require 'ronin/db/model'
 
 require 'active_record'
+require 'resolv'
 
 module Ronin
   module DB
@@ -115,6 +116,17 @@ module Ronin
       #   @return [Time]
       attribute :created_at, :datetime
 
+      # @!attribute [rw] address
+      #   The source IP Address.
+      #
+      #   @return [String, nil]
+      attribute :source_ip, :string
+      validates :source_ip, length: { maximum: 39 },
+                            format: {
+                              with: /#{Resolv::IPv4::Regex}|#{Resolv::IPv6::Regex}/,
+                              message: 'Must be a valid IP address'
+                            },
+                            allow_nil: true
     end
   end
 end

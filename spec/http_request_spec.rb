@@ -77,6 +77,57 @@ describe Ronin::DB::HTTPRequest do
           ["can't be blank", "is not included in the list"]
         )
       end
+
+      describe "source_ip" do
+        let(:address)      { '127.0.0.1' }
+        let(:ipv4_address) { '93.184.216.34' }
+        let(:ipv6_address) { '2606:2800:220:1:248:1893:25c8:1946' }
+
+        it "must not require an address" do
+          http_request = described_class.new
+          expect(http_request).to_not be_valid
+
+          http_request = described_class.new(
+            version:        version,
+            request_method: request_method,
+            path:           path
+          )
+          expect(http_request).to be_valid
+        end
+
+        it "must accept IPv4 addresses" do
+          http_request = described_class.new(
+            version:        version,
+            request_method: request_method,
+            path:           path,
+            source_ip:      ipv4_address
+          )
+          expect(http_request).to be_valid
+        end
+
+        it "must accept IPv6 addresses" do
+          http_request = described_class.new(
+            version:        version,
+            request_method: request_method,
+            path:           path,
+            source_ip:      ipv6_address
+          )
+          expect(http_request).to be_valid
+        end
+
+        it "must not accept non-IP addresses" do
+          http_request = described_class.new(
+            version:        version,
+            request_method: request_method,
+            path:           path,
+            source_ip:      '0'
+          )
+          expect(http_request).to_not be_valid
+          expect(http_request.errors[:source_ip]).to eq(
+            ["Must be a valid IP address"]
+          )
+        end
+      end
     end
 
     describe "request_method" do
