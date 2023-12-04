@@ -51,12 +51,13 @@ module Ronin
       #
       #   @return [String]
       enum type: {
-        lfi:           'lfi',
-        rfi:           'rfi',
-        sqli:          'sqli',
-        ssti:          'ssti',
-        open_redirect: 'open_redirect',
-        reflected_xss: 'reflected_xss'
+        lfi:               'lfi',
+        rfi:               'rfi',
+        sqli:              'sqli',
+        ssti:              'ssti',
+        open_redirect:     'open_redirect',
+        reflected_xss:     'reflected_xss',
+        command_injection: 'command_injection'
       }
       validates :type, presence: true
 
@@ -185,6 +186,24 @@ module Ronin
       #
       #   @return [Boolean, nil]
       attribute :sqli_terminate, :boolean
+
+      # @!attribute [rw] command_injection_escape_quote
+      #   The Command Injection escape quote character.
+      #
+      #   @return [String, nil]
+      attribute :command_injection_escape_quote, :string
+
+      # @!attribute [rw] command_injection_escape_operator
+      #   The Command Injection escape operator character.
+      #
+      #   @return [String, nil]
+      attribute :command_injection_escape_operator, :string
+
+      # @!attribute [rw] command_injection_terminator
+      #   The Command Injection terminator character.
+      #
+      #   @return [String, nil]
+      attribute :command_injection_terminator, :string
 
       # @!attribute [r] created_at
       #   Defines the created_at timestamp
