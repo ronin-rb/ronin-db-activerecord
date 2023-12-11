@@ -76,7 +76,7 @@ module Ronin
                                 with: /#{Resolv::IPv4::Regex}|#{Resolv::IPv6::Regex}/,
                                 message: 'Must be a valid IP address'
                               }
-     
+
       # @!attribute [rw] created_at
       #   When the DNS query request was created.
       #
