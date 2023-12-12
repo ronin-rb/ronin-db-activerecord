@@ -48,24 +48,24 @@ module Ronin
       # @!attribute [rw] request_method
       #   The request method.
       #
-      #   @return [:copy, :delete, :get, :head, :lock, :mkcol, :move, :options, :patch, :post, :propfind, :proppatch, :put, :trace, :unlock]
-      enum request_method: [
-        :copy,
-        :delete,
-        :get,
-        :head,
-        :lock,
-        :mkcol,
-        :move,
-        :options,
-        :patch,
-        :post,
-        :propfind,
-        :proppatch,
-        :put,
-        :trace,
-        :unlock
-      ], _suffix: :requests
+      #   @return ["COPY", "DELETE", "GET", "HEAD", "LOCK", "MKCOL", "MOVE", "OPTIONS", "PATCH", "POST", "PROPFIND", "PROPPATCH", "PUT", "TRACE", "UNLOCK"]
+      enum request_method: {
+        copy:      'COPY',
+        delete:    'DELETE',
+        get:       'GET',
+        head:      'HEAD',
+        lock:      'LOCK',
+        mkcol:     'MKCOL',
+        move:      'MOVE',
+        options:   'OPTIONS',
+        patch:     'PATCH',
+        post:      'POST',
+        propfind:  'PROPFIND',
+        proppatch: 'PROPPATCH',
+        put:       'PUT',
+        trace:     'TRACE',
+        unlock:    'UNLOCK'
+      }, _suffix: :requests
       validates :request_method, presence: true
 
       # @!attribute [rw] path

@@ -95,7 +95,22 @@ describe Ronin::DB::HTTPRequest do
         :proppatch,
         :put,
         :trace,
-        :unlock
+        :unlock,
+        'COPY',
+        'DELETE',
+        'GET',
+        'HEAD',
+        'LOCK',
+        'MKCOL',
+        'MOVE',
+        'OPTIONS',
+        'PATCH',
+        'POST',
+        'PROPFIND',
+        'PROPPATCH',
+        'PUT',
+        'TRACE',
+        'UNLOCK'
       ].each do |valid_request_method|
         it "must accept #{valid_request_method.inspect}" do
           request = described_class.new(
