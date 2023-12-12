@@ -28,6 +28,7 @@ module Ronin
     #
     # Represents a DNS query.
     #
+    # @since 0.2.0
     class DNSQuery < ActiveRecord::Base
 
       include Model
@@ -43,20 +44,20 @@ module Ronin
       #
       #   @return [String]
       enum type: {
-        A:     'A',
-        AAAA:  'AAAA',
-        ANY:   'ANY',
-        CNAME: 'CNAME',
-        HINFO: 'HINFO',
-        LOC:   'LOC',
-        MX:    'MX',
-        NS:    'NS',
-        PTR:   'PTR',
-        SOA:   'SOA',
-        SRV:   'SRV',
-        TXT:   'TXT',
-        WKS:   'WKS'
-      }
+        a:     'A',
+        aaaa:  'AAAA',
+        any:   'ANY',
+        cname: 'CNAME',
+        hinfo: 'HINFO',
+        loc:   'LOC',
+        mx:    'MX',
+        ns:    'NS',
+        ptr:   'PTR',
+        soa:   'SOA',
+        srv:   'SRV',
+        txt:   'TXT',
+        wks:   'WKS'
+      }, _suffix: :query
       validates :type, presence: true
 
       # @!attribute [rw] label

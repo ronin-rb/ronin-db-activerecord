@@ -32,6 +32,10 @@ class CreateDnsQueryTable < ActiveRecord::Migration[7.0]
       t.string :source_addr, length: 39, null: false
 
       t.datetime :created_at, null: false
+
+      t.index :type
+      t.index :label
+      t.index :source_addr
     end
   end
 end
