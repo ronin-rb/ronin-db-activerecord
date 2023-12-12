@@ -65,7 +65,7 @@ module Ronin
         put:       'PUT',
         trace:     'TRACE',
         unlock:    'UNLOCK'
-      }, _suffix: :requests
+      }, _suffix: :request
       validates :request_method, presence: true
 
       # @!attribute [rw] path
