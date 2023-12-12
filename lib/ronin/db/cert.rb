@@ -87,8 +87,8 @@ module Ronin
       # @!attribute [rw] public_key_algorithm
       #   The public key algorithm.
       #
-      #   @return [:rsa, :dsa, :dh, :ec]
-      enum :public_key_algorithm, {rsa: 'rsa', dsa: 'dsa', dh: 'dh', ec: 'ec'}
+      #   @return ['RSA', 'DSA', 'DH', 'EC']
+      enum :public_key_algorithm, {rsa: 'RSA', dsa: 'DSA', dh: 'DH', ec: 'EC'}
       validates :public_key_algorithm, presence: true
 
       # @!attribute [rw] public_key_size
