@@ -49,7 +49,7 @@ module Ronin
       # @!attribute [rw] type
       #   The type of vuln.
       #
-      #   @return [String]
+      #   @return ["lfi", "rfi", "sqli", "ssti", "open_redirect", "reflected_xss", "command_injection"]
       enum type: {
         lfi:               'lfi',
         rfi:               'rfi',
