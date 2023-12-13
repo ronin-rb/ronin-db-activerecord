@@ -46,7 +46,7 @@ module Ronin
       # @!attribute [rw] type
       #   The type of the phone number.
       #
-      #   @return [:home, :cell, :fax, :voip, nil]
+      #   @return ["home", "cell", "fax", "voip", nil]
       enum :type, {home: 'home', cell: 'cell', fax: 'fax', voip: 'voip'}
 
       # @!attribute [rw] person
