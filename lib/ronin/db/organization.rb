@@ -47,7 +47,7 @@ module Ronin
       # @!attribute [rw] type
       #   The type for the organization.
       #
-      #   @return [String, nil]
+      #   @return ["company", "government", "military", nil]
       #
       #   @since 0.2.0
       enum :type, {
