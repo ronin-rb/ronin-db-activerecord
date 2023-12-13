@@ -89,24 +89,24 @@ module Ronin
       # @!attribute [rw] request_method
       #   The request method for the URL.
       #
-      #   @return [:copy, :delete, :get, :head, :lock, :mkcol, :move, :options, :patch, :post, :propfind, :proppatch, :put, :trace, :unlock]
+      #   @return ["copy", "delete", "get", "head", "lock", "mkcol", "move", "options", "patch", "post", "propfind", "proppatch", "put", "trace", "unlock"]
       enum request_method: {
-        copy:      'copy',
-        delete:    'delete',
-        get:       'get',
-        head:      'head',
-        lock:      'lock',
-        mkcol:     'mkcol',
-        move:      'move',
-        options:   'options',
-        patch:     'patch',
-        post:      'post',
-        propfind:  'propfind',
-        proppatch: 'proppatch',
-        put:       'put',
-        trace:     'trace',
-        unlock:    'unlock'
-      }, _suffix: :requests
+        copy:      'COPY',
+        delete:    'DELETE',
+        get:       'GET',
+        head:      'HEAD',
+        lock:      'LOCK',
+        mkcol:     'MKCOL',
+        move:      'MOVE',
+        options:   'OPTIONS',
+        patch:     'PATCH',
+        post:      'POST',
+        propfind:  'PROPFIND',
+        proppatch: 'PROPPATCH',
+        put:       'PUT',
+        trace:     'TRACE',
+        unlock:    'UNLOCK'
+      }, _suffix: :request
 
       # @!attribute [rw] lfi_os
       #   The LFI os.
