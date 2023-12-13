@@ -51,7 +51,7 @@ module Ronin
       # @!attribute [rw] type
       #   The type of organization membership.
       #
-      #   @return [String, nil]
+      #   @return ["advisor", "volunteer", "employee", "contractor", "intern", "board_member", nil]
       enum :type, {
         advisor:      'advisor',
         volunteer:    'volunteer',
