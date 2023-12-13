@@ -44,7 +44,7 @@ module Ronin
       # @!attribute [rw] endian
       #   Endianness of the architecture.
       #
-      #   @return [:little, :big]
+      #   @return ["little", "big"]
       enum :endian, {little: 'little', big: 'big'}
       validates :endian, presence: true
 

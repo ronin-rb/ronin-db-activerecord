@@ -43,7 +43,7 @@ module Ronin
       # @!attribute [rw] flavor
       #   The flavor of the OS (Linux, BSD).
       #
-      #   @return [:linux, :bsd]
+      #   @return ["linux", "bsd"]
       enum :flavor, {linux: 'Linux', bsd: 'BSD'}
 
       # @!attribute [rw] version
