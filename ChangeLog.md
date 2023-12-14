@@ -1,3 +1,10 @@
+### 0.1.5 / 2023-12-13
+
+* Corrected {Ronin::DB::HTTPRequest#request_method} to accept and store
+  uppercase HTTP verbs (ex: `GET`).
+* Corrected {Ronin::DB::HTTPRequest#request_method} helper methods to use the
+  singular suffix of `_request?` (ex: `get_request?`).
+
 ### 0.1.4 / 2023-10-16
 
 * Require [activerecord] `~> 7.0`.
