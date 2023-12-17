@@ -25,7 +25,7 @@ require 'active_record'
 module Ronin
   module DB
     #
-    # Represents a {HostName} of an {Organization}.
+    # Represents an association between an {Organization} and a {HostName}.
     #
     # @since 0.2.0
     #
