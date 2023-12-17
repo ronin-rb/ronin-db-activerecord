@@ -49,6 +49,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * [Ronin::DB::OrganizationCustomer]
   * [Ronin::DB::OrganizationDepartment]
   * [Ronin::DB::OrganizationEmailAddress]
+  * [Ronin::DB::OrganizationHostName]
   * [Ronin::DB::OrganizationMember]
   * [Ronin::DB::OrganizationPhoneNumber]
   * [Ronin::DB::OrganizationStreetAddress]
@@ -107,6 +108,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
 [Ronin::DB::OrganizationCustomer]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationCustomer.html
 [Ronin::DB::OrganizationDepartment]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationDepartment.html
 [Ronin::DB::OrganizationEmailAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationEmailAddress.html
+[Ronin::DB::OrganizationHostName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationHostName.html
 [Ronin::DB::OrganizationMember]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationMember.html
 [Ronin::DB::OrganizationPhoneNumber]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationPhoneNumber.html
 [Ronin::DB::OrganizationStreetAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/OrganizationStreetAddress.html
