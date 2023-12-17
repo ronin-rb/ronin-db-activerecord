@@ -28,6 +28,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
   * [Ronin::DB::CertName]
   * [Ronin::DB::CertSubject]
   * [Ronin::DB::CertSubjectAltName]
+  * [Ronin::DB::DNSQuery]
   * [Ronin::DB::EmailAddress]
   * [Ronin::DB::HostName]
   * [Ronin::DB::HostNameIPAddress]
@@ -84,6 +85,7 @@ ronin-db-activerecord contains [ActiveRecord] models and migrations for the
 [Ronin::DB::CertName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/CertName.html
 [Ronin::DB::CertSubject]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/CertSubject.html
 [Ronin::DB::CertSubjectAltName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/CertSubjectAltName.html
+[Ronin::DB::DNSQuery]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/DNSQuery.html
 [Ronin::DB::EmailAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/EmailAddress.html
 [Ronin::DB::HostName]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/HostName.html
 [Ronin::DB::HostNameIPAddress]: https://ronin-rb.dev/docs/ronin-db-activerecord/Ronin/DB/HostNameIPAddress.html
