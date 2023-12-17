@@ -29,6 +29,7 @@ module Ronin
     # Represents a DNS query.
     #
     # @since 0.2.0
+    #
     class DNSQuery < ActiveRecord::Base
 
       include Model
@@ -83,6 +84,7 @@ module Ronin
       #
       #   @return [Time]
       attribute :created_at, :datetime
+
     end
   end
 end
