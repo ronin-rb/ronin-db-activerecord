@@ -128,6 +128,23 @@ module Ronin
       #   @since 0.2.0
       has_many :advisories, through: :vulnerabilities
 
+      # @!attribute [rw] organization_ip_addresses
+      #   The association of IP addresses and organizations.
+      #
+      #   @return [Array<OrganizationIPAddress>]
+      #
+      #   @since 0.2.0
+      has_many :organization_ip_addresses, class_name: 'OrganizationIPAddress',
+                                           dependent:  :destroy
+
+      # @!attribute [rw] organizations
+      #   The organizations that claim ownership of the IP address.
+      #
+      #   @return [Array<Organization>]
+      #
+      #   @since 0.2.0
+      has_many :organizations, through: :organization_ip_addresses
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
@@ -375,4 +392,5 @@ require 'ronin/db/os'
 require 'ronin/db/asn'
 require 'ronin/db/vulnerability'
 require 'ronin/db/advisory'
+require 'ronin/db/organization_ip_address'
 require 'ronin/db/note'
