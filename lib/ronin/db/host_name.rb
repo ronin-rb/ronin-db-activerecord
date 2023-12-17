@@ -117,6 +117,22 @@ module Ronin
       #   @since 0.2.0
       has_many :advisories, through: :vulnerabilities
 
+      # @!attribute [rw] organization_host_names
+      #   The association of host names and organizations.
+      #
+      #   @return [Array<OrganizationHostName>]
+      #
+      #   @since 0.2.0
+      has_many :organization_host_names, dependent: :destroy
+
+      # @!attribute [rw] organizations
+      #   The organizations that claim ownership of the host name.
+      #
+      #   @return [Array<Organization>]
+      #
+      #   @since 0.2.0
+      has_many :organizations, through: :organization_host_names
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
@@ -249,4 +265,5 @@ require 'ronin/db/host_name_ip_address'
 require 'ronin/db/ip_address'
 require 'ronin/db/vulnerability'
 require 'ronin/db/advisory'
+require 'ronin/db/organization_host_name'
 require 'ronin/db/note'
