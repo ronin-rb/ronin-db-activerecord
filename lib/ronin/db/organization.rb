@@ -194,6 +194,22 @@ module Ronin
       #   @since 0.2.0
       has_many :vendors, through: :organization_vendors
 
+      # @!attribute [rw] organization_host_names
+      #   The association of organizations and host names.
+      #
+      #   @return [Array<OrganizationHostName>]
+      #
+      #   @since 0.2.0
+      has_many :organization_host_names, dependent: :destroy
+
+      # @!attribute [rw] host_names
+      #   The host names that the organization owns.
+      #
+      #   @return [Array<HostName>]
+      #
+      #   @since 0.2.0
+      has_many :host_names, through: :organization_host_names
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
@@ -246,4 +262,5 @@ require 'ronin/db/organization_email_address'
 require 'ronin/db/organization_department'
 require 'ronin/db/organization_member'
 require 'ronin/db/organization_customer'
+require 'ronin/db/organization_host_name'
 require 'ronin/db/note'
