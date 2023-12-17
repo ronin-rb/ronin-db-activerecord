@@ -35,6 +35,7 @@ require 'ronin/db/organization_department'
 require 'ronin/db/organization_phone_number'
 require 'ronin/db/organization_email_address'
 require 'ronin/db/organization_host_name'
+require 'ronin/db/organization_ip_address'
 require 'ronin/db/os'
 require 'ronin/db/os_guess'
 require 'ronin/db/password'
@@ -100,6 +101,7 @@ module Ronin
         OrganizationPhoneNumber,
         OrganizationEmailAddress,
         OrganizationHostName,
+        OrganizationIPAddress,
         Password,
         Person,
         PersonalPhoneNumber,

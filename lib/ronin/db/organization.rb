@@ -210,6 +210,23 @@ module Ronin
       #   @since 0.2.0
       has_many :host_names, through: :organization_host_names
 
+      # @!attribute [rw] organization_ip_addresses
+      #   The association of organizations and IP addresses.
+      #
+      #   @return [Array<OrganizationIPAddress>]
+      #
+      #   @since 0.2.0
+      has_many :organization_ip_addresses, class_name: 'OrganizationIPAddress',
+                                           dependent:  :destroy
+
+      # @!attribute [rw] ip_addresses
+      #   The IP addresses that the organization owns.
+      #
+      #   @return [Array<IPAddress>]
+      #
+      #   @since 0.2.0
+      has_many :ip_addresses, through: :organization_ip_addresses
+
       # @!attribute [rw] notes
       #   The associated notes.
       #
@@ -263,4 +280,5 @@ require 'ronin/db/organization_department'
 require 'ronin/db/organization_member'
 require 'ronin/db/organization_customer'
 require 'ronin/db/organization_host_name'
+require 'ronin/db/organization_ip_address'
 require 'ronin/db/note'
