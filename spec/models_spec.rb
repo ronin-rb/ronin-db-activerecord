@@ -62,6 +62,7 @@ describe 'Ronin::DB::Models' do
     it { expect(subject).to include(Ronin::DB::CertSubject) }
     it { expect(subject).to include(Ronin::DB::CertSubjectAltName) }
     it { expect(subject).to include(Ronin::DB::Cert) }
+    it { expect(subject).to include(Ronin::DB::Note) }
   end
 
   describe ".connect" do
