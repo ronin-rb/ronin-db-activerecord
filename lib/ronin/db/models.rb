@@ -70,6 +70,7 @@ require 'ronin/db/cert_subject'
 require 'ronin/db/cert_subject_alt_name'
 require 'ronin/db/cert'
 require 'ronin/db/dns_query'
+require 'ronin/db/dns_record'
 require 'ronin/db/note'
 
 module Ronin
@@ -131,6 +132,7 @@ module Ronin
         CertSubjectAltName,
         Cert,
         DNSQuery,
+        DNSRecord,
         Note
       ]
 

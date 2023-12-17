@@ -63,6 +63,7 @@ describe 'Ronin::DB::Models' do
     it { expect(subject).to include(Ronin::DB::CertSubjectAltName) }
     it { expect(subject).to include(Ronin::DB::Cert) }
     it { expect(subject).to include(Ronin::DB::DNSQuery) }
+    it { expect(subject).to include(Ronin::DB::DNSRecord) }
     it { expect(subject).to include(Ronin::DB::Note) }
   end
 
