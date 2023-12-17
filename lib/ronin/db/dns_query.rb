@@ -85,6 +85,14 @@ module Ronin
       #   @return [Time]
       attribute :created_at, :datetime
 
+      # @!attribute [rw] records
+      #   The optional DNS records associated with the DNS query.
+      #
+      #   @return [Array<DNSRecord>]
+      has_many :records, class_name: 'DNSRecord'
+
     end
   end
 end
+
+require 'ronin/db/dns_record'
