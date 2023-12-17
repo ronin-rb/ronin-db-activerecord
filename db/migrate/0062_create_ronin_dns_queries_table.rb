@@ -23,7 +23,7 @@
 #
 # Creates the `ronin_dns_queries` table.
 #
-class CreateDnsQueryTable < ActiveRecord::Migration[7.0]
+class CreateRoninDnsQueriesTable < ActiveRecord::Migration[7.0]
 
   def change
     create_table :ronin_dns_queries, if_not_exists: true do |t|
