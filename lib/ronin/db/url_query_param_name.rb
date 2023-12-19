@@ -53,6 +53,14 @@ module Ronin
       has_many :query_params, class_name:  'URLQueryParam',
                               foreign_key: :name_id
 
+      # @!attribute [rw] urls
+      #   The URLs that use this query param name.
+      #
+      #   @return [Array<URL>]
+      #
+      #   @since 0.2.0
+      has_many :urls, through: :query_params
+
       # @!attribute [r] created_at
       #   When the URL query param name was first created.
       #
