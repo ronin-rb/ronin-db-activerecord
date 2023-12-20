@@ -49,7 +49,7 @@ module Ronin
       #   The IP address that the organization owns.
       #
       #   @return [IPAddress]
-      belongs_to :ip_address
+      belongs_to :ip_address, class_name: 'IPAddress'
 
       # @!attribute [r] created_at
       #   Tracks when the organization claimed ownership of the IP address.
