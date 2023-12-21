@@ -139,6 +139,15 @@ module Ronin
         where(active: false)
       end
 
+      #
+      # Converts the organization member to a String.
+      #
+      # @return [String]
+      #
+      def to_s
+        person.to_s
+      end
+
     end
   end
 end
