@@ -152,6 +152,19 @@ module Ronin
       end
 
       #
+      # Queries all street addresses with the matching city.
+      #
+      # @param [String] city
+      #   The city to search for.
+      #
+      # @return [Array<StreetAddress>]
+      #   The matching street addresses.
+      #
+      def self.with_city(city)
+        where(city: city)
+      end
+
+      #
       # Alias for {#state}.
       #
       # @return [String, nil]
