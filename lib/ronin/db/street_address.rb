@@ -178,6 +178,19 @@ module Ronin
       end
 
       #
+      # Queries all street addresses with the matching country.
+      #
+      # @param [String] country
+      #   The country to search for.
+      #
+      # @return [Array<StreetAddress>]
+      #   The matching street addresses.
+      #
+      def self.with_country(country)
+        where(country: country)
+      end
+
+      #
       # Alias for {#state}.
       #
       # @return [String, nil]
