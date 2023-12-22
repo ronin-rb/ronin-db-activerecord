@@ -139,6 +139,19 @@ module Ronin
       has_many :organization_departments, dependent: :nullify
 
       #
+      # Queries all street addresses with the matching address.
+      #
+      # @param [String] address
+      #   The street address to search for.
+      #
+      # @return [Array<StreetAddress>]
+      #   The matching street addresses.
+      #
+      def self.with_address(address)
+        where(address: address)
+      end
+
+      #
       # Alias for {#state}.
       #
       # @return [String, nil]
