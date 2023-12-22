@@ -548,4 +548,54 @@ describe Ronin::DB::StreetAddress do
 
     after { described_class.destroy_all }
   end
+
+  describe ".with_zipcode" do
+    subject { described_class }
+
+    before do
+      described_class.create(
+        address: '1234 fake st.',
+        city:    'City One',
+        state:   'State One',
+        country: 'Country One',
+        zipcode: zipcode,
+      )
+
+      described_class.create(
+        address: '1234 other st.',
+        city:    'City Two',
+        state:   'Other State',
+        country: 'Other Country',
+        zipcode: '4567'
+      )
+
+      described_class.create(
+        address: '4567 yet another st.',
+        city:    'City Three',
+        state:   'State Two',
+        country: 'Country Two',
+        zipcode: zipcode
+      )
+    end
+
+    it "must return the #{described_class} with the matching zipcode" do
+      street_addresses = subject.with_zipcode(zipcode)
+
+      expect(street_addresses.length).to eq(2)
+
+      expect(street_addresses[0].address).to eq('1234 fake st.')
+      expect(street_addresses[0].city).to eq('City One')
+      expect(street_addresses[0].state).to eq('State One')
+      expect(street_addresses[0].country).to eq('Country One')
+      expect(street_addresses[0].zipcode).to eq(zipcode)
+
+      expect(street_addresses[1].address).to eq('4567 yet another st.')
+      expect(street_addresses[1].city).to eq('City Three')
+      expect(street_addresses[1].state).to eq('State Two')
+      expect(street_addresses[1].country).to eq('Country Two')
+      expect(street_addresses[1].zipcode).to eq(zipcode)
+    end
+
+    after { described_class.destroy_all }
+  end
 end

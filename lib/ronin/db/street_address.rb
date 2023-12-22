@@ -191,6 +191,19 @@ module Ronin
       end
 
       #
+      # Queries all street addresses with the matching zipcode.
+      #
+      # @param [String] zipcode
+      #   The zipcode to search for.
+      #
+      # @return [Array<StreetAddress>]
+      #   The matching street addresses.
+      #
+      def self.with_zipcode(zipcode)
+        where(zipcode: zipcode)
+      end
+
+      #
       # Alias for {#state}.
       #
       # @return [String, nil]
