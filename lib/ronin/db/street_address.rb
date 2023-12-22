@@ -178,6 +178,15 @@ module Ronin
       end
 
       #
+      # Alias for {with_state}.
+      #
+      # @see with_state
+      #
+      def self.with_province(province)
+        with_state(province)
+      end
+
+      #
       # Queries all street addresses with the matching country.
       #
       # @param [String] country
