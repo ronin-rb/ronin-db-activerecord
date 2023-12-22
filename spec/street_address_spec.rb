@@ -348,4 +348,54 @@ describe Ronin::DB::StreetAddress do
       end
     end
   end
+
+  describe ".with_address" do
+    subject { described_class }
+
+    before do
+      described_class.create(
+        address: address,
+        city:    'City One',
+        state:   'State',
+        country: 'Country',
+        zipcode: '1234'
+      )
+
+      described_class.create(
+        address: '1234 other st.',
+        city:    'City One',
+        state:   'State',
+        country: 'Country',
+        zipcode: '1234'
+      )
+
+      described_class.create(
+        address: address,
+        city:    'City Two',
+        state:   'State',
+        country: 'Country',
+        zipcode: '5678'
+      )
+    end
+
+    it "must return the #{described_class} with the matching address" do
+      street_addresses = subject.with_address(address)
+
+      expect(street_addresses.length).to eq(2)
+
+      expect(street_addresses[0].address).to eq(address)
+      expect(street_addresses[0].city).to eq('City One')
+      expect(street_addresses[0].state).to eq('State')
+      expect(street_addresses[0].country).to eq('Country')
+      expect(street_addresses[0].zipcode).to eq('1234')
+
+      expect(street_addresses[1].address).to eq(address)
+      expect(street_addresses[1].city).to eq('City Two')
+      expect(street_addresses[1].state).to eq('State')
+      expect(street_addresses[1].country).to eq('Country')
+      expect(street_addresses[1].zipcode).to eq('5678')
+    end
+
+    after { described_class.destroy_all }
+  end
 end
