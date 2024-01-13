@@ -608,7 +608,7 @@ describe Ronin::DB::StreetAddress do
         city:    'City One',
         state:   'State One',
         country: 'Country One',
-        zipcode: zipcode,
+        zipcode: zipcode
       )
 
       described_class.create(
