@@ -73,6 +73,20 @@ describe Ronin::DB::PhoneNumber do
         expect(phone_number).to be_valid
       end
 
+      it "must accept '+NNN-NNN-NNN-NNNN'" do
+        country_code = '123'
+
+        phone_number = described_class.new(
+          number:      "+#{country_code}-#{area_code}-#{prefix}-#{line_number}",
+          country_code: country_code,
+          area_code:    area_code,
+          prefix:       prefix,
+          line_number:  line_number
+        )
+
+        expect(phone_number).to be_valid
+      end
+
       it "must accept 'N-NNN-NNN-NNNN'" do
         phone_number = described_class.new(
           number:      "#{country_code}-#{area_code}-#{prefix}-#{line_number}",
@@ -87,6 +101,20 @@ describe Ronin::DB::PhoneNumber do
 
       it "must accept 'NN-NNN-NNN-NNNN'" do
         country_code = '01'
+
+        phone_number = described_class.new(
+          number:      "#{country_code}-#{area_code}-#{prefix}-#{line_number}",
+          country_code: country_code,
+          area_code:    area_code,
+          prefix:       prefix,
+          line_number:  line_number
+        )
+
+        expect(phone_number).to be_valid
+      end
+
+      it "must accept 'NNN-NNN-NNN-NNNN'" do
+        country_code = '123'
 
         phone_number = described_class.new(
           number:      "#{country_code}-#{area_code}-#{prefix}-#{line_number}",
@@ -146,6 +174,20 @@ describe Ronin::DB::PhoneNumber do
         expect(phone_number).to be_valid
       end
 
+      it "must accept '+NNN.NNN.NNN.NNNN'" do
+        country_code = '123'
+
+        phone_number = described_class.new(
+          number:      "+#{country_code}.#{area_code}.#{prefix}.#{line_number}",
+          country_code: country_code,
+          area_code:    area_code,
+          prefix:       prefix,
+          line_number:  line_number
+        )
+
+        expect(phone_number).to be_valid
+      end
+
       it "must accept 'N.NNN.NNN.NNNN'" do
         phone_number = described_class.new(
           number:      "#{country_code}.#{area_code}.#{prefix}.#{line_number}",
@@ -160,6 +202,20 @@ describe Ronin::DB::PhoneNumber do
 
       it "must accept 'NN.NNN.NNN.NNNN'" do
         country_code = '01'
+
+        phone_number = described_class.new(
+          number:      "#{country_code}.#{area_code}.#{prefix}.#{line_number}",
+          country_code: country_code,
+          area_code:    area_code,
+          prefix:       prefix,
+          line_number:  line_number
+        )
+
+        expect(phone_number).to be_valid
+      end
+
+      it "must accept 'NNN.NNN.NNN.NNNN'" do
+        country_code = '123'
 
         phone_number = described_class.new(
           number:      "#{country_code}.#{area_code}.#{prefix}.#{line_number}",
@@ -219,6 +275,20 @@ describe Ronin::DB::PhoneNumber do
         expect(phone_number).to be_valid
       end
 
+      it "must accept '+NNN (NNN) NNN NNNN'" do
+        country_code = '123'
+
+        phone_number = described_class.new(
+          number:      "+#{country_code} (#{area_code}) #{prefix} #{line_number}",
+          country_code: country_code,
+          area_code:    area_code,
+          prefix:       prefix,
+          line_number:  line_number
+        )
+
+        expect(phone_number).to be_valid
+      end
+
       it "must accept 'N (NNN) NNN NNNN'" do
         phone_number = described_class.new(
           number:      "#{country_code} (#{area_code}) #{prefix} #{line_number}",
@@ -233,6 +303,20 @@ describe Ronin::DB::PhoneNumber do
 
       it "must accept 'NN (NNN) NNN NNNN'" do
         country_code = '01'
+
+        phone_number = described_class.new(
+          number:      "#{country_code} (#{area_code}) #{prefix} #{line_number}",
+          country_code: country_code,
+          area_code:    area_code,
+          prefix:       prefix,
+          line_number:  line_number
+        )
+
+        expect(phone_number).to be_valid
+      end
+
+      it "must accept 'NNN (NNN) NNN NNNN'" do
+        country_code = '123'
 
         phone_number = described_class.new(
           number:      "#{country_code} (#{area_code}) #{prefix} #{line_number}",
@@ -282,6 +366,20 @@ describe Ronin::DB::PhoneNumber do
         expect(phone_number).to be_valid
       end
 
+      it "must accept '+NNN NNN NNN NNNN'" do
+        country_code = '123'
+
+        phone_number = described_class.new(
+          number:      "+#{country_code} #{area_code} #{prefix} #{line_number}",
+          country_code: country_code,
+          area_code:    area_code,
+          prefix:       prefix,
+          line_number:  line_number
+        )
+
+        expect(phone_number).to be_valid
+      end
+
       it "must accept 'N NNN NNN NNNN'" do
         phone_number = described_class.new(
           number:      "#{country_code} #{area_code} #{prefix} #{line_number}",
@@ -296,6 +394,20 @@ describe Ronin::DB::PhoneNumber do
 
       it "must accept 'NN NNN NNN NNNN'" do
         country_code = '01'
+
+        phone_number = described_class.new(
+          number:      "#{country_code} #{area_code} #{prefix} #{line_number}",
+          country_code: country_code,
+          area_code:    area_code,
+          prefix:       prefix,
+          line_number:  line_number
+        )
+
+        expect(phone_number).to be_valid
+      end
+
+      it "must accept 'NNN NNN NNN NNNN'" do
+        country_code = '123'
 
         phone_number = described_class.new(
           number:      "#{country_code} #{area_code} #{prefix} #{line_number}",
@@ -369,19 +481,16 @@ describe Ronin::DB::PhoneNumber do
         expect(phone_number).to be_valid
       end
 
-      it "must not accept three or more digits" do
+      it "must accept three or more digits" do
         phone_number = described_class.new(
           number:       number,
-          country_code: '111',
+          country_code: '123',
           area_code:    area_code,
           prefix:       prefix,
           line_number:  line_number
         )
 
-        expect(phone_number).to_not be_valid
-        expect(phone_number.errors[:country_code]).to eq(
-          ['must be a valid country code number']
-        )
+        expect(phone_number).to be_valid
       end
 
       it "must not accept non-numbers" do
