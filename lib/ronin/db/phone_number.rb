@@ -196,6 +196,66 @@ module Ronin
       end
 
       #
+      # Finds all phone numbers with the matching country code.
+      #
+      # @param [String] country_code
+      #   The country code to search for.
+      #
+      # @return [Array<PhoneNumber>]
+      #   The phone numbers with the matching country code.
+      #
+      # @api public
+      #
+      def self.with_country_code(country_code)
+        where(country_code: country_code)
+      end
+
+      #
+      # Finds all phone numbers with the matching area code.
+      #
+      # @param [String] area_code
+      #   The area code to search for.
+      #
+      # @return [Array<PhoneNumber>]
+      #   The phone numbers with the matching area code.
+      #
+      # @api public
+      #
+      def self.with_area_code(area_code)
+        where(area_code: area_code)
+      end
+
+      #
+      # Finds all phone numbers with the matching prefix.
+      #
+      # @param [String] prefix
+      #   The prefix to search for.
+      #
+      # @return [Array<PhoneNumber>]
+      #   The phone numbers with the matching prefix.
+      #
+      # @api public
+      #
+      def self.with_prefix(prefix)
+        where(prefix: prefix)
+      end
+
+      #
+      # Finds all phone numbers with the matching line number.
+      #
+      # @param [String] line_number
+      #   The line number to search for.
+      #
+      # @return [Array<PhoneNumber>]
+      #   The phone numbers with the matching line number.
+      #
+      # @api public
+      #
+      def self.with_line_number(line_number)
+        where(line_number: line_number)
+      end
+
+      #
       # Converts the phone number to a String.
       #
       # @return [String]
