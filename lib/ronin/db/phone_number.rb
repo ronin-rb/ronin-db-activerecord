@@ -48,7 +48,7 @@ module Ronin
       attribute :number, :string
       validates :number, presence:   true,
                          format:     {
-                           with: /\A(?:\+?\d{1,2}[\s.-])?(?:(?:\(\d{3}\)|\d{3})[\s.-])?\d{3}[\s.-]\d{4}\z/,
+                           with: /\A(?:\+?\d{1,3}[\s.-])?(?:(?:\(\d{3}\)|\d{3})[\s.-])?\d{3}[\s.-]\d{4}\z/,
                            message: 'must be a valid phone number'
                          },
                          uniqueness: true
@@ -59,7 +59,7 @@ module Ronin
       #   @return [String, nil]
       attribute :country_code, :string
       validates :country_code, format: {
-                                 with: /\A\d{1,2}\z/,
+                                 with: /\A\d{1,3}\z/,
                                  message: 'must be a valid country code number'
                                },
                                allow_nil: true
@@ -166,7 +166,7 @@ module Ronin
       # @api private
       #
       def self.parse(number)
-        if (match = number.match(/\A(?:\+?(?<country_code>\d{1,2})[\s.-])?(?:(?:\((?<area_code>\d{3})\)|(?<area_code>\d{3}))[\s.-])?(?<prefix>\d{3})[\s.-](?<line_number>\d{4})\z/))
+        if (match = number.match(/\A(?:(?:\+?(?<country_code>\d{1,3})[\s.-])?(?:\((?<area_code>\d{3})\)|(?<area_code>\d{3}))[\s.-])?(?<prefix>\d{3})[\s.-](?<line_number>\d{4})\z/))
           {
             number: number,
 
