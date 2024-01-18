@@ -1147,6 +1147,110 @@ describe Ronin::DB::PhoneNumber do
     after { described_class.destroy_all }
   end
 
+  describe ".with_country_code" do
+    subject { described_class }
+
+    let(:country_code) { '1' }
+
+    before do
+      described_class.import('555-5555')
+      described_class.import("+#{country_code}-503-555-5555")
+      described_class.import("+#{country_code}-111-111-5555")
+      described_class.import('503-555-5555')
+    end
+
+    it "must return the #{described_class}s with the matching country code" do
+      phone_numbers = subject.with_country_code(country_code)
+
+      expect(phone_numbers.length).to eq(2)
+
+      expect(phone_numbers[0].country_code).to eq(country_code)
+      expect(phone_numbers[0].number).to eq("+#{country_code}-503-555-5555")
+      expect(phone_numbers[1].country_code).to eq(country_code)
+      expect(phone_numbers[1].number).to eq("+#{country_code}-111-111-5555")
+    end
+
+    after { described_class.destroy_all }
+  end
+
+  describe ".with_area_code" do
+    subject { described_class }
+
+    let(:area_code) { '503' }
+
+    before do
+      described_class.import('555-5555')
+      described_class.import("#{area_code}-555-5555")
+      described_class.import("#{area_code}-111-5555")
+      described_class.import('1-800-555-5555')
+    end
+
+    it "must return the #{described_class}s with the matching area code" do
+      phone_numbers = subject.with_area_code(area_code)
+
+      expect(phone_numbers.length).to eq(2)
+
+      expect(phone_numbers[0].area_code).to eq(area_code)
+      expect(phone_numbers[0].number).to eq("#{area_code}-555-5555")
+      expect(phone_numbers[1].area_code).to eq(area_code)
+      expect(phone_numbers[1].number).to eq("#{area_code}-111-5555")
+    end
+
+    after { described_class.destroy_all }
+  end
+
+  describe ".with_prefix" do
+    subject { described_class }
+
+    let(:prefix) { '555' }
+
+    before do
+      described_class.import('123-1234')
+      described_class.import("#{prefix}-5555")
+      described_class.import("#{prefix}-1234")
+      described_class.import('1-800-123-1234')
+    end
+
+    it "must return the #{described_class}s with the matching prefix" do
+      phone_numbers = subject.with_prefix(prefix)
+
+      expect(phone_numbers.length).to eq(2)
+
+      expect(phone_numbers[0].prefix).to eq(prefix)
+      expect(phone_numbers[0].number).to eq("#{prefix}-5555")
+      expect(phone_numbers[1].prefix).to eq(prefix)
+      expect(phone_numbers[1].number).to eq("#{prefix}-1234")
+    end
+
+    after { described_class.destroy_all }
+  end
+
+  describe ".with_line_number" do
+    subject { described_class }
+
+    let(:line_number) { '1234' }
+
+    before do
+      described_class.import('555-5555')
+      described_class.import("123-#{line_number}")
+      described_class.import("555-#{line_number}")
+      described_class.import('1-800-555-5555')
+    end
+
+    it "must return the #{described_class}s with the matching prefix" do
+      phone_numbers = subject.with_line_number(line_number)
+
+      expect(phone_numbers.length).to eq(2)
+
+      expect(phone_numbers[0].line_number).to eq(line_number)
+      expect(phone_numbers[0].number).to eq("123-#{line_number}")
+      expect(phone_numbers[1].line_number).to eq(line_number)
+      expect(phone_numbers[1].number).to eq("555-#{line_number}")
+    end
+
+    after { described_class.destroy_all }
+  end
+
   subject do
     described_class.new(
       number: number,
