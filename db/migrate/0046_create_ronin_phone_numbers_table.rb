@@ -29,7 +29,7 @@ class CreateRoninPhoneNumbersTable < ActiveRecord::Migration[7.0]
     create_table :ronin_phone_numbers, if_not_exists: true do |t|
       t.string :number, null: false, length: 17
 
-      t.string :country_code, null: true,  length: 2
+      t.string :country_code, null: true,  length: 3
       t.string :area_code,    null: true,  length: 3
       t.string :prefix,       null: false, length: 3
       t.string :line_number,  null: false, length: 4
