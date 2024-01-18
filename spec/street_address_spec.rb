@@ -267,88 +267,6 @@ describe Ronin::DB::StreetAddress do
     end
   end
 
-  subject do
-    described_class.new(
-      address: address,
-      city:    city,
-      zipcode: zipcode,
-      state:   state,
-      country: country
-    )
-  end
-
-  describe "#province" do
-    it "must return #state" do
-      expect(subject.province).to eq(subject.state)
-    end
-  end
-
-  describe "#province=" do
-    let(:new_province) { 'New Province' }
-
-    before { subject.province = new_province }
-
-    it "must set #state" do
-      expect(subject.state).to eq(new_province)
-    end
-  end
-
-  describe "#postal_code" do
-    it "must return #zipcode" do
-      expect(subject.postal_code).to eq(subject.zipcode)
-    end
-  end
-
-  describe "#postal_code=" do
-    let(:new_postal_code) { '56789' }
-
-    before { subject.postal_code = new_postal_code }
-
-    it "must set #zipcode" do
-      expect(subject.zipcode).to eq(new_postal_code)
-    end
-  end
-
-  describe "#to_s" do
-    it "must return a three-line mailing address" do
-      expect(subject.to_s).to eq(
-        [
-          address,
-          "#{city}, #{state} #{zipcode}",
-          country
-        ].join($/)
-      )
-    end
-
-    context "when #state is nil" do
-      let(:state) { nil }
-
-      it "must omit #state from the second line" do
-        expect(subject.to_s).to eq(
-          [
-            address,
-            "#{city} #{zipcode}",
-            country
-          ].join($/)
-        )
-      end
-    end
-
-    context "when #zipcode is nil" do
-      let(:zipcode) { nil }
-
-      it "must omit #zipcode from the second line" do
-        expect(subject.to_s).to eq(
-          [
-            address,
-            "#{city}, #{state}",
-            country
-          ].join($/)
-        )
-      end
-    end
-  end
-
   describe ".with_address" do
     subject { described_class }
 
@@ -647,5 +565,87 @@ describe Ronin::DB::StreetAddress do
     end
 
     after { described_class.destroy_all }
+  end
+
+  subject do
+    described_class.new(
+      address: address,
+      city:    city,
+      zipcode: zipcode,
+      state:   state,
+      country: country
+    )
+  end
+
+  describe "#province" do
+    it "must return #state" do
+      expect(subject.province).to eq(subject.state)
+    end
+  end
+
+  describe "#province=" do
+    let(:new_province) { 'New Province' }
+
+    before { subject.province = new_province }
+
+    it "must set #state" do
+      expect(subject.state).to eq(new_province)
+    end
+  end
+
+  describe "#postal_code" do
+    it "must return #zipcode" do
+      expect(subject.postal_code).to eq(subject.zipcode)
+    end
+  end
+
+  describe "#postal_code=" do
+    let(:new_postal_code) { '56789' }
+
+    before { subject.postal_code = new_postal_code }
+
+    it "must set #zipcode" do
+      expect(subject.zipcode).to eq(new_postal_code)
+    end
+  end
+
+  describe "#to_s" do
+    it "must return a three-line mailing address" do
+      expect(subject.to_s).to eq(
+        [
+          address,
+          "#{city}, #{state} #{zipcode}",
+          country
+        ].join($/)
+      )
+    end
+
+    context "when #state is nil" do
+      let(:state) { nil }
+
+      it "must omit #state from the second line" do
+        expect(subject.to_s).to eq(
+          [
+            address,
+            "#{city} #{zipcode}",
+            country
+          ].join($/)
+        )
+      end
+    end
+
+    context "when #zipcode is nil" do
+      let(:zipcode) { nil }
+
+      it "must omit #zipcode from the second line" do
+        expect(subject.to_s).to eq(
+          [
+            address,
+            "#{city}, #{state}",
+            country
+          ].join($/)
+        )
+      end
+    end
   end
 end
