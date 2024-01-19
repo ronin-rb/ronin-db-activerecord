@@ -196,6 +196,26 @@ module Ronin
       end
 
       #
+      # Finds all similar phone numbers with the matching phone number
+      # components.
+      #
+      # @param [String] number
+      #   The phone number to parse and search for.
+      #
+      # @return [Array<PhoneNumber>]
+      #   The similar phone numbers.
+      #
+      # @api public
+      #
+      def self.similar_to(number)
+        attributes = parse(number)
+        attributes.delete(:number)
+        attributes.compact!
+
+        where(**attributes)
+      end
+
+      #
       # Finds all phone numbers with the matching country code.
       #
       # @param [String] country_code

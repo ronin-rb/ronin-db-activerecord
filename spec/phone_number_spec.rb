@@ -1147,6 +1147,31 @@ describe Ronin::DB::PhoneNumber do
     after { described_class.destroy_all }
   end
 
+  describe ".similar_to" do
+    subject { described_class }
+
+    let(:number) { '555-5555' }
+
+    before do
+      described_class.import(number)
+      described_class.import("503-#{number}")
+      described_class.import("+1-503-#{number}")
+      described_class.import('503-111-1111')
+    end
+
+    it "must return the #{described_class}s that have the same phone number attributes" do
+      phone_numbers = subject.similar_to(number)
+
+      expect(phone_numbers.length).to eq(3)
+
+      expect(phone_numbers[0].number).to eq(number)
+      expect(phone_numbers[1].number).to eq("503-#{number}")
+      expect(phone_numbers[2].number).to eq("+1-503-#{number}")
+    end
+
+    after { described_class.destroy_all }
+  end
+
   describe ".with_country_code" do
     subject { described_class }
 
