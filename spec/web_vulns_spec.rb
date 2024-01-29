@@ -260,6 +260,59 @@ describe Ronin::DB::WebVuln do
     end
   end
 
+  describe ".with_request_method" do
+    subject { described_class }
+
+    let(:request_method) { 'post' }
+
+    before do
+      url = Ronin::DB::URL.import('https://example.com/page.php?id=1&foo=2&bar=3&baz=4')
+
+      Ronin::DB::WebVuln.create(
+        type:           :sqli,
+        request_method: :get,
+        query_param:    'id',
+        url:            url
+      )
+
+      Ronin::DB::WebVuln.create(
+        type:           :lfi,
+        form_param:     'user',
+        request_method: request_method,
+        url:            url
+      )
+
+      Ronin::DB::WebVuln.create(
+        type:           :open_redirect,
+        header_name:    'X-Foo',
+        request_method: request_method,
+        url:            url
+      )
+    end
+
+    it "must query all #{described_class}s with the matching #request_method" do
+      web_vulns = subject.with_request_method(request_method)
+
+      expect(web_vulns.length).to eq(2)
+
+      expect(web_vulns[0].type).to eq('lfi')
+      expect(web_vulns[0].form_param).to eq('user')
+      expect(web_vulns[0].request_method).to eq(request_method)
+
+      expect(web_vulns[1].type).to eq('open_redirect')
+      expect(web_vulns[1].header_name).to eq('X-Foo')
+      expect(web_vulns[1].request_method).to eq(request_method)
+    end
+
+    after do
+      Ronin::DB::WebVuln.destroy_all
+      Ronin::DB::URL.destroy_all
+      Ronin::DB::URLQueryParamName.destroy_all
+      Ronin::DB::URLScheme.destroy_all
+      Ronin::DB::HostName.destroy_all
+    end
+  end
+
   let(:url_scheme)    { Ronin::DB::URLScheme.find_or_initialize_by(name: 'https') }
   let(:url_host_name) { Ronin::DB::HostName.find_or_initialize_by(name: 'www.example.com') }
   let(:url_port)      { Ronin::DB::Port.find_or_initialize_by(protocol: :tcp, number: 8080) }
