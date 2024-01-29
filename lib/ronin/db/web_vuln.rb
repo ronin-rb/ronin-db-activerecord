@@ -212,6 +212,19 @@ module Ronin
       attribute :created_at, :datetime
 
       #
+      # Queries all web vulnerabilities of the given type.
+      #
+      # @param [:lfi, :rfi, :sqli, :ssti, :open_redirect, :reflected_xss, :command_injection] type
+      #   The web vulnerability type to search for.
+      #
+      # @return [Array<WebVuln>]
+      #   The matching web vulnerabilities.
+      #
+      def self.with_type(type)
+        where(type: type)
+      end
+
+      #
       # Validates presence of at least one param fields.
       #
       def param_validation
