@@ -277,6 +277,19 @@ module Ronin
       end
 
       #
+      # Queries all web vulnerabilities with the given request method.
+      #
+      # @param [String] request_method
+      #   The request method to search for.
+      #
+      # @return [Array<WebVuln>]
+      #   The matching web vulnerabilities.
+      #
+      def self.with_request_method(request_method)
+        where(request_method: request_method)
+      end
+
+      #
       # Validates presence of at least one param fields.
       #
       def param_validation
