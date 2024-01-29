@@ -9,6 +9,7 @@ gem 'sqlite3', '~> 1.0', platforms: [:mri, :truffleruby]
 platform :jruby do
   gem 'jruby-openssl',	'~> 0.7'
   gem 'activerecord-jdbcsqlite3-adapter', '~> 70.0'
+  gem 'activerecord', '< 7.1.0'
 end
 
 group :development do
