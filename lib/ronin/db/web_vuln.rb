@@ -225,6 +225,19 @@ module Ronin
       end
 
       #
+      # Queries all web vulnerabilities effecting the given query param name.
+      #
+      # @param [String] name
+      #   The query param name to search for.
+      #
+      # @return [Array<WebVuln>]
+      #   The matching web vulnerabilities.
+      #
+      def self.with_query_param(name)
+        where(query_param: name)
+      end
+
+      #
       # Validates presence of at least one param fields.
       #
       def param_validation
