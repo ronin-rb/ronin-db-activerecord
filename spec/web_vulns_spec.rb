@@ -107,6 +107,57 @@ describe Ronin::DB::WebVuln do
     end
   end
 
+  describe ".with_header_name" do
+    subject { described_class }
+
+    let(:header_name) { 'user' }
+
+    before do
+      url = Ronin::DB::URL.import('https://example.com/page.php?id=1&foo=2&bar=3&baz=4')
+
+      Ronin::DB::WebVuln.create(
+        type:           :sqli,
+        request_method: :get,
+        query_param:    'id',
+        url:            url
+      )
+
+      Ronin::DB::WebVuln.create(
+        type:           :lfi,
+        request_method: :get,
+        header_name:    header_name,
+        url:            url
+      )
+
+      Ronin::DB::WebVuln.create(
+        type:           :rfi,
+        request_method: :get,
+        header_name:    header_name,
+        url:            url
+      )
+    end
+
+    it "must query all #{described_class}s with the matching #header_name" do
+      web_vulns = subject.with_header_name(header_name)
+
+      expect(web_vulns.length).to eq(2)
+
+      expect(web_vulns[0].type).to eq('lfi')
+      expect(web_vulns[0].header_name).to eq(header_name)
+
+      expect(web_vulns[1].type).to eq('rfi')
+      expect(web_vulns[1].header_name).to eq(header_name)
+    end
+
+    after do
+      Ronin::DB::WebVuln.destroy_all
+      Ronin::DB::URL.destroy_all
+      Ronin::DB::URLQueryParamName.destroy_all
+      Ronin::DB::URLScheme.destroy_all
+      Ronin::DB::HostName.destroy_all
+    end
+  end
+
   describe ".with_form_param" do
     subject { described_class }
 
