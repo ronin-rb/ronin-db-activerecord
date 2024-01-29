@@ -251,6 +251,19 @@ module Ronin
       end
 
       #
+      # Queries all web vulnerabilities effecting the given cookie param name.
+      #
+      # @param [String] name
+      #   The cookie param name to search for.
+      #
+      # @return [Array<WebVuln>]
+      #   The matching web vulnerabilities.
+      #
+      def self.with_cookie_param(name)
+        where(cookie_param: name)
+      end
+
+      #
       # Queries all web vulnerabilities effecting the given form param name.
       #
       # @param [String] name

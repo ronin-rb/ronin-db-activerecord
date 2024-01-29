@@ -158,6 +158,57 @@ describe Ronin::DB::WebVuln do
     end
   end
 
+  describe ".with_cookie_param" do
+    subject { described_class }
+
+    let(:cookie_param) { 'user' }
+
+    before do
+      url = Ronin::DB::URL.import('https://example.com/page.php?id=1&foo=2&bar=3&baz=4')
+
+      Ronin::DB::WebVuln.create(
+        type:           :sqli,
+        request_method: :get,
+        query_param:    'id',
+        url:            url
+      )
+
+      Ronin::DB::WebVuln.create(
+        type:           :lfi,
+        request_method: :get,
+        cookie_param:    cookie_param,
+        url:            url
+      )
+
+      Ronin::DB::WebVuln.create(
+        type:           :rfi,
+        request_method: :get,
+        cookie_param:    cookie_param,
+        url:            url
+      )
+    end
+
+    it "must query all #{described_class}s with the matching #cookie_param" do
+      web_vulns = subject.with_cookie_param(cookie_param)
+
+      expect(web_vulns.length).to eq(2)
+
+      expect(web_vulns[0].type).to eq('lfi')
+      expect(web_vulns[0].cookie_param).to eq(cookie_param)
+
+      expect(web_vulns[1].type).to eq('rfi')
+      expect(web_vulns[1].cookie_param).to eq(cookie_param)
+    end
+
+    after do
+      Ronin::DB::WebVuln.destroy_all
+      Ronin::DB::URL.destroy_all
+      Ronin::DB::URLQueryParamName.destroy_all
+      Ronin::DB::URLScheme.destroy_all
+      Ronin::DB::HostName.destroy_all
+    end
+  end
+
   describe ".with_form_param" do
     subject { described_class }
 
