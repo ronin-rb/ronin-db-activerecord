@@ -7,6 +7,55 @@ describe Ronin::DB::WebVuln do
     expect(described_class.table_name).to eq('ronin_web_vulns')
   end
 
+  describe ".with_type" do
+    subject { described_class }
+
+    before do
+      url = Ronin::DB::URL.import('https://example.com/page.php?id=1&foo=2&bar=3&baz=4')
+
+      Ronin::DB::WebVuln.create(
+        type:           :sqli,
+        request_method: :get,
+        query_param:    'id',
+        url:            url
+      )
+
+      Ronin::DB::WebVuln.create(
+        type:           :lfi,
+        request_method: :get,
+        query_param:    'foo',
+        url:            url
+      )
+
+      Ronin::DB::WebVuln.create(
+        type:           :sqli,
+        request_method: :get,
+        query_param:    'bar',
+        url:            url
+      )
+    end
+
+    it "must query all #{described_class}s with the matching #type" do
+      web_vulns = subject.with_type(:sqli)
+
+      expect(web_vulns.length).to eq(2)
+
+      expect(web_vulns[0].type).to eq('sqli')
+      expect(web_vulns[0].query_param).to eq('bar')
+
+      expect(web_vulns[1].type).to eq('sqli')
+      expect(web_vulns[1].query_param).to eq('id')
+    end
+
+    after do
+      Ronin::DB::WebVuln.destroy_all
+      Ronin::DB::URL.destroy_all
+      Ronin::DB::URLQueryParamName.destroy_all
+      Ronin::DB::URLScheme.destroy_all
+      Ronin::DB::HostName.destroy_all
+    end
+  end
+
   let(:url_scheme)    { Ronin::DB::URLScheme.find_or_initialize_by(name: 'https') }
   let(:url_host_name) { Ronin::DB::HostName.find_or_initialize_by(name: 'www.example.com') }
   let(:url_port)      { Ronin::DB::Port.find_or_initialize_by(protocol: :tcp, number: 8080) }
