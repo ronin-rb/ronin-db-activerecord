@@ -238,6 +238,19 @@ module Ronin
       end
 
       #
+      # Queries all web vulnerabilities effecting the given header name.
+      #
+      # @param [String] name
+      #   The header name to search for.
+      #
+      # @return [Array<WebVuln>]
+      #   The matching web vulnerabilities.
+      #
+      def self.with_header_name(name)
+        where(header_name: name)
+      end
+
+      #
       # Queries all web vulnerabilities effecting the given form param name.
       #
       # @param [String] name
