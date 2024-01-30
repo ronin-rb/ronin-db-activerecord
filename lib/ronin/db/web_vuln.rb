@@ -212,6 +212,23 @@ module Ronin
       attribute :created_at, :datetime
 
       #
+      # Queries all web vulnerabilities belonging to the given host name.
+      #
+      # @param [String] host_name
+      #   The host name to search for.
+      #
+      # @return [Array<WebVuln>]
+      #   The matching web vulnerabilities.
+      #
+      def self.for_host(host_name)
+        joins(url: [:host_name]).where(
+          url: {
+            ronin_host_names: {name: host_name}
+          }
+        )
+      end
+
+      #
       # Queries all web vulnerabilities of the given type.
       #
       # @param [:lfi, :rfi, :sqli, :ssti, :open_redirect, :reflected_xss, :command_injection] type
