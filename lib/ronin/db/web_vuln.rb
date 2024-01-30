@@ -229,6 +229,19 @@ module Ronin
       end
 
       #
+      # Queries all web vulnerabilities belonging to the given domain name.
+      #
+      # @param [String] domain
+      #   The domain to search for.
+      #
+      # @return [Array<WebVuln>]
+      #   The matching web vulnerabilities.
+      #
+      def self.for_domain(domain)
+        joins(url: [:host_name]).merge(HostName.with_domain(domain))
+      end
+
+      #
       # Queries all web vulnerabilities of the given type.
       #
       # @param [:lfi, :rfi, :sqli, :ssti, :open_redirect, :reflected_xss, :command_injection] type
