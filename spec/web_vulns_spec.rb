@@ -7,6 +7,61 @@ describe Ronin::DB::WebVuln do
     expect(described_class.table_name).to eq('ronin_web_vulns')
   end
 
+  describe ".for_host" do
+    subject { described_class }
+
+    let(:host_name) { 'two.example.com' }
+
+    before do
+      url1 = Ronin::DB::URL.import("https://one.example.com/page1.php?id=1")
+      url2 = Ronin::DB::URL.import("https://#{host_name}/page2.php?id=1")
+      url3 = Ronin::DB::URL.import("https://#{host_name}/page3.php?id=1")
+
+      Ronin::DB::WebVuln.create(
+        type:           :sqli,
+        request_method: :get,
+        query_param:    'id',
+        url:            url1
+      )
+
+      Ronin::DB::WebVuln.create(
+        type:           :sqli,
+        request_method: :get,
+        query_param:    'id',
+        url:            url2
+      )
+
+      Ronin::DB::WebVuln.create(
+        type:           :sqli,
+        request_method: :get,
+        query_param:    'id',
+        url:            url3
+      )
+    end
+
+    it "must query all #{described_class}s with the matching URL's host name" do
+      web_vulns = subject.for_host(host_name)
+
+      expect(web_vulns.length).to eq(2)
+
+      expect(web_vulns[0].type).to eq('sqli')
+      expect(web_vulns[0].url.host_name.name).to eq(host_name)
+      expect(web_vulns[0].url.path).to eq('/page2.php')
+
+      expect(web_vulns[1].type).to eq('sqli')
+      expect(web_vulns[1].url.host_name.name).to eq(host_name)
+      expect(web_vulns[1].url.path).to eq('/page3.php')
+    end
+
+    after do
+      Ronin::DB::WebVuln.destroy_all
+      Ronin::DB::URL.destroy_all
+      Ronin::DB::URLQueryParamName.destroy_all
+      Ronin::DB::URLScheme.destroy_all
+      Ronin::DB::HostName.destroy_all
+    end
+  end
+
   describe ".with_type" do
     subject { described_class }
 
