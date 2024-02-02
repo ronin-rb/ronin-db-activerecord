@@ -267,6 +267,84 @@ describe Ronin::DB::StreetAddress do
     end
   end
 
+  describe ".for_person" do
+    subject { described_class }
+
+    let(:full_name) { 'John Smith' }
+
+    before do
+      person1 = Ronin::DB::Person.import('Bob Smith')
+      person2 = Ronin::DB::Person.import(full_name)
+
+      street_address1 = described_class.create(
+        address: '1234 first st.',
+        city:    'City One',
+        state:   'State',
+        country: 'Country',
+        zipcode: '1234'
+      )
+
+      street_address2 = described_class.create(
+        address: '1234 second st.',
+        city:    'City Two',
+        state:   'State',
+        country: 'Country',
+        zipcode: '1234'
+      )
+
+      street_address3 = described_class.create(
+        address: '1234 third st.',
+        city:    'City Three',
+        state:   'State',
+        country: 'Country',
+        zipcode: '1234'
+      )
+
+      Ronin::DB::PersonalStreetAddress.create(
+        person:         person2,
+        street_address: street_address1
+      )
+
+      Ronin::DB::PersonalStreetAddress.create(
+        person:         person1,
+        street_address: street_address2
+      )
+
+      Ronin::DB::PersonalStreetAddress.create(
+        person:         person2,
+        street_address: street_address3
+      )
+    end
+
+    it "must return the #{described_class}s associated with the person's full name" do
+      street_addresses = subject.for_person(full_name)
+
+      expect(street_addresses.length).to eq(2)
+
+      expect(street_addresses[0].address).to eq('1234 first st.')
+      expect(street_addresses[0].city).to eq('City One')
+      expect(street_addresses[0].state).to eq('State')
+      expect(street_addresses[0].country).to eq('Country')
+      expect(street_addresses[0].zipcode).to eq('1234')
+      expect(street_addresses[0].people.length).to eq(1)
+      expect(street_addresses[0].people[0].full_name).to eq(full_name)
+
+      expect(street_addresses[1].address).to eq('1234 third st.')
+      expect(street_addresses[1].city).to eq('City Three')
+      expect(street_addresses[1].state).to eq('State')
+      expect(street_addresses[1].country).to eq('Country')
+      expect(street_addresses[1].zipcode).to eq('1234')
+      expect(street_addresses[1].people.length).to eq(1)
+      expect(street_addresses[1].people[0].full_name).to eq(full_name)
+    end
+
+    after do
+      Ronin::DB::PersonalStreetAddress.destroy_all
+      Ronin::DB::Person.destroy_all
+      described_class.destroy_all
+    end
+  end
+
   describe ".with_address" do
     subject { described_class }
 
