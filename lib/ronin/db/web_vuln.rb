@@ -242,6 +242,19 @@ module Ronin
       end
 
       #
+      # Queries all web vulnerabilities with the matching URL path.
+      #
+      # @param [String] path
+      #   The URL path to search for.
+      #
+      # @return [Array<WebVuln>]
+      #   The matching web vulnerabilities.
+      #
+      def self.for_path(path)
+        joins(:url).where(url: {path: path})
+      end
+
+      #
       # Queries all web vulnerabilities of the given type.
       #
       # @param [:lfi, :rfi, :sqli, :ssti, :open_redirect, :reflected_xss, :command_injection] type
