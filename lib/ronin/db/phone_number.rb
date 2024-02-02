@@ -196,6 +196,21 @@ module Ronin
       end
 
       #
+      # Queries all phone numbers associated with the person.
+      #
+      # @param [String] full_name
+      #   The person's full name.
+      #
+      # @return [Array<PhoneNumber>]
+      #   The phone numbers associated with the person.
+      #
+      # @api public
+      #
+      def self.for_person(full_name)
+        joins(:people).where(people: {full_name: full_name})
+      end
+
+      #
       # Finds all similar phone numbers with the matching phone number
       # components.
       #
