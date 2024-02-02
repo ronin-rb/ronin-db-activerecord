@@ -139,6 +139,19 @@ module Ronin
       has_many :organization_departments, dependent: :nullify
 
       #
+      # Queries all street addresses associated with the person.
+      #
+      # @param [String] full_name
+      #   The person's full name.
+      #
+      # @return [Array<StreetAddress>]
+      #   The street addresses associated with the person.
+      #
+      def self.for_person(full_name)
+        joins(:people).where(people: {full_name: full_name})
+      end
+
+      #
       # Queries all street addresses with the matching address.
       #
       # @param [String] address
