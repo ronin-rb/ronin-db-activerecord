@@ -1147,6 +1147,56 @@ describe Ronin::DB::PhoneNumber do
     after { described_class.destroy_all }
   end
 
+  describe ".for_person" do
+    subject { described_class }
+
+    let(:full_name) { 'John Smith' }
+
+    before do
+      phone_number1 = described_class.import('555-1111')
+      phone_number2 = described_class.import('555-2222')
+      phone_number3 = described_class.import('555-3333')
+
+      person1 = Ronin::DB::Person.import('Bob Smith')
+      person2 = Ronin::DB::Person.import(full_name)
+
+      Ronin::DB::PersonalPhoneNumber.create(
+        person:       person2,
+        phone_number: phone_number1
+      )
+
+      Ronin::DB::PersonalPhoneNumber.create(
+        person:       person1,
+        phone_number: phone_number2
+      )
+
+      Ronin::DB::PersonalPhoneNumber.create(
+        person:       person2,
+        phone_number: phone_number3
+      )
+    end
+
+    it "must return the #{described_class}s associated with the person's full name" do
+      phone_numbers = subject.for_person(full_name)
+
+      expect(phone_numbers.length).to eq(2)
+
+      expect(phone_numbers[0].number).to eq('555-1111')
+      expect(phone_numbers[0].people.length).to eq(1)
+      expect(phone_numbers[0].people[0].full_name).to eq(full_name)
+
+      expect(phone_numbers[1].number).to eq('555-3333')
+      expect(phone_numbers[1].people.length).to eq(1)
+      expect(phone_numbers[1].people[0].full_name).to eq(full_name)
+    end
+
+    after do
+      Ronin::DB::PersonalPhoneNumber.destroy_all
+      Ronin::DB::Person.destroy_all
+      described_class.destroy_all
+    end
+  end
+
   describe ".similar_to" do
     subject { described_class }
 
