@@ -147,6 +147,8 @@ module Ronin
       # @return [Array<StreetAddress>]
       #   The street addresses associated with the person.
       #
+      # @api public
+      #
       def self.for_person(full_name)
         joins(:people).where(people: {full_name: full_name})
       end
@@ -159,6 +161,8 @@ module Ronin
       #
       # @return [Array<StreetAddress>]
       #   The street addresses associated with the organization.
+      #
+      # @api public
       #
       def self.for_organization(name)
         joins(organization_street_addresses: :organization).where(
@@ -177,6 +181,8 @@ module Ronin
       # @return [Array<StreetAddress>]
       #   The matching street addresses.
       #
+      # @api public
+      #
       def self.with_address(address)
         where(address: address)
       end
@@ -189,6 +195,8 @@ module Ronin
       #
       # @return [Array<StreetAddress>]
       #   The matching street addresses.
+      #
+      # @api public
       #
       def self.with_city(city)
         where(city: city)
@@ -203,6 +211,8 @@ module Ronin
       # @return [Array<StreetAddress>]
       #   The matching street addresses.
       #
+      # @api public
+      #
       def self.with_state(state)
         where(state: state)
       end
@@ -211,6 +221,8 @@ module Ronin
       # Alias for {with_state}.
       #
       # @see with_state
+      #
+      # @api public
       #
       def self.with_province(province)
         with_state(province)
@@ -225,6 +237,8 @@ module Ronin
       # @return [Array<StreetAddress>]
       #   The matching street addresses.
       #
+      # @api public
+      #
       def self.with_country(country)
         where(country: country)
       end
@@ -238,6 +252,8 @@ module Ronin
       # @return [Array<StreetAddress>]
       #   The matching street addresses.
       #
+      # @api public
+      #
       def self.with_zipcode(zipcode)
         where(zipcode: zipcode)
       end
@@ -248,6 +264,8 @@ module Ronin
       # @return [String, nil]
       #
       # @see state
+      #
+      # @api public
       #
       def province
         state
@@ -263,6 +281,8 @@ module Ronin
       #
       # @see state=
       #
+      # @api public
+      #
       def province=(new_province)
         self.state = new_province
       end
@@ -273,6 +293,8 @@ module Ronin
       # @return [String, nil]
       #
       # @see zipcode
+      #
+      # @api public
       #
       def postal_code
         zipcode
@@ -287,6 +309,8 @@ module Ronin
       # @return [String, nil]
       #
       # @see zipcode=
+      #
+      # @api public
       #
       def postal_code=(new_postal_code)
         self.zipcode = new_postal_code
