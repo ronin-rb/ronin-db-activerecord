@@ -152,6 +152,23 @@ module Ronin
       end
 
       #
+      # Queries all street addresses associated with an organization.
+      #
+      # @param [String] name
+      #   The organization name to search for.
+      #
+      # @return [Array<StreetAddress>]
+      #   The street addresses associated with the organization.
+      #
+      def self.for_organization(name)
+        joins(organization_street_addresses: :organization).where(
+          organization_street_addresses: {
+            ronin_organizations: {name: name}
+          }
+        )
+      end
+
+      #
       # Queries all street addresses with the matching address.
       #
       # @param [String] address
