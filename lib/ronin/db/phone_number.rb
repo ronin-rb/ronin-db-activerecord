@@ -211,6 +211,25 @@ module Ronin
       end
 
       #
+      # Queries all phone numbers associated with the organization name.
+      #
+      # @param [String] name
+      #   The organization's name.
+      #
+      # @return [Array<PhoneNumber>]
+      #   The phone numbers associated with the organization.
+      #
+      # @api public
+      #
+      def self.for_organization(name)
+        joins(organization_phone_number: :organization).where(
+          organization_phone_number: {
+            ronin_organizations: {name: name}
+          }
+        )
+      end
+
+      #
       # Finds all similar phone numbers with the matching phone number
       # components.
       #

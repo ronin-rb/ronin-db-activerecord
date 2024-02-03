@@ -1197,6 +1197,56 @@ describe Ronin::DB::PhoneNumber do
     end
   end
 
+  describe ".for_organization" do
+    subject { described_class }
+
+    let(:name) { 'ACME, Corp.' }
+
+    before do
+      phone_number1 = described_class.import('555-1111')
+      phone_number2 = described_class.import('555-2222')
+      phone_number3 = described_class.import('555-3333')
+
+      org1 = Ronin::DB::Organization.import('Other Corp.')
+      org2 = Ronin::DB::Organization.import(name)
+
+      Ronin::DB::OrganizationPhoneNumber.create(
+        organization: org2,
+        phone_number: phone_number1
+      )
+
+      Ronin::DB::OrganizationPhoneNumber.create(
+        organization: org1,
+        phone_number: phone_number2
+      )
+
+      Ronin::DB::OrganizationPhoneNumber.create(
+        organization: org2,
+        phone_number: phone_number3
+      )
+    end
+
+    it "must return the #{described_class}s associated with the Organization's name" do
+      phone_numbers = subject.for_organization(name)
+
+      expect(phone_numbers.length).to eq(2)
+
+      expect(phone_numbers[0].number).to eq('555-1111')
+      expect(phone_numbers[0].organization_phone_number).to_not be(nil)
+      expect(phone_numbers[0].organization_phone_number.organization.name).to eq(name)
+
+      expect(phone_numbers[1].number).to eq('555-3333')
+      expect(phone_numbers[1].organization_phone_number).to_not be(nil)
+      expect(phone_numbers[1].organization_phone_number.organization.name).to eq(name)
+    end
+
+    after do
+      Ronin::DB::OrganizationPhoneNumber.destroy_all
+      Ronin::DB::Organization.destroy_all
+      described_class.destroy_all
+    end
+  end
+
   describe ".similar_to" do
     subject { described_class }
 
