@@ -139,10 +139,10 @@ module Ronin
       has_many :organization_departments, dependent: :nullify
 
       #
-      # Queries all street addresses associated with the person.
+      # Queries all street addresses associated with the person's full name.
       #
       # @param [String] full_name
-      #   The person's full name.
+      #   The person's full name to search for.
       #
       # @return [Array<StreetAddress>]
       #   The street addresses associated with the person.
@@ -154,7 +154,7 @@ module Ronin
       end
 
       #
-      # Queries all street addresses associated with an organization.
+      # Queries all street addresses associated with an organization's name.
       #
       # @param [String] name
       #   The organization name to search for.
