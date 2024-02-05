@@ -227,6 +227,23 @@ module Ronin
       end
 
       #
+      # Queries all email addresses that are associated with the person.
+      #
+      # @param [String] full_name
+      #   The person's full name to search for.
+      #
+      # @return [Array<EmailAddress>]
+      #   The email addresses that are associated with the person.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.for_person(full_name)
+        joins(:people).where(people: {full_name: full_name})
+      end
+
+      #
       # Looks up the email address.
       #
       # @param [String] email
