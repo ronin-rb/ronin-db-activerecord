@@ -300,6 +300,58 @@ describe Ronin::DB::EmailAddress do
     end
   end
 
+  describe ".for_person" do
+    subject { described_class }
+
+    let(:full_name) { 'John Smith' }
+
+    before do
+      email_address1 = described_class.import('jsmith@example.com')
+      email_address2 = described_class.import('bob@example.com')
+      email_address3 = described_class.import('john.smith@example.com')
+
+      person1 = Ronin::DB::Person.import('Bob Smith')
+      person2 = Ronin::DB::Person.import(full_name)
+
+      Ronin::DB::PersonalEmailAddress.create(
+        person:        person2,
+        email_address: email_address1
+      )
+
+      Ronin::DB::PersonalEmailAddress.create(
+        person:        person1,
+        email_address: email_address2
+      )
+
+      Ronin::DB::PersonalEmailAddress.create(
+        person:        person2,
+        email_address: email_address3
+      )
+    end
+
+    it "must return the #{described_class}s associated with the person's full name" do
+      email_addresses = subject.for_person(full_name)
+
+      expect(email_addresses.length).to eq(2)
+
+      expect(email_addresses[0].address).to eq('jsmith@example.com')
+      expect(email_addresses[0].people.length).to eq(1)
+      expect(email_addresses[0].people[0].full_name).to eq(full_name)
+
+      expect(email_addresses[1].address).to eq('john.smith@example.com')
+      expect(email_addresses[1].people.length).to eq(1)
+      expect(email_addresses[1].people[0].full_name).to eq(full_name)
+    end
+
+    after do
+      Ronin::DB::PersonalEmailAddress.destroy_all
+      Ronin::DB::Person.destroy_all
+      Ronin::DB::EmailAddress.destroy_all
+      Ronin::DB::UserName.destroy_all
+      Ronin::DB::HostName.destroy_all
+    end
+  end
+
   describe ".lookup" do
     let(:user_name) { Ronin::DB::UserName.create(name: user) }
     let(:host_name) { Ronin::DB::HostName.create(name: host) }
