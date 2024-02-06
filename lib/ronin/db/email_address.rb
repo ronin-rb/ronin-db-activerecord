@@ -244,6 +244,27 @@ module Ronin
       end
 
       #
+      # Queries all email addresses that are associated with the organization.
+      #
+      # @param [String] name
+      #   The organization name to search for.
+      #
+      # @return [Array<EmailAddress>]
+      #   The email addresses that are associated with the organization.
+      #
+      # @api public
+      #
+      # @since 0.2.0
+      #
+      def self.for_organization(name)
+        joins(organization_email_address: :organization).where(
+          organization_email_address: {
+            ronin_organizations: {name: name}
+          }
+        )
+      end
+
+      #
       # Looks up the email address.
       #
       # @param [String] email
