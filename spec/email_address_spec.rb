@@ -352,6 +352,58 @@ describe Ronin::DB::EmailAddress do
     end
   end
 
+  describe ".for_organization" do
+    subject { described_class }
+
+    let(:name) { 'ACME, Inc.' }
+
+    before do
+      email_address1 = described_class.import('jsmith@example.com')
+      email_address2 = described_class.import('bob@example.com')
+      email_address3 = described_class.import('john.smith@example.com')
+
+      organization1 = Ronin::DB::Organization.import('Other, Corp.')
+      organization2 = Ronin::DB::Organization.import(name)
+
+      Ronin::DB::OrganizationEmailAddress.create(
+        organization:  organization2,
+        email_address: email_address1
+      )
+
+      Ronin::DB::OrganizationEmailAddress.create(
+        organization:  organization1,
+        email_address: email_address2
+      )
+
+      Ronin::DB::OrganizationEmailAddress.create(
+        organization:  organization2,
+        email_address: email_address3
+      )
+    end
+
+    it "must return the #{described_class}s associated with the Organization's name" do
+      email_addresses = subject.for_organization(name)
+
+      expect(email_addresses.length).to eq(2)
+
+      expect(email_addresses[0].address).to eq('jsmith@example.com')
+      expect(email_addresses[0].organization_email_address).to_not be(nil)
+      expect(email_addresses[0].organization_email_address.organization.name).to eq(name)
+
+      expect(email_addresses[1].address).to eq('john.smith@example.com')
+      expect(email_addresses[1].organization_email_address).to_not be(nil)
+      expect(email_addresses[1].organization_email_address.organization.name).to eq(name)
+    end
+
+    after do
+      Ronin::DB::OrganizationEmailAddress.destroy_all
+      Ronin::DB::Organization.destroy_all
+      Ronin::DB::EmailAddress.destroy_all
+      Ronin::DB::UserName.destroy_all
+      Ronin::DB::HostName.destroy_all
+    end
+  end
+
   describe ".lookup" do
     let(:user_name) { Ronin::DB::UserName.create(name: user) }
     let(:host_name) { Ronin::DB::HostName.create(name: host) }
