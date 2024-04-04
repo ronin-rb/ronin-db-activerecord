@@ -271,6 +271,21 @@ module Ronin
       end
 
       #
+      # Queries all people associated with the country.
+      #
+      # @param [String] country
+      #   The country to search for.
+      #
+      # @return [Array<Person>]
+      #   The people associated with the country.
+      #
+      # @api public
+      #
+      def self.for_country(country)
+        joins(:street_addresses).where(street_addresses: {country: country})
+      end
+
+      #
       # Queries all people with the given prefix.
       #
       # @param [String] prefix
