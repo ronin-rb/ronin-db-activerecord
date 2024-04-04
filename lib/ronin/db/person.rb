@@ -239,6 +239,23 @@ module Ronin
       end
 
       #
+      # Queries all people associated with the province.
+      #
+      # @param [String] province
+      #   The province to search for.
+      #
+      # @return [Array<Person>]
+      #   The people associated with the province.
+      #
+      # @see for_state
+      #
+      # @api public
+      #
+      def self.for_province(province)
+        for_state(province)
+      end
+
+      #
       # Queries all people with the given prefix.
       #
       # @param [String] prefix
