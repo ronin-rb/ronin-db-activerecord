@@ -2663,9 +2663,7 @@ describe Ronin::DB::Person do
     end
   end
 
-  describe ".for_address" do
-    subject { described_class }
-
+  shared_examples_for "people with street addresses" do
     let(:first_name1) { "Bob" }
     let(:last_name1)  { "Smith" }
     let(:full_name1)  { "#{first_name1} #{last_name1}" }
@@ -2676,15 +2674,15 @@ describe Ronin::DB::Person do
 
     let(:address1) { '123 First St.' }
     let(:city1)    { 'City One' }
-    let(:state1)   { 'State' }
+    let(:state1)   { 'State One' }
     let(:zipcode1) { '1234' }
-    let(:country1) { 'Country' }
+    let(:country1) { 'USA' }
 
     let(:address2) { '123 Second St.' }
     let(:city2)    { 'City Two' }
-    let(:state2)   { 'State' }
-    let(:zipcode2) { '1234' }
-    let(:country2) { 'Country' }
+    let(:state2)   { 'State Two' }
+    let(:zipcode2) { '4567' }
+    let(:country2) { 'USB' }
 
     before do
       person1 = described_class.create(
@@ -2748,6 +2746,18 @@ describe Ronin::DB::Person do
       )
     end
 
+    after do
+      Ronin::DB::PersonalStreetAddress.destroy_all
+      Ronin::DB::StreetAddress.destroy_all
+      described_class.destroy_all
+    end
+  end
+
+  describe ".for_address" do
+    subject { described_class }
+
+    include_context "people with street addresses"
+
     it "must find all #{described_class} associated with the street address" do
       people = subject.for_address(address1)
 
@@ -2761,11 +2771,25 @@ describe Ronin::DB::Person do
       expect(people[1].first_name).to eq(first_name2)
       expect(people[1].last_name).to eq(last_name2)
     end
+  end
 
-    after do
-      Ronin::DB::PersonalStreetAddress.destroy_all
-      Ronin::DB::StreetAddress.destroy_all
-      described_class.destroy_all
+  describe ".for_city" do
+    subject { described_class }
+
+    include_context "people with street addresses"
+
+    it "must find all #{described_class} associated with the city" do
+      people = subject.for_city(city1)
+
+      expect(people.length).to eq(2)
+
+      expect(people[0].full_name).to eq(full_name1)
+      expect(people[0].first_name).to eq(first_name1)
+      expect(people[0].last_name).to eq(last_name1)
+
+      expect(people[1].full_name).to eq(full_name2)
+      expect(people[1].first_name).to eq(first_name2)
+      expect(people[1].last_name).to eq(last_name2)
     end
   end
 
