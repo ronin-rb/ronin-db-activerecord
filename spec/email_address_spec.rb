@@ -323,7 +323,7 @@ describe Ronin::DB::EmailAddress do
       it do
         expect {
           subject.import(address)
-        }.to raise_error(ArgumentError,"email address #{address.inspect} must have a user name")
+        }.to raise_error(ArgumentError,"invalid email address: #{address.inspect}")
       end
     end
 
@@ -335,7 +335,7 @@ describe Ronin::DB::EmailAddress do
       it do
         expect {
           subject.import(address)
-        }.to raise_error(ArgumentError,"email address #{address.inspect} must have a host name")
+        }.to raise_error(ArgumentError,"invalid email address: #{address.inspect}")
       end
     end
 
@@ -347,7 +347,19 @@ describe Ronin::DB::EmailAddress do
       it do
         expect {
           subject.import(address)
-        }.to raise_error(ArgumentError,"email address #{address.inspect} must not contain spaces")
+        }.to raise_error(ArgumentError,"invalid email address: #{address.inspect}")
+      end
+    end
+
+    context "when the email address does not contain an '@' symbol" do
+      subject { described_class }
+
+      let(:address) { "#{user}" }
+
+      it do
+        expect {
+          subject.import(address)
+        }.to raise_error(ArgumentError,"invalid email address: #{address.inspect}")
       end
     end
   end

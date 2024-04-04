@@ -159,8 +159,8 @@ module Ronin
       # @api public
       #
       def self.import(email)
-        if email =~ /\s/
-          raise(ArgumentError,"email address #{email.inspect} must not contain spaces")
+        unless email =~ URI::MailTo::EMAIL_REGEXP
+          raise(ArgumentError,"invalid email address: #{email.inspect}")
         end
 
         normalized_email = email.downcase
