@@ -2663,6 +2663,112 @@ describe Ronin::DB::Person do
     end
   end
 
+  describe ".for_address" do
+    subject { described_class }
+
+    let(:first_name1) { "Bob" }
+    let(:last_name1)  { "Smith" }
+    let(:full_name1)  { "#{first_name1} #{last_name1}" }
+
+    let(:first_name2) { "Alice" }
+    let(:last_name2)  { "Smith" }
+    let(:full_name2)  { "#{first_name2} #{last_name2}" }
+
+    let(:address1) { '123 First St.' }
+    let(:city1)    { 'City One' }
+    let(:state1)   { 'State' }
+    let(:zipcode1) { '1234' }
+    let(:country1) { 'Country' }
+
+    let(:address2) { '123 Second St.' }
+    let(:city2)    { 'City Two' }
+    let(:state2)   { 'State' }
+    let(:zipcode2) { '1234' }
+    let(:country2) { 'Country' }
+
+    before do
+      person1 = described_class.create(
+        full_name:  "John Smith",
+        first_name: 'John',
+        last_name:  'Smith'
+      )
+
+      person2 = described_class.create(
+        full_name:  full_name1,
+        first_name: first_name1,
+        last_name:  last_name1
+      )
+
+      person3 = described_class.create(
+        full_name:  full_name2,
+        first_name: first_name2,
+        last_name:  last_name2
+      )
+
+      person4 = described_class.create(
+        full_name:  "Eve Smith",
+        first_name: 'Eve',
+        last_name:  'Smith'
+      )
+
+      street_address1 = Ronin::DB::StreetAddress.create(
+        address: address1,
+        city:    city1,
+        state:   state1,
+        zipcode: zipcode1,
+        country: country1
+      )
+
+      street_address2 = Ronin::DB::StreetAddress.create(
+        address: address2,
+        city:    city2,
+        state:   state2,
+        zipcode: zipcode2,
+        country: country2
+      )
+
+      Ronin::DB::PersonalStreetAddress.create(
+        person:         person1,
+        street_address: street_address2
+      )
+
+      Ronin::DB::PersonalStreetAddress.create(
+        person:         person2,
+        street_address: street_address1
+      )
+
+      Ronin::DB::PersonalStreetAddress.create(
+        person:         person3,
+        street_address: street_address1
+      )
+
+      Ronin::DB::PersonalStreetAddress.create(
+        person:         person4,
+        street_address: street_address2
+      )
+    end
+
+    it "must find all #{described_class} associated with the street address" do
+      people = subject.for_address(address1)
+
+      expect(people.length).to eq(2)
+
+      expect(people[0].full_name).to eq(full_name1)
+      expect(people[0].first_name).to eq(first_name1)
+      expect(people[0].last_name).to eq(last_name1)
+
+      expect(people[1].full_name).to eq(full_name2)
+      expect(people[1].first_name).to eq(first_name2)
+      expect(people[1].last_name).to eq(last_name2)
+    end
+
+    after do
+      Ronin::DB::PersonalStreetAddress.destroy_all
+      Ronin::DB::StreetAddress.destroy_all
+      described_class.destroy_all
+    end
+  end
+
   describe ".with_prefix" do
     subject { described_class }
 
