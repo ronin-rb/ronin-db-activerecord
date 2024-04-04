@@ -209,6 +209,21 @@ module Ronin
       end
 
       #
+      # Queries all people associated with the city.
+      #
+      # @param [String] city
+      #   The city to search for.
+      #
+      # @return [Array<Person>]
+      #   The people associated with the city.
+      #
+      # @api public
+      #
+      def self.for_city(city)
+        joins(:street_addresses).where(street_addresses: {city: city})
+      end
+
+      #
       # Queries all people with the given prefix.
       #
       # @param [String] prefix
