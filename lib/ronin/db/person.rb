@@ -194,6 +194,21 @@ module Ronin
       has_many :notes, dependent: :destroy
 
       #
+      # Queries all people associated with the street address.
+      #
+      # @param [String] address
+      #   The street address to search for.
+      #
+      # @return [Array<Person>]
+      #   The people associated with the street address.
+      #
+      # @api public
+      #
+      def self.for_address(address)
+        joins(:street_addresses).where(street_addresses: {address: address})
+      end
+
+      #
       # Queries all people with the given prefix.
       #
       # @param [String] prefix
