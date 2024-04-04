@@ -256,6 +256,21 @@ module Ronin
       end
 
       #
+      # Queries all people associated with the zipcode.
+      #
+      # @param [String] zipcode
+      #   The zipcode to search for.
+      #
+      # @return [Array<Person>]
+      #   The people associated with the zipcode.
+      #
+      # @api public
+      #
+      def self.for_zipcode(zipcode)
+        joins(:street_addresses).where(street_addresses: {zipcode: zipcode})
+      end
+
+      #
       # Queries all people with the given prefix.
       #
       # @param [String] prefix

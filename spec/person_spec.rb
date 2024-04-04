@@ -2833,6 +2833,26 @@ describe Ronin::DB::Person do
     end
   end
 
+  describe ".for_zipcode" do
+    subject { described_class }
+
+    include_context "people with street addresses"
+
+    it "must find all #{described_class} associated with the zipcode" do
+      people = subject.for_zipcode(zipcode1)
+
+      expect(people.length).to eq(2)
+
+      expect(people[0].full_name).to eq(full_name1)
+      expect(people[0].first_name).to eq(first_name1)
+      expect(people[0].last_name).to eq(last_name1)
+
+      expect(people[1].full_name).to eq(full_name2)
+      expect(people[1].first_name).to eq(first_name2)
+      expect(people[1].last_name).to eq(last_name2)
+    end
+  end
+
   describe ".with_prefix" do
     subject { described_class }
 
