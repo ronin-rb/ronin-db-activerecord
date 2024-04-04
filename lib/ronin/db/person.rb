@@ -224,6 +224,21 @@ module Ronin
       end
 
       #
+      # Queries all people associated with the state.
+      #
+      # @param [String] state
+      #   The state to search for.
+      #
+      # @return [Array<Person>]
+      #   The people associated with the state.
+      #
+      # @api public
+      #
+      def self.for_state(state)
+        joins(:street_addresses).where(street_addresses: {state: state})
+      end
+
+      #
       # Queries all people with the given prefix.
       #
       # @param [String] prefix
