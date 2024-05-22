@@ -113,7 +113,8 @@ module Ronin
       #   @return [Array<URL>]
       #
       #   @since 0.2.0
-      has_many :urls, through: :vulnerabilities
+      has_many :urls, through: :vulnerabilities,
+                      class_name: 'URL'
 
       # @!attribute [rw] notes
       #   The associated notes.
