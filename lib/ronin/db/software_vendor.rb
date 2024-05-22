@@ -35,7 +35,8 @@ module Ronin
       attribute :id, :integer
 
       # Products published by the vendor
-      has_many :software, class_name: 'Software'
+      has_many :software, class_name: 'Software',
+                          foreign_key: :vendor_id
 
     end
   end
