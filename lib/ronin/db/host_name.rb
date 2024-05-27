@@ -98,7 +98,8 @@ module Ronin
       #   The URLs that point to this host name.
       #
       #   @return [Array<URL>]
-      has_many :urls, class_name: 'URL'
+      has_many :urls, dependent: :destroy,
+                      class_name: 'URL'
 
       #
       # Looks up the host name.
