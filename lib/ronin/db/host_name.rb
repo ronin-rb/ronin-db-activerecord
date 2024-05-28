@@ -92,7 +92,7 @@ module Ronin
       #   The email addresses that are associated with the host-name.
       #
       #   @return [Array<EmailAddress>]
-      has_many :email_addresses
+      has_many :email_addresses, dependent: :destroy
 
       # @!attribute [rw] urls
       #   The URLs that point to this host name.
