@@ -1,3 +1,13 @@
+### 0.1.6 / 2024-06-19
+
+* Improve the validation of email addresses passed to
+  {Ronin::DB::EmailAddress.import}.
+* Add missing `software_id` column to the `ronin_open_ports` table.
+* Add missing `foreign_key` to {Ronin::DB::SoftwareVendor#software}.
+* Add missing `class_name` to {Ronin::DB::Vulnerability#url}.
+* Add missing `dependent: :destroy` to {Ronin::DB::HostName#urls}.
+* Add missing `dependent: :destroy` to {Ronin::DB::HostName#email_addresses}.
+
 ### 0.1.5 / 2023-12-13
 
 * Corrected {Ronin::DB::HTTPRequest#request_method} to accept and store
