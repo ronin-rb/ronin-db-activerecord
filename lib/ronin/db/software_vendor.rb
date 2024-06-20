@@ -31,10 +31,16 @@ module Ronin
       include Model
       include Model::HasUniqueName
 
-      # The primary-key of the vendor
+      # @!attribute [rw] id
+      #   The primary-key of the vendor
+      #
+      #   @return [Integer]
       attribute :id, :integer
 
-      # Products published by the vendor
+      # @!attribute [rw] software
+      #   Products published by the vendor
+      #
+      #   @return [Array<Software>]
       has_many :software, class_name: 'Software',
                           foreign_key: :vendor_id
 
