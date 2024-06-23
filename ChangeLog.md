@@ -1,3 +1,94 @@
+### 0.2.0 / 2024-XX-XX
+
+* Added {Ronin::DB::Advisory#host_names}.
+* Added {Ronin::DB::Advisory#ip_addresses}.
+* Added {Ronin::DB::Advisory#mac_addresses}.
+* Added {Ronin::DB::Advisory#open_ports}.
+* Added {Ronin::DB::Advisory#urls}.
+* Added {Ronin::DB::Advisory#vulnerabilities}.
+* Added {Ronin::DB::ASN#to_s}.
+* Added {Ronin::DB::Cert}.
+* Added {Ronin::DB::DNSQuery}.
+* Added {Ronin::DB::DNSRecord}.
+* Added {Ronin::DB::EmailAddress.for_organization}.
+* Added {Ronin::DB::EmailAddress.for_person}.
+* Added {Ronin::DB::EmailAddress.with_password}.
+* Added {Ronin::DB::EmailAddress#passwords}.
+* Added {Ronin::DB::EmailAddress#service_credentials}.
+* Added {Ronin::DB::EmailAddress#web_credentials}.
+* Added {Ronin::DB::HostName#advisories}.
+* Added {Ronin::DB::HostName#vulnerabilities}.
+* Added {Ronin::DB::HTTPRequest#source_ip}.
+* Added {Ronin::DB::IPAddress#advisories}.
+* Added {Ronin::DB::IPAddress#vulnerabilities}.
+* Added {Ronin::DB::MACAddress#advisories}.
+* Added {Ronin::DB::MACAddress#vulnerabilities}.
+* Added {Ronin::DB::Model::HasName::ClassMethods#with_name}.
+* Added {Ronin::DB::Note}.
+* Added {Ronin::DB::OpenPort.with_ip_address}.
+* Added {Ronin::DB::OpenPort.with_port_number}.
+* Added {Ronin::DB::OpenPort.with_protocol}.
+* Added {Ronin::DB::OpenPort.with_service_name}.
+* Added {Ronin::DB::OpenPort#advisories}.
+* Added {Ronin::DB::OpenPort#vulnerabilities}.
+* Added {Ronin::DB::Organization.import}.
+* Added {Ronin::DB::Organization.lookup}.
+* Added {Ronin::DB::Organization#type}.
+* Added {Ronin::DB::Organization#parent}.
+* Added {Ronin::DB::OrganizationCustomer}.
+* Added {Ronin::DB::OrganizationDepartment}.
+* Added {Ronin::DB::OrganizationEmailAddress}.
+* Added {Ronin::DB::OrganizationHostName}.
+* Added {Ronin::DB::OrganizationIPAddress}.
+* Added {Ronin::DB::OrganizationMember}.
+* Added {Ronin::DB::OrganizationPhoneNumber}.
+* Added {Ronin::DB::OrganizationStreetAddress}.
+* Added {Ronin::DB::OS.with_flavor}.
+* Added {Ronin::DB::OS.with_version}.
+* Added {Ronin::DB::Password.for_user}.
+* Added {Ronin::DB::Password.with_email_address}.
+* Added {Ronin::DB::Password#email_addresses}.
+* Added {Ronin::DB::Password#service_credentials}.
+* Added {Ronin::DB::Password#web_credentials}.
+* Added {Ronin::DB::Person}.
+* Added {Ronin::DB::PersonalConnection}.
+* Added {Ronin::DB::PersonalEmailAddress}.
+* Added {Ronin::DB::PersonalPhoneNumber}.
+* Added {Ronin::DB::PersonalStreetAddress}.
+* Added {Ronin::DB::PhoneNumber}.
+* Added {Ronin::DB::Port.with_ip_address}.
+* Added {Ronin::DB::Port.with_number}.
+* Added {Ronin::DB::Port.with_protocol}.
+* Added {Ronin::DB::Port.with_service_name}.
+* Added {Ronin::DB::Port#ip_addresses}.
+* Added {Ronin::DB::Port#services}.
+* Added {Ronin::DB::Service.import}.
+* Added {Ronin::DB::Service.lookup}.
+* Added {Ronin::DB::Service.with_ip_address}.
+* Added {Ronin::DB::Service.with_port_number}.
+* Added {Ronin::DB::Service.with_protocol}.
+* Added {Ronin::DB::Service#ip_addresses}.
+* Added {Ronin::DB::Service#ports}.
+* Added {Ronin::DB::Software.with_vendor_name}.
+* Added {Ronin::DB::Software.with_version}.
+* Added {Ronin::DB::StreetAddress}.
+* Added {Ronin::DB::URL#advisories}.
+* Added {Ronin::DB::URL#vulnerabilities}.
+* Added {Ronin::DB::URLQueryParamName.urls}.
+* Added {Ronin::DB::UserName#passwords}.
+* Added {Ronin::DB::UserName#service_credentials}.
+* Added {Ronin::DB::UserName#web_credentials}.
+* Added {Ronin::DB::UserName.with_password}.
+* Added {Ronin::DB::WebVuln}.
+* Include {Ronin::DB::Model::Importable} into {Ronin::DB::Service}.
+* Include {Ronin::DB::Model::Importable} into {Ronin::DB::Organization}.
+* Include {Ronin::DB::Model::HasName} into {Ronin::DB::Software} for the
+  the {Ronin::DB::Model::HasName::ClassMethods#named .named} method.
+* Added missing `created_at` column and attribute to {Ronin::DB::Port}.
+* Added missing `created_at` column and attribute to {Ronin::DB::Service}.
+* Changed {Ronin::DB::OpenPort#to_s} to include
+  {Ronin::DB::OpenPort#ip_address}.
+
 ### 0.1.6 / 2024-06-19
 
 * Improve the validation of email addresses passed to
