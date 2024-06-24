@@ -14,7 +14,8 @@
 ## Description
 
 ronin-db-activerecord contains [ActiveRecord] models and migrations for the
-[Ronin Database][ronin-db].
+[Ronin Database][ronin-db]. Provides database models storing and querying
+network data, advisory data, credentials, and OSINT data.
 
 ## Features
 

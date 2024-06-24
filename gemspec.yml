@@ -3,7 +3,8 @@ version: 0.2.0.rc1
 summary: ActiveRecord backend for the Ronin Database
 description:
   ronin-db-activerecord contains ActiveRecord models and migrations for the
-  Ronin Database.
+  Ronin Database. Provides database models storing and querying network data,
+  advisory data, credentials, and OSINT data.
 
 license: LGPL-3.0
 authors: Postmodern
