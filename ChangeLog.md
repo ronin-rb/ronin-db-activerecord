@@ -1,4 +1,4 @@
-### 0.2.0 / 2024-XX-XX
+### 0.2.0 / 2024-07-22
 
 * Added {Ronin::DB::Advisory#host_names}.
 * Added {Ronin::DB::Advisory#ip_addresses}.
