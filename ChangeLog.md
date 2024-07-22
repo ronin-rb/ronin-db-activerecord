@@ -83,7 +83,7 @@
 * Include {Ronin::DB::Model::Importable} into {Ronin::DB::Service}.
 * Include {Ronin::DB::Model::Importable} into {Ronin::DB::Organization}.
 * Include {Ronin::DB::Model::HasName} into {Ronin::DB::Software} for the
-  the {Ronin::DB::Model::HasName::ClassMethods#named .named} method.
+  {Ronin::DB::Model::HasName::ClassMethods#named .named} method.
 * Added missing `created_at` column and attribute to {Ronin::DB::Port}.
 * Added missing `created_at` column and attribute to {Ronin::DB::Service}.
 * Changed {Ronin::DB::OpenPort#to_s} to include
