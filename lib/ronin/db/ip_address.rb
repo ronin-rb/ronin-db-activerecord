@@ -18,7 +18,7 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/address'
+require_relative 'address'
 
 require 'active_record'
 require 'ipaddr'
@@ -381,16 +381,16 @@ module Ronin
   end
 end
 
-require 'ronin/db/ip_address_mac_address'
-require 'ronin/db/mac_address'
-require 'ronin/db/host_name_ip_address'
-require 'ronin/db/host_name'
-require 'ronin/db/open_port'
-require 'ronin/db/port'
-require 'ronin/db/os_guess'
-require 'ronin/db/os'
-require 'ronin/db/asn'
-require 'ronin/db/vulnerability'
-require 'ronin/db/advisory'
-require 'ronin/db/organization_ip_address'
-require 'ronin/db/note'
+require_relative 'ip_address_mac_address'
+require_relative 'mac_address'
+require_relative 'host_name_ip_address'
+require_relative 'host_name'
+require_relative 'open_port'
+require_relative 'port'
+require_relative 'os_guess'
+require_relative 'os'
+require_relative 'asn'
+require_relative 'vulnerability'
+require_relative 'advisory'
+require_relative 'organization_ip_address'
+require_relative 'note'

@@ -18,7 +18,7 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model'
+require_relative 'model'
 
 require 'ipaddr'
 
@@ -84,5 +84,5 @@ module Ronin
   end
 end
 
-require 'ronin/db/cert_name'
-require 'ronin/db/cert'
+require_relative 'cert_name'
+require_relative 'cert'

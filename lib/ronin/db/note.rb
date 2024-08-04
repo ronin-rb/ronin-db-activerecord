@@ -18,7 +18,7 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model'
+require_relative 'model'
 
 require 'active_record'
 
@@ -180,20 +180,20 @@ module Ronin
   end
 end
 
-require 'ronin/db/mac_address'
-require 'ronin/db/ip_address'
-require 'ronin/db/host_name'
-require 'ronin/db/port'
-require 'ronin/db/service'
-require 'ronin/db/open_port'
-require 'ronin/db/cert'
-require 'ronin/db/url'
-require 'ronin/db/user_name'
-require 'ronin/db/email_address'
-require 'ronin/db/password'
-require 'ronin/db/credential'
-require 'ronin/db/advisory'
-require 'ronin/db/street_address'
-require 'ronin/db/phone_number'
-require 'ronin/db/person'
-require 'ronin/db/organization'
+require_relative 'mac_address'
+require_relative 'ip_address'
+require_relative 'host_name'
+require_relative 'port'
+require_relative 'service'
+require_relative 'open_port'
+require_relative 'cert'
+require_relative 'url'
+require_relative 'user_name'
+require_relative 'email_address'
+require_relative 'password'
+require_relative 'credential'
+require_relative 'advisory'
+require_relative 'street_address'
+require_relative 'phone_number'
+require_relative 'person'
+require_relative 'organization'

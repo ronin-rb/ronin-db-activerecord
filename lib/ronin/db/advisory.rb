@@ -18,8 +18,8 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model'
-require 'ronin/db/model/importable'
+require_relative 'model'
+require_relative 'model/importable'
 
 require 'active_record'
 
@@ -225,10 +225,10 @@ module Ronin
   end
 end
 
-require 'ronin/db/vulnerability'
-require 'ronin/db/mac_address'
-require 'ronin/db/ip_address'
-require 'ronin/db/open_port'
-require 'ronin/db/host_name'
-require 'ronin/db/url'
-require 'ronin/db/note'
+require_relative 'vulnerability'
+require_relative 'mac_address'
+require_relative 'ip_address'
+require_relative 'open_port'
+require_relative 'host_name'
+require_relative 'url'
+require_relative 'note'

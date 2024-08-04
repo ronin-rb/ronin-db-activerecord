@@ -18,7 +18,7 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model'
+require_relative 'model'
 
 require 'active_record'
 require 'resolv'
@@ -95,4 +95,4 @@ module Ronin
   end
 end
 
-require 'ronin/db/dns_record'
+require_relative 'dns_record'

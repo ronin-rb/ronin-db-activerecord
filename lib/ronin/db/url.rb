@@ -18,9 +18,9 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model'
-require 'ronin/db/model/importable'
-require 'ronin/db/model/last_scanned_at'
+require_relative 'model'
+require_relative 'model/importable'
+require_relative 'model/last_scanned_at'
 
 require 'active_record'
 require 'uri/generic'
@@ -518,13 +518,13 @@ module Ronin
   end
 end
 
-require 'ronin/db/host_name'
-require 'ronin/db/port'
-require 'ronin/db/url_scheme'
-require 'ronin/db/url_query_param_name'
-require 'ronin/db/url_query_param'
-require 'ronin/db/web_credential'
-require 'ronin/db/web_vuln'
-require 'ronin/db/vulnerability'
-require 'ronin/db/advisory'
-require 'ronin/db/note'
+require_relative 'host_name'
+require_relative 'port'
+require_relative 'url_scheme'
+require_relative 'url_query_param_name'
+require_relative 'url_query_param'
+require_relative 'web_credential'
+require_relative 'web_vuln'
+require_relative 'vulnerability'
+require_relative 'advisory'
+require_relative 'note'

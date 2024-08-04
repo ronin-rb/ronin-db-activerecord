@@ -18,8 +18,8 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model'
-require 'ronin/db/model/importable'
+require_relative 'model'
+require_relative 'model/importable'
 
 require 'active_record'
 
@@ -249,9 +249,9 @@ module Ronin
   end
 end
 
-require 'ronin/db/user_name'
-require 'ronin/db/email_address'
-require 'ronin/db/password'
-require 'ronin/db/service_credential'
-require 'ronin/db/web_credential'
-require 'ronin/db/note'
+require_relative 'user_name'
+require_relative 'email_address'
+require_relative 'password'
+require_relative 'service_credential'
+require_relative 'web_credential'
+require_relative 'note'

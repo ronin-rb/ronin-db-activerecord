@@ -18,7 +18,7 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model'
+require_relative 'model'
 
 require 'active_record'
 
@@ -152,7 +152,7 @@ module Ronin
   end
 end
 
-require 'ronin/db/organization'
-require 'ronin/db/person'
-require 'ronin/db/email_address'
-require 'ronin/db/phone_number'
+require_relative 'organization'
+require_relative 'person'
+require_relative 'email_address'
+require_relative 'phone_number'

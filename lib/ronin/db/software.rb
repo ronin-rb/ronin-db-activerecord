@@ -18,8 +18,8 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model'
-require 'ronin/db/model/has_name'
+require_relative 'model'
+require_relative 'model/has_name'
 
 require 'active_record'
 
@@ -117,5 +117,5 @@ module Ronin
   end
 end
 
-require 'ronin/db/software_vendor'
-require 'ronin/db/open_port'
+require_relative 'software_vendor'
+require_relative 'open_port'

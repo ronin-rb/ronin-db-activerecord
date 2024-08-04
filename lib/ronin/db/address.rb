@@ -18,9 +18,9 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model'
-require 'ronin/db/model/importable'
-require 'ronin/db/model/last_scanned_at'
+require_relative 'model'
+require_relative 'model/importable'
+require_relative 'model/last_scanned_at'
 
 require 'active_record'
 

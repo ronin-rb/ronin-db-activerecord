@@ -18,7 +18,7 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/cert_organization'
+require_relative 'cert_organization'
 
 module Ronin
   module DB
@@ -75,4 +75,4 @@ module Ronin
   end
 end
 
-require 'ronin/db/cert'
+require_relative 'cert'

@@ -18,9 +18,9 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model'
-require 'ronin/db/model/importable'
-require 'ronin/db/model/last_scanned_at'
+require_relative 'model'
+require_relative 'model/importable'
+require_relative 'model/last_scanned_at'
 
 require 'active_record'
 require 'uri/rfc2396_parser'
@@ -261,9 +261,9 @@ module Ronin
   end
 end
 
-require 'ronin/db/host_name_ip_address'
-require 'ronin/db/ip_address'
-require 'ronin/db/vulnerability'
-require 'ronin/db/advisory'
-require 'ronin/db/organization_host_name'
-require 'ronin/db/note'
+require_relative 'host_name_ip_address'
+require_relative 'ip_address'
+require_relative 'vulnerability'
+require_relative 'advisory'
+require_relative 'organization_host_name'
+require_relative 'note'

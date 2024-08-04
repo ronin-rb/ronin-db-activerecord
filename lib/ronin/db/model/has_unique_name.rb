@@ -18,7 +18,7 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model/has_name'
+require_relative 'has_name'
 
 module Ronin
   module DB

@@ -18,7 +18,7 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/address'
+require_relative 'address'
 
 require 'active_record'
 require 'strscan'
@@ -111,8 +111,8 @@ module Ronin
   end
 end
 
-require 'ronin/db/ip_address_mac_address'
-require 'ronin/db/ip_address'
-require 'ronin/db/vulnerability'
-require 'ronin/db/advisory'
-require 'ronin/db/note'
+require_relative 'ip_address_mac_address'
+require_relative 'ip_address'
+require_relative 'vulnerability'
+require_relative 'advisory'
+require_relative 'note'

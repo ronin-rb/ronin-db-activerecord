@@ -18,9 +18,9 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model'
-require 'ronin/db/model/has_unique_name'
-require 'ronin/db/model/importable'
+require_relative 'model'
+require_relative 'model/has_unique_name'
+require_relative 'model/importable'
 
 module Ronin
   module DB
@@ -103,5 +103,5 @@ module Ronin
   end
 end
 
-require 'ronin/db/cert_subject_alt_name'
-require 'ronin/db/cert'
+require_relative 'cert_subject_alt_name'
+require_relative 'cert'

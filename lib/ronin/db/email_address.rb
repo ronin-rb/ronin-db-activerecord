@@ -18,8 +18,8 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model'
-require 'ronin/db/model/importable'
+require_relative 'model'
+require_relative 'model/importable'
 
 require 'active_record'
 require 'uri/mailto'
@@ -354,10 +354,10 @@ module Ronin
   end
 end
 
-require 'ronin/db/user_name'
-require 'ronin/db/host_name'
-require 'ronin/db/personal_email_address'
-require 'ronin/db/organization_department'
-require 'ronin/db/organization_email_address'
-require 'ronin/db/organization_member'
-require 'ronin/db/note'
+require_relative 'user_name'
+require_relative 'host_name'
+require_relative 'personal_email_address'
+require_relative 'organization_department'
+require_relative 'organization_email_address'
+require_relative 'organization_member'
+require_relative 'note'

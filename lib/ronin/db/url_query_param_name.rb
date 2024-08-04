@@ -18,8 +18,8 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model/has_unique_name'
-require 'ronin/db/model'
+require_relative 'model/has_unique_name'
+require_relative 'model'
 
 require 'active_record'
 

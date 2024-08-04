@@ -18,7 +18,7 @@
 # along with ronin-db-activerecord.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/db/model'
+require_relative 'model'
 
 require 'active_record'
 require 'uri/query_params'
@@ -75,5 +75,5 @@ module Ronin
   end
 end
 
-require 'ronin/db/http_query_param_name'
-require 'ronin/db/http_request'
+require_relative 'http_query_param_name'
+require_relative 'http_request'
