@@ -2,7 +2,7 @@
 #
 # ronin-db-activerecord - ActiveRecord backend for the Ronin Database.
 #
-# Copyright (c) 2022-2024 Hal Brodigan (postmodern.mod3 at gmail.com)
+# Copyright (c) 2022-2025 Hal Brodigan (postmodern.mod3 at gmail.com)
 #
 # ronin-db-activerecord is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published
