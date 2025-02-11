@@ -44,7 +44,7 @@ module Ronin
       #   The queried record type.
       #
       #   @return [String]
-      enum type: {
+      enum :type, {
         a:     'A',
         aaaa:  'AAAA',
         any:   'ANY',
@@ -58,7 +58,7 @@ module Ronin
         srv:   'SRV',
         txt:   'TXT',
         wks:   'WKS'
-      }, _suffix: :query
+      }, suffix: :query
       validates :type, presence: true
 
       # @!attribute [rw] label
