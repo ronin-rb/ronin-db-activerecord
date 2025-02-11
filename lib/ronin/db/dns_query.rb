@@ -44,7 +44,7 @@ module Ronin
       #   The queried record type.
       #
       #   @return [String]
-      enum type: {
+      enum :type, {
         a:     'A',
         aaaa:  'AAAA',
         any:   'ANY',

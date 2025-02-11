@@ -50,7 +50,7 @@ module Ronin
       #   The type of vuln.
       #
       #   @return ["lfi", "rfi", "sqli", "ssti", "open_redirect", "reflected_xss", "command_injection"]
-      enum type: {
+      enum :type, {
         lfi:               'lfi',
         rfi:               'rfi',
         sqli:              'sqli',
@@ -90,7 +90,7 @@ module Ronin
       #   The request method for the URL.
       #
       #   @return ["copy", "delete", "get", "head", "lock", "mkcol", "move", "options", "patch", "post", "propfind", "proppatch", "put", "trace", "unlock"]
-      enum request_method: {
+      enum :request_method, {
         copy:      'COPY',
         delete:    'DELETE',
         get:       'GET',
@@ -112,7 +112,7 @@ module Ronin
       #   The LFI os.
       #
       #   @return [:unix, :windows, nil]
-      enum lfi_os: {
+      enum :lfi_os, {
         unix:    'unix',
         windows: 'windows'
       }, _prefix: true
@@ -127,7 +127,7 @@ module Ronin
       #   The LFI filter bypass.
       #
       #   @return [:null_byte, :base64, :rot13, :zlib, nil]
-      enum lfi_filter_bypass: {
+      enum :lfi_filter_bypass, {
         null_byte: 'null_byte',
         base64:    'base64',
         rot13:     'rot13',
@@ -138,7 +138,7 @@ module Ronin
       #   The RFI script lang.
       #
       #   @return [:asp, :asp_net, :cold_fusion, :jsp, :php, :perl, nil]
-      enum rfi_script_lang: {
+      enum :rfi_script_lang, {
         asp:         'asp',
         asp_net:     'asp_net',
         cold_fusion: 'cold_fusion',
@@ -151,7 +151,7 @@ module Ronin
       #   The RFI filter bypass.
       #
       #   @return [:null_byte, :double_encode, nil]
-      enum rfi_filter_bypass: {
+      enum :rfi_filter_bypass, {
         null_byte:     'null_byte',
         double_encode: 'double_encode'
       }, _prefix: true
@@ -160,7 +160,7 @@ module Ronin
       #   The SSTI escape type.
       #
       #   @return [:double_curly_braces, :dollar_curly_braces, :dollar_double_curly_braces, :pound_curly_braces, :angle_brackets_percent, :custom, nil]
-      enum ssti_escape_type: {
+      enum :ssti_escape_type, {
         double_curly_braces:        'double_curly_braces',
         dollar_curly_braces:        'dollar_curly_braces',
         dollar_double_curly_braces: 'dollar_double_curly_braces',

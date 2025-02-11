@@ -50,7 +50,7 @@ module Ronin
       #   The request method.
       #
       #   @return ["copy", "delete", "get", "head", "lock", "mkcol", "move", "options", "patch", "post", "propfind", "proppatch", "put", "trace", "unlock"]
-      enum request_method: {
+      enum :request_method, {
         copy:      'COPY',
         delete:    'DELETE',
         get:       'GET',
