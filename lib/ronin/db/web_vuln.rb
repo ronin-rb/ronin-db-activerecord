@@ -50,7 +50,7 @@ module Ronin
       #   The type of vuln.
       #
       #   @return ["lfi", "rfi", "sqli", "ssti", "open_redirect", "reflected_xss", "command_injection"]
-      enum type: {
+      enum :type, {
         lfi:               'lfi',
         rfi:               'rfi',
         sqli:              'sqli',
@@ -90,7 +90,7 @@ module Ronin
       #   The request method for the URL.
       #
       #   @return ["copy", "delete", "get", "head", "lock", "mkcol", "move", "options", "patch", "post", "propfind", "proppatch", "put", "trace", "unlock"]
-      enum request_method: {
+      enum :request_method, {
         copy:      'COPY',
         delete:    'DELETE',
         get:       'GET',
@@ -106,16 +106,16 @@ module Ronin
         put:       'PUT',
         trace:     'TRACE',
         unlock:    'UNLOCK'
-      }, _suffix: :request
+      }, suffix: :request
 
       # @!attribute [rw] lfi_os
       #   The LFI os.
       #
       #   @return [:unix, :windows, nil]
-      enum lfi_os: {
+      enum :lfi_os, {
         unix:    'unix',
         windows: 'windows'
-      }, _prefix: true
+      }, prefix: true
 
       # @!attribute [rw] lfi_depth
       #   The LFI depth.
@@ -127,47 +127,47 @@ module Ronin
       #   The LFI filter bypass.
       #
       #   @return [:null_byte, :base64, :rot13, :zlib, nil]
-      enum lfi_filter_bypass: {
+      enum :lfi_filter_bypass, {
         null_byte: 'null_byte',
         base64:    'base64',
         rot13:     'rot13',
         zlib:      'zlib'
-      }, _prefix: true
+      }, prefix: true
 
       # @!attribute [rw] rfi_script_lang
       #   The RFI script lang.
       #
       #   @return [:asp, :asp_net, :cold_fusion, :jsp, :php, :perl, nil]
-      enum rfi_script_lang: {
+      enum :rfi_script_lang, {
         asp:         'asp',
         asp_net:     'asp_net',
         cold_fusion: 'cold_fusion',
         jsp:         'jsp',
         php:         'php',
         perl:        'perl'
-      }, _prefix: true
+      }, prefix: true
 
       # @!attribute [rw] rfi_filter_bypass
       #   The RFI filter bypass.
       #
       #   @return [:null_byte, :double_encode, nil]
-      enum rfi_filter_bypass: {
+      enum :rfi_filter_bypass, {
         null_byte:     'null_byte',
         double_encode: 'double_encode'
-      }, _prefix: true
+      }, prefix: true
 
       # @!attribute [rw] ssti_escape_type
       #   The SSTI escape type.
       #
       #   @return [:double_curly_braces, :dollar_curly_braces, :dollar_double_curly_braces, :pound_curly_braces, :angle_brackets_percent, :custom, nil]
-      enum ssti_escape_type: {
+      enum :ssti_escape_type, {
         double_curly_braces:        'double_curly_braces',
         dollar_curly_braces:        'dollar_curly_braces',
         dollar_double_curly_braces: 'dollar_double_curly_braces',
         pound_curly_braces:         'pound_curly_braces',
         angle_brackets_percent:     'angle_brackets_percent',
         custom:                     'custom'
-      }, _prefix: true
+      }, prefix: true
 
       # @!attribute [rw] sqli_escape_quote
       #   The SQLi escape quote.
