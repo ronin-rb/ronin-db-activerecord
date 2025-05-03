@@ -94,4 +94,70 @@ describe Ronin::DB::Organization do
 
     after { described_class.destroy_all }
   end
+
+  describe "#is_company?" do
+    context "when #type is 'company'" do
+      subject do
+        described_class.new(name: 'Company Org', type: 'company')
+      end
+
+      it "must return true" do
+        expect(subject.is_company?).to be(true)
+      end
+    end
+
+    context "when #type is not 'company'" do
+      subject do
+        described_class.new(name: 'Other Org')
+      end
+
+      it "must return false" do
+        expect(subject.is_company?).to be(false)
+      end
+    end
+  end
+
+  describe "#is_government?" do
+    context "when #type is 'government'" do
+      subject do
+        described_class.new(name: 'Government Org', type: 'government')
+      end
+
+      it "must return true" do
+        expect(subject.is_government?).to be(true)
+      end
+    end
+
+    context "when #type is not 'government'" do
+      subject do
+        described_class.new(name: 'Other Org')
+      end
+
+      it "must return false" do
+        expect(subject.is_government?).to be(false)
+      end
+    end
+  end
+
+  describe "#is_military?" do
+    context "when #type is 'military'" do
+      subject do
+        described_class.new(name: 'Military Org', type: 'military')
+      end
+
+      it "must return true" do
+        expect(subject.is_military?).to be(true)
+      end
+    end
+
+    context "when #type is not 'military'" do
+      subject do
+        described_class.new(name: 'Other Org')
+      end
+
+      it "must return false" do
+        expect(subject.is_military?).to be(false)
+      end
+    end
+  end
 end
