@@ -51,7 +51,7 @@ module Ronin
         company:    'company',
         government: 'government',
         military:   'military'
-      }, prefix: 'is_'
+      }, prefix: 'is'
 
       # @!attribute [r] created_at
       #   Tracks when the organization was first created
