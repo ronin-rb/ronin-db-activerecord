@@ -189,6 +189,50 @@ describe Ronin::DB::OS do
 
   describe "#recent_ip_address"
 
+  describe "#linux?" do
+    context "when #flavor is 'linux'" do
+      subject do
+        described_class.new(name: 'Linux', flavor: 'linux', version: '2.6.11')
+      end
+
+      it "must return true" do
+        expect(subject.linux?).to be(true)
+      end
+    end
+
+    context "when #flavor is not 'linux'" do
+      subject do
+        described_class.new(name: 'Other', version: '1.2.3')
+      end
+
+      it "must return false" do
+        expect(subject.linux?).to be(false)
+      end
+    end
+  end
+
+  describe "#bsd?" do
+    context "when #flavor is 'bsd'" do
+      subject do
+        described_class.new(name: 'FreeBSD', flavor: 'bsd', version: '14.5')
+      end
+
+      it "must return true" do
+        expect(subject.bsd?).to be(true)
+      end
+    end
+
+    context "when #flavor is not 'bsd'" do
+      subject do
+        described_class.new(name: 'Other', version: '1.2.3')
+      end
+
+      it "must return false" do
+        expect(subject.bsd?).to be(false)
+      end
+    end
+  end
+
   describe "#to_s" do
     it "must return the OS name and version" do
       expect(subject.to_s).to eq("#{name} #{version}")
