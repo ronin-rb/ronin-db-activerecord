@@ -6,7 +6,7 @@ describe Ronin::DB::Arch do
     expect(described_class.table_name).to eq('ronin_arches')
   end
 
-  let(:name)      { 'cats'  }
+  let(:name)      { 'x86'   }
   let(:endian)    { :little }
   let(:word_size) { 4       }
 
