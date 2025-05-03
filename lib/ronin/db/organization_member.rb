@@ -48,15 +48,19 @@ module Ronin
       # @!attribute [rw] type
       #   The type of organization membership.
       #
-      #   @return ["advisor", "volunteer", "employee", "contractor", "intern", "board_member", nil]
-      enum :type, {
-        advisor:      'advisor',
-        volunteer:    'volunteer',
-        employee:     'employee',
-        contractor:   'contractor',
-        intern:       'intern',
-        board_member: 'board member'
-      }
+      #   @return ["advisor", "volunteer", "employee", "contractor", "intern", "board member", nil]
+      attribute :type, :string
+      validates :type, allow_nil: true,
+                       inclusion: {
+                         in: [
+                           'advisor',
+                           'volunteer',
+                           'employee',
+                           'contractor',
+                           'intern',
+                           'board member'
+                         ]
+                       }
 
       # @!attribute [rw] role
       #   The member's role within the organization.
@@ -134,6 +138,60 @@ module Ronin
       #
       def self.former
         where(active: false)
+      end
+
+      #
+      # Determines if the organization member is an advisor.
+      #
+      # @return [Boolean]
+      #
+      def advisor?
+        self.type == 'advisor'
+      end
+
+      #
+      # Determines if the organization member is a volunteer.
+      #
+      # @return [Boolean]
+      #
+      def volunteer?
+        self.type == 'volunteer'
+      end
+
+      #
+      # Determines if the organization member is an employee.
+      #
+      # @return [Boolean]
+      #
+      def employee?
+        self.type == 'employee'
+      end
+
+      #
+      # Determines if the organization member is a contractor.
+      #
+      # @return [Boolean]
+      #
+      def contractor?
+        self.type == 'contractor'
+      end
+
+      #
+      # Determines if the organization member is an intern.
+      #
+      # @return [Boolean]
+      #
+      def intern?
+        self.type == 'intern'
+      end
+
+      #
+      # Determines if the organization member is a board member.
+      #
+      # @return [Boolean]
+      #
+      def board_member?
+        self.type == 'board member'
       end
 
       #

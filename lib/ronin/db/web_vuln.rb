@@ -47,16 +47,19 @@ module Ronin
       #   The type of vuln.
       #
       #   @return ["lfi", "rfi", "sqli", "ssti", "open_redirect", "reflected_xss", "command_injection"]
-      enum type: {
-        lfi:               'lfi',
-        rfi:               'rfi',
-        sqli:              'sqli',
-        ssti:              'ssti',
-        open_redirect:     'open_redirect',
-        reflected_xss:     'reflected_xss',
-        command_injection: 'command_injection'
-      }
-      validates :type, presence: true
+      attribute :type, :string
+      validates :type, presence: true,
+                       inclusion: {
+                         in: %w[
+                           lfi
+                           rfi
+                           sqli
+                           ssti
+                           open_redirect
+                           reflected_xss
+                           command_injection
+                         ]
+                       }
 
       # @!attribute [rw] query_param
       #   The query param of the URL.
@@ -86,34 +89,36 @@ module Ronin
       # @!attribute [rw] request_method
       #   The request method for the URL.
       #
-      #   @return ["copy", "delete", "get", "head", "lock", "mkcol", "move", "options", "patch", "post", "propfind", "proppatch", "put", "trace", "unlock"]
-      enum request_method: {
-        copy:      'COPY',
-        delete:    'DELETE',
-        get:       'GET',
-        head:      'HEAD',
-        lock:      'LOCK',
-        mkcol:     'MKCOL',
-        move:      'MOVE',
-        options:   'OPTIONS',
-        patch:     'PATCH',
-        post:      'POST',
-        propfind:  'PROPFIND',
-        proppatch: 'PROPPATCH',
-        put:       'PUT',
-        trace:     'TRACE',
-        unlock:    'UNLOCK'
-      }, _suffix: :request
-      validates :request_method, presence: true
+      #   @return ["COPY", "DELETE", "GET", "HEAD", "LOCK", "MKCOL", "MOVE", "OPTIONS", "PATCH", "POST", "PROPFIND", "PROPPATCH", "PUT", "TRACE", "UNLOCK"]
+      attribute :request_method, :string
+      validates :request_method, presence: true,
+                                 inclusion: {
+                                   in: %w[
+                                     COPY
+                                     DELETE
+                                     GET
+                                     HEAD
+                                     LOCK
+                                     MKCOL
+                                     MOVE
+                                     OPTIONS
+                                     PATCH
+                                     POST
+                                     PROPFIND
+                                     PROPPATCH
+                                     PUT
+                                     TRACE
+                                     UNLOCK
+                                   ]
+                                 }
 
       # @!attribute [rw] lfi_os
       #   The LFI os.
       #
       #   @return [:unix, :windows, nil]
-      enum lfi_os: {
-        unix:    'unix',
-        windows: 'windows'
-      }, _prefix: true
+      attribute :lfi_os, :string
+      validates :lfi_os, allow_nil: true,
+                         inclusion: {in: %w[unix windows]}
 
       # @!attribute [rw] lfi_depth
       #   The LFI depth.
@@ -125,47 +130,58 @@ module Ronin
       #   The LFI filter bypass.
       #
       #   @return [:null_byte, :base64, :rot13, :zlib, nil]
-      enum lfi_filter_bypass: {
-        null_byte: 'null_byte',
-        base64:    'base64',
-        rot13:     'rot13',
-        zlib:      'zlib'
-      }, _prefix: true
+      attribute :lfi_filter_bypass, :string
+      validates :lfi_filter_bypass, allow_nil: true,
+                                    inclusion: {
+                                      in: %w[
+                                        null_byte
+                                        base64
+                                        rot13
+                                        zlib
+                                      ]
+                                    }
 
       # @!attribute [rw] rfi_script_lang
       #   The RFI script lang.
       #
       #   @return [:asp, :asp_net, :cold_fusion, :jsp, :php, :perl, nil]
-      enum rfi_script_lang: {
-        asp:         'asp',
-        asp_net:     'asp_net',
-        cold_fusion: 'cold_fusion',
-        jsp:         'jsp',
-        php:         'php',
-        perl:        'perl'
-      }, _prefix: true
+      attribute :rfi_script_lang, :string
+      validates :rfi_script_lang, allow_nil: true,
+                                  inclusion: {
+                                    in: %w[
+                                      asp
+                                      asp_net
+                                      cold_fusion
+                                      jsp
+                                      php
+                                      perl
+                                    ]
+                                  }
 
       # @!attribute [rw] rfi_filter_bypass
       #   The RFI filter bypass.
       #
       #   @return [:null_byte, :double_encode, nil]
-      enum rfi_filter_bypass: {
-        null_byte:     'null_byte',
-        double_encode: 'double_encode'
-      }, _prefix: true
+      attribute :rfi_filter_bypass, :string
+      validates :rfi_filter_bypass, allow_nil: true,
+                                    inclusion: {in: %w[null_byte double_encode]}
 
       # @!attribute [rw] ssti_escape_type
       #   The SSTI escape type.
       #
       #   @return [:double_curly_braces, :dollar_curly_braces, :dollar_double_curly_braces, :pound_curly_braces, :angle_brackets_percent, :custom, nil]
-      enum ssti_escape_type: {
-        double_curly_braces:        'double_curly_braces',
-        dollar_curly_braces:        'dollar_curly_braces',
-        dollar_double_curly_braces: 'dollar_double_curly_braces',
-        pound_curly_braces:         'pound_curly_braces',
-        angle_brackets_percent:     'angle_brackets_percent',
-        custom:                     'custom'
-      }, _prefix: true
+      attribute :ssti_escape_type, :string
+      validates :ssti_escape_type, allow_nil: true,
+                                   inclusion: {
+                                     in: %w[
+                                       double_curly_braces
+                                       dollar_curly_braces
+                                       dollar_double_curly_braces
+                                       pound_curly_braces
+                                       angle_brackets_percent
+                                       custom
+                                     ]
+                                   }
 
       # @!attribute [rw] sqli_escape_quote
       #   The SQLi escape quote.
@@ -337,6 +353,205 @@ module Ronin
         unless (query_param || header_name || cookie_param || form_param)
           self.errors.add(:base, "query_param, header_name, cookie_param or from_param must be present")
         end
+      end
+
+      #
+      # Determines if the web vulnerability is a LFI vulnerability.
+      #
+      # @return [Boolean]
+      #
+      def lfi?
+        self.type == 'lfi'
+      end
+
+      #
+      # Determines if the web vulnerability is a RFI vulnerability.
+      #
+      # @return [Boolean]
+      #
+      def rfi?
+        self.type == 'rfi'
+      end
+
+      #
+      # Determines if the web vulnerability is a SQLi vulnerability.
+      #
+      # @return [Boolean]
+      #
+      def sqli?
+        self.type == 'sqli'
+      end
+
+      #
+      # Determines if the web vulnerability is a SSTI vulnerability.
+      #
+      # @return [Boolean]
+      #
+      def ssti?
+        self.type == 'ssti'
+      end
+
+      #
+      # Determines if the web vulnerability is a Open Redirect vulnerability.
+      #
+      # @return [Boolean]
+      #
+      def open_redirect?
+        self.type == 'open_redirect'
+      end
+
+      #
+      # Determines if the web vulnerability is a Reflected XSS vulnerability.
+      #
+      # @return [Boolean]
+      #
+      def reflected_xss?
+        self.type == 'reflected_xss'
+      end
+
+      #
+      # Determines if the web vulnerability is a Command Injection
+      # vulnerability.
+      #
+      # @return [Boolean]
+      #
+      def command_injection?
+        self.type == 'command_injection'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP COPY request.
+      #
+      # @return [Boolean]
+      #
+      def copy_request?
+        self.request_method == 'COPY'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP DELETE request.
+      #
+      # @return [Boolean]
+      #
+      def delete_request?
+        self.request_method == 'DELETE'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP GET request.
+      #
+      # @return [Boolean]
+      #
+      def get_request?
+        self.request_method == 'GET'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP HEAD request.
+      #
+      # @return [Boolean]
+      #
+      def head_request?
+        self.request_method == 'HEAD'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP LOCK request.
+      #
+      # @return [Boolean]
+      #
+      def lock_request?
+        self.request_method == 'LOCK'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP MKCOL request.
+      #
+      # @return [Boolean]
+      #
+      def mkcol_request?
+        self.request_method == 'MKCOL'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP MOVE request.
+      #
+      # @return [Boolean]
+      #
+      def move_request?
+        self.request_method == 'MOVE'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP OPTIONS request.
+      #
+      # @return [Boolean]
+      #
+      def options_request?
+        self.request_method == 'OPTIONS'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP PATCH request.
+      #
+      # @return [Boolean]
+      #
+      def patch_request?
+        self.request_method == 'PATCH'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP POST request.
+      #
+      # @return [Boolean]
+      #
+      def post_request?
+        self.request_method == 'POST'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP PROPFIND request.
+      #
+      # @return [Boolean]
+      #
+      def propfind_request?
+        self.request_method == 'PROPFIND'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP PROPPATCH request.
+      #
+      # @return [Boolean]
+      #
+      def proppatch_request?
+        self.request_method == 'PROPPATCH'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP PUT request.
+      #
+      # @return [Boolean]
+      #
+      def put_request?
+        self.request_method == 'PUT'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP TRACE request.
+      #
+      # @return [Boolean]
+      #
+      def trace_request?
+        self.request_method == 'TRACE'
+      end
+
+      #
+      # Determines if the web vulnerability sends a HTTP UNLOCK request.
+      #
+      # @return [Boolean]
+      #
+      def unlock_request?
+        self.request_method == 'UNLOCK'
       end
 
     end

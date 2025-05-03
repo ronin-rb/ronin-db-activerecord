@@ -47,11 +47,9 @@ module Ronin
       #   @return ["company", "government", "military", nil]
       #
       #   @since 0.2.0
-      enum :type, {
-        company:    'company',
-        government: 'government',
-        military:   'military'
-      }, prefix: 'is'
+      attribute :type, :string
+      validates :type, allow_nil: true,
+                       inclusion: {in: %w[company government military]}
 
       # @!attribute [r] created_at
       #   Tracks when the organization was first created
@@ -264,6 +262,39 @@ module Ronin
       #
       def self.import(name)
         create(name: name)
+      end
+
+      #
+      # Determines if the organization is a company.
+      #
+      # @return [Boolean]
+      #
+      # @since 0.2.0
+      #
+      def is_company?
+        self.type == 'company'
+      end
+
+      #
+      # Determines if the organization is a government organization.
+      #
+      # @return [Boolean]
+      #
+      # @since 0.2.0
+      #
+      def is_government?
+        self.type == 'government'
+      end
+
+      #
+      # Determines if the organization is a military organization.
+      #
+      # @return [Boolean]
+      #
+      # @since 0.2.0
+      #
+      def is_military?
+        self.type == 'military'
       end
 
     end

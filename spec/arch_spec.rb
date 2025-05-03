@@ -15,7 +15,7 @@ describe Ronin::DB::Arch do
   end
 
   let(:name)      { 'x86' }
-  let(:endian)    { :little }
+  let(:endian)    { 'little' }
   let(:word_size) { 4 }
 
   describe "validations" do
@@ -46,20 +46,20 @@ describe Ronin::DB::Arch do
         )
       end
 
-      it "must accept :little" do
+      it "must accept 'little'" do
         arch = described_class.new(
           name:      name,
-          endian:    :little,
+          endian:    'little',
           word_size: word_size
         )
 
         expect(arch).to be_valid
       end
 
-      it "must accept :big" do
+      it "must accept 'big'" do
         arch = described_class.new(
           name:      name,
-          endian:    :big,
+          endian:    'big',
           word_size: word_size
         )
 
@@ -67,13 +67,13 @@ describe Ronin::DB::Arch do
       end
 
       it "must not accept other values" do
-        expect {
-          described_class.new(
-            name:      name,
-            endian:    :other,
-            word_size: word_size
-          )
-        }.to raise_error(ArgumentError,"'other' is not a valid endian")
+        arch = described_class.new(
+          name:      name,
+          endian:    'other',
+          word_size: word_size
+        )
+        expect(arch).to_not be_valid
+        expect(arch.errors[:endian]).to eq(['is not included in the list'])
       end
     end
 

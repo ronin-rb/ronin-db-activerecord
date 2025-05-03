@@ -35,12 +35,12 @@ describe Ronin::DB::OrganizationMember do
     describe "type" do
       [
         nil,
-        :advisor,
-        :volunteer,
-        :employee,
-        :contractor,
-        :intern,
-        :board_member
+        'advisor',
+        'volunteer',
+        'employee',
+        'contractor',
+        'intern',
+        'board member'
       ].each do |valid_type|
         it "must accept #{valid_type.inspect}" do
           member = described_class.new(
@@ -54,27 +54,28 @@ describe Ronin::DB::OrganizationMember do
       end
 
       it "must not accept other values" do
-        expect {
-          described_class.new(
-            type:         :other,
-            organization: organization,
-            person:       person
-          )
-        }.to raise_error(ArgumentError,"'other' is not a valid type")
+        member = described_class.new(
+          type:         'other',
+          organization: organization,
+          person:       person
+        )
+
+        expect(member).to_not be_valid
+        expect(member.errors[:type]).to eq(['is not included in the list'])
       end
     end
   end
 
   describe "#advisor?" do
-    context "when #type is :advisor" do
-      let(:type) { :advisor }
+    context "when #type is 'advisor'" do
+      let(:type) { 'advisor' }
 
       it "must return true" do
         expect(subject.advisor?).to be(true)
       end
     end
 
-    context "when #type is not :advisor" do
+    context "when #type is not 'advisor'" do
       it "must return false" do
         expect(subject.advisor?).to be(false)
       end
@@ -82,15 +83,15 @@ describe Ronin::DB::OrganizationMember do
   end
 
   describe "#volunteer?" do
-    context "when #type is :volunteer" do
-      let(:type) { :volunteer }
+    context "when #type is 'volunteer'" do
+      let(:type) { 'volunteer' }
 
       it "must return true" do
         expect(subject.volunteer?).to be(true)
       end
     end
 
-    context "when #type is not :volunteer" do
+    context "when #type is not 'volunteer'" do
       it "must return false" do
         expect(subject.volunteer?).to be(false)
       end
@@ -98,15 +99,15 @@ describe Ronin::DB::OrganizationMember do
   end
 
   describe "#employee?" do
-    context "when #type is :employee" do
-      let(:type) { :employee }
+    context "when #type is 'employee'" do
+      let(:type) { 'employee' }
 
       it "must return true" do
         expect(subject.employee?).to be(true)
       end
     end
 
-    context "when #type is not :employee" do
+    context "when #type is not 'employee'" do
       it "must return false" do
         expect(subject.employee?).to be(false)
       end
@@ -114,8 +115,8 @@ describe Ronin::DB::OrganizationMember do
   end
 
   describe "#contractor?" do
-    context "when #type is :contractor" do
-      let(:type) { :contractor }
+    context "when #type is 'contractor'" do
+      let(:type) { 'contractor' }
 
       it "must return true" do
         expect(subject.contractor?).to be(true)
@@ -130,15 +131,15 @@ describe Ronin::DB::OrganizationMember do
   end
 
   describe "#intern?" do
-    context "when #type is :intern" do
-      let(:type) { :intern }
+    context "when #type is 'intern'" do
+      let(:type) { 'intern' }
 
       it "must return true" do
         expect(subject.intern?).to be(true)
       end
     end
 
-    context "when #type is not :intern" do
+    context "when #type is not 'intern'" do
       it "must return false" do
         expect(subject.intern?).to be(false)
       end
@@ -146,15 +147,15 @@ describe Ronin::DB::OrganizationMember do
   end
 
   describe "#board_member?" do
-    context "when #type is :board_member" do
-      let(:type) { :board_member }
+    context "when #type is 'board member'" do
+      let(:type) { 'board member' }
 
       it "must return true" do
         expect(subject.board_member?).to be(true)
       end
     end
 
-    context "when #type is not :board_member" do
+    context "when #type is not 'board member'" do
       it "must return false" do
         expect(subject.board_member?).to be(false)
       end

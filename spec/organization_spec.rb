@@ -61,6 +61,13 @@ describe Ronin::DB::Organization do
 
         expect(org).to be_valid
       end
+
+      it "must not accept other values" do
+        org = described_class.new(name: 'Other Org', type: 'other')
+
+        expect(org).to_not be_valid
+        expect(org.errors[:type]).to eq(['is not included in the list'])
+      end
     end
 
     after { described_class.destroy_all }

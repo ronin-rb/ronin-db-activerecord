@@ -14,7 +14,7 @@ describe Ronin::DB::HTTPRequest do
   end
 
   let(:version)        { '1.1' }
-  let(:request_method) { :get }
+  let(:request_method) { 'GET' }
   let(:path)           { '/search' }
 
   subject do
@@ -136,37 +136,22 @@ describe Ronin::DB::HTTPRequest do
     end
 
     describe "request_method" do
-      [
-        :copy,
-        :delete,
-        :get,
-        :head,
-        :lock,
-        :mkcol,
-        :move,
-        :options,
-        :patch,
-        :post,
-        :propfind,
-        :proppatch,
-        :put,
-        :trace,
-        :unlock,
-        'COPY',
-        'DELETE',
-        'GET',
-        'HEAD',
-        'LOCK',
-        'MKCOL',
-        'MOVE',
-        'OPTIONS',
-        'PATCH',
-        'POST',
-        'PROPFIND',
-        'PROPPATCH',
-        'PUT',
-        'TRACE',
-        'UNLOCK'
+      %w[
+        COPY
+        DELETE
+        GET
+        HEAD
+        LOCK
+        MKCOL
+        MOVE
+        OPTIONS
+        PATCH
+        POST
+        PROPFIND
+        PROPPATCH
+        PUT
+        TRACE
+        UNLOCK
       ].each do |valid_request_method|
         it "must accept #{valid_request_method.inspect}" do
           request = described_class.new(
@@ -179,14 +164,17 @@ describe Ronin::DB::HTTPRequest do
         end
       end
 
-      it "must not accept any other Symbol" do
-        expect {
-          described_class.new(
-            version:        version,
-            request_method: :foo,
-            path:           path
-          )
-        }.to raise_error(ArgumentError,"'foo' is not a valid request_method")
+      it "must not accept other values" do
+        request = described_class.new(
+                    version:        version,
+                    request_method: 'FOO',
+                    path:           path
+                  )
+
+        expect(request).to_not be_valid
+        expect(request.errors[:request_method]).to eq(
+          ['is not included in the list']
+        )
       end
 
       it "must not accept a nil value" do
@@ -238,16 +226,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#copy_request?" do
-    context "when #request_method is :copy" do
-      let(:request_method) { :copy }
+    context "when #request_method is 'COPY'" do
+      let(:request_method) { 'COPY' }
 
       it "must return true" do
         expect(subject.copy_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :copy" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'COPY'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.copy_request?).to be(false)
@@ -256,16 +244,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#delete_request?" do
-    context "when #request_method is :delete" do
-      let(:request_method) { :delete }
+    context "when #request_method is 'DELETE'" do
+      let(:request_method) { 'DELETE' }
 
       it "must return true" do
         expect(subject.delete_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :delete" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'DELETE'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.delete_request?).to be(false)
@@ -274,16 +262,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#get_request?" do
-    context "when #request_method is :get" do
-      let(:request_method) { :get }
+    context "when #request_method is 'GET'" do
+      let(:request_method) { 'GET' }
 
       it "must return true" do
         expect(subject.get_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :get" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'GET'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.get_request?).to be(false)
@@ -292,16 +280,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#head_request?" do
-    context "when #request_method is :head" do
-      let(:request_method) { :head }
+    context "when #request_method is 'HEAD'" do
+      let(:request_method) { 'HEAD' }
 
       it "must return true" do
         expect(subject.head_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :head" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'HEAD'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.head_request?).to be(false)
@@ -310,16 +298,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#lock_request?" do
-    context "when #request_method is :lock" do
-      let(:request_method) { :lock }
+    context "when #request_method is 'LOCK'" do
+      let(:request_method) { 'LOCK' }
 
       it "must return true" do
         expect(subject.lock_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :lock" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'LOCK'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.lock_request?).to be(false)
@@ -328,16 +316,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#mkcol_request?" do
-    context "when #request_method is :mkcol" do
-      let(:request_method) { :mkcol }
+    context "when #request_method is 'MKCOL'" do
+      let(:request_method) { 'MKCOL' }
 
       it "must return true" do
         expect(subject.mkcol_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :mkcol" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'MKCOL'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.mkcol_request?).to be(false)
@@ -346,16 +334,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#move_request?" do
-    context "when #request_method is :move" do
-      let(:request_method) { :move }
+    context "when #request_method is 'MOVE'" do
+      let(:request_method) { 'MOVE' }
 
       it "must return true" do
         expect(subject.move_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :move" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'MOVE'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.move_request?).to be(false)
@@ -364,16 +352,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#options_request?" do
-    context "when #request_method is :options" do
-      let(:request_method) { :options }
+    context "when #request_method is 'OPTIONS'" do
+      let(:request_method) { 'OPTIONS' }
 
       it "must return true" do
         expect(subject.options_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :options" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'OPTIONS'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.options_request?).to be(false)
@@ -382,16 +370,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#patch_request?" do
-    context "when #request_method is :patch" do
-      let(:request_method) { :patch }
+    context "when #request_method is 'PATCH'" do
+      let(:request_method) { 'PATCH' }
 
       it "must return true" do
         expect(subject.patch_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :patch" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'PATCH'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.patch_request?).to be(false)
@@ -400,16 +388,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#post_request?" do
-    context "when #request_method is :post" do
-      let(:request_method) { :post }
+    context "when #request_method is 'POST'" do
+      let(:request_method) { 'POST' }
 
       it "must return true" do
         expect(subject.post_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :post" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'POST'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.post_request?).to be(false)
@@ -418,16 +406,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#propfind_request?" do
-    context "when #request_method is :propfind" do
-      let(:request_method) { :propfind }
+    context "when #request_method is 'PROPFIND'" do
+      let(:request_method) { 'PROPFIND' }
 
       it "must return true" do
         expect(subject.propfind_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :propfind" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'PROPFIND'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.propfind_request?).to be(false)
@@ -436,16 +424,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#proppatch_request?" do
-    context "when #request_method is :proppatch" do
-      let(:request_method) { :proppatch }
+    context "when #request_method is 'PROPPATCH'" do
+      let(:request_method) { 'PROPPATCH' }
 
       it "must return true" do
         expect(subject.proppatch_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :proppatch" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'PROPPATCH'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.proppatch_request?).to be(false)
@@ -454,16 +442,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#put_request?" do
-    context "when #request_method is :put" do
-      let(:request_method) { :put }
+    context "when #request_method is 'PUT'" do
+      let(:request_method) { 'PUT' }
 
       it "must return true" do
         expect(subject.put_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :put" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'PUT'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.put_request?).to be(false)
@@ -472,16 +460,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#trace_request?" do
-    context "when #request_method is :trace" do
-      let(:request_method) { :trace }
+    context "when #request_method is 'TRACE'" do
+      let(:request_method) { 'TRACE' }
 
       it "must return true" do
         expect(subject.trace_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :trace" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'TRACE'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.trace_request?).to be(false)
@@ -490,16 +478,16 @@ describe Ronin::DB::HTTPRequest do
   end
 
   describe "#unlock_request?" do
-    context "when #request_method is :unlock" do
-      let(:request_method) { :unlock }
+    context "when #request_method is 'UNLOCK'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return true" do
         expect(subject.unlock_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :unlock" do
-      let(:request_method) { :get }
+    context "when #request_method is not 'UNLOCK'" do
+      let(:request_method) { 'GET' }
 
       it "must return false" do
         expect(subject.unlock_request?).to be(false)

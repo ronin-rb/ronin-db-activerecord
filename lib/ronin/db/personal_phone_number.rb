@@ -44,7 +44,16 @@ module Ronin
       #   The type of the phone number.
       #
       #   @return ["home", "cell", "fax", "voip", nil]
-      enum :type, {home: 'home', cell: 'cell', fax: 'fax', voip: 'voip'}
+      attribute :type, :string
+      validates :type, allow_nil: true,
+                       inclusion: {
+                         in: %w[
+                           home
+                           cell
+                           fax
+                           voip
+                         ]
+                       }
 
       # @!attribute [rw] person
       #   The person who owns the phone number.
@@ -64,6 +73,42 @@ module Ronin
       #
       #   @return [Time]
       attribute :created_at, :datetime
+
+      #
+      # Determines if the personal phone number is a home number.
+      #
+      # @return [Boolean]
+      #
+      def home?
+        self.type == 'home'
+      end
+
+      #
+      # Determines if the personal phone number is a cell number.
+      #
+      # @return [Boolean]
+      #
+      def cell?
+        self.type == 'cell'
+      end
+
+      #
+      # Determines if the personal phone number is a Fax number.
+      #
+      # @return [Boolean]
+      #
+      def fax?
+        self.type == 'fax'
+      end
+
+      #
+      # Determines if the personal phone number is a VoIP number.
+      #
+      # @return [Boolean]
+      #
+      def voip?
+        self.type == 'voip'
+      end
 
     end
   end

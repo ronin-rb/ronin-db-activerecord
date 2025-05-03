@@ -44,42 +44,46 @@ module Ronin
       #   The type of the connection.
       #
       #   @return [String, nil]
-      enum :type, {
-        friend:   'friend',
-        collegue: 'collegue',
-        coworker: 'coworker',
+      attribute :type, :string
+      validates :type, allow_nil: true,
+                       inclusion: {
+                         in: %w[
+                           friend
+                           collegue
+                           coworker
 
-        parent:  'parent',
-        mother:  'mother',
-        father:  'father',
-        aunt:    'aunt',
-        uncle:   'uncle',
-        brother: 'brother',
-        sister:  'sister',
-        cousin:  'cousin',
-        nephew:  'nephew',
-        niece:   'niece',
+                           parent
+                           mother
+                           father
+                           aunt
+                           uncle
+                           brother
+                           sister
+                           cousin
+                           nephew
+                           niece
 
-        stepmother:  'stepmother',
-        stepfather:  'stepfather',
-        stepchild:   'stepchild',
-        stepbrother: 'stepbrother',
-        stepsister:  'stepsister',
+                           stepmother
+                           stepfather
+                           stepchild
+                           stepbrother
+                           stepsister
 
-        in_law:        'in-law',
-        father_in_law: 'father-in-law',
-        mother_in_law: 'mother-in-law',
+                           in-law
+                           father-in-law
+                           mother-in-law
 
-        partner:    'partner',
-        boyfriend:  'boyfriend',
-        girlfriend: 'girlfriend',
-        husband:    'husband',
-        wife:       'wife',
+                           partner
+                           boyfriend
+                           girlfriend
+                           husband
+                           wife
 
-        ex:         'ex',
-        ex_husband: 'ex-husband',
-        ex_wife:    'ex-wife'
-      }, prefix: 'is'
+                           ex
+                           ex-husband
+                           ex-wife
+                         ]
+                       }
 
       # @!attribute [rw] person
       #   The person who is befriending the other person.
@@ -99,6 +103,267 @@ module Ronin
       #
       #   @return [Time]
       attribute :created_at, :datetime
+
+      #
+      # Determines if the personal connection type is 'friend'.
+      #
+      # @return [Boolean]
+      #
+      def is_friend?
+        self.type == 'friend'
+      end
+
+      #
+      # Determines if the personal connection type is 'collegue'.
+      #
+      # @return [Boolean]
+      #
+      def is_collegue?
+        self.type == 'collegue'
+      end
+
+      #
+      # Determines if the personal connection type is 'coworker'.
+      #
+      # @return [Boolean]
+      #
+      def is_coworker?
+        self.type == 'coworker'
+      end
+
+      #
+      # Determines if the personal connection type is 'parent'.
+      #
+      # @return [Boolean]
+      #
+      def is_parent?
+        self.type == 'parent'
+      end
+
+      #
+      # Determines if the personal connection type is 'mother'.
+      #
+      # @return [Boolean]
+      #
+      def is_mother?
+        self.type == 'mother'
+      end
+
+      #
+      # Determines if the personal connection type is 'father'.
+      #
+      # @return [Boolean]
+      #
+      def is_father?
+        self.type == 'father'
+      end
+
+      #
+      # Determines if the personal connection type is 'aunt'.
+      #
+      # @return [Boolean]
+      #
+      def is_aunt?
+        self.type == 'aunt'
+      end
+
+      #
+      # Determines if the personal connection type is 'uncle'.
+      #
+      # @return [Boolean]
+      #
+      def is_uncle?
+        self.type == 'uncle'
+      end
+
+      #
+      # Determines if the personal connection type is 'brother'.
+      #
+      # @return [Boolean]
+      #
+      def is_brother?
+        self.type == 'brother'
+      end
+
+      #
+      # Determines if the personal connection type is 'sister'.
+      #
+      # @return [Boolean]
+      #
+      def is_sister?
+        self.type == 'sister'
+      end
+
+      #
+      # Determines if the personal connection type is 'cousin'.
+      #
+      # @return [Boolean]
+      #
+      def is_cousin?
+        self.type == 'cousin'
+      end
+
+      #
+      # Determines if the personal connection type is 'nephew'.
+      #
+      # @return [Boolean]
+      #
+      def is_nephew?
+        self.type == 'nephew'
+      end
+
+      #
+      # Determines if the personal connection type is 'niece'.
+      #
+      # @return [Boolean]
+      #
+      def is_niece?
+        self.type == 'niece'
+      end
+
+      #
+      # Determines if the personal connection type is 'stepmother'.
+      #
+      # @return [Boolean]
+      #
+      def is_stepmother?
+        self.type == 'stepmother'
+      end
+
+      #
+      # Determines if the personal connection type is 'stepfather'.
+      #
+      # @return [Boolean]
+      #
+      def is_stepfather?
+        self.type == 'stepfather'
+      end
+
+      #
+      # Determines if the personal connection type is 'stepchild'.
+      #
+      # @return [Boolean]
+      #
+      def is_stepchild?
+        self.type == 'stepchild'
+      end
+
+      #
+      # Determines if the personal connection type is 'stepbrother'.
+      #
+      # @return [Boolean]
+      #
+      def is_stepbrother?
+        self.type == 'stepbrother'
+      end
+
+      #
+      # Determines if the personal connection type is 'stepsister'.
+      #
+      # @return [Boolean]
+      #
+      def is_stepsister?
+        self.type == 'stepsister'
+      end
+
+      #
+      # Determines if the personal connection type is 'in-law'.
+      #
+      # @return [Boolean]
+      #
+      def is_in_law?
+        self.type == 'in-law'
+      end
+
+      #
+      # Determines if the personal connection type is 'father-in-law'.
+      #
+      # @return [Boolean]
+      #
+      def is_father_in_law?
+        self.type == 'father-in-law'
+      end
+
+      #
+      # Determines if the personal connection type is 'mother-in-law'.
+      #
+      # @return [Boolean]
+      #
+      def is_mother_in_law?
+        self.type == 'mother-in-law'
+      end
+
+      #
+      # Determines if the personal connection type is 'partner'.
+      #
+      # @return [Boolean]
+      #
+      def is_partner?
+        self.type == 'partner'
+      end
+
+      #
+      # Determines if the personal connection type is 'boyfriend'.
+      #
+      # @return [Boolean]
+      #
+      def is_boyfriend?
+        self.type == 'boyfriend'
+      end
+
+      #
+      # Determines if the personal connection type is 'girlfriend'.
+      #
+      # @return [Boolean]
+      #
+      def is_girlfriend?
+        self.type == 'girlfriend'
+      end
+
+      #
+      # Determines if the personal connection type is 'husband'.
+      #
+      # @return [Boolean]
+      #
+      def is_husband?
+        self.type == 'husband'
+      end
+
+      #
+      # Determines if the personal connection type is 'wife'.
+      #
+      # @return [Boolean]
+      #
+      def is_wife?
+        self.type == 'wife'
+      end
+
+      #
+      # Determines if the personal connection type is 'ex'.
+      #
+      # @return [Boolean]
+      #
+      def is_ex?
+        self.type == 'ex'
+      end
+
+      #
+      # Determines if the personal connection type is 'ex-husband'.
+      #
+      # @return [Boolean]
+      #
+      def is_ex_husband?
+        self.type == 'ex-husband'
+      end
+
+      #
+      # Determines if the personal connection type is 'ex-wife'.
+      #
+      # @return [Boolean]
+      #
+      def is_ex_wife?
+        self.type == 'ex-wife'
+      end
 
     end
   end
