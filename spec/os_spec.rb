@@ -24,6 +24,40 @@ describe Ronin::DB::OS do
       end
     end
 
+    describe "flavor" do
+      it "must accept nil" do
+        os = described_class.new(name: name, version: version)
+
+        expect(os).to be_valid
+      end
+
+      it "must accept :linux" do
+        os = described_class.new(name: 'Linux', flavor: :linux, version: '2.6.11')
+
+        expect(os).to be_valid
+      end
+
+      it "must accept :bsd" do
+        os = described_class.new(name: 'FreeBSD', flavor: :bsd, version: '14.2')
+
+        expect(os).to be_valid
+      end
+
+      context "otherwise" do
+        let(:flavor) { :other }
+
+        it do
+          expect {
+            described_class.new(
+              name:    'Other',
+              flavor:  flavor,
+              version: '1.2.3'
+            )
+          }.to raise_error(ArgumentError,"'#{flavor}' is not a valid flavor")
+        end
+      end
+    end
+
     describe "version" do
       it "should require a version" do
         os = described_class.new(name: name)
