@@ -33,6 +33,7 @@ module Ronin
       # @api private
       #
       def self.included(model)
+        # NOTE: all Ronin::DB tables start with 'ronin_'
         model.table_name_prefix = 'ronin_'
       end
     end
