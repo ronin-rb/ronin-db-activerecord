@@ -123,4 +123,238 @@ describe Ronin::DB::DNSQuery do
       end
     end
   end
+
+  describe "#a_query?" do
+    context "when #type is :a" do
+      let(:type) { :a }
+
+      it "must return true" do
+        expect(subject.a_query?).to be(true)
+      end
+    end
+
+    context "when #type is not :a" do
+      let(:type) { :wks }
+
+      it "must return false" do
+        expect(subject.a_query?).to be(false)
+      end
+    end
+  end
+
+  describe "#aaaa_query?" do
+    context "when #type is :aaaa" do
+      let(:type) { :aaaa }
+
+      it "must return true" do
+        expect(subject.aaaa_query?).to be(true)
+      end
+    end
+
+    context "when #type is not :aaaa" do
+      let(:type) { :wks }
+
+      it "must return false" do
+        expect(subject.aaaa_query?).to be(false)
+      end
+    end
+  end
+
+  describe "#any_query?" do
+    context "when #type is :any" do
+      let(:type) { :any }
+
+      it "must return true" do
+        expect(subject.any_query?).to be(true)
+      end
+    end
+
+    context "when #type is not :any" do
+      let(:type) { :wks }
+
+      it "must return false" do
+        expect(subject.any_query?).to be(false)
+      end
+    end
+  end
+
+  describe "#cname_query?" do
+    context "when #type is :cname" do
+      let(:type) { :cname }
+
+      it "must return true" do
+        expect(subject.cname_query?).to be(true)
+      end
+    end
+
+    context "when #type is not :cname" do
+      let(:type) { :wks }
+
+      it "must return false" do
+        expect(subject.cname_query?).to be(false)
+      end
+    end
+  end
+
+  describe "#hinfo_query?" do
+    context "when #type is :hinfo" do
+      let(:type) { :hinfo }
+
+      it "must return true" do
+        expect(subject.hinfo_query?).to be(true)
+      end
+    end
+
+    context "when #type is not :hinfo" do
+      let(:type) { :wks }
+
+      it "must return false" do
+        expect(subject.hinfo_query?).to be(false)
+      end
+    end
+  end
+
+  describe "#loc_query?" do
+    context "when #type is :loc" do
+      let(:type) { :loc }
+
+      it "must return true" do
+        expect(subject.loc_query?).to be(true)
+      end
+    end
+
+    context "when #type is not :loc" do
+      let(:type) { :wks }
+
+      it "must return false" do
+        expect(subject.loc_query?).to be(false)
+      end
+    end
+  end
+
+  describe "#mx_query?" do
+    context "when #type is :mx" do
+      let(:type) { :mx }
+
+      it "must return true" do
+        expect(subject.mx_query?).to be(true)
+      end
+    end
+
+    context "when #type is not :mx" do
+      let(:type) { :wks }
+
+      it "must return false" do
+        expect(subject.mx_query?).to be(false)
+      end
+    end
+  end
+
+  describe "#ns_query?" do
+    context "when #type is :ns" do
+      let(:type) { :ns }
+
+      it "must return true" do
+        expect(subject.ns_query?).to be(true)
+      end
+    end
+
+    context "when #type is not :ns" do
+      let(:type) { :wks }
+
+      it "must return false" do
+        expect(subject.ns_query?).to be(false)
+      end
+    end
+  end
+
+  describe "#ptr_query?" do
+    context "when #type is :ptr" do
+      let(:type) { :ptr }
+
+      it "must return true" do
+        expect(subject.ptr_query?).to be(true)
+      end
+    end
+
+    context "when #type is not :ptr" do
+      let(:type) { :wks }
+
+      it "must return false" do
+        expect(subject.ptr_query?).to be(false)
+      end
+    end
+  end
+
+  describe "#soa_query?" do
+    context "when #type is :soa" do
+      let(:type) { :soa }
+
+      it "must return true" do
+        expect(subject.soa_query?).to be(true)
+      end
+    end
+
+    context "when #type is not :soa" do
+      let(:type) { :wks }
+
+      it "must return false" do
+        expect(subject.soa_query?).to be(false)
+      end
+    end
+  end
+
+  describe "#srv_query?" do
+    context "when #type is :srv" do
+      let(:type) { :srv }
+
+      it "must return true" do
+        expect(subject.srv_query?).to be(true)
+      end
+    end
+
+    context "when #type is not :srv" do
+      let(:type) { :wks }
+
+      it "must return false" do
+        expect(subject.srv_query?).to be(false)
+      end
+    end
+  end
+
+  describe "#txt_query?" do
+    context "when #type is :txt" do
+      let(:type) { :txt }
+
+      it "must return true" do
+        expect(subject.txt_query?).to be(true)
+      end
+    end
+
+    context "when #type is not :txt" do
+      let(:type) { :wks }
+
+      it "must return false" do
+        expect(subject.txt_query?).to be(false)
+      end
+    end
+  end
+
+  describe "#wks_query?" do
+    context "when #type is :wks" do
+      let(:type) { :wks }
+
+      it "must return true" do
+        expect(subject.wks_query?).to be(true)
+      end
+    end
+
+    context "when #type is not :wks" do
+      let(:type) { :a }
+
+      it "must return false" do
+        expect(subject.wks_query?).to be(false)
+      end
+    end
+  end
 end
