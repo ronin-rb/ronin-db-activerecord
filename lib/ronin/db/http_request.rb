@@ -49,25 +49,28 @@ module Ronin
       # @!attribute [rw] request_method
       #   The request method.
       #
-      #   @return ["copy", "delete", "get", "head", "lock", "mkcol", "move", "options", "patch", "post", "propfind", "proppatch", "put", "trace", "unlock"]
-      enum request_method: {
-        copy:      'COPY',
-        delete:    'DELETE',
-        get:       'GET',
-        head:      'HEAD',
-        lock:      'LOCK',
-        mkcol:     'MKCOL',
-        move:      'MOVE',
-        options:   'OPTIONS',
-        patch:     'PATCH',
-        post:      'POST',
-        propfind:  'PROPFIND',
-        proppatch: 'PROPPATCH',
-        put:       'PUT',
-        trace:     'TRACE',
-        unlock:    'UNLOCK'
-      }, _suffix: :request
-      validates :request_method, presence: true
+      #   @return ["COPY", "DELETE", "GET", "HEAD", "LOCK", "MKCOL", "MOVE", "OPTIONS", "PATCH", "POST", "PROPFIND", "PROPPATCH", "PUT", "TRACE", "UNLOCK"]
+      attribute :request_method, :string
+      validates :request_method, presence: true,
+                                 inclusion: {
+                                   in: %w[
+                                     COPY
+                                     DELETE
+                                     GET
+                                     HEAD
+                                     LOCK
+                                     MKCOL
+                                     MOVE
+                                     OPTIONS
+                                     PATCH
+                                     POST
+                                     PROPFIND
+                                     PROPPATCH
+                                     PUT
+                                     TRACE
+                                     UNLOCK
+                                   ]
+                                 }
 
       # @!attribute [rw] path
       #   The path of the HTTP request.
@@ -127,6 +130,142 @@ module Ronin
                               message: 'Must be a valid IP address'
                             },
                             allow_nil: true
+
+      #
+      # Determines if the HTTP request is a COPY request.
+      #
+      # @return [Boolean]
+      #
+      def copy_request?
+        self.request_method == 'COPY'
+      end
+
+      #
+      # Determines if the HTTP request is a DELETE request.
+      #
+      # @return [Boolean]
+      #
+      def delete_request?
+        self.request_method == 'DELETE'
+      end
+
+      #
+      # Determines if the HTTP request is a GET request.
+      #
+      # @return [Boolean]
+      #
+      def get_request?
+        self.request_method == 'GET'
+      end
+
+      #
+      # Determines if the HTTP request is a HEAD request.
+      #
+      # @return [Boolean]
+      #
+      def head_request?
+        self.request_method == 'HEAD'
+      end
+
+      #
+      # Determines if the HTTP request is a LOCK request.
+      #
+      # @return [Boolean]
+      #
+      def lock_request?
+        self.request_method == 'LOCK'
+      end
+
+      #
+      # Determines if the HTTP request is a MKCOL request.
+      #
+      # @return [Boolean]
+      #
+      def mkcol_request?
+        self.request_method == 'MKCOL'
+      end
+
+      #
+      # Determines if the HTTP request is a MOVE request.
+      #
+      # @return [Boolean]
+      #
+      def move_request?
+        self.request_method == 'MOVE'
+      end
+
+      #
+      # Determines if the HTTP request is a OPTIONS request.
+      #
+      # @return [Boolean]
+      #
+      def options_request?
+        self.request_method == 'OPTIONS'
+      end
+
+      #
+      # Determines if the HTTP request is a PATCH request.
+      #
+      # @return [Boolean]
+      #
+      def patch_request?
+        self.request_method == 'PATCH'
+      end
+
+      #
+      # Determines if the HTTP request is a POST request.
+      #
+      # @return [Boolean]
+      #
+      def post_request?
+        self.request_method == 'POST'
+      end
+
+      #
+      # Determines if the HTTP request is a PROPFIND request.
+      #
+      # @return [Boolean]
+      #
+      def propfind_request?
+        self.request_method == 'PROPFIND'
+      end
+
+      #
+      # Determines if the HTTP request is a PROPPATCH request.
+      #
+      # @return [Boolean]
+      #
+      def proppatch_request?
+        self.request_method == 'PROPPATCH'
+      end
+
+      #
+      # Determines if the HTTP request is a PUT request.
+      #
+      # @return [Boolean]
+      #
+      def put_request?
+        self.request_method == 'PUT'
+      end
+
+      #
+      # Determines if the HTTP request is a TRACE request.
+      #
+      # @return [Boolean]
+      #
+      def trace_request?
+        self.request_method == 'TRACE'
+      end
+
+      #
+      # Determines if the HTTP request is a UNLOCK request.
+      #
+      # @return [Boolean]
+      #
+      def unlock_request?
+        self.request_method == 'UNLOCK'
+      end
+
     end
   end
 end

@@ -41,8 +41,9 @@ module Ronin
       #   The protocol of the port (either `'tcp'` / `'udp'`).
       #
       #   @return ["tcp", "udp"]
-      enum :protocol, {tcp: 'tcp', udp: 'udp'}, default: :tcp
-      validates :protocol, presence: true
+      attribute :protocol, :string, default: 'tcp'
+      validates :protocol, presence: true,
+                           inclusion: {in: %w[tcp udp]}
 
       # @!attribute [rw] number
       #   The port number.
@@ -198,6 +199,24 @@ module Ronin
       #
       def self.import(number)
         create(number: number)
+      end
+
+      #
+      # Determines if the port uses the TCP protocol.
+      #
+      # @return [Boolean]
+      #
+      def tcp?
+        self.protocol == 'tcp'
+      end
+
+      #
+      # Determines if the port uses the UDP protocol.
+      #
+      # @return [Boolean]
+      #
+      def udp?
+        self.protocol == 'udp'
       end
 
       #

@@ -7,8 +7,8 @@ describe Ronin::DB::WebVuln do
     expect(described_class.table_name).to eq('ronin_web_vulns')
   end
 
-  let(:type)           { :lfi }
-  let(:request_method) { :get }
+  let(:type)           { 'lfi' }
+  let(:request_method) { 'GET' }
   let(:url_scheme) do
     Ronin::DB::URLScheme.find_or_initialize_by(name: 'https')
   end
@@ -46,17 +46,19 @@ describe Ronin::DB::WebVuln do
         )
 
         expect(web_vuln).to_not be_valid
-        expect(web_vuln.errors[:type]).to eq(["can't be blank"])
+        expect(web_vuln.errors[:type]).to eq(
+          ["can't be blank", "is not included in the list"]
+        )
       end
 
-      [
-        :lfi,
-        :rfi,
-        :sqli,
-        :ssti,
-        :open_redirect,
-        :reflected_xss,
-        :command_injection
+      %w[
+        lfi
+        rfi
+        sqli
+        ssti
+        open_redirect
+        reflected_xss
+        command_injection
       ].each do |valid_type|
         it "must accept #{valid_type.inspect}" do
           web_vuln = described_class.new(
@@ -71,34 +73,35 @@ describe Ronin::DB::WebVuln do
       end
 
       it "must not accept other values" do
-        expect {
-          described_class.new(
-            type:           :other,
-            request_method: request_method,
-            url:            url,
-            query_param:    query_param
-          )
-        }.to raise_error(ArgumentError,"'other' is not a valid type")
+        web_vuln = described_class.new(
+          type:           'other',
+          request_method: request_method,
+          url:            url,
+          query_param:    query_param
+        )
+
+        expect(web_vuln).to_not be_valid
+        expect(web_vuln.errors[:type]).to eq(["is not included in the list"])
       end
     end
 
     describe "request_method" do
-      [
-        :copy,
-        :delete,
-        :get,
-        :head,
-        :lock,
-        :mkcol,
-        :move,
-        :options,
-        :patch,
-        :post,
-        :propfind,
-        :proppatch,
-        :put,
-        :trace,
-        :unlock
+      %w[
+        COPY
+        DELETE
+        GET
+        HEAD
+        LOCK
+        MKCOL
+        MOVE
+        OPTIONS
+        PATCH
+        POST
+        PROPFIND
+        PROPPATCH
+        PUT
+        TRACE
+        UNLOCK
       ].each do |valid_request_method|
         it "must accept #{valid_request_method.inspect}" do
           web_vuln = described_class.new(
@@ -113,14 +116,17 @@ describe Ronin::DB::WebVuln do
       end
 
       it "must not accept other values" do
-        expect {
-          described_class.new(
-            type:           type,
-            request_method: :other,
-            url:            url,
-            query_param:    query_param
-          )
-        }.to raise_error(ArgumentError,"'other' is not a valid request_method")
+        web_vuln = described_class.new(
+          type:           type,
+          request_method: 'OTHER',
+          url:            url,
+          query_param:    query_param
+        )
+
+        expect(web_vuln).to_not be_valid
+        expect(web_vuln.errors[:request_method]).to eq(
+          ['is not included in the list']
+        )
       end
     end
 
@@ -144,15 +150,16 @@ describe Ronin::DB::WebVuln do
       end
 
       it "must not accept other values" do
-        expect {
-          described_class.new(
-            type:           :lfi,
-            lfi_os:         :other,
-            request_method: request_method,
-            url:            url,
-            query_param:    query_param
-          )
-        }.to raise_error(ArgumentError,"'other' is not a valid lfi_os")
+        web_vuln = described_class.new(
+          type:           'lfi',
+          lfi_os:         'other',
+          request_method: request_method,
+          url:            url,
+          query_param:    query_param
+        )
+
+        expect(web_vuln).to_not be_valid
+        expect(web_vuln.errors[:lfi_os]).to eq(['is not included in the list'])
       end
     end
 
@@ -166,7 +173,7 @@ describe Ronin::DB::WebVuln do
       ].each do |valid_lfi_filter_bypass|
         it "must accept #{valid_lfi_filter_bypass.inspect}" do
           web_vuln = described_class.new(
-            type:              :lfi,
+            type:              'lfi',
             lfi_filter_bypass: valid_lfi_filter_bypass,
             request_method:    request_method,
             url:               url,
@@ -178,15 +185,18 @@ describe Ronin::DB::WebVuln do
       end
 
       it "must not accept other values" do
-        expect {
-          described_class.new(
-            type:              :lfi,
-            lfi_filter_bypass: :other,
-            request_method:    request_method,
-            url:               url,
-            query_param:       query_param
-          )
-        }.to raise_error(ArgumentError,"'other' is not a valid lfi_filter_bypass")
+        web_vuln = described_class.new(
+          type:              'lfi',
+          lfi_filter_bypass: 'other',
+          request_method:    request_method,
+          url:               url,
+          query_param:       query_param
+        )
+
+        expect(web_vuln).to_not be_valid
+        expect(web_vuln.errors[:lfi_filter_bypass]).to eq(
+          ['is not included in the list']
+        )
       end
     end
 
@@ -201,7 +211,7 @@ describe Ronin::DB::WebVuln do
       ].each do |valid_rfi_script_lang|
         it "must accept #{valid_rfi_script_lang.inspect}" do
           web_vuln = described_class.new(
-            type:            :rfi,
+            type:            'rfi',
             rfi_script_lang: valid_rfi_script_lang,
             request_method:  request_method,
             url:             url,
@@ -213,15 +223,18 @@ describe Ronin::DB::WebVuln do
       end
 
       it "must not accept other values" do
-        expect {
-          described_class.new(
-            type:            :rfi,
-            rfi_script_lang: :other,
-            request_method:  request_method,
-            url:             url,
-            query_param:     query_param
-          )
-        }.to raise_error(ArgumentError,"'other' is not a valid rfi_script_lang")
+        web_vuln = described_class.new(
+          type:            'rfi',
+          rfi_script_lang: 'other',
+          request_method:  request_method,
+          url:             url,
+          query_param:     query_param
+        )
+
+        expect(web_vuln).to_not be_valid
+        expect(web_vuln.errors[:rfi_script_lang]).to eq(
+          ['is not included in the list']
+        )
       end
     end
 
@@ -237,7 +250,7 @@ describe Ronin::DB::WebVuln do
       ].each do |valid_ssti_escape_type|
         it "must accept #{valid_ssti_escape_type.inspect}" do
           web_vuln = described_class.new(
-            type:             :ssti,
+            type:             'ssti',
             ssti_escape_type: valid_ssti_escape_type,
             request_method:   request_method,
             url:              url,
@@ -249,15 +262,18 @@ describe Ronin::DB::WebVuln do
       end
 
       it "must not accept other values" do
-        expect {
-          described_class.new(
-            type:             :ssti,
-            ssti_escape_type: :other,
-            request_method:   request_method,
-            url:              url,
-            query_param:      query_param
-          )
-        }.to raise_error(ArgumentError,"'other' is not a valid ssti_escape_type")
+        web_vuln = described_class.new(
+          type:             'ssti',
+          ssti_escape_type: 'other',
+          request_method:   request_method,
+          url:              url,
+          query_param:      query_param
+        )
+
+        expect(web_vuln).to_not be_valid
+        expect(web_vuln.errors[:ssti_escape_type]).to eq(
+          ['is not included in the list']
+        )
       end
     end
   end
@@ -273,22 +289,22 @@ describe Ronin::DB::WebVuln do
       url3 = Ronin::DB::URL.import("https://#{host_name}/page3.php?id=1")
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'GET',
         query_param:    'id',
         url:            url1
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'GET',
         query_param:    'id',
         url:            url2
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'GET',
         query_param:    'id',
         url:            url3
       )
@@ -328,22 +344,22 @@ describe Ronin::DB::WebVuln do
       url3 = Ronin::DB::URL.import("https://two.#{domain}/page3.php?id=1")
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'GET',
         query_param:    'id',
         url:            url1
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'GET',
         query_param:    'id',
         url:            url2
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'GET',
         query_param:    'id',
         url:            url3
       )
@@ -383,22 +399,22 @@ describe Ronin::DB::WebVuln do
       url3 = Ronin::DB::URL.import("https://example.com#{path}?id=2")
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'get',
         query_param:    'id',
         url:            url1
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'GET',
         query_param:    'id',
         url:            url2
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :ssti,
-        request_method: :get,
+        type:           'ssti',
+        request_method: 'GET',
         query_param:    'id',
         url:            url3
       )
@@ -434,29 +450,29 @@ describe Ronin::DB::WebVuln do
       url = Ronin::DB::URL.import('https://example.com/page.php?id=1&foo=2&bar=3&baz=4')
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'GET',
         query_param:    'id',
         url:            url
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :lfi,
-        request_method: :get,
+        type:           'lfi',
+        request_method: 'GET',
         query_param:    'foo',
         url:            url
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'GET',
         query_param:    'bar',
         url:            url
       )
     end
 
     it "must query all #{described_class}s with the matching #type" do
-      web_vulns = subject.with_type(:sqli)
+      web_vulns = subject.with_type('sqli')
 
       expect(web_vulns.length).to eq(2)
 
@@ -485,22 +501,22 @@ describe Ronin::DB::WebVuln do
       url = Ronin::DB::URL.import('https://example.com/page.php?id=1&foo=2&bar=3&baz=4')
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'GET',
         query_param:    'id',
         url:            url
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :lfi,
-        request_method: :get,
+        type:           'lfi',
+        request_method: 'GET',
         query_param:    query_param,
         url:            url
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :rfi,
-        request_method: :get,
+        type:           'rfi',
+        request_method: 'GET',
         query_param:    query_param,
         url:            url
       )
@@ -536,22 +552,22 @@ describe Ronin::DB::WebVuln do
       url = Ronin::DB::URL.import('https://example.com/page.php?id=1&foo=2&bar=3&baz=4')
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'GET',
         query_param:    'id',
         url:            url
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :lfi,
-        request_method: :get,
+        type:           'lfi',
+        request_method: 'GET',
         header_name:    header_name,
         url:            url
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :rfi,
-        request_method: :get,
+        type:           'rfi',
+        request_method: 'GET',
         header_name:    header_name,
         url:            url
       )
@@ -587,22 +603,22 @@ describe Ronin::DB::WebVuln do
       url = Ronin::DB::URL.import('https://example.com/page.php?id=1&foo=2&bar=3&baz=4')
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'GET',
         query_param:    'id',
         url:            url
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :lfi,
-        request_method: :get,
+        type:           'lfi',
+        request_method: 'GET',
         cookie_param:    cookie_param,
         url:            url
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :rfi,
-        request_method: :get,
+        type:           'rfi',
+        request_method: 'GET',
         cookie_param:    cookie_param,
         url:            url
       )
@@ -638,22 +654,22 @@ describe Ronin::DB::WebVuln do
       url = Ronin::DB::URL.import('https://example.com/page.php?id=1&foo=2&bar=3&baz=4')
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'GET',
         query_param:    'id',
         url:            url
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :lfi,
-        request_method: :get,
+        type:           'lfi',
+        request_method: 'GET',
         form_param:     form_param,
         url:            url
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :rfi,
-        request_method: :get,
+        type:           'rfi',
+        request_method: 'GET',
         form_param:     form_param,
         url:            url
       )
@@ -683,27 +699,27 @@ describe Ronin::DB::WebVuln do
   describe ".with_request_method" do
     subject { described_class }
 
-    let(:request_method) { 'post' }
+    let(:request_method) { 'POST' }
 
     before do
       url = Ronin::DB::URL.import('https://example.com/page.php?id=1&foo=2&bar=3&baz=4')
 
       Ronin::DB::WebVuln.create(
-        type:           :sqli,
-        request_method: :get,
+        type:           'sqli',
+        request_method: 'GET',
         query_param:    'id',
         url:            url
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :lfi,
+        type:           'lfi',
         form_param:     'user',
         request_method: request_method,
         url:            url
       )
 
       Ronin::DB::WebVuln.create(
-        type:           :open_redirect,
+        type:           'open_redirect',
         header_name:    'X-Foo',
         request_method: request_method,
         url:            url
@@ -757,16 +773,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#lfi?" do
-    context "when #type is :lfi" do
-      let(:type) { :lfi }
+    context "when #type is 'lfi'" do
+      let(:type) { 'lfi' }
 
       it "must return true" do
         expect(subject.lfi?).to be(true)
       end
     end
 
-    context "when #type is not :lfi" do
-      let(:type) { :command_injection }
+    context "when #type is not 'lfi'" do
+      let(:type) { 'command_injection' }
 
       it "must return false" do
         expect(subject.lfi?).to be(false)
@@ -775,16 +791,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#rfi?" do
-    context "when #type is :rfi" do
-      let(:type) { :rfi }
+    context "when #type is 'rfi'" do
+      let(:type) { 'rfi' }
 
       it "must return true" do
         expect(subject.rfi?).to be(true)
       end
     end
 
-    context "when #type is not :rfi" do
-      let(:type) { :command_injection }
+    context "when #type is not 'rfi'" do
+      let(:type) { 'command_injection' }
 
       it "must return false" do
         expect(subject.rfi?).to be(false)
@@ -793,16 +809,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#sqli?" do
-    context "when #type is :sqli" do
-      let(:type) { :sqli }
+    context "when #type is 'sqli'" do
+      let(:type) { 'sqli' }
 
       it "must return true" do
         expect(subject.sqli?).to be(true)
       end
     end
 
-    context "when #type is not :sqli" do
-      let(:type) { :command_injection }
+    context "when #type is not 'sqli'" do
+      let(:type) { 'command_injection' }
 
       it "must return false" do
         expect(subject.sqli?).to be(false)
@@ -811,16 +827,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#ssti?" do
-    context "when #type is :ssti" do
-      let(:type) { :ssti }
+    context "when #type is 'ssti'" do
+      let(:type) { 'ssti' }
 
       it "must return true" do
         expect(subject.ssti?).to be(true)
       end
     end
 
-    context "when #type is not :ssti" do
-      let(:type) { :command_injection }
+    context "when #type is not 'ssti'" do
+      let(:type) { 'command_injection' }
 
       it "must return false" do
         expect(subject.ssti?).to be(false)
@@ -829,16 +845,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#open_redirect?" do
-    context "when #type is :open_redirect" do
-      let(:type) { :open_redirect }
+    context "when #type is 'open_redirect'" do
+      let(:type) { 'open_redirect' }
 
       it "must return true" do
         expect(subject.open_redirect?).to be(true)
       end
     end
 
-    context "when #type is not :open_redirect" do
-      let(:type) { :command_injection }
+    context "when #type is not 'open_redirect'" do
+      let(:type) { 'command_injection' }
 
       it "must return false" do
         expect(subject.open_redirect?).to be(false)
@@ -847,15 +863,15 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#reflected_xss?" do
-    context "when #type is :reflected_xss" do
-      let(:type) { :reflected_xss }
+    context "when #type is 'reflected_xss'" do
+      let(:type) { 'reflected_xss' }
 
       it "must return true" do
         expect(subject.reflected_xss?).to be(true)
       end
     end
 
-    context "when #type is not :reflected_xss" do
+    context "when #type is not 'reflected_xss'" do
       let(:type) { :command_injection }
 
       it "must return false" do
@@ -865,7 +881,7 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#command_injection?" do
-    context "when #type is :command_injection" do
+    context "when #type is 'command_injection'" do
       let(:type) { :command_injection }
 
       it "must return true" do
@@ -873,7 +889,7 @@ describe Ronin::DB::WebVuln do
       end
     end
 
-    context "when #type is not :command_injection" do
+    context "when #type is not 'command_injection'" do
       let(:type) { :lfi }
 
       it "must return false" do
@@ -883,16 +899,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#copy_request?" do
-    context "when #request_method is :copy" do
-      let(:request_method) { :copy }
+    context "when #request_method is 'COPY'" do
+      let(:request_method) { 'COPY' }
 
       it "must return true" do
         expect(subject.copy_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :copy" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'COPY'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.copy_request?).to be(false)
@@ -901,16 +917,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#delete_request?" do
-    context "when #request_method is :delete" do
-      let(:request_method) { :delete }
+    context "when #request_method is 'DELETE'" do
+      let(:request_method) { 'DELETE' }
 
       it "must return true" do
         expect(subject.delete_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :delete" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'DELETE'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.delete_request?).to be(false)
@@ -919,16 +935,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#get_request?" do
-    context "when #request_method is :get" do
-      let(:request_method) { :get }
+    context "when #request_method is 'GET'" do
+      let(:request_method) { 'GET' }
 
       it "must return true" do
         expect(subject.get_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :get" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'GET'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.get_request?).to be(false)
@@ -937,16 +953,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#head_request?" do
-    context "when #request_method is :head" do
-      let(:request_method) { :head }
+    context "when #request_method is 'HEAD'" do
+      let(:request_method) { 'HEAD' }
 
       it "must return true" do
         expect(subject.head_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :head" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'HEAD'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.head_request?).to be(false)
@@ -955,16 +971,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#lock_request?" do
-    context "when #request_method is :lock" do
-      let(:request_method) { :lock }
+    context "when #request_method is 'LOCK'" do
+      let(:request_method) { 'LOCK' }
 
       it "must return true" do
         expect(subject.lock_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :lock" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'LOCK'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.lock_request?).to be(false)
@@ -973,16 +989,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#mkcol_request?" do
-    context "when #request_method is :mkcol" do
-      let(:request_method) { :mkcol }
+    context "when #request_method is 'MKCOL'" do
+      let(:request_method) { 'MKCOL' }
 
       it "must return true" do
         expect(subject.mkcol_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :mkcol" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'MKCOL'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.mkcol_request?).to be(false)
@@ -991,16 +1007,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#move_request?" do
-    context "when #request_method is :move" do
-      let(:request_method) { :move }
+    context "when #request_method is 'MOVE'" do
+      let(:request_method) { 'MOVE' }
 
       it "must return true" do
         expect(subject.move_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :move" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'MOVE'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.move_request?).to be(false)
@@ -1009,16 +1025,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#options_request?" do
-    context "when #request_method is :options" do
-      let(:request_method) { :options }
+    context "when #request_method is 'OPTIONS'" do
+      let(:request_method) { 'OPTIONS' }
 
       it "must return true" do
         expect(subject.options_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :options" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'OPTIONS'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.options_request?).to be(false)
@@ -1027,16 +1043,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#patch_request?" do
-    context "when #request_method is :patch" do
-      let(:request_method) { :patch }
+    context "when #request_method is 'PATCH'" do
+      let(:request_method) { 'PATCH' }
 
       it "must return true" do
         expect(subject.patch_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :patch" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'PATCH'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.patch_request?).to be(false)
@@ -1045,16 +1061,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#post_request?" do
-    context "when #request_method is :post" do
-      let(:request_method) { :post }
+    context "when #request_method is 'POST'" do
+      let(:request_method) { 'POST' }
 
       it "must return true" do
         expect(subject.post_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :post" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'POST'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.post_request?).to be(false)
@@ -1063,16 +1079,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#propfind_request?" do
-    context "when #request_method is :propfind" do
-      let(:request_method) { :propfind }
+    context "when #request_method is 'PROPFIND'" do
+      let(:request_method) { 'PROPFIND' }
 
       it "must return true" do
         expect(subject.propfind_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :propfind" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'PROPFIND'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.propfind_request?).to be(false)
@@ -1081,16 +1097,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#proppatch_request?" do
-    context "when #request_method is :proppatch" do
-      let(:request_method) { :proppatch }
+    context "when #request_method is 'PROPPATCH'" do
+      let(:request_method) { 'PROPPATCH' }
 
       it "must return true" do
         expect(subject.proppatch_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :proppatch" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'PROPPATCH'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.proppatch_request?).to be(false)
@@ -1099,16 +1115,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#put_request?" do
-    context "when #request_method is :put" do
-      let(:request_method) { :put }
+    context "when #request_method is 'PUT'" do
+      let(:request_method) { 'PUT' }
 
       it "must return true" do
         expect(subject.put_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :put" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'PUT'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.put_request?).to be(false)
@@ -1117,16 +1133,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#trace_request?" do
-    context "when #request_method is :trace" do
-      let(:request_method) { :trace }
+    context "when #request_method is 'TRACE'" do
+      let(:request_method) { 'TRACE' }
 
       it "must return true" do
         expect(subject.trace_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :trace" do
-      let(:request_method) { :unlock }
+    context "when #request_method is not 'TRACE'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return false" do
         expect(subject.trace_request?).to be(false)
@@ -1135,16 +1151,16 @@ describe Ronin::DB::WebVuln do
   end
 
   describe "#unlock_request?" do
-    context "when #request_method is :unlock" do
-      let(:request_method) { :unlock }
+    context "when #request_method is 'UNLOCK'" do
+      let(:request_method) { 'UNLOCK' }
 
       it "must return true" do
         expect(subject.unlock_request?).to be(true)
       end
     end
 
-    context "when #request_method is not :unlock" do
-      let(:request_method) { :get }
+    context "when #request_method is not 'UNLOCK'" do
+      let(:request_method) { 'GET' }
 
       it "must return false" do
         expect(subject.unlock_request?).to be(false)

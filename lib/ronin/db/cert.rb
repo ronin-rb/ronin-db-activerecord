@@ -87,9 +87,10 @@ module Ronin
       # @!attribute [rw] public_key_algorithm
       #   The public key algorithm.
       #
-      #   @return ["rsa", "dsa", "dh", "ec"]
-      enum :public_key_algorithm, {rsa: 'RSA', dsa: 'DSA', dh: 'DH', ec: 'EC'}
-      validates :public_key_algorithm, presence: true
+      #   @return ["RSA", "DSA", "DH", "EC"]
+      attribute :public_key_algorithm, :string
+      validates :public_key_algorithm, presence: true,
+                                       inclusion: {in: %w[RSA DSA DH EC]}
 
       # @!attribute [rw] public_key_size
       #   The public key size in bits.
@@ -370,16 +371,16 @@ module Ronin
       def self.import(cert)
         case (public_key = cert.public_key)
         when OpenSSL::PKey::RSA
-          public_key_algorithm = :rsa
+          public_key_algorithm = 'RSA'
           public_key_size      = public_key.n.num_bits
         when OpenSSL::PKey::DSA
-          public_key_algorithm = :dsa
+          public_key_algorithm = 'DSA'
           public_key_size      = public_key.p.num_bits
         when OpenSSL::PKey::DH
-          public_key_algorithm = :dh
+          public_key_algorithm = 'DH'
           public_key_size      = public_key.p.num_bits
         when OpenSSL::PKey::EC
-          public_key_algorithm = :ec
+          public_key_algorithm = 'EC'
 
           public_key_text = public_key.to_text
           public_key_size = if (match = public_key_text.match(/\((\d+) bit\)/))

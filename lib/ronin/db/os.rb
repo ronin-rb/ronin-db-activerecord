@@ -44,7 +44,9 @@ module Ronin
       #   The flavor of the OS (Linux, BSD).
       #
       #   @return ["linux", "bsd", nil]
-      enum :flavor, {linux: 'Linux', bsd: 'BSD'}
+      attribute :flavor, :string
+      validates :flavor, allow_nil: true,
+                         inclusion: {in: %w[Linux BSD]}
 
       # @!attribute [rw] version
       #   The version of the Operating System.
@@ -71,7 +73,7 @@ module Ronin
       #
       # Queries all OSes with the matching flavor.
       #
-      # @param [:linux, :bsd] flavor
+      # @param ['Linux', 'BSD'] flavor
       #   The flavor to search for.
       #
       # @return [Array<OS>]
@@ -111,7 +113,7 @@ module Ronin
       # @return [OS]
       #
       def self.linux(version)
-        find_or_create_by(name: 'Linux', flavor: :linux, version: version)
+        find_or_create_by(name: 'Linux', flavor: 'Linux', version: version)
       end
 
       #
@@ -123,7 +125,7 @@ module Ronin
       # @return [OS]
       #
       def self.freebsd(version)
-        find_or_create_by(name: 'FreeBSD', flavor: :bsd, version: version)
+        find_or_create_by(name: 'FreeBSD', flavor: 'BSD', version: version)
       end
 
       #
@@ -135,7 +137,7 @@ module Ronin
       # @return [OS]
       #
       def self.openbsd(version)
-        find_or_create_by(name: 'OpenBSD', flavor: :bsd, version: version)
+        find_or_create_by(name: 'OpenBSD', flavor: 'BSD', version: version)
       end
 
       #
@@ -147,7 +149,7 @@ module Ronin
       # @return [OS]
       #
       def self.netbsd(version)
-        find_or_create_by(name: 'NetBSD', flavor: :bsd, version: version)
+        find_or_create_by(name: 'NetBSD', flavor: 'BSD', version: version)
       end
 
       #
@@ -159,7 +161,7 @@ module Ronin
       # @return [OS]
       #
       def self.macos(version)
-        find_or_create_by(name: 'macOS', flavor: :bsd, version: version)
+        find_or_create_by(name: 'macOS', flavor: 'BSD', version: version)
       end
 
       #
@@ -190,6 +192,24 @@ module Ronin
         if relation
           return relation.ip_address
         end
+      end
+
+      #
+      # Determines if the OS is a Linux OS.
+      #
+      # @return [Boolean]
+      #
+      def linux?
+        self.flavor == 'Linux'
+      end
+
+      #
+      # Determines if the OS is a Linux OS.
+      #
+      # @return [Boolean]
+      #
+      def bsd?
+        self.flavor == 'BSD'
       end
 
       #
