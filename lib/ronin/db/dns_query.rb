@@ -44,22 +44,25 @@ module Ronin
       #   The queried record type.
       #
       #   @return [String]
-      enum type: {
-        a:     'A',
-        aaaa:  'AAAA',
-        any:   'ANY',
-        cname: 'CNAME',
-        hinfo: 'HINFO',
-        loc:   'LOC',
-        mx:    'MX',
-        ns:    'NS',
-        ptr:   'PTR',
-        soa:   'SOA',
-        srv:   'SRV',
-        txt:   'TXT',
-        wks:   'WKS'
-      }, _suffix: :query
-      validates :type, presence: true
+      attribute :type, :string
+      validates :type, presence: true,
+                       inclusion: {
+                         in: %w[
+                           A
+                           AAAA
+                           ANY
+                           CNAME
+                           HINFO
+                           LOC
+                           MX
+                           NS
+                           PTR
+                           SOA
+                           SRV
+                           TXT
+                           WKS
+                         ]
+                       }
 
       # @!attribute [rw] label
       #   The queried domain label.
@@ -91,6 +94,123 @@ module Ronin
       #
       #   @return [Array<DNSRecord>]
       has_many :records, class_name: 'DNSRecord'
+
+      #
+      # Determines if the DNS query is an A record query.
+      #
+      # @return [Boolean]
+      #
+      def a_query?
+        self.type == 'A'
+      end
+
+      #
+      # Determines if the DNS query is an AAAA record query.
+      #
+      # @return [Boolean]
+      #
+      def aaaa_query?
+        self.type == 'AAAA'
+      end
+
+      #
+      # Determines if the DNS query is an ANY record query.
+      #
+      # @return [Boolean]
+      #
+      def any_query?
+        self.type == 'ANY'
+      end
+
+      #
+      # Determines if the DNS query is an CNAME record query.
+      #
+      # @return [Boolean]
+      #
+      def cname_query?
+        self.type == 'CNAME'
+      end
+
+      #
+      # Determines if the DNS query is an HINFO record query.
+      #
+      # @return [Boolean]
+      #
+      def hinfo_query?
+        self.type == 'HINFO'
+      end
+
+      #
+      # Determines if the DNS query is an LOC record query.
+      #
+      # @return [Boolean]
+      #
+      def loc_query?
+        self.type == 'LOC'
+      end
+
+      #
+      # Determines if the DNS query is an MX record query.
+      #
+      # @return [Boolean]
+      #
+      def mx_query?
+        self.type == 'MX'
+      end
+
+      #
+      # Determines if the DNS query is an NS record query.
+      #
+      # @return [Boolean]
+      #
+      def ns_query?
+        self.type == 'NS'
+      end
+
+      #
+      # Determines if the DNS query is an PTR record query.
+      #
+      # @return [Boolean]
+      #
+      def ptr_query?
+        self.type == 'PTR'
+      end
+
+      #
+      # Determines if the DNS query is an SOA record query.
+      #
+      # @return [Boolean]
+      #
+      def soa_query?
+        self.type == 'SOA'
+      end
+
+      #
+      # Determines if the DNS query is an SRV record query.
+      #
+      # @return [Boolean]
+      #
+      def srv_query?
+        self.type == 'SRV'
+      end
+
+      #
+      # Determines if the DNS query is an TXT record query.
+      #
+      # @return [Boolean]
+      #
+      def txt_query?
+        self.type == 'TXT'
+      end
+
+      #
+      # Determines if the DNS query is an WKS record query.
+      #
+      # @return [Boolean]
+      #
+      def wks_query?
+        self.type == 'WKS'
+      end
 
     end
   end

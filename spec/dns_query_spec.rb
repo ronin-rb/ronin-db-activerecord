@@ -6,7 +6,7 @@ describe Ronin::DB::DNSQuery do
     expect(described_class.table_name).to eq('ronin_dns_queries')
   end
 
-  let(:type)        { :a }
+  let(:type)        { 'A' }
   let(:label)       { 'example.com' }
   let(:source_addr) { '192.168.1.1' }
 
@@ -62,20 +62,20 @@ describe Ronin::DB::DNSQuery do
     end
 
     describe "type" do
-      [
-        :a,
-        :aaaa,
-        :any,
-        :cname,
-        :hinfo,
-        :loc,
-        :mx,
-        :ns,
-        :ptr,
-        :soa,
-        :srv,
-        :txt,
-        :wks
+      %w[
+        A
+        AAAA
+        ANY
+        CNAME
+        HINFO
+        LOC
+        MX
+        NS
+        PTR
+        SOA
+        SRV
+        TXT
+        WKS
       ].each do |valid_type|
         it "must accept #{valid_type.inspect}" do
           dns_query = described_class.new(
@@ -89,13 +89,14 @@ describe Ronin::DB::DNSQuery do
       end
 
       it "must not accept other values" do
-        expect {
-          described_class.new(
-            type:        :other,
-            label:       label,
-            source_addr: source_addr
-          )
-        }.to raise_error(ArgumentError,"'other' is not a valid type")
+        dns_query = described_class.new(
+          type:        'OTHER',
+          label:       label,
+          source_addr: source_addr
+        )
+
+        expect(dns_query).to_not be_valid
+        expect(dns_query.errors[:type]).to eq(['is not included in the list'])
       end
     end
 
@@ -124,7 +125,7 @@ describe Ronin::DB::DNSQuery do
 
   describe "#a_query?" do
     context "when #type is :a" do
-      let(:type) { :a }
+      let(:type) { 'A' }
 
       it "must return true" do
         expect(subject.a_query?).to be(true)
@@ -132,7 +133,7 @@ describe Ronin::DB::DNSQuery do
     end
 
     context "when #type is not :a" do
-      let(:type) { :wks }
+      let(:type) { 'WKS' }
 
       it "must return false" do
         expect(subject.a_query?).to be(false)
@@ -142,7 +143,7 @@ describe Ronin::DB::DNSQuery do
 
   describe "#aaaa_query?" do
     context "when #type is :aaaa" do
-      let(:type) { :aaaa }
+      let(:type) { 'AAAA' }
 
       it "must return true" do
         expect(subject.aaaa_query?).to be(true)
@@ -150,7 +151,7 @@ describe Ronin::DB::DNSQuery do
     end
 
     context "when #type is not :aaaa" do
-      let(:type) { :wks }
+      let(:type) { 'WKS' }
 
       it "must return false" do
         expect(subject.aaaa_query?).to be(false)
@@ -160,7 +161,7 @@ describe Ronin::DB::DNSQuery do
 
   describe "#any_query?" do
     context "when #type is :any" do
-      let(:type) { :any }
+      let(:type) { 'ANY' }
 
       it "must return true" do
         expect(subject.any_query?).to be(true)
@@ -168,7 +169,7 @@ describe Ronin::DB::DNSQuery do
     end
 
     context "when #type is not :any" do
-      let(:type) { :wks }
+      let(:type) { 'WKS' }
 
       it "must return false" do
         expect(subject.any_query?).to be(false)
@@ -178,7 +179,7 @@ describe Ronin::DB::DNSQuery do
 
   describe "#cname_query?" do
     context "when #type is :cname" do
-      let(:type) { :cname }
+      let(:type) { 'CNAME' }
 
       it "must return true" do
         expect(subject.cname_query?).to be(true)
@@ -186,7 +187,7 @@ describe Ronin::DB::DNSQuery do
     end
 
     context "when #type is not :cname" do
-      let(:type) { :wks }
+      let(:type) { 'WKS' }
 
       it "must return false" do
         expect(subject.cname_query?).to be(false)
@@ -196,7 +197,7 @@ describe Ronin::DB::DNSQuery do
 
   describe "#hinfo_query?" do
     context "when #type is :hinfo" do
-      let(:type) { :hinfo }
+      let(:type) { 'HINFO' }
 
       it "must return true" do
         expect(subject.hinfo_query?).to be(true)
@@ -204,7 +205,7 @@ describe Ronin::DB::DNSQuery do
     end
 
     context "when #type is not :hinfo" do
-      let(:type) { :wks }
+      let(:type) { 'WKS' }
 
       it "must return false" do
         expect(subject.hinfo_query?).to be(false)
@@ -214,7 +215,7 @@ describe Ronin::DB::DNSQuery do
 
   describe "#loc_query?" do
     context "when #type is :loc" do
-      let(:type) { :loc }
+      let(:type) { 'LOC' }
 
       it "must return true" do
         expect(subject.loc_query?).to be(true)
@@ -222,7 +223,7 @@ describe Ronin::DB::DNSQuery do
     end
 
     context "when #type is not :loc" do
-      let(:type) { :wks }
+      let(:type) { 'WKS' }
 
       it "must return false" do
         expect(subject.loc_query?).to be(false)
@@ -232,7 +233,7 @@ describe Ronin::DB::DNSQuery do
 
   describe "#mx_query?" do
     context "when #type is :mx" do
-      let(:type) { :mx }
+      let(:type) { 'MX' }
 
       it "must return true" do
         expect(subject.mx_query?).to be(true)
@@ -240,7 +241,7 @@ describe Ronin::DB::DNSQuery do
     end
 
     context "when #type is not :mx" do
-      let(:type) { :wks }
+      let(:type) { 'WKS' }
 
       it "must return false" do
         expect(subject.mx_query?).to be(false)
@@ -250,7 +251,7 @@ describe Ronin::DB::DNSQuery do
 
   describe "#ns_query?" do
     context "when #type is :ns" do
-      let(:type) { :ns }
+      let(:type) { 'NS' }
 
       it "must return true" do
         expect(subject.ns_query?).to be(true)
@@ -258,7 +259,7 @@ describe Ronin::DB::DNSQuery do
     end
 
     context "when #type is not :ns" do
-      let(:type) { :wks }
+      let(:type) { 'WKS' }
 
       it "must return false" do
         expect(subject.ns_query?).to be(false)
@@ -268,7 +269,7 @@ describe Ronin::DB::DNSQuery do
 
   describe "#ptr_query?" do
     context "when #type is :ptr" do
-      let(:type) { :ptr }
+      let(:type) { 'PTR' }
 
       it "must return true" do
         expect(subject.ptr_query?).to be(true)
@@ -276,7 +277,7 @@ describe Ronin::DB::DNSQuery do
     end
 
     context "when #type is not :ptr" do
-      let(:type) { :wks }
+      let(:type) { 'WKS' }
 
       it "must return false" do
         expect(subject.ptr_query?).to be(false)
@@ -286,7 +287,7 @@ describe Ronin::DB::DNSQuery do
 
   describe "#soa_query?" do
     context "when #type is :soa" do
-      let(:type) { :soa }
+      let(:type) { 'SOA' }
 
       it "must return true" do
         expect(subject.soa_query?).to be(true)
@@ -294,7 +295,7 @@ describe Ronin::DB::DNSQuery do
     end
 
     context "when #type is not :soa" do
-      let(:type) { :wks }
+      let(:type) { 'WKS' }
 
       it "must return false" do
         expect(subject.soa_query?).to be(false)
@@ -304,7 +305,7 @@ describe Ronin::DB::DNSQuery do
 
   describe "#srv_query?" do
     context "when #type is :srv" do
-      let(:type) { :srv }
+      let(:type) { 'SRV' }
 
       it "must return true" do
         expect(subject.srv_query?).to be(true)
@@ -312,7 +313,7 @@ describe Ronin::DB::DNSQuery do
     end
 
     context "when #type is not :srv" do
-      let(:type) { :wks }
+      let(:type) { 'WKS' }
 
       it "must return false" do
         expect(subject.srv_query?).to be(false)
@@ -322,7 +323,7 @@ describe Ronin::DB::DNSQuery do
 
   describe "#txt_query?" do
     context "when #type is :txt" do
-      let(:type) { :txt }
+      let(:type) { 'TXT' }
 
       it "must return true" do
         expect(subject.txt_query?).to be(true)
@@ -330,7 +331,7 @@ describe Ronin::DB::DNSQuery do
     end
 
     context "when #type is not :txt" do
-      let(:type) { :wks }
+      let(:type) { 'WKS' }
 
       it "must return false" do
         expect(subject.txt_query?).to be(false)
@@ -340,7 +341,7 @@ describe Ronin::DB::DNSQuery do
 
   describe "#wks_query?" do
     context "when #type is :wks" do
-      let(:type) { :wks }
+      let(:type) { 'WKS' }
 
       it "must return true" do
         expect(subject.wks_query?).to be(true)
@@ -348,7 +349,7 @@ describe Ronin::DB::DNSQuery do
     end
 
     context "when #type is not :wks" do
-      let(:type) { :a }
+      let(:type) { 'A' }
 
       it "must return false" do
         expect(subject.wks_query?).to be(false)

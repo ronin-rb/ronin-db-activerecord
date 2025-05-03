@@ -31,26 +31,35 @@ describe Ronin::DB::OS do
         expect(os).to be_valid
       end
 
-      it "must accept :linux" do
-        os = described_class.new(name: 'Linux', flavor: :linux, version: '2.6.11')
+      it "must accept 'linux'" do
+        os = described_class.new(
+          name:    'Linux',
+          flavor:  'Linux',
+          version: '2.6.11'
+        )
 
         expect(os).to be_valid
       end
 
-      it "must accept :bsd" do
-        os = described_class.new(name: 'FreeBSD', flavor: :bsd, version: '14.2')
+      it "must accept 'bsd'" do
+        os = described_class.new(
+          name:    'FreeBSD',
+          flavor:  'BSD',
+          version: '14.2'
+        )
 
         expect(os).to be_valid
       end
 
       it "must not accept other values" do
-        expect {
-          described_class.new(
-            name:    'Other',
-            flavor:  :other,
-            version: '1.2.3'
-          )
-        }.to raise_error(ArgumentError,"'other' is not a valid flavor")
+        os = described_class.new(
+          name:    'Other',
+          flavor:  'other',
+          version: '1.2.3'
+        )
+
+        expect(os).to_not be_valid
+        expect(os.errors[:flavor]).to eq(['is not included in the list'])
       end
     end
 
@@ -68,10 +77,10 @@ describe Ronin::DB::OS do
   end
 
   describe ".with_flavor" do
-    let(:flavor) { :linux }
+    let(:flavor) { 'Linux' }
 
     before do
-      described_class.create(name: 'macOS',   flavor: :bsd,   version: '10.5')
+      described_class.create(name: 'macOS',   flavor: 'BSD',  version: '10.5')
       described_class.create(name: 'Linux',   flavor: flavor, version: '6.2.1')
       described_class.create(name: 'Ubuntu',  flavor: flavor, version: '22.0.1')
     end
@@ -94,9 +103,9 @@ describe Ronin::DB::OS do
     let(:version) { '1.2.3' }
 
     before do
-      described_class.create(name: 'macOS',   flavor: :bsd,   version: '10.5')
-      described_class.create(name: 'Linux',   flavor: :linux, version: version)
-      described_class.create(name: 'Ubuntu',  flavor: :linux, version: version)
+      described_class.create(name: 'macOS',   flavor: 'BSD',   version: '10.5')
+      described_class.create(name: 'Linux',   flavor: 'Linux', version: version)
+      described_class.create(name: 'Ubuntu',  flavor: 'Linux', version: version)
     end
 
     subject { described_class }
@@ -120,7 +129,7 @@ describe Ronin::DB::OS do
       os = described_class.linux(version)
 
       expect(os.name).to eq(name)
-      expect(os.flavor).to eq('linux')
+      expect(os.flavor).to eq('Linux')
       expect(os.version).to eq(version)
     end
   end
@@ -132,7 +141,7 @@ describe Ronin::DB::OS do
       os = described_class.freebsd(version)
 
       expect(os.name).to eq(name)
-      expect(os.flavor).to eq('bsd')
+      expect(os.flavor).to eq('BSD')
       expect(os.version).to eq(version)
     end
   end
@@ -144,7 +153,7 @@ describe Ronin::DB::OS do
       os = described_class.openbsd(version)
 
       expect(os.name).to eq(name)
-      expect(os.flavor).to eq('bsd')
+      expect(os.flavor).to eq('BSD')
       expect(os.version).to eq(version)
     end
   end
@@ -156,7 +165,7 @@ describe Ronin::DB::OS do
       os = described_class.netbsd(version)
 
       expect(os.name).to eq(name)
-      expect(os.flavor).to eq('bsd')
+      expect(os.flavor).to eq('BSD')
       expect(os.version).to eq(version)
     end
   end
@@ -168,7 +177,7 @@ describe Ronin::DB::OS do
       os = described_class.macos(version)
 
       expect(os.name).to eq(name)
-      expect(os.flavor).to eq('bsd')
+      expect(os.flavor).to eq('BSD')
       expect(os.version).to eq(version)
     end
   end
@@ -186,9 +195,9 @@ describe Ronin::DB::OS do
   describe "#recent_ip_address"
 
   describe "#linux?" do
-    context "when #flavor is 'linux'" do
+    context "when #flavor is 'Linux'" do
       subject do
-        described_class.new(name: 'Linux', flavor: 'linux', version: '2.6.11')
+        described_class.new(name: 'Linux', flavor: 'Linux', version: '2.6.11')
       end
 
       it "must return true" do
@@ -196,7 +205,7 @@ describe Ronin::DB::OS do
       end
     end
 
-    context "when #flavor is not 'linux'" do
+    context "when #flavor is not 'Linux'" do
       subject do
         described_class.new(name: 'Other', version: '1.2.3')
       end
@@ -208,9 +217,9 @@ describe Ronin::DB::OS do
   end
 
   describe "#bsd?" do
-    context "when #flavor is 'bsd'" do
+    context "when #flavor is 'BSD'" do
       subject do
-        described_class.new(name: 'FreeBSD', flavor: 'bsd', version: '14.5')
+        described_class.new(name: 'FreeBSD', flavor: 'BSD', version: '14.5')
       end
 
       it "must return true" do
@@ -218,7 +227,7 @@ describe Ronin::DB::OS do
       end
     end
 
-    context "when #flavor is not 'bsd'" do
+    context "when #flavor is not 'BSD'" do
       subject do
         described_class.new(name: 'Other', version: '1.2.3')
       end

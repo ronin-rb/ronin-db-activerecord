@@ -45,8 +45,9 @@ module Ronin
       #   Endianness of the architecture.
       #
       #   @return ["little", "big"]
-      enum :endian, {little: 'little', big: 'big'}
-      validates :endian, presence: true
+      attribute :endian, :string
+      validates :endian, presence: true,
+                         inclusion: {in: %w[little big]}
 
       # @!attribute [rw] word_size
       #   Address length of the architecture.

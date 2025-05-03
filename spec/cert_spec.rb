@@ -16,7 +16,7 @@ describe Ronin::DB::Cert do
   let(:not_before) { Time.now - one_year }
   let(:not_after)  { Time.now + one_year }
 
-  let(:public_key_algorithm) { :rsa }
+  let(:public_key_algorithm) { 'RSA' }
   let(:public_key_size)      { 4096 }
 
   let(:signing_algorithm) { 'sha256WithRSAEncryption' }
@@ -2093,8 +2093,8 @@ describe Ronin::DB::Cert do
     context "when the certificate uses a RSA public key" do
       let(:cert_file) { 'rsa_cert.crt' }
 
-      it "must set #public_key_algorithm to 'rsa'" do
-        expect(subject.public_key_algorithm).to eq('rsa')
+      it "must set #public_key_algorithm to 'RSA'" do
+        expect(subject.public_key_algorithm).to eq('RSA')
       end
 
       it "must set #public_key_size to the RSA public key's bit size" do
@@ -2105,8 +2105,8 @@ describe Ronin::DB::Cert do
     context "when the certificate uses a DSA public key" do
       let(:cert_file) { 'dsa_cert.crt' }
 
-      it "must set #public_key_algorithm to 'dsa'" do
-        expect(subject.public_key_algorithm).to eq('dsa')
+      it "must set #public_key_algorithm to 'DSA'" do
+        expect(subject.public_key_algorithm).to eq('DSA')
       end
 
       it "must set #public_key_size to the DSA public key's bit size" do
@@ -2118,8 +2118,8 @@ describe Ronin::DB::Cert do
       # TODO: need to generate a X509 certificate with a DH key pair
       let(:cert_file) { 'dh_cert.crt' }
 
-      xit "must set #public_key_algorithm to 'dh'" do
-        expect(subject.public_key_algorithm).to eq('dh')
+      xit "must set #public_key_algorithm to 'DH'" do
+        expect(subject.public_key_algorithm).to eq('DH')
       end
 
       xit "must set #public_key_size to the DH public key's bit size" do
@@ -2130,12 +2130,12 @@ describe Ronin::DB::Cert do
     context "when the certificate uses a EC public key" do
       let(:cert_file) { 'ec_cert.crt' }
 
-      it "must set #public_key_algorithm to 'ec'" do
+      it "must set #public_key_algorithm to 'EC'" do
         if RUBY_ENGINE == 'jruby'
           skip "JRuby's openssl does not provide OpenSSL::PKey::EC#to_text"
         end
 
-        expect(subject.public_key_algorithm).to eq('ec')
+        expect(subject.public_key_algorithm).to eq('EC')
       end
 
       it "must set #public_key_size to the EC key's bit size" do

@@ -24,9 +24,9 @@ describe Ronin::DB::Port do
     end
 
     describe "protocol" do
-      [
-        :tcp,
-        :udp
+      %w[
+        tcp
+        udp
       ].each do |valid_protocol|
         it "must accept #{valid_protocol.inspect}" do
           port = described_class.new(protocol: valid_protocol, number: number)
@@ -36,9 +36,10 @@ describe Ronin::DB::Port do
       end
 
       it "must not accept other values" do
-        expect {
-          described_class.new(protocol: :other, number: number)
-        }.to raise_error(ArgumentError,"'other' is not a valid protocol")
+        port = described_class.new(protocol: :other, number: number)
+
+        expect(port).to_not be_valid
+        expect(port.errors[:protocol]).to eq(['is not included in the list'])
       end
     end
 
@@ -60,8 +61,8 @@ describe Ronin::DB::Port do
     context "when given an Integer" do
       before do
         described_class.create(number: 22)
-        described_class.create(number: 80, protocol: :tcp)
-        described_class.create(number: 80, protocol: :udp)
+        described_class.create(number: 80, protocol: 'tcp')
+        described_class.create(number: 80, protocol: 'udp')
         described_class.create(number: 443)
         described_class.create(number: 8080)
         described_class.create(number: 9000)
@@ -104,17 +105,17 @@ describe Ronin::DB::Port do
   describe ".with_protocol" do
     before do
       described_class.create(number: 22)
-      described_class.create(number: 53, protocol: :udp)
+      described_class.create(number: 53, protocol: 'udp')
       described_class.create(number: 80)
       described_class.create(number: 443)
-      described_class.create(number: 8080, protocol: :udp)
+      described_class.create(number: 8080, protocol: 'udp')
       described_class.create(number: 9000)
     end
 
     subject { described_class }
 
     it "must query all #{described_class} with the matching #protocol" do
-      ports = subject.with_protocol(:udp)
+      ports = subject.with_protocol('udp')
 
       expect(ports).to_not be_empty
       expect(ports.map(&:protocol).uniq).to eq(['udp'])
@@ -236,16 +237,16 @@ describe Ronin::DB::Port do
   end
 
   describe "#tcp?" do
-    context "when #protocol is :tcp" do
-      let(:protocol) { :tcp }
+    context "when #protocol is 'tcp'" do
+      let(:protocol) { 'tcp' }
 
       it "must return true" do
         expect(subject.tcp?).to be(true)
       end
     end
 
-    context "when #protocol is not :tcp" do
-      let(:protocol) { :udp }
+    context "when #protocol is not 'tcp'" do
+      let(:protocol) { 'udp' }
 
       it "must return false" do
         expect(subject.tcp?).to be(false)
@@ -254,16 +255,16 @@ describe Ronin::DB::Port do
   end
 
   describe "#udp?" do
-    context "when #protocol is :udp" do
-      let(:protocol) { :udp }
+    context "when #protocol is 'udp'" do
+      let(:protocol) { 'udp' }
 
       it "must return true" do
         expect(subject.udp?).to be(true)
       end
     end
 
-    context "when #protocol is not :udp" do
-      let(:protocol) { :tcp }
+    context "when #protocol is not 'udp'" do
+      let(:protocol) { 'tcp' }
 
       it "must return false" do
         expect(subject.udp?).to be(false)

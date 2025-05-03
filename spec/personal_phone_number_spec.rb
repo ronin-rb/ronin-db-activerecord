@@ -62,13 +62,16 @@ describe Ronin::DB::PersonalPhoneNumber do
       end
 
       it "must not accept other values" do
-        expect {
-          described_class.new(
-            type:         :other,
-            person:       person,
-            phone_number: phone_number
-          )
-        }.to raise_error(ArgumentError,"'other' is not a valid type")
+        personal_phone_number = described_class.new(
+          type:         :other,
+          person:       person,
+          phone_number: phone_number
+        )
+
+        expect(personal_phone_number).to_not be_valid
+        expect(personal_phone_number.errors[:type]).to eq(
+          ['is not included in the list']
+        )
       end
     end
   end
