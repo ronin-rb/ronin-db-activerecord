@@ -6,9 +6,9 @@ describe Ronin::DB::Arch do
     expect(described_class.table_name).to eq('ronin_arches')
   end
 
-  let(:name)      { 'x86'   }
+  let(:name)      { 'x86' }
   let(:endian)    { :little }
-  let(:word_size) { 4       }
+  let(:word_size) { 4 }
 
   it "must include Ronin::DB::Model" do
     expect(described_class).to include(Ronin::DB::Model)
@@ -22,6 +22,7 @@ describe Ronin::DB::Arch do
     describe "name" do
       it "must requier a name" do
         arch = described_class.new(endian: endian, word_size: word_size)
+
         expect(arch).to_not be_valid
         expect(arch.errors[:name]).to eq(
           ["can't be blank"]
@@ -32,6 +33,7 @@ describe Ronin::DB::Arch do
           endian:    endian,
           word_size: word_size
         )
+
         expect(arch).to be_valid
       end
     end
@@ -50,6 +52,7 @@ describe Ronin::DB::Arch do
           endian:    :little,
           word_size: word_size
         )
+
         expect(arch).to be_valid
       end
 
@@ -59,6 +62,7 @@ describe Ronin::DB::Arch do
           endian:    :big,
           word_size: word_size
         )
+
         expect(arch).to be_valid
       end
 
@@ -80,6 +84,7 @@ describe Ronin::DB::Arch do
     describe "word_size" do
       it "must require a word_size" do
         arch = described_class.new(name: name, endian: endian)
+
         expect(arch).to_not be_valid
         expect(arch.errors[:word_size]).to include("can't be blank")
 
@@ -88,6 +93,7 @@ describe Ronin::DB::Arch do
           endian:    endian,
           word_size: word_size
         )
+
         expect(arch).to be_valid
       end
 
@@ -97,6 +103,7 @@ describe Ronin::DB::Arch do
           endian:    endian,
           word_size: 4
         )
+
         expect(arch).to be_valid
       end
 
@@ -106,6 +113,7 @@ describe Ronin::DB::Arch do
           endian:    endian,
           word_size: 8
         )
+
         expect(arch).to be_valid
       end
 
@@ -118,6 +126,7 @@ describe Ronin::DB::Arch do
             endian:    endian,
             word_size: word_size
           )
+
           expect(arch).to_not be_valid
           expect(arch.errors[:word_size]).to eq(
             ['is not included in the list']
