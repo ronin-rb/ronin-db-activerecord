@@ -1,5 +1,5 @@
 name: ronin-db-activerecord
-version: 0.2.1
+version: 0.3.0
 summary: ActiveRecord backend for the Ronin Database
 description:
   ronin-db-activerecord contains ActiveRecord models and migrations for the
