@@ -27,6 +27,7 @@ describe Ronin::DB::EmailAddress do
           user_name: user_name,
           host_name: host_name
         )
+
         expect(email_address).to_not be_valid
         expect(email_address.errors[:address]).to include(
           "can't be blank"
@@ -37,6 +38,7 @@ describe Ronin::DB::EmailAddress do
           user_name: user_name,
           host_name: host_name
         )
+
         expect(email_address).to be_valid
       end
 
@@ -46,6 +48,7 @@ describe Ronin::DB::EmailAddress do
           user_name: user_name,
           host_name: host_name
         )
+
         expect(email_address).to_not be_valid
         expect(email_address.errors[:address]).to eq(
           ["Must be a valid email address"]
@@ -56,6 +59,7 @@ describe Ronin::DB::EmailAddress do
           user_name: user_name,
           host_name: host_name
         )
+
         expect(email_address).to be_valid
       end
 
@@ -65,6 +69,7 @@ describe Ronin::DB::EmailAddress do
           user_name: user_name,
           host_name: host_name
         )
+
         expect(email_address).to_not be_valid
         expect(email_address.errors[:address]).to eq(
           ["is too long (maximum is 320 characters)"]
@@ -75,6 +80,7 @@ describe Ronin::DB::EmailAddress do
           user_name: user_name,
           host_name: host_name
         )
+
         expect(email_address).to be_valid
       end
 
@@ -87,6 +93,7 @@ describe Ronin::DB::EmailAddress do
           user_name: user_name,
           host_name: host_name
         )
+
         expect(email_address).to be_valid
 
         email_address = described_class.new(
@@ -112,6 +119,7 @@ describe Ronin::DB::EmailAddress do
           address: address,
           user_name: user_name
         )
+
         expect(email_address).to_not be_valid
         expect(email_address.errors[:host_name]).to include(
           "must exist"
@@ -122,6 +130,7 @@ describe Ronin::DB::EmailAddress do
           user_name: user_name,
           host_name: host_name
         )
+
         expect(email_address).to be_valid
       end
     end
@@ -132,6 +141,7 @@ describe Ronin::DB::EmailAddress do
           address: address,
           host_name: host_name
         )
+
         expect(email_address).to_not be_valid
         expect(email_address.errors[:user_name]).to include(
           "must exist"
@@ -142,6 +152,7 @@ describe Ronin::DB::EmailAddress do
           user_name: user_name,
           host_name: host_name
         )
+
         expect(email_address).to be_valid
       end
 
@@ -154,6 +165,7 @@ describe Ronin::DB::EmailAddress do
           user_name: user_name,
           host_name: host_name
         )
+
         expect(email_address).to be_valid
 
         email_address = described_class.new(
@@ -161,6 +173,7 @@ describe Ronin::DB::EmailAddress do
           user_name: user_name,
           host_name: host_name
         )
+
         expect(email_address).to_not be_valid
         expect(email_address.errors[:user_name]).to eq(
           ["has already been taken"]
@@ -216,6 +229,7 @@ describe Ronin::DB::EmailAddress do
         user_name: user_name,
         host_name: host_name
       )
+
       email_address.host_name.ip_addresses << ip_address
     end
 
