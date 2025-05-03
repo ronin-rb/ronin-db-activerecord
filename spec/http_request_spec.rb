@@ -231,4 +231,274 @@ describe Ronin::DB::HTTPRequest do
       end
     end
   end
+
+  describe "#copy_request?" do
+    context "when #request_method is :copy" do
+      let(:request_method) { :copy }
+
+      it "must return true" do
+        expect(subject.copy_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :copy" do
+      let(:request_method) { :unlock }
+
+      it "must return false" do
+        expect(subject.copy_request?).to be(false)
+      end
+    end
+  end
+
+  describe "#delete_request?" do
+    context "when #request_method is :delete" do
+      let(:request_method) { :delete }
+
+      it "must return true" do
+        expect(subject.delete_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :delete" do
+      let(:request_method) { :unlock }
+
+      it "must return false" do
+        expect(subject.delete_request?).to be(false)
+      end
+    end
+  end
+
+  describe "#get_request?" do
+    context "when #request_method is :get" do
+      let(:request_method) { :get }
+
+      it "must return true" do
+        expect(subject.get_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :get" do
+      let(:request_method) { :unlock }
+
+      it "must return false" do
+        expect(subject.get_request?).to be(false)
+      end
+    end
+  end
+
+  describe "#head_request?" do
+    context "when #request_method is :head" do
+      let(:request_method) { :head }
+
+      it "must return true" do
+        expect(subject.head_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :head" do
+      let(:request_method) { :unlock }
+
+      it "must return false" do
+        expect(subject.head_request?).to be(false)
+      end
+    end
+  end
+
+  describe "#lock_request?" do
+    context "when #request_method is :lock" do
+      let(:request_method) { :lock }
+
+      it "must return true" do
+        expect(subject.lock_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :lock" do
+      let(:request_method) { :unlock }
+
+      it "must return false" do
+        expect(subject.lock_request?).to be(false)
+      end
+    end
+  end
+
+  describe "#mkcol_request?" do
+    context "when #request_method is :mkcol" do
+      let(:request_method) { :mkcol }
+
+      it "must return true" do
+        expect(subject.mkcol_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :mkcol" do
+      let(:request_method) { :unlock }
+
+      it "must return false" do
+        expect(subject.mkcol_request?).to be(false)
+      end
+    end
+  end
+
+  describe "#move_request?" do
+    context "when #request_method is :move" do
+      let(:request_method) { :move }
+
+      it "must return true" do
+        expect(subject.move_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :move" do
+      let(:request_method) { :unlock }
+
+      it "must return false" do
+        expect(subject.move_request?).to be(false)
+      end
+    end
+  end
+
+  describe "#options_request?" do
+    context "when #request_method is :options" do
+      let(:request_method) { :options }
+
+      it "must return true" do
+        expect(subject.options_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :options" do
+      let(:request_method) { :unlock }
+
+      it "must return false" do
+        expect(subject.options_request?).to be(false)
+      end
+    end
+  end
+
+  describe "#patch_request?" do
+    context "when #request_method is :patch" do
+      let(:request_method) { :patch }
+
+      it "must return true" do
+        expect(subject.patch_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :patch" do
+      let(:request_method) { :unlock }
+
+      it "must return false" do
+        expect(subject.patch_request?).to be(false)
+      end
+    end
+  end
+
+  describe "#post_request?" do
+    context "when #request_method is :post" do
+      let(:request_method) { :post }
+
+      it "must return true" do
+        expect(subject.post_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :post" do
+      let(:request_method) { :unlock }
+
+      it "must return false" do
+        expect(subject.post_request?).to be(false)
+      end
+    end
+  end
+
+  describe "#propfind_request?" do
+    context "when #request_method is :propfind" do
+      let(:request_method) { :propfind }
+
+      it "must return true" do
+        expect(subject.propfind_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :propfind" do
+      let(:request_method) { :unlock }
+
+      it "must return false" do
+        expect(subject.propfind_request?).to be(false)
+      end
+    end
+  end
+
+  describe "#proppatch_request?" do
+    context "when #request_method is :proppatch" do
+      let(:request_method) { :proppatch }
+
+      it "must return true" do
+        expect(subject.proppatch_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :proppatch" do
+      let(:request_method) { :unlock }
+
+      it "must return false" do
+        expect(subject.proppatch_request?).to be(false)
+      end
+    end
+  end
+
+  describe "#put_request?" do
+    context "when #request_method is :put" do
+      let(:request_method) { :put }
+
+      it "must return true" do
+        expect(subject.put_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :put" do
+      let(:request_method) { :unlock }
+
+      it "must return false" do
+        expect(subject.put_request?).to be(false)
+      end
+    end
+  end
+
+  describe "#trace_request?" do
+    context "when #request_method is :trace" do
+      let(:request_method) { :trace }
+
+      it "must return true" do
+        expect(subject.trace_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :trace" do
+      let(:request_method) { :unlock }
+
+      it "must return false" do
+        expect(subject.trace_request?).to be(false)
+      end
+    end
+  end
+
+  describe "#unlock_request?" do
+    context "when #request_method is :unlock" do
+      let(:request_method) { :unlock }
+
+      it "must return true" do
+        expect(subject.unlock_request?).to be(true)
+      end
+    end
+
+    context "when #request_method is not :unlock" do
+      let(:request_method) { :get }
+
+      it "must return false" do
+        expect(subject.unlock_request?).to be(false)
+      end
+    end
+  end
 end
