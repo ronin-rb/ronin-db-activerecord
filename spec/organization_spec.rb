@@ -37,6 +37,32 @@ describe Ronin::DB::Organization do
       end
     end
 
+    describe "type" do
+      it "must accept nil" do
+        org = described_class.new(name: 'Type-less Org')
+
+        expect(org).to be_valid
+      end
+
+      it "must accept 'company'" do
+        org = described_class.new(name: 'Company Org', type: 'company')
+
+        expect(org).to be_valid
+      end
+
+      it "must accept 'government'" do
+        org = described_class.new(name: 'Government Org', type: 'government')
+
+        expect(org).to be_valid
+      end
+
+      it "must accept 'military'" do
+        org = described_class.new(name: 'Military Org', type: 'military')
+
+        expect(org).to be_valid
+      end
+    end
+
     after { described_class.destroy_all }
   end
 
