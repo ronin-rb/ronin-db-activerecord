@@ -6,10 +6,6 @@ describe Ronin::DB::Arch do
     expect(described_class.table_name).to eq('ronin_arches')
   end
 
-  let(:name)      { 'x86' }
-  let(:endian)    { :little }
-  let(:word_size) { 4 }
-
   it "must include Ronin::DB::Model" do
     expect(described_class).to include(Ronin::DB::Model)
   end
@@ -17,6 +13,10 @@ describe Ronin::DB::Arch do
   it "must include Ronin::DB::Model::HasUniqueName" do
     expect(described_class).to include(Ronin::DB::Model::HasUniqueName)
   end
+
+  let(:name)      { 'x86' }
+  let(:endian)    { :little }
+  let(:word_size) { 4 }
 
   describe "validations" do
     describe "name" do
