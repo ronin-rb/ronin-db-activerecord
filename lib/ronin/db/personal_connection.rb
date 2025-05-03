@@ -79,7 +79,7 @@ module Ronin
         ex:         'ex',
         ex_husband: 'ex-husband',
         ex_wife:    'ex-wife'
-      }, prefix: 'is_'
+      }, prefix: 'is'
 
       # @!attribute [rw] person
       #   The person who is befriending the other person.
