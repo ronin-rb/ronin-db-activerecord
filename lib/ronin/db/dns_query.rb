@@ -73,7 +73,8 @@ module Ronin
       #
       #   @return [String]
       attribute :source_addr, :string
-      validates :source_addr, length: { maximum: 39 },
+      validates :source_addr, presence: true,
+                              length: { maximum: 39 },
                               format: {
                                 with: /#{Resolv::IPv4::Regex}|#{Resolv::IPv6::Regex}/,
                                 message: 'Must be a valid IP address'
