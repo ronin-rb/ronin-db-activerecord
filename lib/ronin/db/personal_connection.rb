@@ -34,9 +34,6 @@ module Ronin
 
       include Model
 
-      # NOTE: disable STI so we can use the type column as an enum.
-      self.inheritance_column = nil
-
       # @!attribute [rw] id
       #   The primary key of the friendship.
       #

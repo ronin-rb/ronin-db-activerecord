@@ -25,7 +25,10 @@ module Ronin
     #
     module Model
       #
-      # Sets the models `table_name_prefix` to `ronin_`.
+      # Configures the {Ronin::DB} model.
+      #
+      # * Sets the models `table_name_prefix` to `ronin_`.
+      # * Disables the Single Table Inheritance (STI) column by default.
       #
       # @param [Class<ActiveRecord::Base>] model
       #   The ActiveRecord model class which is including {Model}.
@@ -35,6 +38,10 @@ module Ronin
       def self.included(model)
         # NOTE: all Ronin::DB tables start with 'ronin_'
         model.table_name_prefix = 'ronin_'
+
+        # NOTE: disable Single Table Inheritance (STI) so that we can use the
+        # 'type' column as a regular column.
+        model.inheritance_column = nil
       end
     end
   end

@@ -20,5 +20,10 @@ describe Ronin::DB::Model do
     it "must set .table_name_prefix to 'ronin_'" do
       expect(subject.table_name_prefix).to eq('ronin_')
     end
+
+    it "must disable .inheritance_column" do
+      # NOTE: setting inheritence_column to nil actualls sets it to ''
+      expect(subject.inheritance_column).to eq('')
+    end
   end
 end
