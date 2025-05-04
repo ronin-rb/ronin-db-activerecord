@@ -12,7 +12,7 @@ describe Ronin::DB::MACAddress do
 
   describe "validations" do
     describe "address" do
-      it "should require an address" do
+      it "must require an address" do
         mac_address = described_class.new
         expect(mac_address).not_to be_valid
         expect(mac_address.errors[:address]).to include(
@@ -59,7 +59,7 @@ describe Ronin::DB::MACAddress do
   describe "#to_i" do
     let(:integer) { 0x000102030405 }
 
-    it "should convert the MAC Address to an Integer" do
+    it "must convert the MAC Address to an Integer" do
       expect(subject.to_i).to eq(integer)
     end
   end

@@ -19,11 +19,11 @@ describe Ronin::DB::Model::HasName do
   describe ".included" do
     subject { model }
 
-    it "should include Ronin::DB::Model" do
+    it "must include Ronin::DB::Model" do
       expect(subject.ancestors).to include(Ronin::DB::Model)
     end
 
-    it "should define a name attribute" do
+    it "must define a name attribute" do
       expect(subject.new).to respond_to(:name)
       expect(subject.new).to respond_to(:name=)
     end
@@ -32,7 +32,7 @@ describe Ronin::DB::Model::HasName do
   describe "validations" do
     subject { model }
 
-    it "should require a name" do
+    it "must require a name" do
       resource = subject.new
       expect(resource).not_to be_valid
 
@@ -52,7 +52,7 @@ describe Ronin::DB::Model::HasName do
       subject.create(name: name2)
     end
 
-    it "should be able to find resources with similar names" do
+    it "must be able to find resources with similar names" do
       resources = subject.named('foo')
 
       expect(resources.length).to eq(2)
@@ -76,7 +76,7 @@ describe Ronin::DB::Model::HasName do
       subject.create(name: name3)
     end
 
-    it "should be able to find resources with the matching name" do
+    it "must be able to find resources with the matching name" do
       records = subject.with_name(name2)
 
       expect(records.length).to eq(1)

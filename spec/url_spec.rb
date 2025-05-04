@@ -874,28 +874,28 @@ describe Ronin::DB::URL do
     context "when given a URI::HTTP object" do
       subject { described_class.import(uri) }
 
-      it "should parse URL schemes" do
+      it "must parse URL schemes" do
         expect(subject.scheme).not_to be_nil
         expect(subject.scheme.name).to be == scheme
       end
 
-      it "should parse host names" do
+      it "must parse host names" do
         expect(subject.host_name.name).to be == host_name
       end
 
-      it "should parse port numbers" do
+      it "must parse port numbers" do
         expect(subject.port.number).to be == port
       end
 
-      it "should parse paths" do
+      it "must parse paths" do
         expect(subject.path).to be == path
       end
 
-      it "should parse query strings" do
+      it "must parse query strings" do
         expect(subject.query).to be == query
       end
 
-      it "should parse URL fragments" do
+      it "must parse URL fragments" do
         expect(subject.fragment).to be == fragment
       end
 
@@ -950,7 +950,7 @@ describe Ronin::DB::URL do
       described_class.new(host_name: url_host_name)
     end
 
-    it "should return the URI host String" do
+    it "must return the URI host String" do
       expect(subject.host).to be == host_name
     end
   end
@@ -958,33 +958,33 @@ describe Ronin::DB::URL do
   describe "#to_uri" do
     subject { super().to_uri }
 
-    it "should convert the scheme" do
+    it "must convert the scheme" do
       expect(subject.scheme).to be == scheme
     end
 
-    it "should convert the host name" do
+    it "must convert the host name" do
       expect(subject.host).to be == host_name
     end
 
-    it "should convert the port number" do
+    it "must convert the port number" do
       expect(subject.port).to be == port
     end
 
-    it "should convert the path" do
+    it "must convert the path" do
       expect(subject.path).to be == path
     end
 
-    it "should convert the query string" do
+    it "must convert the query string" do
       expect(subject.query).to be == query
     end
 
-    it "should convert the fragment" do
+    it "must convert the fragment" do
       expect(subject.fragment).to be == fragment
     end
   end
 
   describe "#to_s" do
-    it "should convert the URL back into a String URI" do
+    it "must convert the URL back into a String URI" do
       expect(subject.to_s).to be == uri.to_s
     end
   end

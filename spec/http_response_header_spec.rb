@@ -67,7 +67,7 @@ describe Ronin::DB::HTTPResponseHeader do
   end
 
   describe "#to_s" do
-    it "should dump a name and a value into a String" do
+    it "must dump a name and a value into a String" do
       expect(subject.to_s).to eq("#{name}: #{value}")
     end
   end

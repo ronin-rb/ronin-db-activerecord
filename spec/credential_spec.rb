@@ -349,13 +349,13 @@ describe Ronin::DB::Credential do
   end
 
   describe "#plain_text" do
-    it "should provide the clear-text password String" do
+    it "must provide the clear-text password String" do
       expect(subject.plain_text).to eq(plain_text)
     end
   end
 
   describe "#to_s" do
-    it "should include the user name and password" do
+    it "must include the user name and password" do
       expect(subject.to_s).to eq("#{name}:#{plain_text}")
     end
   end

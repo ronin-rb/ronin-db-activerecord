@@ -25,7 +25,7 @@ describe Ronin::DB::Software do
     end
 
     describe "version" do
-      it "should require version attribute" do
+      it "must require version attribute" do
         software = described_class.new(name: name)
         expect(software).to_not be_valid
         expect(software.errors[:version]).to eq(
@@ -109,7 +109,7 @@ describe Ronin::DB::Software do
   end
 
   describe "#to_s" do
-    it "should be convertable to a String" do
+    it "must be convertable to a String" do
       expect(subject.to_s).to eq("#{vendor} #{name} #{version}")
     end
 
@@ -118,7 +118,7 @@ describe Ronin::DB::Software do
         described_class.new(name: name, version: version)
       end
 
-      it "should ignore the missing vendor information" do
+      it "must ignore the missing vendor information" do
         expect(subject.to_s).to eq("#{name} #{version}")
       end
     end

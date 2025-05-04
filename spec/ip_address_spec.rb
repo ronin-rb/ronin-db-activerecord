@@ -283,7 +283,7 @@ describe Ronin::DB::IPAddress do
   end
 
   describe "#version" do
-    it "should only accept 4 or 6" do
+    it "must only accept 4 or 6" do
       ip_address = described_class.new(address: '1.1.1.1', version: 7)
 
       expect(ip_address).not_to be_valid

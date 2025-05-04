@@ -65,14 +65,14 @@ describe Ronin::DB::HTTPQueryParam do
   end
 
   describe "#to_s" do
-    it "should dump a name and a value into a String" do
+    it "must dump a name and a value into a String" do
       expect(subject.to_s).to eq("#{name}=#{value}")
     end
 
     context "when an empty value" do
       let(:value) { '' }
 
-      it "should ignore empty or nil values" do
+      it "must ignore empty or nil values" do
         expect(subject.to_s).to eq("#{name}=")
       end
     end
@@ -80,7 +80,7 @@ describe Ronin::DB::HTTPQueryParam do
     context "when a nil value" do
       let(:value) { nil }
 
-      it "should ignore empty or nil values" do
+      it "must ignore empty or nil values" do
         expect(subject.to_s).to eq("#{name}=")
       end
     end
@@ -96,7 +96,7 @@ describe Ronin::DB::HTTPQueryParam do
         )
       end
 
-      it "should escape special characters" do
+      it "must escape special characters" do
         expect(subject.to_s).to eq("#{name}=#{encoded_value}")
       end
     end

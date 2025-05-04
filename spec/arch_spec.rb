@@ -139,7 +139,7 @@ describe Ronin::DB::Arch do
   describe ".x86" do
     subject { described_class.x86 }
 
-    it "should return the x86 architecture" do
+    it "must return the x86 architecture" do
       expect(subject).to be_kind_of(described_class)
       expect(subject.name).to eq('x86')
     end
@@ -148,7 +148,7 @@ describe Ronin::DB::Arch do
   describe ".i686" do
     subject { described_class.i686 }
 
-    it "should return the i686 architecture" do
+    it "must return the i686 architecture" do
       expect(subject).to be_kind_of(described_class)
       expect(subject.name).to eq('i686')
     end
@@ -157,7 +157,7 @@ describe Ronin::DB::Arch do
   describe ".x86_64" do
     subject { described_class.x86_64 }
 
-    it "should return the x86-64 architecture" do
+    it "must return the x86-64 architecture" do
       expect(subject).to be_kind_of(described_class)
       expect(subject.name).to eq('x86-64')
     end
@@ -166,7 +166,7 @@ describe Ronin::DB::Arch do
   describe ".ppc" do
     subject { described_class.ppc }
 
-    it "should return the PPC architecture" do
+    it "must return the PPC architecture" do
       expect(subject).to be_kind_of(described_class)
       expect(subject.name).to eq('PPC')
     end
@@ -175,7 +175,7 @@ describe Ronin::DB::Arch do
   describe ".ppc64" do
     subject { described_class.ppc64 }
 
-    it "should return the PPC64 architecture" do
+    it "must return the PPC64 architecture" do
       expect(subject).to be_kind_of(described_class)
       expect(subject.name).to eq('PPC64')
     end
@@ -184,7 +184,7 @@ describe Ronin::DB::Arch do
   describe ".mips" do
     subject { described_class.mips }
 
-    it "should return the MIPS architecture" do
+    it "must return the MIPS architecture" do
       expect(subject).to be_kind_of(described_class)
       expect(subject.name).to eq('MIPS')
     end
@@ -193,7 +193,7 @@ describe Ronin::DB::Arch do
   describe ".mips_le" do
     subject { described_class.mips_le }
 
-    it "should return the MIPS (Little-Endian) architecture" do
+    it "must return the MIPS (Little-Endian) architecture" do
       expect(subject).to be_kind_of(described_class)
       expect(subject.name).to eq('MIPS (Little-Endian)')
     end
@@ -202,7 +202,7 @@ describe Ronin::DB::Arch do
   describe ".mips_be" do
     subject { described_class.mips_be }
 
-    it "should return the MIPS (Big-Endian) architecture" do
+    it "must return the MIPS (Big-Endian) architecture" do
       expect(subject).to be_kind_of(described_class)
       expect(subject.name).to eq('MIPS (Big-Endian)')
     end
@@ -211,7 +211,7 @@ describe Ronin::DB::Arch do
   describe ".arm" do
     subject { described_class.arm }
 
-    it "should return the ARM architecture" do
+    it "must return the ARM architecture" do
       expect(subject).to be_kind_of(described_class)
       expect(subject.name).to eq('ARM')
     end
@@ -220,7 +220,7 @@ describe Ronin::DB::Arch do
   describe ".arm_le" do
     subject { described_class.arm_le }
 
-    it "should return the ARM (Little-Endian) architecture" do
+    it "must return the ARM (Little-Endian) architecture" do
       expect(subject).to be_kind_of(described_class)
       expect(subject.name).to eq('ARM (Little-Endian)')
     end
@@ -229,7 +229,7 @@ describe Ronin::DB::Arch do
   describe ".arm_be" do
     subject { described_class.arm_be }
 
-    it "should return the ARM (Big-Endian) architecture" do
+    it "must return the ARM (Big-Endian) architecture" do
       expect(subject).to be_kind_of(described_class)
       expect(subject.name).to eq('ARM (Big-Endian)')
     end

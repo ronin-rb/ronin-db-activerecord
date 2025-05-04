@@ -19,15 +19,15 @@ describe Ronin::DB::Model::HasUniqueName do
   describe ".included" do
     subject { model }
 
-    it "should include Ronin::DB::Model" do
+    it "must include Ronin::DB::Model" do
       expect(subject.ancestors).to include(Ronin::DB::Model)
     end
 
-    it "should include Ronin::DB::Model::HasName::InstanceMethods" do
+    it "must include Ronin::DB::Model::HasName::InstanceMethods" do
       expect(subject.ancestors).to include(Ronin::DB::Model::HasName::InstanceMethods)
     end
 
-    it "should define a name attribute" do
+    it "must define a name attribute" do
       expect(subject.new).to respond_to(:name)
       expect(subject.new).to respond_to(:name=)
     end
@@ -36,7 +36,7 @@ describe Ronin::DB::Model::HasUniqueName do
   describe "validations" do
     subject { model }
 
-    it "should require a name" do
+    it "must require a name" do
       record = subject.new
       expect(record).to_not be_valid
 

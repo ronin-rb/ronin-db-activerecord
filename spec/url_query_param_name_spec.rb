@@ -10,7 +10,7 @@ describe Ronin::DB::URLQueryParamName do
 
   describe "validations" do
     describe "name" do
-      it "should require name attribute" do
+      it "must require name attribute" do
         url_query_param_name = described_class.new
         expect(url_query_param_name).to_not be_valid
         expect(url_query_param_name.errors[:name]).to eq(

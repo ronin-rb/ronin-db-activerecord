@@ -10,7 +10,7 @@ describe Ronin::DB::HTTPQueryParamName do
 
   describe "validations" do
     describe "name" do
-      it "should require name attribute" do
+      it "must require name attribute" do
         http_query_param_name = described_class.new
         expect(http_query_param_name).to_not be_valid
         expect(http_query_param_name.errors[:name]).to eq(

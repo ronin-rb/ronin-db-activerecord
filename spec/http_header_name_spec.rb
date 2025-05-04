@@ -10,7 +10,7 @@ describe Ronin::DB::HTTPHeaderName do
 
   describe "validations" do
     describe "name" do
-      it "should require name attribute" do
+      it "must require name attribute" do
         http_header_name = described_class.new
         expect(http_header_name).to_not be_valid
         expect(http_header_name.errors[:name]).to eq(

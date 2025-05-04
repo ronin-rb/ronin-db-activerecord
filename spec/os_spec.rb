@@ -13,7 +13,7 @@ describe Ronin::DB::OS do
 
   describe "validations" do
     describe "name" do
-      it "should require a name" do
+      it "must require a name" do
         os = described_class.new(version: version)
 
         expect(os).not_to be_valid
@@ -59,7 +59,7 @@ describe Ronin::DB::OS do
     end
 
     describe "version" do
-      it "should require a version" do
+      it "must require a version" do
         os = described_class.new(name: name)
 
         expect(os).not_to be_valid

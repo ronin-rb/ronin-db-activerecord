@@ -15,7 +15,7 @@ describe Ronin::DB::UserName do
   subject { described_class.new(name: name) }
 
   describe "validations" do
-    it "should require a name" do
+    it "must require a name" do
       user = described_class.new
       expect(user).not_to be_valid
 

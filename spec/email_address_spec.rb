@@ -533,7 +533,7 @@ describe Ronin::DB::EmailAddress do
   end
 
   describe "#to_s" do
-    it "should include the email address" do
+    it "must include the email address" do
       expect(subject.to_s).to eq(address)
     end
   end
