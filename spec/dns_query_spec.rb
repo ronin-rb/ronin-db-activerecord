@@ -88,16 +88,14 @@ describe Ronin::DB::DNSQuery do
         end
       end
 
-      context "otherwise" do
-        it "must not accept other values" do
-          expect {
-            described_class.new(
-              type:        :other,
-              label:       label,
-              source_addr: source_addr
-            )
-          }.to raise_error(ArgumentError,"'other' is not a valid type")
-        end
+      it "must not accept other values" do
+        expect {
+          described_class.new(
+            type:        :other,
+            label:       label,
+            source_addr: source_addr
+          )
+        }.to raise_error(ArgumentError,"'other' is not a valid type")
       end
     end
 

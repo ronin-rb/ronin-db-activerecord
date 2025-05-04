@@ -43,18 +43,14 @@ describe Ronin::DB::OS do
         expect(os).to be_valid
       end
 
-      context "otherwise" do
-        let(:flavor) { :other }
-
-        it do
-          expect {
-            described_class.new(
-              name:    'Other',
-              flavor:  flavor,
-              version: '1.2.3'
-            )
-          }.to raise_error(ArgumentError,"'#{flavor}' is not a valid flavor")
-        end
+      it "must not accept other values" do
+        expect {
+          described_class.new(
+            name:    'Other',
+            flavor:  :other,
+            version: '1.2.3'
+          )
+        }.to raise_error(ArgumentError,"'other' is not a valid flavor")
       end
     end
 

@@ -66,18 +66,14 @@ describe Ronin::DB::Arch do
         expect(arch).to be_valid
       end
 
-      context "otherwise" do
-        let(:endian) { :foo }
-
-        it do
-          expect {
-            described_class.new(
-              name:      name,
-              endian:    endian,
-              word_size: word_size
-            )
-          }.to raise_error(ArgumentError,"'#{endian}' is not a valid endian")
-        end
+      it "must not accept other values" do
+        expect {
+          described_class.new(
+            name:      name,
+            endian:    :other,
+            word_size: word_size
+          )
+        }.to raise_error(ArgumentError,"'other' is not a valid endian")
       end
     end
 
@@ -117,21 +113,17 @@ describe Ronin::DB::Arch do
         expect(arch).to be_valid
       end
 
-      context "otherwise" do
-        let(:word_size) { 3 }
+      it "must not accept other word_size values" do
+        arch = described_class.new(
+          name:      name,
+          endian:    endian,
+          word_size: 3
+        )
 
-        it do
-          arch = described_class.new(
-            name:      name,
-            endian:    endian,
-            word_size: word_size
-          )
-
-          expect(arch).to_not be_valid
-          expect(arch.errors[:word_size]).to eq(
-            ['is not included in the list']
-          )
-        end
+        expect(arch).to_not be_valid
+        expect(arch.errors[:word_size]).to eq(
+          ['is not included in the list']
+        )
       end
     end
   end
