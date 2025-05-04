@@ -73,7 +73,7 @@ module Ronin
         partner:    'partner',
         boyfriend:  'boyfriend',
         girlfriend: 'girlfriend',
-        hushband:   'husband',
+        husband:    'husband',
         wife:       'wife',
 
         ex:         'ex',
