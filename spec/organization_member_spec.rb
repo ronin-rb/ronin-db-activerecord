@@ -21,6 +21,40 @@ describe Ronin::DB::OrganizationMember do
   let(:organization_name) { 'ACME, Corp.' }
   let(:organization) { Ronin::DB::Organization.new(name: organization_name) }
 
+  describe "validations" do
+    describe "type" do
+      [
+        nil,
+        :advisor,
+        :volunteer,
+        :employee,
+        :contractor,
+        :intern,
+        :board_member
+      ].each do |valid_type|
+        it "must accept #{valid_type.inspect}" do
+          member = described_class.new(
+            type:         valid_type,
+            organization: organization,
+            person:       person
+          )
+
+          expect(member).to be_valid
+        end
+      end
+
+      it "must not accept other values" do
+        expect {
+          described_class.new(
+            type:         :other,
+            organization: organization,
+            person:       person
+          )
+        }.to raise_error(ArgumentError,"'other' is not a valid type")
+      end
+    end
+  end
+
   subject do
     described_class.new(
       organization: organization,
