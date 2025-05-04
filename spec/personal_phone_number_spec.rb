@@ -72,4 +72,68 @@ describe Ronin::DB::PersonalPhoneNumber do
       end
     end
   end
+
+  describe "#home?" do
+    context "when #type is :home" do
+      let(:type) { :home }
+
+      it "must return true" do
+        expect(subject.home?).to be(true)
+      end
+    end
+
+    context "when #type is not :home" do
+      it "must return false" do
+        expect(subject.home?).to be(false)
+      end
+    end
+  end
+
+  describe "#cell?" do
+    context "when #type is :cell" do
+      let(:type) { :cell }
+
+      it "must return true" do
+        expect(subject.cell?).to be(true)
+      end
+    end
+
+    context "when #type is not :cell" do
+      it "must return false" do
+        expect(subject.cell?).to be(false)
+      end
+    end
+  end
+
+  describe "#fax?" do
+    context "when #type is :fax" do
+      let(:type) { :fax }
+
+      it "must return true" do
+        expect(subject.fax?).to be(true)
+      end
+    end
+
+    context "when #type is not :fax" do
+      it "must return false" do
+        expect(subject.fax?).to be(false)
+      end
+    end
+  end
+
+  describe "#voip?" do
+    context "when #type is :voip" do
+      let(:type) { :voip }
+
+      it "must return true" do
+        expect(subject.voip?).to be(true)
+      end
+    end
+
+    context "when #type is not :voip" do
+      it "must return false" do
+        expect(subject.voip?).to be(false)
+      end
+    end
+  end
 end
