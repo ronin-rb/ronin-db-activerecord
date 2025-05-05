@@ -7,7 +7,7 @@ describe Ronin::DB::Port do
   end
 
   let(:protocol) { 'tcp' }
-  let(:number)   { 80    }
+  let(:number)   { 80 }
 
   subject do
     described_class.new(protocol: protocol, number: number)
