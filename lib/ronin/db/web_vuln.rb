@@ -104,6 +104,7 @@ module Ronin
         trace:     'TRACE',
         unlock:    'UNLOCK'
       }, _suffix: :request
+      validates :request_method, presence: true
 
       # @!attribute [rw] lfi_os
       #   The LFI os.
