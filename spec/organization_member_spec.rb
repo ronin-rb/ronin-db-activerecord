@@ -21,6 +21,16 @@ describe Ronin::DB::OrganizationMember do
   let(:organization_name) { 'ACME, Corp.' }
   let(:organization) { Ronin::DB::Organization.new(name: organization_name) }
 
+  let(:type) { nil }
+
+  subject do
+    described_class.new(
+      type:         type,
+      organization: organization,
+      person:       person
+    )
+  end
+
   describe "validations" do
     describe "type" do
       [
@@ -55,11 +65,100 @@ describe Ronin::DB::OrganizationMember do
     end
   end
 
-  subject do
-    described_class.new(
-      organization: organization,
-      person:       person
-    )
+  describe "#advisor?" do
+    context "when #type is :advisor" do
+      let(:type) { :advisor }
+
+      it "must return true" do
+        expect(subject.advisor?).to be(true)
+      end
+    end
+
+    context "when #type is not :advisor" do
+      it "must return false" do
+        expect(subject.advisor?).to be(false)
+      end
+    end
+  end
+
+  describe "#volunteer?" do
+    context "when #type is :volunteer" do
+      let(:type) { :volunteer }
+
+      it "must return true" do
+        expect(subject.volunteer?).to be(true)
+      end
+    end
+
+    context "when #type is not :volunteer" do
+      it "must return false" do
+        expect(subject.volunteer?).to be(false)
+      end
+    end
+  end
+
+  describe "#employee?" do
+    context "when #type is :employee" do
+      let(:type) { :employee }
+
+      it "must return true" do
+        expect(subject.employee?).to be(true)
+      end
+    end
+
+    context "when #type is not :employee" do
+      it "must return false" do
+        expect(subject.employee?).to be(false)
+      end
+    end
+  end
+
+  describe "#contractor?" do
+    context "when #type is :contractor" do
+      let(:type) { :contractor }
+
+      it "must return true" do
+        expect(subject.contractor?).to be(true)
+      end
+    end
+
+    context "when #type is not :contractor" do
+      it "must return false" do
+        expect(subject.contractor?).to be(false)
+      end
+    end
+  end
+
+  describe "#intern?" do
+    context "when #type is :intern" do
+      let(:type) { :intern }
+
+      it "must return true" do
+        expect(subject.intern?).to be(true)
+      end
+    end
+
+    context "when #type is not :intern" do
+      it "must return false" do
+        expect(subject.intern?).to be(false)
+      end
+    end
+  end
+
+  describe "#board_member?" do
+    context "when #type is :board_member" do
+      let(:type) { :board_member }
+
+      it "must return true" do
+        expect(subject.board_member?).to be(true)
+      end
+    end
+
+    context "when #type is not :board_member" do
+      it "must return false" do
+        expect(subject.board_member?).to be(false)
+      end
+    end
   end
 
   describe "#to_s" do
