@@ -24,6 +24,17 @@ describe Ronin::DB::Port do
     end
 
     describe "protocol" do
+      [
+        :tcp,
+        :udp
+      ].each do |valid_protocol|
+        it "must accept #{valid_protocol.inspect}" do
+          port = described_class.new(protocol: valid_protocol, number: number)
+
+          expect(port).to be_valid
+        end
+      end
+
       it "must not accept other values" do
         expect {
           described_class.new(protocol: :other, number: number)
