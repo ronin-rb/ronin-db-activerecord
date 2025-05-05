@@ -14,35 +14,33 @@ describe Ronin::DB::Port do
   end
 
   describe "validations" do
-    context "when not given a port number" do
-      subject { described_class.new(protocol: protocol) }
+    it "must require a port number" do
+      port = described_class.new(protocol: protocol)
 
-      it "must require a port number" do
-        expect(subject).not_to be_valid
-      end
+      expect(port).not_to be_valid
+      expect(port.errors[:number]).to eq(
+        ["can't be blank", "is not a number"]
+      )
     end
 
-    context "when given an unknown protocol" do
-      let(:protocol) { 'foo' }
-
-      it "must only allow 'tcp' and 'udp' as protocols" do
+    describe "protocol" do
+      it "must not accept other values" do
         expect {
-          described_class.new(protocol: protocol, number: number)
-        }.to raise_error(ArgumentError,"'#{protocol}' is not a valid protocol")
+          described_class.new(protocol: :other, number: number)
+        }.to raise_error(ArgumentError,"'other' is not a valid protocol")
       end
     end
 
-    context "when a duplicate protocol/port-number pairs is saved" do
-      before { subject.save }
+    it "must only allow saving unique protocol/port-number pairs" do
+      described_class.create(protocol: protocol, number: number)
 
-      it "must only allow saving unique protocol/port-number pairs" do
-        port = described_class.new(protocol: protocol, number: number)
+      port2 = described_class.new(protocol: protocol, number: number)
 
-        expect(port).not_to be_valid
-      end
-
-      after { subject.destroy }
+      expect(port2).to_not be_valid
+      expect(port2.errors[:number]).to eq(["has already been taken"])
     end
+
+    after { described_class.destroy_all }
   end
 
   describe ".with_number" do
