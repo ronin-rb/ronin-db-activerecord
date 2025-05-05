@@ -235,6 +235,42 @@ describe Ronin::DB::Port do
     after { described_class.destroy_all }
   end
 
+  describe "#tcp?" do
+    context "when #protocol is :tcp" do
+      let(:protocol) { :tcp }
+
+      it "must return true" do
+        expect(subject.tcp?).to be(true)
+      end
+    end
+
+    context "when #protocol is not :tcp" do
+      let(:protocol) { :udp }
+
+      it "must return false" do
+        expect(subject.tcp?).to be(false)
+      end
+    end
+  end
+
+  describe "#udp?" do
+    context "when #protocol is :udp" do
+      let(:protocol) { :udp }
+
+      it "must return true" do
+        expect(subject.udp?).to be(true)
+      end
+    end
+
+    context "when #protocol is not :udp" do
+      let(:protocol) { :tcp }
+
+      it "must return false" do
+        expect(subject.udp?).to be(false)
+      end
+    end
+  end
+
   describe "#to_i" do
     it "must be convertable to an Integer" do
       expect(subject.to_i).to eq(number)
