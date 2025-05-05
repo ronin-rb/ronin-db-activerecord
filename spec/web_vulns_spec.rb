@@ -755,4 +755,130 @@ describe Ronin::DB::WebVuln do
       end
     end
   end
+
+  describe "#lfi?" do
+    context "when #type is :lfi" do
+      let(:type) { :lfi }
+
+      it "must return true" do
+        expect(subject.lfi?).to be(true)
+      end
+    end
+
+    context "when #type is not :lfi" do
+      let(:type) { :command_injection }
+
+      it "must return false" do
+        expect(subject.lfi?).to be(false)
+      end
+    end
+  end
+
+  describe "#rfi?" do
+    context "when #type is :rfi" do
+      let(:type) { :rfi }
+
+      it "must return true" do
+        expect(subject.rfi?).to be(true)
+      end
+    end
+
+    context "when #type is not :rfi" do
+      let(:type) { :command_injection }
+
+      it "must return false" do
+        expect(subject.rfi?).to be(false)
+      end
+    end
+  end
+
+  describe "#sqli?" do
+    context "when #type is :sqli" do
+      let(:type) { :sqli }
+
+      it "must return true" do
+        expect(subject.sqli?).to be(true)
+      end
+    end
+
+    context "when #type is not :sqli" do
+      let(:type) { :command_injection }
+
+      it "must return false" do
+        expect(subject.sqli?).to be(false)
+      end
+    end
+  end
+
+  describe "#ssti?" do
+    context "when #type is :ssti" do
+      let(:type) { :ssti }
+
+      it "must return true" do
+        expect(subject.ssti?).to be(true)
+      end
+    end
+
+    context "when #type is not :ssti" do
+      let(:type) { :command_injection }
+
+      it "must return false" do
+        expect(subject.ssti?).to be(false)
+      end
+    end
+  end
+
+  describe "#open_redirect?" do
+    context "when #type is :open_redirect" do
+      let(:type) { :open_redirect }
+
+      it "must return true" do
+        expect(subject.open_redirect?).to be(true)
+      end
+    end
+
+    context "when #type is not :open_redirect" do
+      let(:type) { :command_injection }
+
+      it "must return false" do
+        expect(subject.open_redirect?).to be(false)
+      end
+    end
+  end
+
+  describe "#reflected_xss?" do
+    context "when #type is :reflected_xss" do
+      let(:type) { :reflected_xss }
+
+      it "must return true" do
+        expect(subject.reflected_xss?).to be(true)
+      end
+    end
+
+    context "when #type is not :reflected_xss" do
+      let(:type) { :command_injection }
+
+      it "must return false" do
+        expect(subject.reflected_xss?).to be(false)
+      end
+    end
+  end
+
+  describe "#command_injection?" do
+    context "when #type is :command_injection" do
+      let(:type) { :command_injection }
+
+      it "must return true" do
+        expect(subject.command_injection?).to be(true)
+      end
+    end
+
+    context "when #type is not :command_injection" do
+      let(:type) { :lfi }
+
+      it "must return false" do
+        expect(subject.command_injection?).to be(false)
+      end
+    end
+  end
 end
