@@ -7,6 +7,261 @@ describe Ronin::DB::WebVuln do
     expect(described_class.table_name).to eq('ronin_web_vulns')
   end
 
+  let(:type)           { :lfi }
+  let(:request_method) { :get }
+  let(:url_scheme) do
+    Ronin::DB::URLScheme.find_or_initialize_by(name: 'https')
+  end
+  let(:url_host_name) do
+    Ronin::DB::HostName.find_or_initialize_by(name: 'www.example.com')
+  end
+  let(:url_port) do
+    Ronin::DB::Port.find_or_initialize_by(protocol: :tcp, number: 8080)
+  end
+  let(:url) do
+    Ronin::DB::URL.new(
+      scheme:    url_scheme,
+      host_name: url_host_name,
+      port:      url_port
+    )
+  end
+  let(:query_param) { 'id' }
+
+  subject do
+    described_class.new(
+      type:           type,
+      request_method: request_method,
+      url:            url,
+      query_param:    query_param
+    )
+  end
+
+  describe "validations" do
+    describe "type" do
+      it "must require a type" do
+        web_vuln = described_class.new(
+          request_method: request_method,
+          url:            url,
+          query_param:    query_param
+        )
+
+        expect(web_vuln).to_not be_valid
+        expect(web_vuln.errors[:type]).to eq(["can't be blank"])
+      end
+
+      [
+        :lfi,
+        :rfi,
+        :sqli,
+        :ssti,
+        :open_redirect,
+        :reflected_xss,
+        :command_injection
+      ].each do |valid_type|
+        it "must accept #{valid_type.inspect}" do
+          web_vuln = described_class.new(
+            type:           valid_type,
+            request_method: request_method,
+            url:            url,
+            query_param:    query_param
+          )
+
+          expect(web_vuln).to be_valid
+        end
+      end
+
+      it "must not accept other values" do
+        expect {
+          described_class.new(
+            type:           :other,
+            request_method: request_method,
+            url:            url,
+            query_param:    query_param
+          )
+        }.to raise_error(ArgumentError,"'other' is not a valid type")
+      end
+    end
+
+    describe "request_method" do
+      [
+        :copy,
+        :delete,
+        :get,
+        :head,
+        :lock,
+        :mkcol,
+        :move,
+        :options,
+        :patch,
+        :post,
+        :propfind,
+        :proppatch,
+        :put,
+        :trace,
+        :unlock
+      ].each do |valid_request_method|
+        it "must accept #{valid_request_method.inspect}" do
+          web_vuln = described_class.new(
+            type:           type,
+            request_method: valid_request_method,
+            url:            url,
+            query_param:    query_param
+          )
+
+          expect(web_vuln).to be_valid
+        end
+      end
+
+      it "must not accept other values" do
+        expect {
+          described_class.new(
+            type:           type,
+            request_method: :other,
+            url:            url,
+            query_param:    query_param
+          )
+        }.to raise_error(ArgumentError,"'other' is not a valid request_method")
+      end
+    end
+
+    describe "lfi_os" do
+      [
+        nil,
+        'unix',
+        'windows'
+      ].each do |valid_lfi_os|
+        it "must accept #{valid_lfi_os.inspect}" do
+          web_vuln = described_class.new(
+            type:           :lfi,
+            lfi_os:         valid_lfi_os,
+            request_method: request_method,
+            url:            url,
+            query_param:    query_param
+          )
+
+          expect(web_vuln).to be_valid
+        end
+      end
+
+      it "must not accept other values" do
+        expect {
+          described_class.new(
+            type:           :lfi,
+            lfi_os:         :other,
+            request_method: request_method,
+            url:            url,
+            query_param:    query_param
+          )
+        }.to raise_error(ArgumentError,"'other' is not a valid lfi_os")
+      end
+    end
+
+    describe "lfi_filter_bypass" do
+      [
+        nil,
+        'null_byte',
+        'base64',
+        'rot13',
+        'zlib'
+      ].each do |valid_lfi_filter_bypass|
+        it "must accept #{valid_lfi_filter_bypass.inspect}" do
+          web_vuln = described_class.new(
+            type:              :lfi,
+            lfi_filter_bypass: valid_lfi_filter_bypass,
+            request_method:    request_method,
+            url:               url,
+            query_param:       query_param
+          )
+
+          expect(web_vuln).to be_valid
+        end
+      end
+
+      it "must not accept other values" do
+        expect {
+          described_class.new(
+            type:              :lfi,
+            lfi_filter_bypass: :other,
+            request_method:    request_method,
+            url:               url,
+            query_param:       query_param
+          )
+        }.to raise_error(ArgumentError,"'other' is not a valid lfi_filter_bypass")
+      end
+    end
+
+    describe "rfi_script_lang" do
+      [
+        nil,
+        'asp',
+        'asp_net',
+        'cold_fusion',
+        'jsp',
+        'perl'
+      ].each do |valid_rfi_script_lang|
+        it "must accept #{valid_rfi_script_lang.inspect}" do
+          web_vuln = described_class.new(
+            type:            :rfi,
+            rfi_script_lang: valid_rfi_script_lang,
+            request_method:  request_method,
+            url:             url,
+            query_param:     query_param
+          )
+
+          expect(web_vuln).to be_valid
+        end
+      end
+
+      it "must not accept other values" do
+        expect {
+          described_class.new(
+            type:            :rfi,
+            rfi_script_lang: :other,
+            request_method:  request_method,
+            url:             url,
+            query_param:     query_param
+          )
+        }.to raise_error(ArgumentError,"'other' is not a valid rfi_script_lang")
+      end
+    end
+
+    describe "ssti_escape_type" do
+      [
+        nil,
+        'double_curly_braces',
+        'dollar_curly_braces',
+        'dollar_double_curly_braces',
+        'pound_curly_braces',
+        'angle_brackets_percent',
+        'custom'
+      ].each do |valid_ssti_escape_type|
+        it "must accept #{valid_ssti_escape_type.inspect}" do
+          web_vuln = described_class.new(
+            type:             :ssti,
+            ssti_escape_type: valid_ssti_escape_type,
+            request_method:   request_method,
+            url:              url,
+            query_param:      query_param
+          )
+
+          expect(web_vuln).to be_valid
+        end
+      end
+
+      it "must not accept other values" do
+        expect {
+          described_class.new(
+            type:             :ssti,
+            ssti_escape_type: :other,
+            request_method:   request_method,
+            url:              url,
+            query_param:      query_param
+          )
+        }.to raise_error(ArgumentError,"'other' is not a valid ssti_escape_type")
+      end
+    end
+  end
+
   describe ".for_host" do
     subject { described_class }
 
@@ -476,18 +731,6 @@ describe Ronin::DB::WebVuln do
       Ronin::DB::URLScheme.destroy_all
       Ronin::DB::HostName.destroy_all
     end
-  end
-
-  let(:url_scheme)    { Ronin::DB::URLScheme.find_or_initialize_by(name: 'https') }
-  let(:url_host_name) { Ronin::DB::HostName.find_or_initialize_by(name: 'www.example.com') }
-  let(:url_port)      { Ronin::DB::Port.find_or_initialize_by(protocol: :tcp, number: 8080) }
-  let(:url)           { Ronin::DB::URL.new(scheme: url_scheme, host_name: url_host_name, port: url_port) }
-
-  subject do
-    described_class.new(
-      url: url,
-      query_param: query_param
-    )
   end
 
   describe "#param_validations" do
