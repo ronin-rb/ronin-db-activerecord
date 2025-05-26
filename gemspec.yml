@@ -19,11 +19,11 @@ metadata:
   changelog_uri:     https://github.com/ronin-rb/ronin-db-activerecord/blob/main/ChangeLog.md
   rubygems_mfa_required: 'true'
 
-required_ruby_version: ">= 3.0.0"
+required_ruby_version: ">= 3.2.0"
 
 dependencies:
   uri-query_params: ~> 0.6
-  activerecord: ~> 7.0
+  activerecord: ~> 8.0
 
 development_dependencies:
   bundler: ">= 2.0.0"
