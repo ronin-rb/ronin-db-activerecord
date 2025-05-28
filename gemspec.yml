@@ -21,9 +21,14 @@ metadata:
 
 required_ruby_version: ">= 3.2.0"
 
+ruby_dependencies:
+  activerecord: ~> 8.0
+
+jruby_dependencies:
+  activerecord: ~> 7.0
+
 dependencies:
   uri-query_params: ~> 0.6
-  activerecord: ~> 8.0
 
 development_dependencies:
   bundler: ">= 2.0.0"
