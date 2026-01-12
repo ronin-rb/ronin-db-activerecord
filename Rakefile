@@ -66,6 +66,7 @@ namespace :db do
 
     require 'irb'
     include Ronin::DB
+
     ARGV.clear
     IRB.start
   end
