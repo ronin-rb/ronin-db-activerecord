@@ -205,7 +205,7 @@ local database console.
 
 ## License
 
-Copyright (c) 2022-2025 Hal Brodigan (postmodern.mod3@gmail.com)
+Copyright (c) 2022-2026 Hal Brodigan (postmodern.mod3@gmail.com)
 
 ronin-db-activerecord is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published
